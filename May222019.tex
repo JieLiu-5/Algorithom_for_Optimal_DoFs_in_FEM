@@ -1,0 +1,1906 @@
+\documentclass[final,3p]{elsarticle}
+
+\usepackage{lineno,hyperref}
+\modulolinenumbers[5]
+\usepackage{subcaption}
+\usepackage{amsmath,amsfonts,amsthm}
+
+\usepackage{upgreek}
+\usepackage[dvipsnames]{xcolor}  
+\usepackage{soul} 
+\usepackage{multirow}
+\usepackage{array}
+\newcolumntype{L}{>{\centering\arraybackslash}m{3cm}}
+\newcolumntype{R}{>{\centering\arraybackslash}m{2cm}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}} 
+\usepackage{mathtools,amssymb}
+\newcommand{\ddn}[2]{\frac{\mathrm{d}}{\mathrm{d}#1}#2}
+\newcommand{\ddt}{\frac{\mathrm{d}}{\mathrm{d}t}}
+
+\usepackage{pbox}
+
+\usepackage{empheq}
+
+\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+\usepackage{colortbl}
+\usepackage{esvect}
+\usepackage{makecell}
+\usepackage{spreadtab}
+\usepackage{numprint}
+\usepackage{xstring}
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\usepackage[symbol]{footmisc}
+
+\usepackage{siunitx}
+
+\makeatletter
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+\captionsetup[figure]{labelfont={bf},name={Fig.},labelsep=period}
+\captionsetup[table]{labelfont={bf},name={Table},labelsep=space}
+
+\usepackage[labelformat=simple]{subcaption}		% order of subfigure with brackets
+\renewcommand\thesubfigure{(\alph{subfigure})}
+\renewcommand\thesubtable{(\alph{subtable})}
+
+\usepackage{enumitem}
+
+%\usepackage{hyperref} % not needed; should go before cleveref if loaded
+\usepackage{cleveref}
+
+\crefformat{section}{\S#2#1#3} % see manual of cleveref, section 8.2.1
+\crefformat{subsection}{\S#2#1#3}
+\crefformat{subsubsection}{\S#2#1#3}
+
+
+\bibliographystyle{elsarticle-num}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{A practical a posteriori strategy to determine the optimal number of degrees of freedom for $hp$-refinement in finite element methods}
+
+ \author[1]{Jie Liu\corref{cor1}}						% author info start from here
+ \ead{j.liu-5@tudelft.nl}
+ \author[1]{Matthias M\"oller}
+ \ead{m.moller@tudelft.nl}
+ \author[1]{Henk M. Schuttelaars}
+ \ead{h.m.schuttelaars@tudelft.nl}
+ 
+ \address[1]{Delft Institute of Applied Mathematics\\ Delft University of Technology\\ Van Mourik Broekmanweg 6, 2628 XE Delft, The Netherlands}
+\cortext[cor1]{Corresponding author}
+
+
+\begin{abstract}
+
+In finite element methods (FEMs), common practices in improving the accuracy of numerically computed solutions to partial differential equations are reduce the mesh width ($h$-refinement), increase the approximation order ($p$-refinement), or apply both strategies simultaneously ($hp$-refinement). The principle behind this is to decrease the truncation error by increasing the number of degrees of freedom (``$\text{DoFs}$'').
+
+% $h$-refinement, $p$-refinement, or $hp$-refinement.
+% All three approaches are based on the theoretical insight that for consistent numerical methods the truncation error vanishes in the asymptotic limit and, hence, should reduce below some prescribed tolerance for 'sufficiently fine meshes' ($h$-refinement), whereby for 'sufficiently smooth solutions' the speed of the error reduction increases with increasing approximation order ($p$-refinement). These two observations are combined in the $hp$-refinement strategy, which aims at producing most accurate approximate solutions with a minimum number of degrees of freedom (``$\text{DoFs}$'').
+In practical calculations, however, computational round-off errors accumulate and start to exceed the truncation error when the number of $\text{DoFs}$ becomes larger than a critical number $N_{\rm opt}^{(p)}$, as a function of the approximation order $p$. Since further refinements will even result in less accurate solutions, the total discretization error (truncation + round-off error) corresponding to $N_{\text{opt}} ^{(p)}$, i.e. ${E}_{\text{min}}^{(p)}$, is the minimum attainable error for the approximation order $p$.
+
+% Further refinement of the mesh width results in less accurate solutions unless special numerical techniques like high-precision floating-point arithmetic are employed to suppress the excess accumulation of round-off errors.
+
+Focusing on one-dimensional differential equations in space, we investigate this phenomenon and propose a systematic approach to identify $N_{\rm opt}^{(p)}$ and ${E}_{\text{min}}^{(p)}$ a posteriori, both for the primary variable and its derivatives. We furthermore show that both $N_{\rm opt}^{(p)}$ and ${E}_{\text{min}}^{(p)}$ decrease for increasing $p$.
+This has led us to develop a practical a posteriori $hp$-refinement strategy that adjusts the mesh width $h^{(p)}$ in accordance with $p$ so that we can distinguish $N_{\rm opt}^{(p)}$ and ${E}_{\text{min}}^{(p)}$ for each $p$.
+
+Moreover, we also investigate the influence of the finite element formulation and show that the mixed FEM incurs smaller round-off errors compared with the standard FEM, thus allowing for a more accurate solution and its derivatives.
+In addition, the possible influence factors on the discretization error, such as the $L_2$ norm of the solution, working precision, computational mesh, type and implementation of boundary conditions and choice of solver, are also investigated. Finally, our strategy is successfully applied on a Helmholtz equation.
+
+%  the optimal mesh width $h^{(p)}_{\rm opt}$ correlates with $N_{\text{opt}}^{(p)}$
+%  (as a function of the approximation order $p$) 
+% both $N_{\rm opt}^{(p)}$ and ${E}_{\text{min}}^{(p)}$ strongly depend on the approximation order $p$ with $N_{\text{opt}}^{(p)}$ and ${E}_{\text{min}}^{(p)}$ decreasing for increasing $p$.
+%At the same time, the overall discretization error (truncation + round-off error) that is obtained for the optimal number of DoFs reduces for increasing $p$,
+%Thus, by taking higher-order elements, the round-off errors can be reduced, resulting in more accurate solutions that can be obtained when using larger-order elements. Furthermore, the type of FEM method also influences the accumulation of round-off errors, allowing for more accurate solutions, compared to the most accurate solutions obtained with the standard FEM method.
+
+% We also investigate the influence of the finite element formulation and demonstrate by considering several numerical examples that the use of the mixed-FEM approach leads to less severe round-off errors compared to the standard FEM and can, thus, yield more accurate approximations of the solution and its derivatives.
+
+\end{abstract}
+
+\begin{keyword}
+Finite Element Method (FEM), round-off error, truncation error, optimal number of degrees of freedom, $hp$-refinement strategy.
+\end{keyword}
+
+\end{frontmatter}
+
+
+\section{Introduction}
+
+Many problems in engineering sciences and industry are modelled mathematically by initial-boundary value problems comprising systems of coupled, nonlinear partial and/or ordinary differential equations. These problems often consider complex geometries, with initial and/or boundary conditions that depend on measured data \citep{Kumar2016}. 
+In some applications, not only the solution, but also its derivatives are of interest \citep{Kumar2016,carey1982derivative}.
+Analytical or semi-analytical solutions are usually not available, and hence one has to resort to numerical solution methods, such as the finite difference, the finite volume, and the finite element method\textcolor{black}{s}. The latter will be adopted throughout this paper and applied to boundary value problems with scalar solution.
+
+% In the early days of computational numerical analysis, computer simulations were very time consuming and therefore mainly used as final validation tools. {Advancements in computers} and the numerical methods themselves have made computer simulations much faster, allowing for more detailed (i.e. higher-resolution) simulations, but also for application within larger work flows such as sensitivity analysis or as driver for simulation-based shape optimization of, say, airfoils \citep{jansen2010aerostructural,imam1982three}.
+
+% In many applications, the model results involve uncertain parameters, or are based on model simplifications whose correlation to real-world phenomena is not fully understood. This results in conflicting goals:  on the one hand and performing the calculation most efficiently on the other hand, so that many runs can be performed in reasonable time. 
+% To obtain highly accurate solutions (and their derivatives), it is often assumed that accuracy can be increased by .
+
+The accuracy of the numerically obtained solution is influenced by many sources of errors \citep{ferziger2012computational}: firstly, errors in the set-up of the models, such as the simplification of the domain and governing equations and the approximation of the initial and boundary conditions; next, truncation errors due to the discretization of the computational domain and the use of basis functions for the function spaces defined on it; then, the iteration error resulted from the artificially controlled stopping criterion of iterative solvers; finally, the round-off error due to the adoption of finite-precision computer arithmetics, rather than exact arithmetics.
+One tacitly assumes that most errors are well-balanced and/or negligibly small.
+In particular, the round-off error is often ignored based on the argument that it will be `sufficiently small' if just IEEE-754 double-precision floating-point arithmetics \citep{zuras2008ieee} are adopted.
+In this paper, aiming at the idealized model problem and using the direct solver, the focus is placed on the {discretization error} led by the truncation and round-off error. In particular, we will show that the latter might very well have a significant influence on the overall accuracy and propose an a posteriori strategy to balance both error contributions.
+
+% In this paper, the focus is placed on the interplay of truncation and  round-off errors. In particular, we will show that the latter might very well have a significant influence on the overall accuracy and propose an a posteriori strategy to balance both error contributions.
+% errors originating from the discretization process, which fall into two categories: truncation errors and 
+% Given a mathematical model and assuming the influence of the iteration error is negligible, the possible error comes from the truncation error and the round-off error.
+
+The truncation error dominates the discretization error only when the number of degrees of freedom (``$\text{DoFs}$") is not too large, and it decreases with increasing mesh resolution and element degree as it can be expected from finite element theory \citep{gockenbach2006understanding}. Based on this, the commonly used approaches to reduce the truncation error are reduce the mesh width ($h$-refinement), increase the approximation order ($p$-refinement), or apply both strategies simultaneously ($hp$-refinement) \citep{guo1986hp}. 
+The round-off error is, however, only negligible for moderately coarse meshes and dominates the overall discretization error if more and more DoFs are employed. 
+Consequently, for a particular approximation order $p$, by performing $h$-refinement, the best accuracy ${E}_{\text{min}}^{(p)}$ is obtained when the truncation error and the round-off error are of the same size. The corresponding number of DoFs is denoted as $N_{\rm opt}^{(p)}$.
+
+
+While the break-even point between both error contributions is typically obtained for impractically large numbers of $\text{DoFs}$ if low(est)-order approximations are adopted, it can be easily reached for moderate problem sizes if high-order approximations are adopted, which are nowadays becoming more and more popular. This means that the results for high-order elements are more prone to be polluted by the round-off error.
+Despite this alarming observation and to the authors’ best knowledge, only very few publications address the impact of accumulated round-off errors on the overall accuracy of the final solution \citep{ling1984numerical,mou2017example} or take them into account explicitly in the error-estimation procedure {\citep{ainsworth1992procedure,kelly1983posteriori}}.
+The general rule of thumb is still to perform $h$-refinement as much as possible with the available computer hardware.
+The aim of this paper is to systematically analyze the influence of the round-off error on the total error systematically, and propose a practical approach for obtaining $N_{\rm opt}^{(p)}$ and ${E}_{\text{min}}^{(p)}$.
+
+
+
+% As a rule of thumb, ${E}_{\text{min}}^{(p)}$ and $N_{\rm opt}^{(p)}$ decrease with increasing element degree.
+
+%Moreover, it is well-established that the round-off error using the mixed FEM is smaller than that using the standard FEM.
+% Even though it requires impractically small grid size for the round-off error to dominate the total discretization error using low-order elements, it occurs for moderate grid size for high-order elements. Due to the increasing popularity of higher-order elements, it is difficult to overstate the importance of considering the influence of the round-off error on the total discretization error.
+
+% The general rule of thumb is still to $h$-refine as much as possible with the available computer resources.
+
+% In fact, brute-force mesh refinement is still the most widely used approach to compute so-called reference solutions numerically if no analytical expressions are available, and it is often argued that the computational resources are just insufficient to provide enough resolution for challenging practical applications. In line with this is the direct numerical simulation (DNS) \citep{orszag1970} of turbulent flows, which has been becoming more and more popular with the advent of powerful supercomputers and is based on the paradigm to resolve small(est)-scale turbulent effects with ultra-fine meshes directly rather than modelling them by some turbulence model.
+
+% We furthermore propose a so-called $h_{\rm opt}^{(p)}$-refinement strategy that computes successive solutions along the break-even points $h_{\rm opt}^{(p)}$, that is, the optimal numbers of $\text{DoFs}$ for a particular approximation order $p$.
+
+Focusing on one-dimensional model problems, i.e. Poisson, diffusion and Helmholtz equations, both the standard finite element method (FEM) and the mixed FEM are investigated.
+Our numerical experiments demonstrate that the above discretization error can be modelled by two counteracting power-law functions for the truncation and the round-off errors, respectively. 
+To assess the general applicability of our approach, the following influencing factors are investigated: the scale of the solution, working precision, computational mesh, type and implementation of boundary conditions and choice of the linear system solver.
+
+%We focus on two finite element methods ($\text{FEMs}$): the standard FEM and the mixed FEM, which are different in terms of formulations and function spaces.
+%If only the solution is of interest, usually the standard FEM is used, in which derivatives can be obtained by differentiating the FEM solution. However, each differentiation results in a loss of accuracy \citep{Kumar2016}, and it is moreover not possible to obtain higher-order derivatives of general problems with $C^0$ finite elements.
+%When accurate (higher-order) derivatives are important for the subsequent analysis, the mixed-FEM formulation \citep{boffi2013mixed} is a better alternative.
+%In this method, both the solution and its first derivatives are treated as independent variables that are solved for either simultaneously or in a segregated way.
+%This ensures the existence of the first derivatives, and improves the accuracy of the second derivatives since they are obtained from the first derivatives rather than from the primary solution.
+
+The paper is organized as follows. The model problem, finite element formulation, and numerical implementation are described in Section \ref{model problem, FE formulation and solution method}. The algorithm is put forward and validated in Section \ref{paragraph on results}. An application of the practical algorithm is made in Section \ref{application section}. Final conclusions are drawn in Section \ref{paragraph on conclusion}.
+
+% The results and sensitivity analyses are discussed in Section \ref{paragraph on results}. 
+
+\section{Model problem, finite element formulation and numerical implementation}	\label{model problem, FE formulation and solution method}
+
+\subsection{Model problem}
+
+Consider the following one-dimensional second-order differential equation:
+
+\begin{equation}
+  \left(D(x) u_x \right)_x + r(x)u(x) = f(x),\qquad x \in I = (0,1),	\label{1D_general_Helmholtz_equation}
+\end{equation}
+with $u$ denoting the unknown variable, $f(x) \in L^2 (I)$ a prescribed right-hand side, and $D(x)$ and $r(x)$ coefficient functions.	%, and $L$ the length of the interval.
+The above setting ensures the existence of the second derivative in weak sense, i.e. $u \in H^2 (I)$ (Chapter 1 in \citep{boffi2013mixed}).
+
+%It should be noted that for the model problems considered in this paper both the standard FEM and the mixed-FEM approach. 
+
+By choosing $D(x)=1$ and $r(x)=0$, Eq. (\ref{1D_general_Helmholtz_equation}) reduces to the Poisson equation; for $D(x)>$ 0 and $r(x)=0$, the diffusion equation is found. For $r(x) \neq $ 0, we obtain the Helmholtz equation. 
+The boundary conditions are $u(x)=g(x)$ at $x \in \Gamma_D$ and $u_x=h(x)$ at $x \in \Gamma_N$. Here, $\Gamma_D$ and $\Gamma_N$ are the boundaries where, respectively, Dirichlet and Neumann boundary conditions are imposed.
+
+\subsection{Finite element formulation}		\label{FE formulation}
+
+\subsubsection{The standard FEM} 
+
+The weak form of Eq. (\ref{1D_general_Helmholtz_equation}), discretized using strong imposition of Dirichlet boundary conditions reads:
+
+\begin{equation}
+\centering
+\boxed{ 
+\begin{aligned}
+&Weak ~form~ 1 ~~~~~~~~~\\
+&\text{Find $u \in H _D^1 (I)$ such that:} \\
+&-({ \eta} _{ x }, \,D { u} _{ x }  ) + (\eta, \, ru) = (\eta, \, f ) - (\eta, \, D h \cdot \text{n} )_{\Gamma _N} \qquad \forall \eta \in H _{D0}^1 (I),\\
+&\text{with} \\
+&~~~~~~~~~~~~~~~~~~~~~~~~~H_{D} ^1 (I) = \{t \; | \; t \in H^1 (I), \; t = g \text{ at } \Gamma _D \},  \\
+&~~~~~~~~~~~~~~~~~~~~~~~\,H_{D0} ^1 (I) = \{t \; | \; t \in H^1 (I), \; t = 0 \text{ at } \Gamma _D\},\\
+&\text{where } {n} \text{ is 1 at $x=1$, and -1 at $x=0$.}
+\end{aligned}	\label{1D_general_SM_weak_form} 
+}
+\end{equation}
+
+ %is the outward unit normal vector, which 
+ 
+The last term in the right-hand side contains the information of the Neumann boundary conditions; if no Neumann boundary conditions are prescribed, this term is not present.
+For details about the derivation of this weak form and the following ones, see \ref{system equation appendix}.
+
+If Dirichlet boundary conditions are imposed in the weak sense, we obtain the following weak form \citep{bazilevs2007weak}:
+\begin{equation}
+\centering
+\boxed{
+\begin{aligned}
+&Weak ~form~ 2 ~~~~~~~~~\\
+&\text{Find } u \in H ^1 (I) \text{ such that:}\\
+& - ( { \eta} _{ x }, \, D { u} _{ x } ) + (\eta, \, ru) + (\eta, \, D u_x \cdot \text{n} )_{\Gamma _D} - (\eta _x, \, u \cdot \text{n} )_{\Gamma _D} + (\eta, \, \rho u \cdot \text{n} )_{\Gamma _D} \\ 
+&= (\eta, \, f ) - (\eta, \, D h \cdot \text{n} )_{\Gamma _N} - (\eta _x, \, g \cdot \text{n} )_{\Gamma _D} + (\eta, \, \rho g \cdot \text{n} )_{\Gamma _D} \qquad \forall \eta \in H ^1 (I), \\
+&\text{where } \rho \text{ is a } \text{{positive}} \text{ value that serves as the penalty parameter}.
+\end{aligned}	\label{1D_general_SM_weak_form_weak_Diri}
+}
+\end{equation}
+Next, we approximate the exact solution $u(x)$ by a linear combination of a finite number of basis functions:
+
+\begin{equation}
+ u(x) \approx u_h^{(p)} (x) = \sum _ {j=1} ^{m} u _{j} \varphi _{j}^{(p)} (x), \label{General_SM_u_approx}%
+\end{equation}
+where $m$ is the number of $\text{DoFs}$, the coefficients $u_j$ are the value of $u_h^{(p)} (x)$ at the $\text{DoFs}$, $\varphi _{j}^{(p)} (x)$ are the associated $C^0$-continuous Lagrange basis functions with Gauss-Lobatto points as the support nodes $x_j$, and $p$ is the degree of the basis function. The interpolation property $u_j=u_h^{(p)} (x_j)$ is a direct consequence of the Kronecker-delta property, $\varphi _{j}^{(p)} (x_i)=\delta_{ij}$, of the chosen type of basis functions.
+Finally, the test function $\eta(x)$ is taken equal to $\varphi ^{(p)}_{k}(x),~ k=1, \,2, \, \ldots , \, m$.
+The resulting matrix equation that has to be solved reads
+\begin{equation}
+ A {U} = F,				\label{std FEM matrix equation}
+\end{equation}
+where $A$ is the discretized left-hand side in Eq. (\ref{1D_general_SM_weak_form}) and Eq. (\ref{1D_general_SM_weak_form_weak_Diri}), respectively, $F$ the discretized right-hand side and $U$ the vector of coefficients from which the approximate solution can be computed from Eq. (\ref{General_SM_u_approx}).
+
+\subsubsection{The mixed FEM}
+
+To solve Eq. (\ref{1D_general_Helmholtz_equation}) using the mixed FEM, as a first step, we introduce the auxiliary variable
+\begin{subequations}
+\begin{align}
+   v(x) = - u _x, \label{Gene_MM_strong1} 
+\end{align}  
+allowing Eq. (\ref{1D_general_Helmholtz_equation}) to be rewritten as
+\begin{align}
+  -D_x v(x) - D(x) v_x + r(x)u(x) = f(x). \label{Gene_MM_strong2}
+\end{align}	\label{1D_general_MM_2in1}
+\end{subequations}
+The weak form of Eq. (\ref{Gene_MM_strong1}) and Eq. (\ref{Gene_MM_strong2}) is given by:
+\begin{subequations}
+\begin{empheq}[box=\fbox]{align}
+&Weak ~form~ 3 ~~~~~~~~~\notag\\
+&\text{Find $v \in H_{N}^1 (I)$ and $u \in L ^2 (I)$ such that:}	\notag\\
+& ~~~~~~~~~~~~~~~~~~~~~~~~\,\,(w, \, v) - (w_x, \,  u ) = -(w, \, g \cdot \text{n})_{\Gamma_D} \qquad \forall w \in H_{N0}^1 (I), \label{1D_General_MM_weak_1}\\ 
+&  -(q, \, D_x v ) - (q, \, D v_x) + (q, \, ru) = (q, \, f) \qquad \forall q \in L ^2 (I), \label{1D_General_MM_weak_2}	\\
+&    \text{with}\notag\\
+& ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ H_{N} ^1 (I) = \{t \; | \; t \in H^1 (I), \; t = -h \text{ at } \Gamma _N \},  \notag\\
+& ~~~~~~~~~~~~~~~~~~~~~~~~~~~~\, H_{N0} ^1 (I) = \{t \; | \; t \in H^1 (I), \; t = 0 \text{ at } \Gamma _N\}.	\notag 
+\end{empheq}
+\label{1D_General_MM_weak_2in1}%
+\end{subequations}
+In mixed FEM, the essential boundary conditions are imposed at $\Gamma _N$, and the natural boundary conditions at $\Gamma _D$.
+Next, we approximate $v(x)$ and $u(x)$ by a linear combination of a finite number of basis functions:
+\begin{subequations}
+ \begin{align}
+ v(x) \approx v _h^{(p)} (x) &= \sum _ {i=1} ^{n} v _{i} \varphi _{i}^{(p)}(x),
+ \label{General_MM_var_approx1}
+ \\[3ex]
+%  u(x) \approx u _{p-1} (x) &= \sum _ {c=1} ^{n_c} \left( \sum _ {j=1} ^{p-1} u _{cj} \psi _{j} ^{(p-1)}(x) \right), \\
+%   u _{p-1} (x) &= \sum _ {j=1} ^{n-1} u _{j} \psi _{j} ^{(p-1)}(x),\\
+    u(x) \approx u _h^{(p-1)} (x) &=
+    \begin{cases}
+      \sum\limits _ {j=1} ^{p-1} u _{1j} \psi _{1j} ^{(p-1)}(x), \qquad \text{in cell 1,} \\[3ex]
+      \sum\limits _ {j=1} ^{p-1} u _{2j} \psi _{2j} ^{(p-1)}(x), \qquad \text{in cell 2,} \\[2ex]
+      \ldots \\[2ex]
+      \sum\limits _ {j=1} ^{p-1} u _{tj} \psi _{tj} ^{(p-1)}(x), \qquad \text{in cell }t,
+    \end{cases}
+    \label{General_MM_var_approx2}
+\end{align}	\label{General_MM_var_approx}%
+\end{subequations}
+where $n$ is the number of $\text{DoFs}$ of $v_h^{(p)}$ and $t$ is the number of cells. The coefficients $v_i$ and $u_{cj}, \, c=1,\,2, \, \ldots, \,t,$ are the values of $v_h^{(p)}$ and $u_h^{(p-1)}$ at the $\text{DoFs}$, and $\varphi _{i}^{(p)}$ and $\psi _{cj} ^{(p-1)}, \, c=1,\,2, \, \ldots, \,t,$ are the associated Lagrange basis functions of degree $p$ and $p-1$, respectively. In contrast to the $C^0$-continuous basis functions $\varphi _{i}^{(p)}$, the basis functions $\psi _{j} ^{(p-1)}$ are discontinuous at the cell interface, which means that the $\text{DoFs}$ are duplicated at the element boundaries, resulting in the number of $\text{DoFs}$ of $u_h^{(p-1)}$: $t \times (p-1)=n-1$. 
+Finally, the test functions $w$ and $q$ are replaced by $\varphi _{k}^{(p)} , ~{k} = 1, \,2, \, \ldots , \, n, $ and $ \psi _{e}^{(p-1)} ,~ {e} = 1, \,2, \, \ldots , \, n-1$, respectively.
+
+The resulting coupled linear system of equations that has to be solved reads
+\begin{equation}
+ \left[ \begin{array}{cc} M & B  \\ B^\top & 0 \end{array}\right] \left[ \begin{array}{cc} {V} \\ {U} \end{array}\right] =\left[ \begin{array}{cc} G \\ H \end{array}\right],		\label{matrix system mixed}
+\end{equation}
+where the mass matrix $M$, the discrete gradient operator $B$, and its transpose, the discrete divergence operator $B^\top$ are the components of the discretized left-hand side of Eq. (\ref{1D_General_MM_weak_1})--(\ref{1D_General_MM_weak_2}), $G$ and $H$ are the discretized right-hand side, and $U$ and $V$ are the vectors of coefficients of the solution and its first derivative, respectively, from which the finite element functions can be computed using Eq. (\ref{General_MM_var_approx1})--(\ref{General_MM_var_approx2}).
+
+%Eq. (\ref{matrix system mixed}) can be solved either as a whole, e.g., with a direct solver such as UMFPACK \citep{davis2004algorithm} or using the Schur complement approach, which amounts to solving the following two subproblems in segregated way
+%\begin{subequations}
+% \begin{align}
+%  B^{\top} M^{-1} B U &= B^{\top} M^{-1} G - H, 	\label{schur_complement_solution} \\
+%  MV&=G-BU.						\label{schur_complement_gradient}
+% \end{align}
+%\end{subequations}
+%To solve Eq. (\ref{schur_complement_solution}), three times of the CG solver need to be used: two times for inverting $M$, one time for inverting $B^{\top} M^{-1} B$.
+%Assuring the accuracy of the former, the influence of the stopping criterion in terms of the residual norm of the CG solver on the latter is investigated.
+%The residual norm is set to be equal to the product of a parameter and the $L_2$ norm of the right-hand side of Eq. (\ref{schur_complement_solution}).
+%The results are shown in Fig. \ref{Fig:Pois_MM_UMFvsCG}.
+
+\subsection{Numerical implementation}
+
+\subsubsection{Solution technique}
+
+Unless stated otherwise, all results are computed in IEEE-754 double precision \citep{zuras2008ieee} using the deal.\rom{2} finite element code \citep{alzetta2018deal}. For the standard FEM, the family of $P_p$ finite elements with $C^0$-continuous Lagrange basis functions of degree $p$ is adopted, whereas for the mixed FEM, $P_p/P_{p-1}^{\text{disc}}$ element pairs are used, where superscript `disc' stands for discontinuous basis functions shown in Eq. (\ref{General_MM_var_approx2}).
+%Higher-order elements are also investigated in some cases.
+The derivatives are computed in the classical finite element manner, e.g., $v_{h,x} ^p(x)=\sum_{i=1}^n v_i\varphi_{i,x}^{(p)}(x)$ yields an approximation to the second derivative for the mixed FEM.
+
+The computational mesh is obtained by globally refining a single element that covers the entire unit interval domain $I$ and Dirichlet boundary conditions are imposed strongly unless stated otherwise. Furthermore, the UMFPACK solver \citep{davis2004algorithm} is used to solve the matrix equation, as this solver results in relatively fast computations of the considered problem sizes and, moreover, use of a direct method prevents the pollution of the solutions by additional iteration errors incurred by not fully converged iterative solutions. %The influence of the latter is investigated for one example case in Section~\ref{Influence_solver}.
+
+\subsubsection{Error estimation}
+
+For the sake of readability, we will drop the superscript $(p)$, whenever the approximation order is clear from the context. To assess the accuracy of the numerical solution $u_h(x)$ with grid size $h$, we resort to the absolute error measured on the $L_2$ norm, which is defined as
+
+\begin{subequations}	\label{formula abs error}
+\begin{equation}		\label{formula abs error analytical}
+ {E_{h}}= {\|u_{h}(x)- {u}_\text{ex}(x)\|_{2}}
+\end{equation}
+when the exact solution ${u}_\text{ex}(x)$ is available, or \citep{Runborg2012VerifyingNC}
+\begin{equation}		\label{formula abs error numerical}
+ {\tilde {E_{h}}}= {\|u_{h}(x)- {u}_{h/2}(x)\|_{2}}
+\end{equation}
+otherwise,
+\end{subequations}
+where $u_{h/2}(x)$ is the numerical solution computed on a mesh with grid size $h/2$. 
+A sufficiently accurate Gaussian quadrature formula is used to compute the occurring integrals numerically.
+
+Furthermore, using the absolute errors of the numerical solutions of two consecutive $h$-refinements keeping the approximation order $p$ fixed, the numerical order of convergence is determined from the formula
+\begin{subequations}	\label{formula order of convergence}
+\begin{equation}
+ {\text{P}}=\log _2 \left( \frac{E_{h}}{E_{h/2}} \right)
+\end{equation}
+when ${u}_\text{ex}(x)$ is available, or
+\begin{equation}
+ \tilde{\text{P}}=\log _2 \left( \frac{\tilde E_{h}}{\tilde E_{h/2}} \right)
+\end{equation}
+otherwise.
+\end{subequations}
+
+% , where $E_{h/2}$ or $\tilde E_{h/2}$  is the absolute error of the numerical solution with grid size $h/2$
+\newpage
+\section{Numerical results and sensitivity analysis}	\label{paragraph on results}
+
+In this section, first, through conceptual sketches, we illustrate the decrease of the truncation error and the increase of the round-off error as a function of the number of $\text{DoFs}$ for a particular approximation order $p$, see Fig. \ref{Fig:rounding_error_inkscape} (a), and their dependency on $p$, see Fig. \ref{Fig:rounding_error_inkscape} (b). 
+Note that, since the truncation error is subject to the type and complexity of the model problem, a sufficient number of grid refinements might be needed before the asymptotic order of convergence is achieved.  
+Fig. \ref{Fig:rounding_error_inkscape} (b) has led us to the development of a novel a posteriori refinement strategy, which correlates the optimal mesh width $h_{\rm opt}^{(p)}$ to the break-even point $N_{\rm opt}^{(p)}$ and refines both $h_{\rm opt}^{(p)}$ and $p$ simultaneously so as to always obtain the most accurate solution possible with a fixed approximation order $p$. 
+
+%where $N_{\rm opt}^{(p)}$ and ${E}_{\text{min}}^{(p)}$ reduce systematically with increasing number of DoFs.
+
+% Refining the mesh beyond some critical number of DoFs leads to the dominance of the round-off error which increases of $h$-refinement is continued.
+% Obviously, the best accuracy is obtained at the break-even point, where the truncation error and the round-off error are of the same size. 
+% As stated above, this break-even point, denoted by $N_{\rm opt}^{(p)}$, depends on the approximation order $p$.
+% As a rule of thumb, larger $p$ values yield smaller values of the corresponding break-even point $N_{\rm opt}^{(p)}$ as illustrated in Fig. \ref{Fig:rounding_error_inkscape} (b). Even more important is the fact, that the corresponding value of the absolute discretization error  if higher-order approximations are adopted. 
+
+% Next to the approximation order $p$, the truncation error may also depend on other influence factors such as  and the resulting solution profile. 
+% as well as the particular choice of finite element basis functions
+% Furthermore, the round-off error might behave differently for different FEM formulations and magnitudes of the solution and/or its derivatives.
+
+
+\begin{figure}[!ht]
+\hspace{2.0cm}
+\begin{subfigure}[t]{0.35\textwidth}
+      \includegraphics[width=\linewidth,natwidth=500,natheight=480]{rounding_error_inkscape_truncation_error_curve.pdf}
+      \caption{Fixed approximation order $p$}
+\end{subfigure}
+\hspace{0.5cm}
+\begin{subfigure}[t]{0.35\textwidth}
+      \includegraphics[width=\linewidth,natwidth=500,natheight=480]{rounding_error_inkscape_truncation_error_line_p_dependent.pdf}
+      \caption{Variable approximation order $p$}
+\end{subfigure}
+\caption{Conceptual sketch of the interplay between truncation and round-off error as a function of the number of $\text{DoFs}$. (a) The break-even point between both error components is attained at $N_{\rm opt}^{(p)}$, where the total discretization error is smallest. (b) Simultaneous refinement of $p$ and $h_{\rm opt}^{(p)}$ yields a systematic reduction of the total discretization error.}
+\label{Fig:rounding_error_inkscape}
+\end{figure}
+
+% In order to devise a generally applicable a posteriori refinement strategy that is agnostic, we will systematically investigate the dependencies of the truncation and round-off error on all possible influence factors. 
+
+Next, in \cref{Three_benchmark_examples}, through three one-dimensional model problems, the feasibility of our algorithm is justified. Finally, sensitivity analyses of the algorithm to the possible influence factors are conducted: 
+in \cref{section_scaling} and \cref{section_working_precision}, the influence of scaling and computer precision will be investigated, respectively;
+in \cref{section_sensitivity}, other influence factors, such as the type of boundary conditions and ways of implementing them, choices for the linear system solver are studied.
+
+%, the selection of support points, and the impact of adaptive mesh refinement
+% aforementioned
+% This a posteriori refinement strategy is further elucidated in Section \ref{application section}.
+
+\newpage
+\subsection{Three benchmark examples}		\label{Three_benchmark_examples}
+
+First, we restrict ourselves to three benchmark configurations: the Poisson, diffusion and Helmholtz equations, see Table \ref{Table: differences in three equations}. 
+Parameters are chosen such that the $L_2$ norm of the analytical solution $u_{\text{ex}}$ is of order 1, see the last row of Table \ref{Table: differences in three equations}. Using the standard FEM for the Poisson equation, the absolute error of $u_h$, compared to $u_{\text{ex}}$, is shown in Fig. \ref{Fig:Pois_pexp_SM_abs_error_solu} as a function of the number of DoFs.
+In Figs. \ref{Fig:Pois_pexp_SM_abs_error_grad} and \ref{Fig:Pois_pexp_SM_abs_error_2ndd} the errors in the first and second derivatives, $u_{x}$ and $u_{xx}$, are depicted, respectively. 
+
+\begin{table}[!ht]
+\centering
+ \begin{tabular}{|C{2.5cm}|C{4cm}|C{4cm}|C{4cm}|} \hline   
+{} & {``Poisson''} & {``diffusion''} & {``Helmholtz''} \\
+\hline
+{$D(x)$} & {$1$} & $1+x$ & $(1+i) e^{-x}$  \\		%
+\hline
+{$r(x)$} & {0} & 0 & $2 e^{-x}$ \\		%
+\hline
+{$f(x)$} & {$e^{- (x-1/2)^2} \left({4x^2 - 4x -1} \right)$}  & $2 \pi \cos (2 \pi x) - 4 {\pi}^2 \sin (2 \pi x)(x+1)$ & 0 \\
+\hline
+{$\|f\|_2$} & {1.60} & {42.99} & {0.00} \\	%
+\hline
+\multirow{2}{2cm}{\centering Boundary conditions} & {$u(0) = e^{-1/4}$} & $u(0)=0$& $u (0) = 1$ \\	%	%\makecell{$u (0) = u_0$ \\ \textcolor{cyan}{[why only this term generic]}}
+\cline{2-4}
+&$u(1) = e^{-1/4}$ & $u_x(1)=2 \pi$  &$ u_x(1) = 0$ \\	%
+\hline
+Analytical solution $u_{\text{ex}}$ & {$e^{- (x-1/2)^2}$} & $\sin (2 \pi x)$ & $a e^{(1+i) x} + (1-a) e^{-i x}$, $a=1/{((1-i) e^{1+2i}+1)}$ \\	%
+\hline
+{$\|u_{\text{ex}}\|_2$} & {0.92} & 0.71 & 1.26 \\	%
+\hline
+\end{tabular}
+\caption [sss] {Settings of the Poisson, diffusion and Helmholtz equations \footnotemark}\label{Table: differences in three equations} 
+\end{table}
+
+\footnotetext{$i=\sqrt{-1}$ is the unit imaginary number}
+
+% \textcolor{red}{It turns out that, using the CG solver with well-chosen number of quadrature points, the accuracy could be improved, see \cref{Influence_solver}.}
+
+For the finite element solution $u_h$, the total discretization error changes along straight lines with the number of $\text{DoFs}$ in the log-log plot (either decreasing or increasing) for all approximation orders considered, see Fig. \ref{Fig:Pois_pexp_SM_abs_error_solu}. Hence, the error can be modeled by two counteracting power-law functions in the number of DoFs.
+When the latter is relatively small, the truncation error ${E}_{\text{T}}$ dominates the overall discretization error, and decreases when the number of $\text{DoFs}$ is increased. This error can be approximated as
+\begin{subequations}
+\begin{align}
+  {E}_{\text{T}} = \alpha_\text{T} {{N}}^{- {\beta _{\text{T}}}},		\label{truncation-error}
+\end{align}
+where ${N}$ represents the number of $\text{DoFs}$, and $\alpha_{\text{T}}$ and $\beta _{\text{T}}$ are the associated offset and slope of the truncation error, respectively.
+The slope $\beta _{\text{T}}$ is one order higher than the approximation order $p$, which is in accordance with its expected value predicted from finite element theory; see Chapter~5 in reference \citep{gockenbach2006understanding}.
+
+When the number of $\text{DoFs}$ exceeds a critical number, the accumulated round-off error ${E}_{\text{R}}$ dominates the overall discretization error, and increases with the number of $\text{DoFs}$. Its dependency on ${N}$ reads
+\begin{align}
+  {E}_{\text{R}} = \alpha_{\text{R}} {{N}}^{\beta _{\text{R}}},		\label{General_round-off}
+\end{align}
+\label{error_function}%
+\end{subequations}
+where $\alpha_{\text{R}}$ and $\beta _{\text{R}}$ are the associated offset and slope of the round-off error, respectively. Notably, the round-off error lines for \emph{different} approximation orders coincide: the slope is always 2, and the value of the offset $\alpha_{\text{R}}$, which can be found as number in all figures, is between $10^{-17}$ and $10^{-16}$. 
+
+Fig. \ref{Fig:Pois_pexp_SM_abs_error_solu} clearly shows that the best possible solution (for a fixed approximation order $p$) is obtained at the break-even point between truncation and round-off error and that the overall accuracy systematically improves if higher-order approximations are adopted ($p$-refinement) and operated at their respective optimal number of $\text{DoFs}$, i.e. $N_{\rm opt}^{(p)}$. We intentionally consider degrees of freedoms rather than the mesh width since the former immediately gives the dimension of the linear system in Eq. (\ref{std FEM matrix equation}) that needs to be solved.
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pexp_SM_abs_error_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_pexp_SM_abs_error_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pexp_SM_abs_error_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_pexp_SM_abs_error_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pexp_SM_abs_error_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_pexp_SM_abs_error_2ndd}
+    \end{subfigure}
+\caption{Absolute errors using the standard FEM for the Poisson equation.}
+\label{Fig:Pois_pexp_SM_abs_error}
+\end{figure}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{diff_psin_SM_abs_error_solu.pdf}
+        \caption{Solution}
+        \label{Fig:diff_psin_SM_abs_error_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{diff_psin_SM_abs_error_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:diff_psin_SM_abs_error_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{diff_psin_SM_abs_error_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:diff_psin_SM_abs_error_2ndd}
+    \end{subfigure}
+\caption{Absolute errors using the standard FEM for the diffusion equation.}
+\label{Fig:diff_psin_SM_abs_error}
+\end{figure}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Helm_simpcoe_SM_abs_error_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Helm_simpcoe_SM_abs_error_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Helm_simpcoe_SM_abs_error_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Helm_simpcoe_SM_abs_error_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Helm_simpcoe_SM_abs_error_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Helm_simpcoe_SM_abs_error_2ndd}
+    \end{subfigure}
+\caption{Absolute errors using the standard FEM for the Helmholtz equation.}
+\label{Fig:Helm_simpcoe_SM_abs_error}
+\end{figure}
+
+The slopes $\beta _{\text{T}}$ of the truncation error of $u_x$ and $u_{xx}$ are equal to $p$ and $p-1$, respectively, cf. Fig. \ref{Fig:Pois_pexp_SM_abs_error_grad} (first derivative) and \ref{Fig:Pois_pexp_SM_abs_error_2ndd} (second derivative), which is again in accordance with the finite element theory. The offset $\alpha_{\text{R}}$ of the round-off error increases slightly, whereas the slope $\beta_{\text{R}}$ remains 2. As a result, the highest attainable accuracy for derivatives is smaller than for the solution itself, and the corresponding $N_{\rm opt}^{(p)}$ is slightly larger compared to the optimal number of $\text{DoFs}$ for the solution. As a consequence, optimal accuracy for \emph{all} three quantities, $u$, $u_x$ and $u_{xx}$ requires separate simulations run with different $N_{\rm opt}^{(p)}$ values.
+
+For the diffusion and Helmholtz equations, the above observations on $u$, $u_x$ and $u_{xx}$ also hold, cf. Figs. \ref{Fig:diff_psin_SM_abs_error} and \ref{Fig:Helm_simpcoe_SM_abs_error}.
+The dependency of $\beta _{\text{T}}$ does not change, the offset $\alpha_{\text{R}}$ varies slightly and the slope $\beta_{\text{R}}$ remains 2.
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pexp_MM_abs_error_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_pexp_MM_abs_error_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pexp_MM_abs_error_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_pexp_MM_abs_error_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pexp_MM_abs_error_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_pexp_MM_abs_error_2ndd}
+    \end{subfigure}
+\caption{Absolute errors using the mixed FEM for the Poisson equation}
+\label{Fig:Pois_pexp_MM_abs_error}
+\end{figure}
+
+%  \textcolor{red}{study CG solver}
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{diff_psin_MM_abs_error_solu.pdf}
+        \caption{Solution}
+        \label{Fig:diff_psin_MM_abs_error_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{diff_psin_MM_abs_error_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:diff_psin_MM_abs_error_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{diff_psin_MM_abs_error_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:diff_psin_MM_abs_error_2ndd}
+    \end{subfigure}
+\caption{Absolute errors using the mixed FEM for the diffusion equation}
+\label{Fig:diff_psin_MM_abs_error}    
+\end{figure}   
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Helm_simp_coeff_MM_abs_error_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Helm_simp_coeff_MM_abs_error_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Helm_simp_coeff_MM_abs_error_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Helm_simp_coeff_MM_abs_error_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Helm_simp_coeff_MM_abs_error_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Helm_simp_coeff_MM_abs_error_2ndd}
+    \end{subfigure}  
+\caption{Absolute errors using the mixed FEM for the Helmholtz equation}
+\label{Fig:Helm_simp_coeff_MM_abs_error}
+\end{figure}
+
+All three model problems have also been analyzed using the mixed-FEM formulation (\ref{1D_General_MM_weak_1})--(\ref{1D_General_MM_weak_2}), whereby the linear system of equations (\ref{matrix system mixed}) has been solved in fully coupled manner using the direct solver UMFPACK \citep{davis2004algorithm}. The absolute errors for $u$, $v=u_x$, and $v_x=u_{xx}$ are shown in Figs. \ref{Fig:Pois_pexp_MM_abs_error}, \ref{Fig:diff_psin_MM_abs_error} and \ref{Fig:Helm_simp_coeff_MM_abs_error}. 
+Qualitatively, the behavior observed for the standard FEM concerning ${E}_{\text{T}}$ and ${E}_{\text{R}}$ is found for the mixed FEM as well.
+The main difference is that the slope $\beta _{\text{R}}$ of the round-off error ${E}_{\text{R}}$ is 1 for the mixed FEM (compared to 2 for the standard FEM). 
+This means that the mixed FEM allows for higher accuracy when increasing the number of $\text{DoFs}$ since the dominance of the round-off error starts for larger values of $N_{\rm opt}^{(p)}$.
+
+\textcolor{red}{REWRITE: Compare standard FEM vs. mixed FEM w.r.t. best accuracy for different approximation orders $p$ and the respective $N_{\rm opt}^{(p)}$. Only show value for $p$ that are also given in the previous figures.} 
+%According to the statistics, see Table \ref{Table: optimal_number_of_dofs_MM}, $h_{opt} ^{(p)}$ of $u$ is slightly larger than that of $u_{xx}$, $\hat h_{opt} ^{(p)}$ is dependent on the accuracy of $u$.
+
+\begin{table}[!ht]
+\caption [sss] {Optimal refinement times and corresponding errors for $u$, $u_{x,h}$ and $u_{xx,h}$ using the standard FEM for the Poisson, diffusion and Helmholtz equation}\label{Table: optimal_number_of_dofs_SM} 
+ \centering
+\begin{subtable}{0.5\textwidth}
+\centering
+ \begin{tabular}{|c|c|c|c|c|c|c|} \hline 
+{} & \multicolumn{2}{c|}{$u$} & \multicolumn{2}{c|}{$u_{x,h}$} & \multicolumn{2}{c|}{$u_{xx,h}$}  \\
+\cline{2-7}
+ & $R_{\rm opt}$ & $E_{\rm min}$ & $R_{\rm opt}$ & $E_{\rm min}$ & $R_{\rm opt}$ & $E_{\rm min}$ \\		%
+\hline
+$P_1$ & 15 & 2.1e-10 & 19 & 1.1e-6 & \multicolumn{2}{c|}{n/a}  \\		%
+\hline
+$P_2$ & 10 & 8.1e-11 & 12 & 7.2e-9 & 16 & 1.4e-5 \\		%
+\hline
+$P_3$ & 7 & 8.9e-12 & 9 & 2.0e-10 & 12 & 6.2e-8 \\
+\hline
+$P_4$ & 6 & 2.3e-12 & 7 & 3.4e-11 & 9 & 3.1e-9 \\	%
+\hline
+$P_5$ & 5 & 7.4e-13 & 6 & 7.2e-12 & 7 & 3.8e-10 \\	%
+\hline
+% $P_6$ & 4 & 1.3e-13 & 5 & 1.7e-12 & 5 & 1.3e-10 \\	%
+% \hline
+\end{tabular}
+\caption[sss]{Poisson}
+\end{subtable}
+
+ \centering
+\begin{subtable}{0.5\textwidth}
+ \begin{tabular}{|c|c|c|c|c|c|c|} \hline
+{} & \multicolumn{2}{c|}{$u$} & \multicolumn{2}{c|}{$u_{x,h}$} & \multicolumn{2}{c|}{$u_{xx,h}$}  \\
+\cline{2-7}
+ & $R_{\rm opt}$ & $E_{\rm min}$ & $R_{\rm opt}$ & $E_{\rm min}$ & $R_{\rm opt}$ & $E_{\rm min}$ \\		%
+\hline
+$P_1$ & 16 & 1.3e-9 & 20 & 7.7e-6 & \multicolumn{2}{c|}{n/a} \\		%
+\hline
+$P_2$ & 11 & 1.0e-10 & 14 & 3.0e-8 & 18 & 2.0e-4 \\		%
+\hline
+$P_3$ & 9 & 5.5e-11 & 11 & 1.6e-9 & 13 & 6.3e-7 \\
+\hline
+$P_4$ & 7 & 3.8e-12 & 9 & 1.4e-10 & 10 & 1.6e-8 \\	%
+\hline
+$P_5$ & 6 & 2.9e-12 & 7 & 2.1e-11 & 8 & 1.1e-9 \\	%
+\hline
+% $P_6$ & 5 & 2.3e-12 & 6 & 4.5e-12 & 7 & 3.8e-10 \\	%
+% \hline
+\end{tabular}
+\caption[sss]{Diffusion}
+\end{subtable}
+
+\centering
+\begin{subtable}{0.5\textwidth}
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|} \hline  
+{} & \multicolumn{2}{c|}{$u$} & \multicolumn{2}{c|}{$u_{x,h}$} & \multicolumn{2}{c|}{$u_{xx,h}$}  \\
+\cline{2-7}
+ & $R_{\rm opt}$ & $E_{\rm min}$ & $R_{\rm opt}$ & $E_{\rm min}$ & $R_{\rm opt}$ & $E_{\rm min}$ \\		%
+\hline
+$P_1$ & 13 & 4.5e-9 & 17 & 2.8e-6 & \multicolumn{2}{c|}{n/a} \\		%
+\hline
+$P_2$ & 9 & 1.2e-10 & 13 & 5.8e-9 & 16 & 1.1e-5 \\		%
+\hline
+$P_3$ & 6 & 2.6e-11 & 8 & 3.1e-10 & 11 & 4.0e-8 \\
+\hline
+$P_4$ & 5 & 2.5e-12 & 7 & 7.5e-12 & 8 & 1.8e-9 \\	%
+\hline
+$P_5$ & 4 & 6.2e-13 & 6 & 4.8e-12 & 6 & 1.9e-10 \\	%
+\hline
+% $P_6$ & 3 & 2.7e-13 & 4 & 9.1e-13 & 5 & 6.3e-11 \\	%
+% \hline
+\end{tabular}
+\caption[sss]{Helmholtz}
+\end{subtable}
+\end{table}
+
+\begin{table}[!ht]
+\caption [sss] {Optimal refinement times and corresponding errors for $u$, $u_{x,h}$ and $u_{xx,h}$ using the mixed FEM for the Poisson, diffusion and Helmholtz equation}\label{Table: optimal_number_of_dofs_MM} 
+ \centering
+\begin{subtable}{0.5\textwidth}
+\centering
+ \begin{tabular}{|c|c|c|c|c|c|c|} \hline 
+{} & \multicolumn{2}{c|}{$u$} & \multicolumn{2}{c|}{$u_{x,h}$} & \multicolumn{2}{c|}{$u_{xx,h}$}  \\
+\cline{2-7}
+ & $R_{\rm opt}$ & $E_{\rm min}$ & $R_{\rm opt}$ & $E_{\rm min}$ & $R_{\rm opt}$ & $E_{\rm min}$ \\		%
+\hline
+$P_1/P_0^{\text{disc}}$ & - & & 21 & 4.0e-14 & - &  \\		%
+\hline
+$P_2/P_1^{\text{disc}}$ & 20 & 2.1e-13 & 13 & 2.2e-13 & 17 & 3.5e-11 \\		%
+\hline
+$P_3/P_2^{\text{disc}}$ & 14 & 9.3e-15 & 10 & 7.4e-14 & 12 & 2.4e-12 \\
+\hline
+$P_4/P_3^{\text{disc}}$ & 10 & 2.6e-15 & 8 & 7.3e-15 & 9 & 5.1e-13 \\	%
+\hline
+$P_5/P_4^{\text{disc}}$ & 8 & 7.4e-16 & 7 & 4.1e-15 & 7 & 2.4e-13 \\	%
+\hline
+%$P_6/P_5^{\text{disc}}$ & 7 & 5.5e-16 & 5 & 2.5e-14 & 6 & 1.1e-13 \\	%
+%\hline
+\end{tabular}
+\caption[sss]{Poisson}
+\end{subtable}
+
+ \centering
+\begin{subtable}{0.5\textwidth}
+ \begin{tabular}{|c|c|c|c|c|c|c|} \hline
+{} & \multicolumn{2}{c|}{$u$} & \multicolumn{2}{c|}{$u_{x,h}$} & \multicolumn{2}{c|}{$u_{xx,h}$}  \\
+\cline{2-7}
+ & $R_{\rm opt}$ & $E_{\rm min}$ & $R_{\rm opt}$ & $E_{\rm min}$ & $R_{\rm opt}$ & $E_{\rm min}$ \\		%
+\hline
+$P_1/P_0^{\text{disc}}$ & - & & - & & - &  \\		%
+\hline
+$P_2/P_1^{\text{disc}}$ & 22 & 8.2e-14 & 16 & 4.6e-14 & 18 & 1.3e-9 \\		%
+\hline
+$P_3/P_2^{\text{disc}}$ & 15 & 4.3e-14 & 11 & 2.5e-13 & 13 & 1.1e-10 \\
+\hline
+$P_4/P_3^{\text{disc}}$ & 12 & 2.7e-15 & 9 & 3.3e-14 & 11 & 2.0e-11 \\	%
+\hline
+$P_5/P_4^{\text{disc}}$ & 10 & 6.8e-16 & 8 & 1.7e-14 & 8 & 9.0e-12 \\	%
+\hline
+%$P_6/P_5^{\text{disc}}$ & 8 & 3.4e-15 & 6 & 6.3e-14 & 7 & 3.1e-12 \\	%
+%\hline
+\end{tabular}
+\caption[sss]{Diffusion}
+\end{subtable}
+
+\centering
+\begin{subtable}{0.5\textwidth}
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|} \hline  
+{} & \multicolumn{2}{c|}{$u$} & \multicolumn{2}{c|}{$u_{x,h}$} & \multicolumn{2}{c|}{$u_{xx,h}$}  \\
+\cline{2-7}
+ & $R_{\rm opt}$ & $E_{\rm min}$ & $R_{\rm opt}$ & $E_{\rm min}$ & $R_{\rm opt}$ & $E_{\rm min}$ \\		%
+\hline
+$P_1/P_0^{\text{disc}}$ & - & & - & & - &  \\		%
+\hline
+$P_2/P_1^{\text{disc}}$ & 17 & 7.3e-12 & 12 & 1.6e-13 & 16 & 3.3e-11 \\		%
+\hline
+$P_3/P_2^{\text{disc}}$ & 12 & 3.3e-13 & 10 & 3.5e-14 & 12 & 2.5e-12 \\
+\hline
+$P_4/P_3^{\text{disc}}$ & 10 & 2.7e-14 & 8 & 3.1e-14 & 8 & 5.6e-13 \\	%
+\hline
+$P_5/P_4^{\text{disc}}$ & 7 & 2.3e-14 & 6 & 2.9e-15 & 6 & 1.6e-13 \\	%
+\hline
+%$P_6/P_5^{\text{disc}}$ & 5 & 3.8e-14 & 4 & 1.1e-14 & 5 & 9.2e-14 \\	%
+%\hline
+\end{tabular}
+\caption[sss]{Helmholtz}
+\end{subtable}
+\end{table}
+
+% When higher-order derivatives are considered, to reach the highest attainable accuracy for  overall is controlled by the highest-order derivative, and the corresponding $h_{opt} ^{(p)}$ is the $h_{opt} ^{(p)}$ overall.
+% Using the mixed FEM for the same equations, the offsets $\alpha _{\text{R}}$ are of the same order with that of the standard FEM, but slopes $\beta _{\text{R}}$ decrease to 1, which means that, using this method, higher accuracy can be achieved with a larger number of $\text{DoFs}$.
+% \textcolor{black}{In addition, since the truncation error decreases along straight lines when the number of $\text{DoFs}$ is relatively large, $h_{opt} ^{(p)}$ can be quickly obtained by extending this line.}
+% general one-dimensional differential 
+% and mixed FEMs, 
+
+\newpage
+\subsection{Scaling}	\label{section_scaling}
+
+In this section, we investigate the influence of the scaling of the solution and the right-hand side on the overall error behavior and propose different scaling schemes to neutralize this influence factor.
+
+To cover a wide range of scenarios, we consider the Poisson equation with five different right-hand sides and corresponding boundary conditions, see Table \ref{Table: Poisson equation rhs}. 
+Each case contains a coefficient $c_i,~i=1,2, \ldots , 5$, which is varied over several orders of magnitude so that the $L_2$ norm of the right-hand side, the solution and its first and second derivative extends over a wide range of magnitudes; cf. Table \ref{Table: L2 norm Poisson fsin} for Case 1. Details of the other four cases can be found in Table \ref{Table: offsets Poisson other cases}. Fig. \ref{Fig:L2 norm u f} gives an overview of the different cases.
+
+The influence of the scaling on the error behavior for the standard FEM has been analyzed for $P_2$ elements, whereas for the mixed FEM the $P_4/P_3^{\text{disc}}$ element pair has been employed.
+In \cref{scaling_std_FEM}, the results obtained for case 1 using the standard FEM are discussed, and for the mixed FEM in \cref{scaling_mix_FEM}. 
+Results of other cases can be found in \ref{other scaling cases}, which shows qualitatively the same behavior.
+% For Case 2, Case 3, Case 4 and Case 5, the offsets $\alpha_{\text{R}}$ of $u$, $u_{x}$ and $u_{xx}$ after using schemes $\text{M}_1$ and $\text{M}_2$ also converge as Case 1.
+
+\begin{table}[!ht]
+\centering
+ \begin{tabular}{|c|c|c|c|c|} \hline      
+\multirow{2}{*}{Case} & \multirow{2}{*}{$f(x)$}  & \multicolumn{2}{c|}{Boundary conditions} & \multirow{2}{*}{$u_{\text{ex}}(x)$} \\
+\cline{3-4}
+& & $u(0)$ & $u(1)$ & \\
+\hline
+{1} & {$\sin (2 \pi c_1x)$} & {0}& ${(2 \pi c_1)}^{-2} \sin (2 \pi c_1)$ & ${(2 \pi c_1)}^{-2} \sin (2 \pi c_1x)$\\
+\hline
+2 & $\makecell{-e^{-{c_2}{(x-1/2)^2}} \cdot \\ \left({4{c_2}^2(x-1/2)^2 -2c_2} \right)}$ & $e^{-c_2/4}$ & $e^{-c_2/4}$ & $e^{-{c_2}{{(x-1/2)^2}}}$ \\
+\hline
+3 & $\sin (2 \pi c_3 x) +1$ & $0$ & ${(2 \pi c_3)}^{-2}\sin (2 \pi c_3)-\frac{1}{2}$ & ${(2 \pi c_3)}^{-2}\sin (2 \pi c_3 x)-\frac{x^2}{2}$ \\
+\hline
+4 & $2 \pi c_4 \sin (2 \pi c_4 x)$ & $0$ & ${(2 \pi c_4)}^{-1} \sin (2 \pi c_4)$ & ${(2 \pi c_4)}^{-1} \sin (2 \pi c_4x)$ \\
+\hline
+5 & $0$ & $0$ & ${c_5}^{-1}$ & ${c_5}^{-1} x$ \\
+\hline
+\end{tabular}
+\caption [w]{Poisson equation of different right-hand-sides} 
+\label{Table: Poisson equation rhs}
+\end{table}
+
+\begin{table}[!ht]
+\centering
+\begin{tabular}{|c|c|c|c|c|} \hline   
+\multicolumn{2}{|c|}{} &\multicolumn{3}{c|}{$L_2$ norm}  \\	%
+\cline{3-5}
+\multicolumn{2}{|c|}{}& $u$ & $u_{x}$ & $u_{xx}$ \\	%
+\hline
+\multirow{5}{*}{$c_1$}
+&$10^{-2}$& 9.2e-0 & 1.6e+1 & 3.6e-2 \\
+\cline{2-5}  
+&$10^{-1}$& 8.8e-1 & 1.5e-0 & 3.5e-1 \\
+\cline{2-5}   
+&$10^{0}$& 1.8e-2 & 1.1e-1 & 7.1e-1 \\
+\cline{2-5}   
+&$10^{1}$& 1.8e-4 & 1.1e-2 & 7.1e-1 \\
+\cline{2-5}  
+&$10^{2}$ & 1.8e-6 & 1.1e-3 & 7.1e-1 \\
+\hline 
+\end{tabular}
+\caption [sss] {$L_2$ norms of $f$, $u$, $u_{x}$ and $u_{xx}$ for Case 1.}
+\label{Table: L2 norm Poisson fsin} 
+\end{table}
+
+\begin{figure}[!ht]
+\centering
+      \includegraphics[width=0.4\linewidth,natwidth=500,natheight=440]{L2_norm_u_f.pdf}
+\caption{Distribution of the $L_2$ norm of $u$ and $f$ of the above equations. Different cases are represented by the case number. The colors denotes the magnitude of $c_i$: red for $c_i \gg 1$, green for $c_i \sim 1$ and blue for $c_i \ll 1$.}
+\label{Fig:L2 norm u f}
+\end{figure}
+
+\subsubsection{The standard FEM}		\label{scaling_std_FEM}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_SM_rhs_fsin_abs_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_SM_rhs_fsin_abs_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_SM_rhs_fsin_abs_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_SM_rhs_fsin_abs_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_SM_rhs_fsin_abs_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_SM_rhs_fsin_abs_2ndd}
+    \end{subfigure}
+\caption{Absolute errors for different $c_1$ using the standard FEM.}   
+\label{Pois_SM_rhs_solu orig}
+\end{figure}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_SM_rhs_solu_scale_p2pisinovpL2_abs_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_SM_rhs_solu_scale_p2pisinovpL2_abs_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_SM_rhs_solu_scale_p2pisinovpL2_abs_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_SM_rhs_solu_scale_p2pisinovpL2_abs_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_SM_rhs_solu_scale_p2pisinovpL2_abs_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_SM_rhs_solu_scale_p2pisinovpL2_abs_2ndd}
+    \end{subfigure}
+\caption{Absolute errors for different $c_1$ using the standard FEM with scheme $\text{S}$.}    
+\label{Pois_SM_rhs_solu S}
+\end{figure}
+
+The absolute errors of $u$, $u_{x}$ {and} $u_{xx}$ for different values $c_1$ using the standard FEM are depicted in Fig. \ref{Pois_SM_rhs_solu orig}. It shows that the slopes $\beta _{\text{R}}$ of the round-off error ${E}_{\text{R}}$ are the same for different coefficients values $c_1$. However, the offsets $\alpha_{\text{R}}$ decrease with increasing $c_1$, which makes it impossible to determine the break-even point between truncation and round-off error in a generic, that is, problem independent way.
+
+The reason for the large variation of $\alpha_{\text{R}}$ is the change in magnitude of ${\|u\|_{2}}$, which is inversely proportional to $c_1$. To eliminate this influence factor we scale the solution to 1 by dividing the right-hand side $F$ of the linear system of equations (\ref{std FEM matrix equation}) by $\|u_{\text{ex}}\|_{2}$. This scaling is denoted as scheme S, cf. Table \ref{Table: scaling schemes std FEM}.
+
+\begin{table}[!ht]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline  
+{Scheme}& Left-hand side & Solution & Right-hand side \\	%
+\hline
+$\text{S}$ & {$A$} & $\frac{1}{\|u\|_{2}} U$ & $\frac{1}{\|u\|_{2}} F$\\	%
+\hline
+\end{tabular}
+\caption [sss] {Scaling scheme of the standard FEM}
+\label{Table: scaling schemes std FEM} 
+\end{table}
+
+The absolute errors of $u$, $u_x$, and $u_{xx}$ obtained from using scheme S and depicted in Fig. \ref{Pois_SM_rhs_solu S} confirm that the scaling of the solution can be easily neutralized as an influence factor for the break-even point between truncation and round-off error. In practice, a rough estimate of $\|u_{\text{ex}}\|_{2}\approx \|u_{h}^{(p)}\|_{2}$ can be computed on a coarse mesh with low approximation order at nearly no additional computational costs.
+
+\subsubsection{The mixed FEM}			\label{scaling_mix_FEM}
+
+The outcome of the numerical experiments performed with the mixed-FEM formulation (\ref{matrix system mixed}) are presented in Fig. \ref{Pois_pLov2pi2sin_MM_rhs orig}. The slopes $\beta _{\text{R}}$ are the same for different values of $c_1$, but the offset $\alpha_{\text{R}}$, like with the standard FEM, decreases whenever the parameter $c_1$ is increased.
+Since both $\|u\|_{2}$ and $\|u_{x}\|_{2}$ decrease with increasing $c_1$, this suggests that $\alpha_{\text{R}}$ is proportional to $\|u\|_{2}$ and/or $\|u_{x}\|_{2}$. Note that the first derivative $u_x=v$ is a separate variable in the mixed FEM, which gives us more flexibility in defining scaling schemes.
+
+In order to render the offset $\alpha_{\text{R}}$ scale-independent, we normalize the first derivative by dividing the right-hand side $G$ by ${\|v\|_{2}}$, and also scale the solution to 1 by dividing the right-hand side $H$ by ${\|u\|_{2}}$. The details of the resulting scheme $\text{M}_1$ are given in the first row of Table \ref{Table: scaling schemes mix FEM}.
+The absolute errors of $u$, $u_{x}=v$ and $u_{xx}=v_x$ obtained by using this scheme are shown in Fig. \ref{Pois_pLov2pi2sin_MM_rhs M1}.
+As can be seen, the offsets $\alpha_{\text{R}}$ of $u$ and $u_{xx}$ converge, while that of $u_{x}$ only converges when $c_1<1$. 
+The former observation suggests that the offsets $\alpha_{\text{R}}$ of $u$ and $u_{xx}$ depend linearly on the magnitudes of $\|u\|_{2}$ and $\|u_{x}\|_{2}$, respectively.
+
+When $c_1>1$, even though the offset $\alpha_{\text{R}}$ of $u_x$ of different $c_1$ moves up, it still decreases with increasing $c_1$.
+Therefore, we need to decrease ${\|u_x\|_{2}}$ further.
+Given that ${\|u\|_{2}}$ decreases faster than ${\|u_x\|_{2}}$ with increasing $c_1$ for $c_1>1$, we propose a second scaling scheme, $\text{M}_2$, (see the second row in Table \ref{Table: scaling schemes mix FEM}), in which both $u_x$ and $u$ are scaled by $\|u\|_{2}$. The absolute errors obtained by using this scheme are shown in Fig. \ref{Pois_pLov2pi2sin_MM_rhs M2}. For this scheme, the offsets $\alpha_{\text{R}}$ of $u$ and $u_{x}$ converge, while that of $u_{xx}$ does not.
+
+\begin{table}[!ht]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline  
+{Scheme}& Left-hand side & Solution & Right-hand side \\	%
+\hline
+$\text{M}_1$ & {$\left[ \begin{array}{cc} M & \frac{\|u\|_{2}}{\|u_{x}\|_{2}} B  \\ B^T & 0 \end{array}\right]$ } & $\left[ \begin{array}{cc} \frac{1}{\|u_x\|_{2}} {V} \\ \frac{1}{\|u\|_{2}} {U} \end{array}\right]$ & $\left[ \begin{array}{cc} \frac{1}{\|u_x\|_{2}} G \\ {\frac{1}{\|u_x\|_{2}} H} \end{array}\right]$\\	%
+\hline
+$\text{M}_2$ & {$\left[ \begin{array}{cc} M & B  \\ B^T & 0 \end{array}\right]$ } & $\left[ \begin{array}{cc} \frac{1}{\|u\|_{2}} {V} \\ \frac{1}{\|u\|_{2}} {U} \end{array}\right]$ & $\left[ \begin{array}{cc} \frac{1}{\|u\|_{2}} G \\ {\frac{1}{\|u\|_{2}} H} \end{array}\right]$ \\	%
+\hline
+\end{tabular}
+\caption [sss] {Scaling schemes of the mixed FEM }
+\label{Table: scaling schemes mix FEM}
+\end{table}
+
+Our numerical experiments for this and the other cases (cf. \ref{other scaling cases}) show that scheme $\text{M}_1$ is preferable if $u$ and $u_{xx}$ are of primary interest, whereas most accurate solutions and first derivatives are obtained form scheme $\text{M}_2$. If all three quantities are required with best possible accuracy both schemes need to be applied in concert, whereby different $N_{\rm opt}^{(p)}$ values have to be used for $u$, $u_x$, and $u_{xx}$.
+
+Summarizing this section, we have proposed and validated three different scaling schemes $\text{S}$, $\text{M}_1$ and $\text{M}_2$, which make it possible to eliminate the scaling of the solution, its first derivative and the right-hand side as influence factor for the break-even point between truncation and round-off error, which is an essential prerequisite for our $hp$-refinement strategy to be robust and generally applicable.
+
+%To summarize, using the standard FEM, the offset $\alpha_{\text{R}}$ for ${E}_{\text{R}}$ depends on $\|u\|_{2}$. 
+%By scaling $\|u\|_{2}$ to 1, the offset $\alpha_{\text{R}}$ for the scaled equations for $u$, $u_x$ and $u_{xx}$ tends to converge to $2\times 10^{-17}$, $5\times 10^{-17}$ and $5\times 10^{-16}$, respectively.
+%Using the mixed FEM, the offset $\alpha_{\text{R}}$ of $u$ and $u_{x}$ depends on $\|u\|_{2}$, and that of $u_{xx}$ depends on $\|u_x\|_{2}$. The converging offsets $\alpha_{\text{R}}$ of $u$, $u_{x}$ and $u_{xx}$ are $1 \times 10^{-19} \sim 4 \times 10^{-18}$, $2 \times 10^{-17} \sim 4 \times 10^{-17}$ and $2 \times 10^{-16}$, respectively. 
+
+
+% scaling allows  the lines approximating the round-off error having a common 
+% Therefore, by scaling analysis, the offset $\alpha_{\text{R}}$ and slope $\beta _{\text{R}}$ for the Poisson equation with different right-hand sides confirm the observation of the general equations.
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_pLov2pi2sin_MM_rhs_noscaling_UMF_abs_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_pLov2pi2sin_MM_rhs_noscaling_UMF_abs_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_pLov2pi2sin_MM_rhs_noscaling_UMF_abs_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_pLov2pi2sin_MM_rhs_noscaling_UMF_abs_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_pLov2pi2sin_MM_rhs_noscaling_UMF_abs_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_pLov2pi2sin_MM_rhs_noscaling_UMF_abs_2ndd}
+    \end{subfigure}
+\caption{Absolute errors for different $c_1$ using the mixed FEM.}    
+\label{Pois_pLov2pi2sin_MM_rhs orig}
+\end{figure}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pLov2pi2sin_MM_rhs_scale_UMF_uprime_uprimeL2_u_uL2_abs_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_pLov2pi2sin_MM_rhs_scale_UMF_uprime_uprimeL2_u_uL2_abs_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pLov2pi2sin_MM_rhs_scale_UMF_uprime_uprimeL2_u_uL2_abs_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_pLov2pi2sin_MM_rhs_scale_UMF_uprime_uprimeL2_u_uL2_abs_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pLov2pi2sin_MM_rhs_scale_UMF_uprime_uprimeL2_u_uL2_abs_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_pLov2pi2sin_MM_rhs_scale_UMF_uprime_uprimeL2_u_uL2_abs_2ndd}
+    \end{subfigure}
+\caption{Absolute errors for different $c_1$ using the standard FEM with scheme $\text{M}_1$.}    
+\label{Pois_pLov2pi2sin_MM_rhs M1}
+\end{figure}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pLov2pi2sin_MM_rhs_scale_upu_uL2_GH_uL2_abs_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_pLov2pi2sin_MM_rhs_scale_upu_uL2_GH_uL2_abs_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pLov2pi2sin_MM_rhs_scale_upu_uL2_GH_uL2_abs_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_pLov2pi2sin_MM_rhs_scale_upu_uL2_GH_uL2_abs_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pLov2pi2sin_MM_rhs_scale_upu_uL2_GH_uL2_abs_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_pLov2pi2sin_MM_rhs_scale_upu_uL2_GH_uL2_abs_2ndd}
+    \end{subfigure}
+\caption{Absolute errors for different $c_1$ using the mixed FEM with scheme $\text{M}_2$.}
+\label{Pois_pLov2pi2sin_MM_rhs M2}
+\end{figure}
+
+
+\subsection{Computer precision}	\label{section_working_precision}
+
+In this section we study the influence of the computer precision on the overall error. To this end, we consider the Poisson equation with the normalized settings given in Table \ref{Table: differences in three equations} and solve it by the standard FEM with $P_2$ elements using both single and double precision as defined in the IEEE-754 standard \cite{zuras2008ieee}.
+
+\subsubsection{Single floating point}
+
+Fig. \ref{Poisson_SM_abs_float_vs_double} clearly demonstrates that the computer precision has no influence on the truncation error at all and also not on the slope of the round-off error but directly impacts the offset $\alpha_{\text{R}}$ of the latter. The shift by about 7-9 orders of magnitude is expected behavior given the fact that the number of decimal digits that can be represented by single and double precision is about 7 and 16, respectively.
+
+Consequently, the round-off error lines obtained for double-precision results need to be shifted upwards by the respective order of magnitude to become valid for the single-precision case. Similarly, it is expected that quadrupel precision will show a similar behavior with a possible downward shift by about 18.
+
+%In this section, we decrease the precision of the solution from double to single precision, and investigate its influence on the round-off error, see Fig. \ref{Poisson_SM_abs_float_vs_double}.
+%As can be seen, when the number of $\text{DoFs}$ is not large, the errors obtained with the single precision are the same as those obtained with the double precision. 
+%When the number of $\text{DoFs}$ is increased, the errors using the single precision increase for a smaller number of $\text{DoFs}$ than that using the double precision, but with a same slope that is to be expected.
+%The offsets $\alpha_{\text{R}}$ of $u$, $u_{x}$ and $u_{xx}$ for single precision experiments are between $10^{-9}$ and $10^{-8}$, larger than those found for double precision experiments with a factor of $10^{8}$.
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Poisson_SM_abs_float_vs_double_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Poisson_SM_abs_float_vs_double_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Poisson_SM_abs_float_vs_double_grad.pdf}
+        \caption{First derivative}	
+        \label{Fig:Poisson_SM_abs_float_vs_double_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Poisson_SM_abs_float_vs_double_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Poisson_SM_abs_float_vs_double_2ndd}
+    \end{subfigure}
+\caption{Comparison of using single precision and using double precision.}
+\label{Poisson_SM_abs_float_vs_double}
+\end{figure}
+
+\newpage
+\subsubsection{Highest allowable accuracy of the double working precision}
+
+Since the highest allowable accuracy of the double working precision is around $10^{-16}$, the resulting error can not be smaller than this value.
+By conducting experiments for Case 5 in Table \ref{Table: Poisson equation rhs}, see Fig. \ref{Fig:Pois_p_coeffx_MM_abs_error} for the results, we show that the round-off error only takes effect when its value is larger than $10^{-16}$.
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_p_coeffx_MM_abs_error_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_p_coeffx_MM_abs_error_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_p_coeffx_MM_abs_error_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_p_coeffx_MM_abs_error_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_p_coeffx_MM_abs_error_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_p_coeffx_MM_abs_error_2ndd}
+    \end{subfigure}
+\caption{Absolute errors for Case 5 in Table \ref{Table: Poisson equation rhs}.}
+\label{Fig:Pois_p_coeffx_MM_abs_error}
+\end{figure}
+
+\subsection{Sensitivity}		\label{section_sensitivity}
+
+This section investigates possible other influence factors such as types of boundary conditions and their implementation, linear system solvers, the choice of support points and adaptive mesh refinement.
+
+\subsubsection{Boundary conditions}	\label{Influence BC}
+
+Next to different types of boundary conditions, in particular, Neumann and Dirichlet type, we consider two common approaches for imposing the latter and analyze their non-influence on the error behavior.
+
+To begin with, we consider the same model problem as in the previous section and solve it by the standard FEM with $P_2$ elements using again double precision. Fig. \ref{Pois_SM_StrongvsWeak_BC_python} compares the discretization errors resulting from using the strong imposition strategy (Weak form 1; cf. Eq. (\ref{1D_general_SM_weak_form})) against the results obtained with weakly imposed Dirichlet boundary conditions (Weak form 2; cf. Eq. (\ref{1D_general_SM_weak_form_weak_Diri})).
+As can be seen, both weak and strong imposition of the Dirichlet boundary condition yield the same trend line for the round-off error for the solution and its derivatives mostly irrespective of the magnitude of the penalty parameter.
+
+% In addition, when the penalty parameter $\rho$ is 50, the truncation error is slightly larger than that using the strong imposition; when $\rho$ becomes much larger, for example, 1e6, the results are virtually the same with that using the strong imposition.
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{deal_Pois_SM_StrongvsWeak_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_SM_StrongvsWeak_BC_solu_python}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{deal_Pois_SM_StrongvsWeak_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_SM_StrongvsWeak_BC_grad_python}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{deal_Pois_SM_StrongvsWeak_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_SM_StrongvsWeak_BC_2ndd_python}
+    \end{subfigure}
+\caption{Comparison of the strong and weak imposition of the Dirichlet boundary condition.}
+\label{Pois_SM_StrongvsWeak_BC_python}
+\end{figure}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_SM_DBCvsMBC_UMF_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_SM_DBCvsMBC_UMF_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_SM_DBCvsMBC_UMF_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_SM_DBCvsMBC_UMF_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_SM_DBCvsMBC_UMF_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_SM_DBCvsMBC_UMF_2ndd}
+    \end{subfigure}
+\caption{Comparison of Dirichlet/Dirichlet and Dirichlet/Neumann boundary conditions.}
+\label{Pois_SM_DBCvsMBC}
+\end{figure}
+
+For the second numerical experiment, the Dirichlet boundary condition at the left boundary ($x=0$) is kept while the one at the right boundary ($x=1$) has been replaced by the Neumann boundary condition $u_x (1) = -e^{-1/4}$, leading to the same solution and derivative profiles. It follows from the convergence plots depicted in Fig. \ref{Pois_SM_DBCvsMBC} that the slopes $\beta_{\text{R}}$ of the round-off error are invariant to the change in the type of the boundary conditions. The offsets $\alpha_{\text{R}}$ of $u$ and $u_x$ are slightly larger for the Dirichlet/Neumann boundary condition by a factor of 3.5 and 2, respectively, and identical to the Dirichlet/Dirichlet case for $u_{xx}$.
+
+In summary, both the truncation and the round-off error trends are very robust with respect to variations in the type of boundary conditions and the way Dirichlet boundary conditions are implemented, which is an important prerequisite for our a posteriori refinement strategy to be applicable for a wide range of problems.
+
+%Two important aspects of the influence of boundary conditions are investigated in this section: 
+%Firstly, we investigate the influence of the Neumann boundary condition. We still use the Dirichlet boundary condition at $x=0$, whereas a Neumann boundary condition $u_x (1) = -e^{-1/4}$ is imposed at $x=1$, see Fig. \ref{Pois_SM_DBCvsMBC} for the results.
+%It shows that the slopes $\beta_{\text{R}}$ using the Neumann boundary condition are the same with that only using the Dirichlet boundary conditions. The offset $\alpha_{\text{R}}$ of $u$ and $u_x$ of the former is slightly larger than that of the latter, whereas the offsets $\alpha_{\text{R}}$ of $u_{xx}$ are the same using these two types of boundary conditions.
+
+
+\subsubsection{Solver}		\label{Influence_solver}
+
+In this section, we investigate different aspects of the solution procedure such as the use of direct and iterative solvers, the tolerance of stopping criteria and the segregated solution of the mixed-FEM system by virtue of the Schur complement approach and quantify their influence on the error behavior. Throughout this section we will restrict our analysis to the one-dimensional Poisson equation with the normalized settings given in Table \ref{Table: differences in three equations} as model problem and discretize it using $P_2$ and $P_4/P_3^{\rm disc}$ elements, respectively. Boundary conditions are imposed in strong sense and all results are computed using double-precision arithmetics.
+
+\paragraph{The standard FEM}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_SM_UMFvsCG_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_SM_UMFvsCG_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_SM_UMFvsCG_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_SM_UMFvsCG_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_SM_UMFvsCG_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_SM_UMFvsCG_2ndd}
+    \end{subfigure}
+\caption{Comparison of the CG solver and UMFPACK solver using the standard FEM.}
+\label{Fig:Pois_SM_UMFvsCG}
+\end{figure}
+
+Eq. (\ref{std FEM matrix equation}) that arises from the standard FEM features a symmetric and positive definite system matrix ($D(x)>0$ and $r(x)=0$), which allows us to use the iterative Conjugate Gradient (CG) method \citep{ginsburg1963cg} and compare it to the direct solver UMFPACK \citep{davis2004algorithm}, which implements the multifrontal LU factorization approach. For the former, the $L_2$ norm of the residual is used as stopping criterion for the iteration process, whereby three different tolerances, namely, $10^{-4}$, $10^{-10}$ and $10^{-16}$, are investigated.
+
+Fig. \ref{Fig:Pois_SM_UMFvsCG} shows the error of the approximate solution and its first and second derivatives. Even though the slopes $\beta _{\text{R}}$ of the round-off errors are the same for all solver configurations, the CG method reduces the offset $\alpha_{\text{R}}$ for $u$ and $u_x$ by 1-2 orders of magnitude compared to UMFPACK if the stopping tolerance is sufficiently small. This is in agreement with the general observation that direct solvers are often less accurate than iterative ones \cite{skeel1980}, which has lead to the development of iterative refinement schemes \citep{wilkinson1963,moler1967,steward1973}, which improve the accuracy of a directly computed solution by a few steps carried by an iterative method.
+
+Fig. \ref{Fig:Pois_SM_UMFvsCG} furthermore confirms that the stopping criterion of the iterative solution procedure has a significant impact on the overall error if the tolerance of the stopping criterion is too large so that the error contribution due to the iterative solver dominates both truncation and round-orr errors. At the same time, choosing too restrictive tolerances results in the over-solving of the linear system, which leads to excess computational costs without any improvement of the overall accuracy of the solution.
+
+It should be noted that commonly adopted stopping criteria do not monitor the error of the approximate solution $\tilde U\approx U$ but only the magnitude of the residual, i.e. $\|F-A\tilde U\|_2$ possibly related to the initial residual. It is thus in general nontrivial to select tolerances for residual-based stopping criteria a priori that ensure that the error contribution due to the iterative solvers falls below the truncation or round-off error.
+
+%In this section, we investigate the influence of the stopping criterion of the CG solver, which is used to be compared with the residual norm of the solution, on the round-off error. Three values, i.e. $10^{-16}$, $10^{-10}$ and $10^{-4}$, are chosen. 
+%Insuring the criterion is satisfied in each case, the results are shown in Fig. \ref{Fig:Pois_SM_UMFvsCG}, together with that using the UMFPACK solver.
+
+%When the value is $10^{-16}$, the slope $\beta _{\text{R}}$ using the CG solver is also 2 for $u$, $u_{x,h}$ and $u_{xx,h}$; the offset $\alpha_{\text{R}}$ using the CG solver is smaller than that using the UMFPACK solver for both $u$ and $u_{x,h}$, whereas the inverse is true for $u_{xx,h}$.
+
+\paragraph{The mixed FEM} A widely used alternative to the monolithic solution of the coupled linear system (\ref{matrix system mixed}) is to decouple the approximate solution $U$ and its first derivative $V$ by the Schur complement approach
+\begin{subequations}
+ \begin{align}
+  B^{\top} M^{-1} B U &= B^{\top} M^{-1} G - H, 	\label{schur_complement_solution} \\
+  MV&=G-BU					
+  \label{schur_complement_gradient}
+\end{align}
+\end{subequations}
+and solve both equations in segregated manner. Since the inverse of the consistent mass matrix is typically not sparse one avoids to assemble $M^{-1}$ explicitly and, instead, replaces the term $M^{-1}G$ in the right-hand side of Eq. (\ref{schur_complement_solution}) by solving the auxiliary linear system $MZ=G$, e.g., by the CG method. 
+
+Moreover, the Schur complement matrix $S=B^\top M^{-1}B$ is positive definite since $M$ features this properties and is moreover symmetric and $B$ has full column rank. Consequently, Eq. (\ref{schur_complement_solution}) can be solved by the CG method, which does not require the explicit formation of matrix $S$ but only its application to a vector, say, $W$. In short, the matrix-vector product $SW$ is implemented by the following three-step routine
+\begin{enumerate}
+    \item form $X=BW$,
+    \item solve $MY=X$ by the CG method,
+    \item form $Z=B^\top Y$ to obtain $Z=SW$.
+\end{enumerate}
+Once the approximate solution $U$ is obtained from Eq. (\ref{schur_complement_solution}) it is used in the right-hand side of Eq. (\ref{schur_complement_gradient}) to calculate the first derivative $V$, again, using the CG method.
+
+
+ 
+Note that, in this approach, when using the CG solver, the tolerance is set to be the product of a parameter and the $L_2$ norm of the right-hand side.
+Base on the form of the left-hand side of the matrix equation, we divide the influence of the solver into two aspects: one is when the left-hand side is $M$, and the other one is when the left-hand side is $S$.
+For the first instance, setting the parameter for the Schur complement as $10^{-16}$, using the UMFPACK solver and the CG solver with parameters $10^{-16}$ and $10^{-10}$, the errors are shown in Fig. \ref{Fig:Pois_UMFvsCG_MM_Schur_10tom16_other_variant}, in comparison with that using the UMFPACK solver for the whole system.
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_UMFvsCG_MM_Schur_10tom16_other_variant_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_UMFvsCG_MM_Schur_10tom16_other_variant_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_UMFvsCG_MM_Schur_10tom16_other_variant_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_UMFvsCG_MM_Schur_10tom16_other_variant_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_UMFvsCG_MM_Schur_10tom16_other_variant_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_UMFvsCG_MM_Schur_10tom16_other_variant_2ndd}
+    \end{subfigure}
+\caption{Influence of inverting M on the accuracy using the mixed FEM.}		% Comparison of the CG solver and the UMFPACK solver 
+\label{Fig:Pois_UMFvsCG_MM_Schur_10tom16_other_variant}
+\end{figure}
+
+It shows that, when using the UMFPACK solver or the parameter is $10^{-16}$, the accuracy for $u$ is the same with that using the UMFPACK solver for the whole system; while the accuracy for $u_{x,h}$ and $u_{xx,h}$ is lower than that using the UMFPACK solver for the whole system.
+When the parameter is $10^{-10}$, the accuracy for all the three variables is less than that when $10^{-16}$ is the parameter. 
+
+For the second instance, using the UMFPACK solver for $M$, when the parameter for the Schur complement is $10^{-16}$ and $10^{-10}$, the results are shown in Fig. \ref{Fig:Pois_UMFvsCG_MM_other_UMF_Schur_variant}.
+
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_UMFvsCG_MM_other_UMF_Schur_variant_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_UMFvsCG_MM_other_UMF_Schur_variant_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_UMFvsCG_MM_other_UMF_Schur_variant_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_UMFvsCG_MM_other_UMF_Schur_variant_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_UMFvsCG_MM_other_UMF_Schur_variant_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_UMFvsCG_MM_other_UMF_Schur_variant_2ndd}
+    \end{subfigure}
+\caption{Influence of the tolerance of the CG solver for the Schur complement on the accuracy using the mixed FEM.}
+\label{Fig:Pois_UMFvsCG_MM_other_UMF_Schur_variant}
+\end{figure}
+
+It shows that the accuracy for $10^{-10}$ is lower than that for $10^{-16}$.
+
+\newpage
+
+\section{Application}		\label{application section}
+
+In what follows, we will apply the algorithm to the following Helmholtz equation: $D(x)=(0.01+x)(1.01-x)$, $r(x)$=-0.01$i$, $f(x)=1.0$;
+at $x=0$, a Dirichlet boundary condition $u(0)=0$ is imposed, and at $x=1$, the Neumann boundary condition $u_x(1)=0$ is imposed.
+
+
+Even though an analytical solution can be obtained using hypergeometric functions, we estimate the error by using Eq. (\ref{formula abs error numerical}).
+Using the standard FEM with scheme S, the absolute errors of $u$, $u_{x,h}$ and $u_{xx,h}$ for $P_1$, $P_2$, $P_4$, $P_8$ and $P_{16}$ elements are shown in Fig. \ref{Fig:Helm_xi_SM_scaling_abs}. Using the mixed FEM with scheme $\text{M}_2$, the absolute errors of $u$, $u_{x,h}$ and $u_{xx,h}$ for $P_2/P_1$, $P_3/P_2$, $P_5/P_4$, $P_9/P_8$ and $P_{17}/P_{16}$ elements are depicted in Fig. \ref{Fig:Helm_xi_MM_scaling_M2_abs}. In scaling the right-hand side, a viable estimate for $||u||_{2}$ and/or $||u_x||_{2}$ is obtained from an approximate, numerical solution of the unscaled problem computed on a moderately coarse mesh.
+
+It can be seen that the sensitivity of ${E}_{\text{R}}$ and ${E}_{\text{T}}$ for $u$, $u_{x,h}$ and $u_{xx,h}$ is still observed and can be reproduced without the use of the exact analytical solution.
+Using higher-order elements, higher accuracy can be obtained with a smaller $\hat h_{opt} ^{(p)}$.
+
+
+% \begin{figure}[!ht]
+%     \begin{subfigure}{5.5cm}
+%         \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{TwoDV_xi_SM_num_deg_2_solu.pdf}
+%         \caption{Solution}
+%         \label{Fig:TwoDV_xi_SM_num_deg_2_solu}
+%     \end{subfigure}
+%     \begin{subfigure}{5.5cm}
+%         \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{TwoDV_xi_SM_num_deg_2_grad.pdf}
+%         \caption{First derivative}
+%         \label{Fig:TwoDV_xi_SM_num_deg_2_grad}
+%     \end{subfigure}
+%     \begin{subfigure}{5.5cm}
+%         \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{TwoDV_xi_SM_num_deg_2_2ndd.pdf}
+%         \caption{Second derivative}
+%         \label{Fig:TwoDV_xi_SM_num_deg_2_2ndd}
+%     \end{subfigure}    
+% \caption{Shapes of $u_r$ of the practical Helmholtz equation.}
+% \label{Fig:TwoDV_xi_SM_num_deg_2}
+% \end{figure}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Helm_xi_SM_scaling_abs_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Helm_xi_SM_scaling_abs_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Helm_xi_SM_scaling_abs_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Helm_xi_SM_scaling_abs_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Helm_xi_SM_scaling_abs_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Helm_xi_SM_scaling_abs_2ndd}
+    \end{subfigure}    
+\caption{Absolute errors of the practical Helmholtz equation using the standard FEM with scheme S.}
+\label{Fig:Helm_xi_SM_scaling_abs}
+\end{figure}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Helm_xi_MM_scaling_M2_abs_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Helm_xi_MM_scaling_M2_abs_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Helm_xi_MM_scaling_M2_abs_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Helm_xi_MM_scaling_M2_abs_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Helm_xi_MM_scaling_M2_abs_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Helm_xi_MM_scaling_M2_abs_2ndd}
+    \end{subfigure}    
+\caption{Absolute errors of the practical Helmholtz equation using the mixed FEM with scheme $\text{M}_2$.}
+\label{Fig:Helm_xi_MM_scaling_M2_abs}
+\end{figure}
+
+\section{Conclusions}		\label{paragraph on conclusion}
+
+This paper aims at ascertaining the optimal number of $\text{DoFs}$ that brings about the smallest attainable error for the numerical solutions when higher-order derivatives are considered.
+To this end, focusing on equations of type Eq. (\ref{1D_general_Helmholtz_equation}), using the regular refinement, considering various boundary conditions and imposing the Dirichlet boundary conditions strongly, the truncation error ${E}_{\text{T}}$ and round-off error ${E}_{\text{R}}$ using both the standard and mixed FEMs are investigated. It shows that the decrease slope or order of convergence, $\beta _{\text{T}}$ ,of the truncation error with increasing number of degrees of freedom (DoFs) in the log-log plot tends to be one order higher than the element degree. With each time of differentiation, the slope decreases one.
+
+With increasing number of DoFs, the round-off error increases along a straight line in the log-log plot, irrespective of the element degree. The slope of this line $\beta _{\text{R}}$ is 2 for the standard FEM and 1 for the mixed FEM.
+Using the double working precision, when $\|u\|_2$ is of order 1 in the standard FEM, and additionally $\|u_x\|_2$ is scaled by $\|u\|_2$ in the mixed FEM, the offset of this line $\alpha_{\text{R}}$ for $u$, $u_{x}$ and $u_{xx}$ is well-approximated by $10^{-16}$.
+
+% this also holds when 
+% and both and,  ., and $\|u\|_2$ is of order 1 and
+
+For the Poisson equation in Table \ref{Three_benchmark_examples}, with respect to $\alpha _{\text{R}}$ and $\beta _{\text{R}}$ for ${E}_{\text{R}}$, the following conclusions are drawn from the sensitivity analyses:
+\begin{enumerate}
+ \item Using the adaptive mesh refinement, $\alpha _{\text{R}}$ and $\beta _{\text{R}}$ are nearly the same with that using the regular refinement. 
+ \item Neumann boundary conditions only make a small difference to $\alpha _{\text{R}}$, and does not affect $\beta _{\text{R}}$. 
+ \item When the penalty parameter is large enough, the weak imposition of the Dirichlet boundary conditions performs as well as that of the strong imposition.
+ \item The iteration criterion affects the precision of the solution, of which the influence diminishes when the criterion is high enough.
+\end{enumerate}
+
+
+Combining the behavior of ${E}_{\text{T}}$ and ${E}_{\text{R}}$, it can be concluded that, higher-order elements can be used to achieve higher accuracy. 
+Furthermore, the mixed FEM can be used to improve the accuracy.
+Hence, a practical strategy for obtaining the highest accuracy systematically is to compute the solutions along the $hp$-refinement pair ($p$, $h_{opt}^{(p)}$), where $h_{opt}^{(p)}$ is the optimal mesh size for the order $p$. 
+An application of this strategy to a Helmholtz equation proves the validity of the strategy.
+
+\appendix
+ 
+  
+\section{Derivation of the system of equations}		\label{system equation appendix}
+
+\subsection{The standard FEM} 
+
+ Eq. (\ref{1D_general_Helmholtz_equation}) is multiplied by a test function $\eta \in H _0^1 (I)$, and integrated over $I$, yielding
+\begin{equation}
+(\eta, \, \left(D u_x \right)_x + ru) = (\eta, \, f). \label{1D_general_inte}
+\end{equation}
+
+By applying Gauss's theorem for the first term of the left-hand side of Eq. (\ref{1D_general_inte})
+
+\begin{equation}
+ -({\eta} _x, \, D {u} _{ x }) + (\eta, \, ru) = (\eta, \, f) - \left( \eta, \, D u_x \cdot \text{n} \right)_{ {\Gamma_N}}.		\label{1D_general_gauss}
+\end{equation}
+
+As for the strong imposition of the Dirichlet boundary conditions, the weak formulation Eq. (\ref{1D_general_SM_weak_form}) is obtained by substituting the natural boundary conditions of $u(x)$ and the essential boundary conditions of $\eta(x)$ into Eq. (\ref{1D_general_gauss}); as for the weak imposition, Eq. (\ref{1D_general_SM_weak_form_weak_Diri}) is obtained by introducing new terms since there are no boundary conditions imposed on the finite element spaces.
+
+\subsection{The mixed FEM}
+
+To obtain the weak form of Eq. (\ref{1D_general_MM_2in1}), Eq. (\ref{Gene_MM_strong1}) is multiplied by $w \in H _{0}^{1}(I)$, a test function of $v$, and integrated over $I$, yielding
+\begin{subequations}
+\begin{align}
+  ( v w + u _x w  ) = 0,	\label{Gene_MM_weak1_inte}
+\end{align}
+and Eq. (\ref{Gene_MM_strong2}) is multiplied by $q \in L_0^2 (I)$, a test function of $u$, and integrated over $I$, yielding 
+\begin{align}
+  -( q, \, D_x v) - ( q , \, D v_x) + (q, \, ru) = (q, \, f ). \label{1D_Poisson_classical_Dint2}
+\end{align}
+\end{subequations}
+
+By applying Gauss's theorem to Eq. (\ref{Gene_MM_weak1_inte}), the weak form of Eq. (\ref{1D_general_MM_2in1}) of the mixed FEM is obtained, see Eq. (\ref{1D_General_MM_weak_2in1}).
+
+\section{Other influence factors of the round-off error}
+
+\subsection{Support points of basis functions}
+
+To clarify the influence of the type of the support nodes of the basis functions on the round-off error, especially for high-order elements, we conduct experiments using the equidistant support nodes, see Fig. \ref{Fig:Pois_pexp_SM_equi_support_abs_error} for the results, compared with that using Gauss-Lobatto support nodes in Fig. \ref{Fig:Pois_pexp_SM_high_order_abs_error}. It shows that, when higher-order elements are used, the error of $u$, $u_{x}$ and $u_{xx}$ using the equidistant support nodes increases before reaching the analytical line approximating the round-off error.
+Furthermore, the convergence behaviour of $u$, $u_{x}$ and $u_{xx}$ using Gauss-Lobatto points for high-order elements is as expected. 
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pexp_SM_equi_support_abs_error_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_pexp_SM_equi_support_abs_error_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pexp_SM_equi_support_abs_error_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_pexp_SM_equi_support_abs_error_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pexp_SM_equi_support_abs_error_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_pexp_SM_equi_support_abs_error_2ndd}
+    \end{subfigure}
+\caption{Absolute errors using the standard FEM with equidistant support points for the Poisson equation.}
+\label{Fig:Pois_pexp_SM_equi_support_abs_error}
+\end{figure}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pexp_SM_high_order_abs_error_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_pexp_SM_high_order_abs_error_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pexp_SM_high_order_abs_error_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_pexp_SM_high_order_abs_error_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pexp_SM_high_order_abs_error_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_pexp_SM_high_order_abs_error_2ndd}
+    \end{subfigure}
+\caption{Absolute errors using the standard FEM with Gauss-Lobatto support points for the Poisson equation.}
+\label{Fig:Pois_pexp_SM_high_order_abs_error}
+\end{figure}
+
+\subsection{Adaptive mesh refinement used on a different right-hand side}	\label{influence_rhs_amr}
+
+To exaggerate the influence of the adaptive mesh refinement, the right-hand side $f(x)=-e^{- \frac{(x-1/2)^2}{0.001}} \left( \frac{4(x-1/2)^2-2\times0.001}{0.001^2} \right)$ is investigated. Choosing the boundary conditions $u(0)=e^{-1/{(0.004)}}$ and $u(1)=e^{-1/{(0.004)}}$, the solution reads $u_{\text{ex}}(x)=e^{- \frac{(x-1/2)^2}{0.001}}$, which is relatively stiff.
+
+Choosing the initial refinement level as 2, the absolute errors of $u_h$ using the adaptive mesh refinement, in comparison with that using the regular refinement, are shown in Fig. \ref{Fig:Pois_SM_DBC_abs_adap_vs_nonadap_uplimit40}. It shows that the offset $\alpha_{\text{R}}$ of $u$ and $u_x$ is slightly larger as shown in the figure, but the slope $\beta _{\text{R}}$ is still 2.
+When the number of DoFs is extremely large, the round-off error increases faster than before.
+The round-off error of $u_{xx}$ increases faster than that of $u$ and $u_x$.
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Poisson_SM_abs_solu_adap_vs_nonadap_uplimit40.pdf}
+        \caption{Solution}
+        \label{Fig:Poisson_SM_abs_solu_adap_vs_nonadap_uplimit40}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Poisson_SM_abs_grad_adap_vs_nonadap_uplimit40.pdf}
+        \caption{First derivative}
+        \label{Fig:Poisson_SM_abs_grad_adap_vs_nonadap_uplimit40}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Poisson_SM_abs_2ndd_adap_vs_nonadap_uplimit40.pdf}
+        \caption{Second derivative}
+        \label{Fig:Poisson_SM_abs_2ndd_adap_vs_nonadap_uplimit40}
+    \end{subfigure}
+\caption{Absolute error of the regular and adaptive mesh refinement.}
+\label{Fig:Pois_SM_DBC_abs_adap_vs_nonadap_uplimit40}
+\end{figure}
+
+\newpage
+\section{Other scaling cases }   \label{other scaling cases}
+
+\begin{table}[!ht]
+\begin{subtable}{0.5\textwidth}
+% \tiny
+\centering
+\begin{tabular}{|c|c|c|c|c|} \hline   
+\multicolumn{2}{|c|}{} &\multicolumn{3}{c|}{$L_2$ norm}  \\	%
+\cline{3-5}
+\multicolumn{2}{|c|}{}& $u$ & $u_{x}$ & $u_{xx}$ \\	%
+\hline
+\multirow{5}{*}{$c_2$}
+&$10^{-4}$ & {1.0} & {5.8e-5} & {2.0e-4} \\
+\cline{2-5}  
+&$10^{-2}$ & {1.0} & {5.8e-3} & {2.0e-2} \\
+\cline{2-5}  
+&$10^{0}$& {0.92} & {5.0e-1} & {1.6} \\
+\cline{2-5} 
+&$10^{2}$& {0.35} & {3.5} & {61} \\
+\cline{2-5} 
+&$10^{4}$& {0.11} & {11} & {1.9e3}  \\	%
+\hline
+\end{tabular}
+\caption [sss] {Case 2.}
+\label{Table: L2 norm Poisson pexp} 
+\end{subtable}
+\begin{subtable}{0.5\textwidth}
+% \tiny
+\centering
+\begin{tabular}{|c|c|c|c|c|} \hline   
+\multicolumn{2}{|c|}{} &\multicolumn{3}{c|}{$L_2$ norm}  \\	%
+\cline{3-5}
+\multicolumn{2}{|c|}{}& $u$ & $u_{x}$ & $u_{xx}$ \\	%
+\hline
+\multirow{5}{*}{$c_3$}
+&$10^{-4}$ & {9.2e2} & {1.6e3} & {1.0} \\
+\cline{2-5} 
+&$10^{-2}$ &  {9.0} & {15.4} & {1.0} \\
+\cline{2-5}
+&$10^{0}$ & {0.23} & {0.59} & {1.2} \\
+\cline{2-5} 
+&$10^{2}$& {0.22} & {0.58} & {1.2} \\
+\cline{2-5} 
+&$10^{4}$& {0.22} & {0.58} & {1.2} \\
+\hline
+\end{tabular}
+\caption [sss] {Case 3.} 
+\label{Table: L2 norm Poisson p Lover2pi^2sin -x^2/2} 
+\end{subtable}
+\begin{subtable}{0.5\textwidth}
+% \tiny
+\centering
+\begin{tabular}{|c|c|c|c|c|} \hline   
+\multicolumn{2}{|c|}{} &\multicolumn{3}{c|}{$L_2$ norm} \\	%
+\cline{3-5}
+\multicolumn{2}{|c|}{}& $u$ & $u_{x}$ & $u_{xx}$ \\	%
+\hline
+\multirow{5}{*}{$c_4$}
+&$10^{-2}$& 5.8e-1 & 1.0 & 2.3e-3 \\
+\cline{2-5}
+&$10^{-1}$ & {5.5e-1} & {0.94} & {0.22} \\
+\cline{2-5} 
+&$10^{0}$& 1.1e-1 & 0.71 & 4.4 \\
+\cline{2-5} 
+&$10^{1}$ & 1.1e-2 & 0.71 & 4.4e1 \\
+\cline{2-5} 
+&$10^{2}$& 1.1e-3 & 0.71 & 4.4e2 \\
+\hline
+\end{tabular}
+\caption [sss] {Case 4.}
+\label{Table: offsets Poisson pLov2pisin} 
+\end{subtable}
+\begin{subtable}{0.5\textwidth}
+% \tiny
+\centering
+\begin{tabular}{|c|c|c|c|c|} \hline   
+\multicolumn{2}{|c|}{} &\multicolumn{3}{c|}{$L_2$ norm} \\	%
+\cline{3-5}
+\multicolumn{2}{|c|}{}& $u$ & $u_{x}$ & $u_{xx}$ \\	%
+\hline
+\multirow{5}{*}{$c_5$}
+&$10^{-2}$ & 5.8e1 & 1e2 & 0 \\
+\cline{2-5} 
+&$10^{-1}$& 5.8e0 & 1e1 & 0 \\
+\cline{2-5}
+&$10^{0}$& 5.8e-1 & 1e0 & 0 \\
+\cline{2-5} 
+&$10^{1}$& 5.8e-2 & 1e-1 & 0 \\
+\cline{2-5} 
+&$10^{2}$& 5.8e-3 & 1e-2 & 0 \\
+\hline
+\end{tabular}
+\caption [sss] {Case 5.}
+\label{Table: offsets Poisson pcoex}
+\end{subtable}
+\caption [sss] {$L_2$ norms of $f$, $u$, $u_{x}$ and $u_{xx}$ for Cases 2-5.}
+\label{Table: offsets Poisson other cases}
+\end{table}
+
+\subsection{The standard FEM}
+
+\pagebreak
+\subsubsection{Case 2}
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_SM_rhs_abs_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_SM_rhs_abs_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_SM_rhs_abs_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_SM_rhs_abs_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_SM_rhs_abs_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_SM_rhs_abs_2ndd}
+    \end{subfigure}
+\caption{Absolute errors of Case 2 using Eq. (\ref{std FEM matrix equation}).}
+\label{Pois_SM_rhs_abs}
+\end{figure}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pexp_SM_rhs_uf_scale_uL2_abs_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_pexp_SM_rhs_uf_scale_uL2_abs_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pexp_SM_rhs_uf_scale_uL2_abs_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_pexp_SM_rhs_uf_scale_uL2_abs_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pexp_SM_rhs_uf_scale_uL2_abs_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_pexp_SM_rhs_uf_scale_uL2_abs_2ndd}
+    \end{subfigure}
+\caption{Absolute errors of Case 2 using scheme $\text{S}$.}
+\label{Pois_pexp_SM_rhs_uf_scale_uL2_abs}
+\end{figure}
+
+\pagebreak
+\subsubsection{Case 3}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_SM_rhs_pLov2pi2sinmx2ov2_abs_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_SM_rhs_pLov2pi2sinmx2ov2_abs_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_SM_rhs_pLov2pi2sinmx2ov2_abs_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_SM_rhs_pLov2pi2sinmx2ov2_abs_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_SM_rhs_pLov2pi2sinmx2ov2_abs_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_SM_rhs_pLov2pi2sinmx2ov2_abs_2ndd}
+    \end{subfigure}
+\caption{Absolute errors of Case 3 using Eq. (\ref{std FEM matrix equation}).}
+\label{Pois_SM_rhs_pLov2pi2sinmx2ov2_abs}
+\end{figure}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_SM_rhs_solu_scale_p2pisinmx2ov2_abs_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_SM_rhs_solu_scale_p2pisinmx2ov2_abs_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_SM_rhs_solu_scale_p2pisinmx2ov2_abs_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_SM_rhs_solu_scale_p2pisinmx2ov2_abs_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_SM_rhs_solu_scale_p2pisinmx2ov2_abs_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_SM_rhs_solu_scale_p2pisinmx2ov2_abs_2ndd}
+    \end{subfigure}
+\caption{Absolute errors of Case 3 using scheme $\text{S}$.}
+\label{Pois_SM_rhs_solu_scale_p2pisinmx2ov2_abs}
+\end{figure}
+
+\pagebreak
+\subsubsection{Case 4}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_SM_rhs_pLov2pisin_abs_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_SM_rhs_pLov2pisin_abs_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_SM_rhs_pLov2pisin_abs_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_SM_rhs_pLov2pisin_abs_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_SM_rhs_pLov2pisin_abs_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_SM_rhs_pLov2pisin_abs_2ndd}
+    \end{subfigure}
+\caption{Absolute errors of Case 4 using Eq. (\ref{std FEM matrix equation}).}
+\label{Pois_SM_rhs_pLov2pisin_abs}
+\end{figure}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_SM_rhs_pLov2pisin_scale_uf_uL2_abs_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_SM_rhs_pLov2pisin_scale_uf_uL2_abs_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_SM_rhs_pLov2pisin_scale_uf_uL2_abs_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_SM_rhs_pLov2pisin_scale_uf_uL2_abs_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_SM_rhs_pLov2pisin_scale_uf_uL2_abs_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_SM_rhs_pLov2pisin_scale_uf_uL2_abs_2ndd}
+    \end{subfigure}
+\caption{Absolute errors of Case 4 using scheme $\text{S}$.}
+\label{Pois_SM_rhs_pLov2pisin_scale_uf_uL2_abs}
+\end{figure}
+
+\pagebreak
+\subsubsection{Case 5}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_SM_rhs_pcoex_abs_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_SM_rhs_pcoex_abs_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_SM_rhs_pcoex_abs_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_SM_rhs_pcoex_abs_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_SM_rhs_pcoex_abs_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_SM_rhs_pcoex_abs_2ndd}
+    \end{subfigure}
+\caption{Absolute errors of Case 5 using Eq. (\ref{std FEM matrix equation}).}
+\label{Pois_SM_rhs_pcoex_abs}
+\end{figure}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pcoex_SM_rhs_uf_scale_uL2_abs_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_pcoex_SM_rhs_uf_scale_uL2_abs_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pcoex_SM_rhs_uf_scale_uL2_abs_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_pcoex_SM_rhs_uf_scale_uL2_abs_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pcoex_SM_rhs_uf_scale_uL2_abs_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_pcoex_SM_rhs_uf_scale_uL2_abs_2ndd}
+    \end{subfigure}
+\caption{Absolute errors of Case 5 using scheme $\text{S}$.}
+\label{Pois_pcoex_SM_rhs_uf_scale_uL2_abs}
+\end{figure}
+
+\subsection{The mixed FEM}
+
+\subsubsection{Case 2}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_pexp_MM_rhs_noscaling_UMF_abs_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_pexp_MM_rhs_noscaling_UMF_abs_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_pexp_MM_rhs_noscaling_UMF_abs_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_pexp_MM_rhs_noscaling_UMF_abs_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_pexp_MM_rhs_noscaling_UMF_abs_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_pexp_MM_rhs_noscaling_UMF_abs_2ndd}
+    \end{subfigure}
+\caption{Absolute errors of Case 2 using Eq. (\ref{matrix system mixed}).}
+\label{Pois_pexp_MM_rhs_noscaling_UMF_abs}
+\end{figure}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pexp_MM_rhs_scale_upf_upL2_u_uL2_abs_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_pexp_MM_rhs_scale_upf_upL2_u_uL2_abs_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pexp_MM_rhs_scale_upf_upL2_u_uL2_abs_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_pexp_MM_rhs_scale_upf_upL2_u_uL2_abs_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pexp_MM_rhs_scale_upf_upL2_u_uL2_abs_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_pexp_MM_rhs_scale_upf_upL2_u_uL2_abs_2ndd}
+    \end{subfigure}
+\caption{Absolute errors of Case 2 using scheme $\text{M}_1$.}
+\label{Pois_pexp_MM_rhs_scale_upf_upL2_u_uL2_abs}
+\end{figure}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pexp_MM_rhs_scale_upu_uL2_fg_uL2_abs_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_pexp_MM_rhs_scale_upu_uL2_fg_uL2_abs_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pexp_MM_rhs_scale_upu_uL2_fg_uL2_abs_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_pexp_MM_rhs_scale_upu_uL2_fg_uL2_abs_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pexp_MM_rhs_scale_upu_uL2_fg_uL2_abs_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_pexp_MM_rhs_scale_upu_uL2_fg_uL2_abs_2ndd}
+    \end{subfigure}
+\caption{Absolute errors of Case 2 using scheme $\text{M}_2$.}
+\label{Pois_pexp_MM_rhs_scale_upu_uL2_fg_uL2_abs}
+\end{figure}
+
+\subsubsection{Case 3}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_pLov2pi2sinmx2ov2_MM_rhs_noscaling_UMF_abs_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_pLov2pi2sinmx2ov2_MM_rhs_noscaling_UMF_abs_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_pLov2pi2sinmx2ov2_MM_rhs_noscaling_UMF_abs_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_pLov2pi2sinmx2ov2_MM_rhs_noscaling_UMF_abs_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_pLov2pi2sinmx2ov2_MM_rhs_noscaling_UMF_abs_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_pLov2pi2sinmx2ov2_MM_rhs_noscaling_UMF_abs_2ndd}
+    \end{subfigure}
+\caption{Absolute errors of Case 3 using Eq. (\ref{matrix system mixed}).}
+\label{Pois_pLov2pi2sinmx2ov2_MM_rhs_noscaling_UMF_abs}
+\end{figure}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pLov2pi2sinmx2ov2_MM_rhs_scale_uprime_uprimeL2_u_uL2_UMF_abs_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_pLov2pi2sinmx2ov2_MM_rhs_scale_uprime_uprimeL2_u_uL2_UMF_abs_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pLov2pi2sinmx2ov2_MM_rhs_scale_uprime_uprimeL2_u_uL2_UMF_abs_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_pLov2pi2sinmx2ov2_MM_rhs_scale_uprime_uprimeL2_u_uL2_UMF_abs_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pLov2pi2sinmx2ov2_MM_rhs_scale_uprime_uprimeL2_u_uL2_UMF_abs_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_pLov2pi2sinmx2ov2_MM_rhs_scale_uprime_uprimeL2_u_uL2_UMF_abs_2ndd}
+    \end{subfigure}
+\caption{Absolute errors of Case 3 using scheme $\text{M}_1$.}
+\label{Pois_pLov2pi2sinmx2ov2_MM_rhs_scale_uprime_uprimeL2_u_uL2_UMF_abs}
+\end{figure}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pexp_MM_rhs_scale_uprime_u_uL2_fg_uL2_abs_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_pexp_MM_rhs_scale_uprime_u_uL2_fg_uL2_abs_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pexp_MM_rhs_scale_uprime_u_uL2_fg_uL2_abs_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_pexp_MM_rhs_scale_uprime_u_uL2_fg_uL2_abs_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pexp_MM_rhs_scale_uprime_u_uL2_fg_uL2_abs_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_pexp_MM_rhs_scale_uprime_u_uL2_fg_uL2_abs_2ndd}
+    \end{subfigure}
+\caption{Absolute errors of Case 3 using scheme $\text{M}_2$.}
+\label{Pois_pexp_MM_rhs_scale_uprime_u_uL2_fg_uL2_abs}
+\end{figure}
+
+\subsubsection{Case 4}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_pLov2pisin_MM_rhs_noscaling_UMF_abs_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_pLov2pisin_MM_rhs_noscaling_UMF_abs_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_pLov2pisin_MM_rhs_noscaling_UMF_abs_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_pLov2pisin_MM_rhs_noscaling_UMF_abs_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_pLov2pisin_MM_rhs_noscaling_UMF_abs_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_pLov2pisin_MM_rhs_noscaling_UMF_abs_2ndd}
+    \end{subfigure}
+\caption{Absolute errors of Case 4 using Eq. (\ref{matrix system mixed}).}
+\label{Pois_pLov2pisin_MM_rhs_noscaling_UMF_abs}
+\end{figure}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_pLov2pisin_MM_rhs_scale_uprime_uprimeL2_u_uL2_UMF_abs_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_pLov2pisin_MM_rhs_scale_uprime_uprimeL2_u_uL2_UMF_abs_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_pLov2pisin_MM_rhs_scale_uprime_uprimeL2_u_uL2_UMF_abs_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_pLov2pisin_MM_rhs_scale_uprime_uprimeL2_u_uL2_UMF_abs_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_pLov2pisin_MM_rhs_scale_uprime_uprimeL2_u_uL2_UMF_abs_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_pLov2pisin_MM_rhs_scale_uprime_uprimeL2_u_uL2_UMF_abs_2ndd}
+    \end{subfigure}
+\caption{Absolute errors of Case 4 using scheme $\text{M}_1$.}
+\label{Pois_pLov2pisin_MM_rhs_scale_uprime_uprimeL2_u_uL2_UMF_abs}
+\end{figure}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_pLov2pisin_MM_rhs_scale_uprime_u_uL2_fg_uL2_abs_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_pLov2pisin_MM_rhs_scale_uprime_u_uL2_fg_uL2_abs_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_pLov2pisin_MM_rhs_scale_uprime_u_uL2_fg_uL2_abs_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_pLov2pisin_MM_rhs_scale_uprime_u_uL2_fg_uL2_abs_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_pLov2pisin_MM_rhs_scale_uprime_u_uL2_fg_uL2_abs_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_pLov2pisin_MM_rhs_scale_uprime_u_uL2_fg_uL2_abs_2ndd}
+    \end{subfigure}
+\caption{Absolute errors of Case 4 using scheme $\text{M}_2$.}
+\label{Pois_pLov2pisin_MM_rhs_scale_uprime_u_uL2_fg_uL2_abs}
+\end{figure}
+% 
+
+\subsubsection{Case 5}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_pcoex_MM_rhs_noscaling_UMF_dell_abs_solu.pdf}
+        \caption{Solution}	% (The green lines are the results obtained from a laptop.)
+        \label{Fig:Pois_pcoex_MM_rhs_noscaling_UMF_abs_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_pcoex_MM_rhs_noscaling_UMF_abs_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_pcoex_MM_rhs_noscaling_UMF_abs_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=330]{Pois_pcoex_MM_rhs_noscaling_UMF_abs_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_pcoex_MM_rhs_noscaling_UMF_abs_2ndd}
+    \end{subfigure}
+\caption{Absolute errors of Case 5 using Eq. (\ref{matrix system mixed}).}
+\label{Pois_pcoex_MM_rhs_noscaling_UMF_abs}
+\end{figure}
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pcoex_MM_rhs_scale_upf_upL2_u_uL2_UMF_dell_abs_solu.pdf}
+        \caption{Solution}
+        \label{Fig:Pois_pcoex_MM_rhs_scale_upf_upL2_u_uL2_UMF_abs_solu}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pcoex_MM_rhs_scale_upf_upL2_u_uL2_UMF_abs_grad.pdf}
+        \caption{First derivative}
+        \label{Fig:Pois_pcoex_MM_rhs_scale_upf_upL2_u_uL2_UMF_abs_grad}
+    \end{subfigure}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.1\linewidth,natwidth=500,natheight=350]{Pois_pcoex_MM_rhs_scale_upf_upL2_u_uL2_UMF_abs_2ndd.pdf}
+        \caption{Second derivative}
+        \label{Fig:Pois_pcoex_MM_rhs_scale_upf_upL2_u_uL2_UMF_abs_2ndd}
+    \end{subfigure}
+\caption{Absolute errors of Case 5 using scheme $\text{M}_1$.}
+\label{Pois_pcoex_MM_rhs_scale_upf_upL2_u_uL2_UMF_abs}
+\end{figure}
+
+\bibliography{mybibfile}
+
+\end{document}
