@@ -1,0 +1,655 @@
+\documentclass[review,3p]{elsarticle}
+
+\usepackage{lineno,hyperref}
+\modulolinenumbers[5]
+\usepackage{subcaption}             % used in subtable
+\usepackage{amsmath,amsfonts,amsthm}            % for subequations
+
+\usepackage{mathtools,amssymb}          % for \leqslant
+\newcommand{\ddn}[2]{\frac{\mathrm{d}}{\mathrm{d}#1}#2}
+\newcommand{\ddt}{\frac{\mathrm{d}}{\mathrm{d}t}}
+
+
+\usepackage{upgreek}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{soul}
+\usepackage{multirow}
+
+\usepackage{array}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}} 
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}} 
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}} 
+
+\usepackage{booktabs}       % http://ctan.org/pkg/booktabs
+
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}           % for items inside a table
+\usepackage{makecell}       % used inside a table
+\usepackage{pbox}           % for weak form 3
+\usepackage{empheq}
+\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+
+
+\usepackage{colortbl}
+\usepackage{esvect}
+\usepackage{spreadtab}
+\usepackage{numprint}
+\usepackage{xstring}
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\usepackage[symbol]{footmisc}
+
+\usepackage{siunitx}
+
+\makeatletter       % for rom in deal.ii symbol
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+\usepackage{enumitem}
+
+\usepackage{cleveref}
+\crefformat{section}{\S#2#1#3} % see manual of cleveref, section 8.2.1
+\crefformat{subsection}{\S#2#1#3}
+\crefformat{subsubsection}{\S#2#1#3}
+
+\captionsetup[figure]{labelfont={bf},name={Fig.},labelsep=period}
+\captionsetup[table]{labelfont={bf},name={Table},labelsep=space}
+
+\usepackage[labelformat=simple]{subcaption}	        	% order of subfigure with brackets
+\renewcommand\thesubfigure{(\alph{subfigure})}
+\renewcommand\thesubtable{(\alph{subtable})}
+
+
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+
+\usepackage{pgfplots}       % for tikzpicture
+
+\pdfsuppresswarningpagegroup=1      % eliminate warning 'multiple pdfs with page group included in a single page'
+
+\usepackage[ruled,linesnumbered]{algorithm2e}		% for algorithm
+
+
+\begin{document}
+
+\section{Influence of $d(x)$ and $r(x)$ on \texorpdfstring{$\alpha_{\rm R}$}{alpha_{rm R}}}         \label{discretization_error_bench_pois_diff_Helm}
+
+If not stated otherwise, $P_2$ elements are used for the standard FEM, and $P_4/P_3^{\rm disc}$ elements are used for the mixed FEM.
+
+\subsection{\texorpdfstring{$p=(2\pi c_1)^{-2}\sin(2\pi c_1x)$}{p=(2pic1){-2}sin(2pic1x)}}
+
+\subsubsection{d=10, r=0}
+
+
+\begin{table}[!ht]
+\caption[sss]{Ratio of $\alpha_{\rm R}$ for $d=10$ to that for $d=1$.}
+\label{evolution_convergence_order_sample_equations}
+\centering
+ \begin{tabular}{c c c c c c c} \hline
+ \multirow{2}{*}{$c$} & \multicolumn{3}{c}{The standard FEM} & \multicolumn{3}{c}{The mixed FEM} \\ \cline{2-4} \cline{5-7}
+ & $u$ & $u_x$ & $u_{xx}$ & $u$ & $u_x$ & $u_{xx}$ \\	\hline
+$10^{-2}$ & 0.8 & 1.0 & 1.0 & 1.0 & 10.0 & 10.0 \\ 
+$10^{-1}$ & 0.8 & 1.0 & 1.0 & 1.0 & 10.0 & 10.0 \\ 
+$10^{0}$ & 1.0 & 0.5 & 1.0 & 0.1 & 10.0 & 10.0 \\ 
+$10^{1}$ & 1.3 & 0.5 & 1.0 & 1.0 & 10.0 & 10.0 \\ 
+$10^{2}$ & 1.3 & 1.3 & 1.0 & 1.0 & 10.0 & 10.0 \\ \hline
+\end{tabular}
+\end{table}
+% \newpage
+
+\subsection{\texorpdfstring{p=$e^{-(x-0.5)^2}$}{p=e^{-(x-0.5)^2}}}
+
+\subsubsection{d=1+0.5\texorpdfstring{$\sin$(cx)}{sin(cx)}, r=0}            \label{p_exp_d_1plus0p5sin_r_0}
+
+
+For $c$ ranging from 1 to $10^4$, $\|d\|_2$ is of order 1, see Fig.~\ref{Fig:d_L2_varying_with_c_diff_d_1_plus_sincx}.
+Note that, the oscillation of $d$ magnifies when $c$ increases.
+\begin{figure}[!ht]
+\centering
+    \includegraphics[width=0.45\linewidth]{d_L2_varying_with_c_diff_d_1_plus_sincx.png}
+    \caption{Change of $\|d\|_2$ with the coefficient $c$ for section \ref{p_exp_d_1plus0p5sin_r_0}.}
+    \label{Fig:d_L2_varying_with_c_diff_d_1_plus_sincx}   
+\end{figure}
+
+
+Using both the standard FEM and the mixed FEM, $\alpha_{\rm R}$ are shown below.
+
+
+
+\begin{figure}[!ht]
+\hspace{0.0cm}
+\begin{subfigure}[b]{0.35\textwidth}
+\scalebox{0.85}{
+\begin{tikzpicture} 
+\begin{axis}
+[
+    ymode=log,    
+    ymin=1e-25,
+    ymax=1e-13,
+    ytick={1e-25, 1e-22, 1e-19, 1e-16, 1e-13},
+    yticklabels={1e-25, 1e-22, 1e-19, 1e-16, 1e-13},      
+    legend style={nodes={scale=0.8},at={(0.03,0.15)},anchor=west},
+    legend cell align={left},
+    height=5cm,
+    width=6cm,
+    ylabel={$\alpha_{\rm R}$},
+    ylabel style={at={(-0.01,0.5)}},    
+    xtick={0,1,2,3,4},
+    xticklabels={Poisson, diffusion, Helmholtz}
+]
+\addplot[blue,mark=o, only marks,mark options={color=blue,fill=blue}] coordinates {(0,2.0e-17) (1,2.0e-18) (2,2.0e-18)};	% SM
+
+\addplot[red,mark=o, only marks,mark options={color=red,fill=red}] coordinates {(0,1.0e-19) (1,5.0e-20) (2,1.0e-30)};		% MM
+
+\addplot[blue,mark=o, only marks,mark options={color=blue!80,fill=blue}] coordinates {(0,2.0e-30) (1,2.0e-30) (2,2.0e-18)};	% SM_supp_Helm
+\addplot[blue,mark=o, only marks,mark options={color=blue!60,fill=blue}] coordinates {(0,2.0e-30) (1,2.0e-30) (2,2.0e-20)};
+\addplot[blue,mark=o, only marks,mark options={color=blue!40,fill=blue}] coordinates {(0,2.0e-30) (1,2.0e-30) (2,2.0e-22)};
+\addplot[blue,mark=o, only marks,mark options={color=blue!20,fill=blue}] coordinates {(0,2.0e-30) (1,2.0e-30) (2,2.0e-24)};
+
+\legend{The standard FEM, The mixed FEM};
+\end{axis}
+\end{tikzpicture}
+}
+\vspace{-0.7cm}
+\caption{Solution}
+\label{alpha_R_Poisson_benchmark_2_diff_2_Helm_solu}
+\end{subfigure}
+\hspace{-0.7cm}
+\begin{subfigure}[b]{0.35\textwidth}
+\scalebox{0.85}{
+\begin{tikzpicture} 
+\begin{axis}
+[
+    ymode=log,    
+    ymin=1e-25,
+    ymax=1e-13,
+    ytick={1e-25, 1e-22, 1e-19, 1e-16, 1e-13},
+    yticklabels={1e-25, 1e-22, 1e-19, 1e-16, 1e-13},   
+    legend style={nodes={scale=0.8},at={(0.03,0.85)},anchor=west},
+    legend cell align={left},
+    height=5cm,
+    width=6cm,
+    ylabel={$\alpha_{\rm R}$},
+    ylabel style={at={(-0.01,0.5)}},    
+    xtick={0,1,2,3,4},
+    xticklabels={Poisson, diffusion, Helmholtz}
+]
+\addplot[blue,mark=o, only marks,mark options={color=blue,fill=blue}] coordinates {(0,5.0e-17) (1,5.0e-18) (2,5.0e-18)};
+\addplot[red,mark=o, only marks,mark options={color=red,fill=red}] coordinates {(0,5.0e-17) (1,2.0e-18) (2,1.0e-30)};
+\addplot[blue,mark=o, only marks,mark options={color=blue!80,fill=blue}] coordinates {(0,2.0e-30) (1,2.0e-30) (2,5.0e-18)};
+\addplot[blue,mark=o, only marks,mark options={color=blue!60,fill=blue}] coordinates {(0,2.0e-30) (1,2.0e-30) (2,1.0e-19)};
+\addplot[blue,mark=o, only marks,mark options={color=blue!40,fill=blue}] coordinates {(0,2.0e-30) (1,2.0e-30) (2,1.0e-20)};
+\addplot[blue,mark=o, only marks,mark options={color=blue!20,fill=blue}] coordinates {(0,2.0e-30) (1,2.0e-30) (2,5.0e-21)};
+\end{axis}
+\end{tikzpicture}
+}
+\vspace{-0.7cm}
+\caption{First derivative}
+\label{alpha_R_Poisson_benchmark_2_diff_2_Helm_grad}
+\end{subfigure}
+\hspace{-0.7cm}
+\begin{subfigure}[b]{0.35\textwidth}
+\scalebox{0.85}{
+\begin{tikzpicture} 
+\begin{axis}
+[
+    ymode=log,    
+    ymin=1e-25,
+    ymax=1e-13,
+    ytick={1e-25, 1e-22, 1e-19, 1e-16, 1e-13},
+    yticklabels={1e-25, 1e-22, 1e-19, 1e-16, 1e-13},     
+    legend style={nodes={scale=0.8},at={(0.03,0.85)},anchor=west},
+    legend cell align={left},
+    height=5cm,
+    width=6cm,
+    ylabel={$\alpha_{\rm R}$},
+    ylabel style={at={(-0.01,0.5)}},    
+    xtick={0,1,2,3,4},
+    xticklabels={Poisson, diffusion, Helmholtz} 
+]
+\addplot[blue,mark=o, only marks,mark options={color=blue,fill=blue}] coordinates {(0,1.0e-15) (1,5.0e-16) (2,5.0e-16)};	% SM
+
+\addplot[red,mark=o, only marks,mark options={color=red,fill=red}] coordinates {(0,2.0e-16) (1,1.0e-16) (2,2.0e-30)};		% MM
+
+\addplot[blue,mark=o, only marks,mark options={color=blue!80,fill=blue}] coordinates {(0,2.0e-30) (1,2.0e-30) (2,2.0e-18)};	% SM_supp_diff
+\addplot[blue,mark=o, only marks,mark options={color=blue!60,fill=blue}] coordinates {(0,2.0e-30) (1,2.0e-30) (2,2.0e-20)};
+\addplot[blue,mark=o, only marks,mark options={color=blue!40,fill=blue}] coordinates {(0,2.0e-30) (1,5.0e-15) (2,2.0e-22)};
+\addplot[blue,mark=o, only marks,mark options={color=blue!20,fill=blue}] coordinates {(0,2.0e-30) (1,5.0e-14) (2,2.0e-24)};
+
+\end{axis}
+\end{tikzpicture}
+}
+\vspace{-0.7cm}
+\caption{Second derivative}
+\label{alpha_R_Poisson_benchmark_2_diff_2_Helm_2ndd}
+\end{subfigure}
+\caption{$\alpha_{\rm R}$ for the Poisson, diffusion and Hemlholtz equations with $p=e^{-(x-0.5)^2}$.}
+\label{alpha_R_benchmark_Pois2diff2Helm}
+\end{figure}
+
+
+\newpage
+\paragraph{The standard FEM}
+
+The truncation error increases when the $d$ oscillates relatively large, i.e. when $c$ is larger than 10.
+
+The lines approximating the round-off error for the solution and first derivative are not affected by the oscillation of $d$, but that for the second derivative moves up a bit when  $c$ is larger than 10.
+
+
+% \newpage
+\paragraph{The mixed FEM}
+
+The truncation error increases when $d$ oscillates relatively large.
+% For the solution, 
+The lines approximating the round-off error are not affected.
+
+Last but not least, the offsets $\alpha_{\rm R}$ for the diffusion equation tend to be smaller than that for the Poisson equation.
+
+% \newpage
+
+\subsubsection{d=1+0.5\texorpdfstring{$\sin$(x)}{sin(x)}, r=c}
+
+Here, $c$ ranges from 1 to $10^8$.
+For larger $c$, $\alpha_{\rm R}$ is denoted by lighter color.
+
+\paragraph{The standard FEM}
+$\alpha_{\rm R}$ for different $c$ are summarized in Fig.~\ref{alpha_R_benchmark_Pois2diff2Helm}.
+
+\paragraph{The mixed FEM}
+
+%\subsubsection{d=0, r=c}            \label{p_exp_d_0_r_c}
+%
+%The errors are shown in Fig.~\ref{py_oned_helm_p_exp_minus_x_minus_0p5_square_d_0_SM_error_normal_coeff_variant}.
+%
+%\begin{figure}[!ht]
+%    \begin{subfigure}{5.5cm}
+%        \includegraphics[width=1.0\linewidth]{py_oned_helm_p_exp_minus_x_minus_0p5_square_d_0_SM_error_normal_coeff_variant_solu.pdf}
+%        \caption{Solution}
+%        \label{py_oned_helm_p_exp_minus_x_minus_0p5_square_d_0_SM_error_normal_coeff_variant_solu}
+%    \end{subfigure}
+%    \hspace{-0.2cm}
+%    \begin{subfigure}{5.5cm}
+%        \includegraphics[width=1.0\linewidth]{py_oned_helm_p_exp_minus_x_minus_0p5_square_d_0_SM_error_normal_coeff_variant_grad.pdf}
+%        \caption{First derivative}
+%        \label{py_oned_helm_p_exp_minus_x_minus_0p5_square_d_0_SM_error_normal_coeff_variant_grad}
+%    \end{subfigure}
+%    \hspace{-0.2cm}
+%    \begin{subfigure}{5.5cm}
+%        \includegraphics[width=1.0\linewidth]{py_oned_helm_p_exp_minus_x_minus_0p5_square_d_0_SM_error_normal_coeff_variant_2ndd.pdf}
+%        \caption{Second derivative}
+%        \label{py_oned_helm_p_exp_minus_x_minus_0p5_square_d_0_SM_error_normal_coeff_variant_2ndd}
+%    \end{subfigure}
+%\caption{Absolute errors for section \ref{p_exp_d_0_r_c} using the standard FEM.}
+%\label{py_oned_helm_p_exp_minus_x_minus_0p5_square_d_0_SM_error_normal_coeff_variant}
+%\end{figure}
+%
+%Fig.~\ref{py_oned_helm_p_exp_minus_x_minus_0p5_square_d_0_SM_error_normal_coeff_variant} shows that the slope 2 for the round-off error is led by the second-order derivative part in the differential equation.
+%% 
+\newpage
+\subsection{\texorpdfstring{p=$\sin$(2$\pi$x)}{p=sin(2pix)}} \label{discretization_error_bench_diff}
+
+
+\begin{figure}[!ht]
+\hspace{0.0cm}
+\begin{subfigure}[b]{0.35\textwidth}
+\scalebox{0.85}{
+\begin{tikzpicture} 
+\begin{axis}
+[
+    ymode=log,    
+    ymin=1e-25,
+    ymax=1e-13,
+    ytick={1e-25, 1e-22, 1e-19, 1e-16, 1e-13},
+    yticklabels={1e-25, 1e-22, 1e-19, 1e-16, 1e-13},      
+    legend style={nodes={scale=0.8},at={(0.03,0.15)},anchor=west},
+    legend cell align={left},
+    height=5cm,
+    width=6cm,
+    ylabel={$\alpha_{\rm R}$},
+    ylabel style={at={(-0.01,0.5)}},    
+    xtick={0,1,2,3,4},
+    xticklabels={Poisson, diffusion, Helmholtz}
+]
+\addplot[blue,mark=o, only marks,mark options={color=blue,fill=blue}] coordinates {(0,5.0e-17) (1,5.0e-17) (2,5.0e-30)};	%
+
+\addplot[red,mark=o, only marks,mark options={color=red,fill=red}] coordinates {(0,2.0e-18) (1,1.0e-17) (2,5.0e-30)};		%
+
+\addplot[blue,mark=o, only marks,mark options={color=blue!80,fill=blue}] coordinates {(0,2.0e-30) (1,2.0e-30) (2,2.0e-30)};	%
+\addplot[blue,mark=o, only marks,mark options={color=blue!60,fill=blue}] coordinates {(0,2.0e-30) (1,2.0e-30) (2,2.0e-30)};
+\addplot[blue,mark=o, only marks,mark options={color=blue!40,fill=blue}] coordinates {(0,2.0e-30) (1,2.0e-30) (2,2.0e-30)};
+\addplot[blue,mark=o, only marks,mark options={color=blue!20,fill=blue}] coordinates {(0,2.0e-30) (1,2.0e-30) (2,2.0e-30)};
+\legend{The standard FEM, The mixed FEM};
+\end{axis}
+\end{tikzpicture}
+}
+\vspace{-0.2cm}
+\caption{Solution}
+\label{alpha_R_Poisson_p_sin2pix}
+\end{subfigure}
+\hspace{-0.7cm}
+\begin{subfigure}[b]{0.35\textwidth}
+\scalebox{0.85}{
+\begin{tikzpicture} 
+\begin{axis}
+[
+    ymode=log,    
+    ymin=1e-25,
+    ymax=1e-13,
+    ytick={1e-25, 1e-22, 1e-19, 1e-16, 1e-13},
+    yticklabels={1e-25, 1e-22, 1e-19, 1e-16, 1e-13},   
+    legend style={nodes={scale=0.8},at={(0.03,0.85)},anchor=west},
+    legend cell align={left},
+    height=5cm,
+    width=6cm,
+    ylabel={$\alpha_{\rm R}$},
+    ylabel style={at={(-0.01,0.5)}},    
+    xtick={0,1,2,3,4},
+    xticklabels={Poisson, diffusion, Helmholtz}
+]
+\addplot[blue,mark=o, only marks,mark options={color=blue,fill=blue}] coordinates {(0,5.0e-17) (1,5.0e-18) (2,5.0e-30)};
+\addplot[red,mark=o, only marks,mark options={color=red,fill=red}] coordinates {(0,1.0e-17) (1,2.0e-18) (2,1.0e-30)};
+\addplot[blue,mark=o, only marks,mark options={color=blue!80,fill=blue}] coordinates {(0,2.0e-30) (1,2.0e-30) (2,5.0e-30)};
+\addplot[blue,mark=o, only marks,mark options={color=blue!60,fill=blue}] coordinates {(0,2.0e-30) (1,2.0e-30) (2,1.0e-30)};
+\addplot[blue,mark=o, only marks,mark options={color=blue!40,fill=blue}] coordinates {(0,2.0e-30) (1,2.0e-30) (2,1.0e-30)};
+\addplot[blue,mark=o, only marks,mark options={color=blue!20,fill=blue}] coordinates {(0,2.0e-30) (1,2.0e-30) (2,5.0e-30)};
+\end{axis}
+\end{tikzpicture}
+}
+\vspace{-0.2cm}
+\caption{First derivative}
+\label{alpha_R_Poisson_p_sin2pix_2_diffusion}
+\end{subfigure}
+\hspace{-0.7cm}
+\begin{subfigure}[b]{0.35\textwidth}
+\scalebox{0.85}{
+\begin{tikzpicture} 
+\begin{axis}
+[
+    ymode=log,    
+    ymin=1e-25,
+    ymax=1e-13,
+    ytick={1e-25, 1e-22, 1e-19, 1e-16, 1e-13},
+    yticklabels={1e-25, 1e-22, 1e-19, 1e-16, 1e-13},     
+    legend style={nodes={scale=0.8},at={(0.03,0.85)},anchor=west},
+    legend cell align={left},
+    height=5cm,
+    width=6cm,
+    ylabel={$\alpha_{\rm R}$},
+    ylabel style={at={(-0.01,0.5)}},    
+    xtick={0,1,2,3,4},
+    xticklabels={Poisson, diffusion, Helmholtz} 
+]
+\addplot[blue,mark=o, only marks,mark options={color=blue,fill=blue}] coordinates {(0,5.0e-16) (1,5.0e-16) (2,5.0e-30)};
+\addplot[red,mark=o, only marks,mark options={color=red,fill=red}] coordinates {(0,5.0e-16) (1,1.0e-16) (2,2.0e-30)};
+\end{axis}
+\end{tikzpicture}
+}
+\vspace{-0.2cm}
+\caption{Second derivative}
+\label{alpha_R_Poisson_p_sin2pix_2_Helmholtz}
+\end{subfigure}
+\caption{$\alpha_{\rm R}$ for the Poisson, diffusion and Hemlholtz equations with $p=\sin(2\pi x)$.}
+\label{alpha_R_Poisson_p_sin2pix_2diff2helm}
+\end{figure}
+
+
+% We consider the diffusion equation shown in Table 1 in \cite{liu2019balancing}.
+% We first find the offsets $\alpha_{\rm R}$ for the diffusion equation using recommended scaling schemes for the standard and mixed FEMs, in which the .
+% Next, we investigate $\alpha_{\rm R}$ for different coefficients, i.e. $d(x)=1+cx$ with .
+
+% \subsubsection{d=1+x}
+% 
+% Element degree $p$ ranges from 1 to 5. The offsets $\alpha_{\rm R}$ for different scaling schemes are summarized in Fig.~\ref{alpha_R_diff}.
+% For the standard FEM, $\alpha_{\rm R}$ are basically the same using scheme $S$ or not.
+% For the mixed FEM, $\alpha_{\rm R}$ changes a bit for different scaling schemes.
+% 
+% \begin{figure}[!ht]
+% \hspace{2.2cm}
+% % \centering
+% \begin{subfigure}[b]{0.4\textwidth}
+% \scalebox{0.9}{
+% \begin{tikzpicture} 
+% \begin{axis}
+% [
+%     ymode=log,    
+%     ymin=1e-20,
+%     ymax=1e-14,
+%     ytick={1e-20, 1e-18, 1e-16, 1e-14},
+%     yticklabels={1e-20, 1e-18, 1e-16, 1e-14},        
+%     legend style={nodes={scale=0.8},at={(0.45,0.15)},anchor=west},
+%     legend cell align={left},
+%     height=5cm,
+%     width=6cm,
+%     ylabel={$\alpha_{\rm R}$},
+%     ylabel style={at={(-0.01,0.5)}},    
+%     xtick={0,1,2,3,4},
+%     xticklabels={$u$,$u_x$, $u_{xx}$, $4$, ${5}$},
+%     xlabel={Variable},
+%     xlabel style={at={(0.5,0.03)}},    
+% ]
+% \addplot[black,mark=diamond,mark options={color=black,fill=black}] coordinates {(0,5.0e-17) (1,5.0e-17) (2,5.0e-16)};
+% \addplot[green,mark=diamond,mark options={color=green,fill=green}] coordinates {(0,5.0e-17) (1,5.0e-17) (2,5.0e-16)};
+% \legend{Not scaling, Scheme $S$};
+% \end{axis}
+% \end{tikzpicture}
+% }
+% \caption{The standard FEM}
+% \label{alpha_R_diff_std}
+% \end{subfigure}
+% \hspace{-1.0cm}
+% \begin{subfigure}[b]{0.4\textwidth}
+% \scalebox{0.9}{
+% \begin{tikzpicture} 
+% \begin{axis}
+% [
+%     ymode=log,    
+%     ymin=1e-20,
+%     ymax=1e-14,
+%     ytick={1e-20, 1e-18, 1e-16, 1e-14},
+%     yticklabels={1e-20, 1e-18, 1e-16, 1e-14},        
+%     legend style={nodes={scale=0.8},at={(0.45,0.2)},anchor=west},
+%     legend cell align={left},
+%     height=5cm,
+%     width=6cm,
+%     ylabel={$\alpha_{\rm R}$},
+%     ylabel style={at={(-0.01,0.5)}},    
+%     xtick={0,1,2,3,4},
+%     xticklabels={$u$,$u_x$, $u_{xx}$, $4$, ${5}$},
+%     xlabel={Variable},
+%     xlabel style={at={(0.5,0.03)}},    
+% ]
+% \addplot[black,mark=square,mark options={color=black,fill=black}] coordinates {(0, 1.0e-19) (1, 1.0e-17) (2, 5.0e-15)};
+% \addplot[green,mark=square,mark options={color=green,fill=green}] coordinates {(0, 2.0e-18) (1, 5.0e-18) (2, 5.0e-16)};
+% \addplot[violet,mark=square,mark options={color=violet,fill=violet}] coordinates {(0, 5.0e-19) (1, 1.0e-17) (2, 5.0e-15)};
+% \legend{Not scaling, Scheme $M_1$, Scheme $M_2$};
+% \end{axis}
+% \end{tikzpicture}
+% }
+% \caption{The mixed FEM}
+% \label{alpha_R_diff_mix}
+% \end{subfigure}
+% \caption{$\alpha_{\rm R}$ for the benchmark diffusion equation for different scaling schemes.}
+% \label{alpha_R_diff}
+% \end{figure}
+
+\subsubsection{d=1+cx}
+
+$c$ ranges from $10^{-4}$ to $10^4$. The values of $\|d\|_2$ for different $c$ are given in Fig.~\ref{Fig:d_L2_varying_with_c_diff}.
+It shows that when $c<1$, $\|d\|_2$ are basically the same; when $c>1$, $\|d\|_2$ increases quickly.
+
+\begin{figure}[!ht]
+\centering
+    \includegraphics[width=0.45\linewidth]{d_L2_varying_with_c_diff.png}
+    \caption{Change of $\|d\|_2$ with the coefficient $c$ for the diffusion equation.}
+    \label{Fig:d_L2_varying_with_c_diff}   
+\end{figure}
+
+% \newpage
+\paragraph{The standard FEM}
+
+Using scheme $S$, the errors are shown in Fig.~\ref{py_oned_bench_diff_SM_error_scheme_S_coeff_variant}.
+When $c<1$, like $\|d\|_2$, $\alpha_{\rm R}$ for different $c$ are basically the same; when $c>1$, $\alpha_{\rm R}$ increases with $c$, and the magnitude of the increase is larger for higher-order derivatives.
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.0\linewidth]{py_oned_bench_diff_SM_error_scheme_S_coeff_variant_solu.pdf}
+        \caption{Solution}
+        \label{py_oned_bench_diff_SM_error_scheme_S_coeff_variant_solu}
+    \end{subfigure}
+    \hspace{-0.2cm}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.0\linewidth]{py_oned_bench_diff_SM_error_scheme_S_coeff_variant_grad.pdf}
+        \caption{First derivative}
+        \label{py_oned_bench_diff_SM_error_scheme_S_coeff_variant_grad}
+    \end{subfigure}
+    \hspace{-0.2cm}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.0\linewidth]{py_oned_bench_diff_SM_error_scheme_S_coeff_variant_2ndd.pdf}
+        \caption{Second derivative}
+        \label{py_oned_bench_diff_SM_error_scheme_S_coeff_variant_2ndd}
+    \end{subfigure}
+\caption{Absolute errors for the benchmark diffusion equation using the standard FEM with scheme $S$, $c$ variant.}
+\label{py_oned_bench_diff_SM_error_scheme_S_coeff_variant}
+\end{figure}
+
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.0\linewidth]{py_error_oned_diff_p_sin2pix_d_1pcx_S1_degree_var_solu.pdf}
+        \caption{Solution}
+        \label{py_error_oned_diff_p_sin2pix_d_1pcx_S1_degree_var_solu}
+    \end{subfigure}
+    \hspace{-0.2cm}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.0\linewidth]{py_error_oned_diff_p_sin2pix_d_1pcx_S1_degree_var_grad.pdf}
+        \caption{First derivative}
+        \label{py_error_oned_diff_p_sin2pix_d_1pcx_S1_degree_var_grad}
+    \end{subfigure}
+    \hspace{-0.2cm}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.0\linewidth]{py_error_oned_diff_p_sin2pix_d_1pcx_S1_degree_var_2ndd.pdf}
+        \caption{Second derivative}
+        \label{py_error_oned_diff_p_sin2pix_d_1pcx_S1_degree_var_2ndd}
+    \end{subfigure}
+\caption{Absolute errors for the benchmark diffusion equation using the standard FEM with scheme $S$, $c$=1e4, degree variant.}
+\label{py_error_oned_diff_p_sin2pix_d_1pcx_S1_degree_var}
+\end{figure}
+
+
+
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.0\linewidth]{py_error_oned_diff_p_sin2pix_d_1pcx_S1_c_var_solu.pdf}
+        \caption{Solution}
+        \label{py_error_oned_diff_p_sin2pix_d_1pcx_S1_c_var_solu}
+    \end{subfigure}
+    \hspace{-0.2cm}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.0\linewidth]{py_error_oned_diff_p_sin2pix_d_1pcx_S1_c_var_grad.pdf}
+        \caption{First derivative}
+        \label{py_error_oned_diff_p_sin2pix_d_1pcx_S1_c_var_grad}
+    \end{subfigure}
+    \hspace{-0.2cm}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.0\linewidth]{py_error_oned_diff_p_sin2pix_d_1pcx_S1_c_var_2ndd.pdf}
+        \caption{Second derivative}
+        \label{py_error_oned_diff_p_sin2pix_d_1pcx_S1_c_var_2ndd}
+    \end{subfigure}
+\caption{Absolute errors for the benchmark diffusion equation but only imposed by Dirichlet boundary conditions using the standard FEM with scheme $S$, $c$ variant.}
+\label{py_error_oned_diff_p_sin2pix_d_1pcx_S1_c_var}
+\end{figure}
+
+Fig.~\ref{py_error_oned_diff_p_sin2pix_d_1pcx_S1_degree_var} proves that the element degree does not affect the round-off error.
+Fig.~\ref{py_error_oned_diff_p_sin2pix_d_1pcx_S1_c_var} proves that only using Dirichlet boundary conditions produces smaller $\alpha_{\rm R}$.
+
+% 
+% To clarify if the increase of $\alpha_{\rm R}$ for higher-order derivatives is caused by the magnitude of $\|d\|_2$, we divide the equation by $\|d\|_2$, which results in
+% \begin{equation}
+%  -(d/{\|d\|_2} u_x)_x = f/{\|d\|_2}.             \label{diff_eq_coeff_scaling}
+% \end{equation}
+% 
+% For the above equation, the errors of the solution, first and second derivatives are shown in Fig.~\ref{py_oned_bench_diff_SM_error_scheme_S_diff_coeff_variant}. It shows that $\alpha_{\rm R}$ also increases when $c$ is relatively large.
+% 
+% 
+% \begin{figure}[!ht]
+%     \begin{subfigure}{5.5cm}
+%         \includegraphics[width=1.0\linewidth]{py_oned_bench_diff_SM_error_scheme_S_diff_coeff_variant_solu.pdf}
+%         \caption{Solution}
+%         \label{py_oned_bench_diff_SM_error_scheme_S_diff_coeff_variant_solu}
+%     \end{subfigure}
+%     \hspace{-0.2cm}
+%     \begin{subfigure}{5.5cm}
+%         \includegraphics[width=1.0\linewidth]{py_oned_bench_diff_SM_error_scheme_S_diff_coeff_variant_grad.pdf}
+%         \caption{First derivative}
+%         \label{py_oned_bench_diff_SM_error_scheme_S_diff_coeff_variant_grad}
+%     \end{subfigure}
+%     \hspace{-0.2cm}
+%     \begin{subfigure}{5.5cm}
+%         \includegraphics[width=1.0\linewidth]{py_oned_bench_diff_SM_error_scheme_S_diff_coeff_variant_2ndd.pdf}
+%         \caption{Second derivative}
+%         \label{py_oned_bench_diff_SM_error_scheme_S_diff_coeff_variant_2ndd}
+%     \end{subfigure}
+% \caption{Absolute errors for Eq.~(\ref{diff_eq_coeff_scaling}) using the standard FEM, no scaling, $c$ variant.}
+% \label{py_oned_bench_diff_SM_error_scheme_S_diff_coeff_variant}
+% \end{figure}
+
+% \newpage
+\paragraph{The mixed FEM}
+Not using scaling, the errors are shown in Fig.~\ref{py_oned_bench_diff_M0_error_coeff_variant_nonpost}.
+It shows that when $c$ is relatively large, $\alpha_{\rm R}$ for the first and second derivatives increases. This is because the magnitude of the first derivative, which is $\|du_x\|_2$, increases with $c$ when $c>1$.
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.0\linewidth]{py_oned_bench_diff_M0_error_coeff_variant_nonpost_solu.pdf}
+        \caption{Solution}
+        \label{py_oned_bench_diff_M0_error_coeff_variant_nonpost_solu}
+    \end{subfigure}
+    \hspace{-0.2cm}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.0\linewidth]{py_oned_bench_diff_M0_error_coeff_variant_nonpost_grad.pdf}
+        \caption{First derivative}
+        \label{py_oned_bench_diff_M0_error_coeff_variant_nonpost_grad}
+    \end{subfigure}
+    \hspace{-0.2cm}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.0\linewidth]{py_oned_bench_diff_M0_error_coeff_variant_nonpost_2ndd.pdf}
+        \caption{Second derivative}
+        \label{py_oned_bench_diff_M0_error_coeff_variant_nonpost_2ndd}
+    \end{subfigure}
+\caption{Absolute errors for the benchmark diffusion equation using the mixed FEM with $P_4/P_3^{\rm disc}$ elements, $v=-du_x$, coefficient variant, no scaling.}
+\label{py_oned_bench_diff_M0_error_coeff_variant_nonpost}
+\end{figure}
+
+% \newpage
+
+If we use scheme $M_1$ in \cite{liu2019balancing}, the errors are shown in Fig.~\ref{py_oned_bench_diff_M1_error_coeff_variant_nonpost}, where the convergence behavior of $\alpha_{\rm R}$ is observed. Note that, $\|v\|_2$ is $\|du_x\|_2$ for the diffusion equation.
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.0\linewidth]{py_oned_bench_diff_M1_error_coeff_variant_nonpost_solu.pdf}
+        \caption{Solution}
+        \label{py_oned_bench_diff_M1_error_coeff_variant_nonpost_solu}
+    \end{subfigure}
+    \hspace{-0.2cm}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.0\linewidth]{py_oned_bench_diff_M1_error_coeff_variant_nonpost_grad.pdf}
+        \caption{First derivative}
+        \label{py_oned_bench_diff_M1_error_coeff_variant_nonpost_grad}
+    \end{subfigure}
+    \hspace{-0.2cm}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.0\linewidth]{py_oned_bench_diff_M1_error_coeff_variant_nonpost_2ndd.pdf}
+        \caption{Second derivative}
+        \label{py_oned_bench_diff_M1_error_coeff_variant_nonpost_2ndd}
+    \end{subfigure}
+\caption{Absolute errors for the benchmark diffusion equation using the mixed FEM with $P_4/P_3^{\rm disc}$ elements, $v=-du_x$, coefficient variant, scheme $M_1$.}
+\label{py_oned_bench_diff_M1_error_coeff_variant_nonpost}
+\end{figure}
+
+
+
+\bibliographystyle{unsrt}  
+\bibliography{mybibfile}  %%% Remove comment to use the external .bib file (using bibtex).
+
+
+\end{document}

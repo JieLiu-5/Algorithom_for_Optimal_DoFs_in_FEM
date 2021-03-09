@@ -1,0 +1,1215 @@
+\documentclass[fleqn,s1,tex]{neptune}
+\usepackage[5.5]{neptune-els-dtd}
+%% Please do not edit bookindate/proofdate
+\bookindate{2020-10-05}
+\proofdate{2020-10-07}
+%%
+\usepackage[nptn]{neptune-els}
+
+
+\begin{pkg}
+\usepackage[ruled,linesnumbered]{algorithm2e}
+\usepackage{empheq}
+\end{pkg}
+
+\begin{additionalpkgs}
+\end{additionalpkgs}
+
+\begin{document}
+
+\newproof{proof}{Proof}
+
+\begin{macros}
+
+
+\let\citep\cite
+\def\rom#1{II}
+\jshort
+\def\rvtACMTMSTOMS{ACM Trans. Math. Softw.}
+\end{macros}
+
+\begin{additionalmacros}
+\end{additionalmacros}
+
+\begin{frontmatter}
+%\QUERY[1]
+
+\title{Balancing truncation and round-off errors in FEM: One-dimensional analysis}
+
+\addrai[1]{S0377042720305100-28be95b297f26e32f00f0784d8e0fd3a} 
+ \addrai[2]{S0377042720305100-5bc3b5a8b395f7ffac7b0f515ea9f64e} 
+ \addrai[3]{S0377042720305100-6175d89bea77f2032673c52f4492adfb}
+
+
+
+\begin{authorgroup}
+
+\author{Jie Liu}
+%\QUERY[2]
+\cormark[1]
+\cortext[1]{\COR
+}
+\email[j.liu-5@tudelft.nl]
+
+\author{Matthias M\"oller}
+\email[m.moller@tudelft.nl]
+
+\author{Henk M. Schuttelaars}
+\email[h.m.schuttelaars@tudelft.nl]
+
+ 
+\affiliation{o={Delft Institute of Applied Mathematics, Delft University of Technology}, a={Van Mourik Broekmanweg 6}, p={2628 XE}, pp={}, c={Delft}, cy={The Netherlands}}
+\end{authorgroup}
+
+\begin{abstractgroup}
+\begin{abstract}[1]
+In finite element methods, the accuracy of the solution cannot increase indefinitely since the round-off error related to limited computer precision increases when the number of degrees of freedom (DoFs) is large enough. Because a priori information of the highest attainable accuracy is of great interest, we construct an innovative method to obtain the highest attainable accuracy given the order of the elements.
+In this method, the truncation error is extrapolated when it converges at the asymptotic rate, and the bound of the round-off error follows from a generically valid error estimate, obtained and validated through extensive numerical experiments. The highest attainable accuracy is obtained by minimizing the sum of these two types of errors.
+We validate this method using a one-dimensional Helmholtz equation in space. 
+It shows that the highest attainable accuracy can be accurately predicted, and the CPU time required is much smaller compared with that using successive grid refinement. 
+\end{abstract}
+
+
+\keywords{Finite element method \sep A posteriori error estimation \sep Optimal number of degrees of freedom \sep $hp$-refinement strategy \sep Round-off error}
+\end{abstractgroup}
+
+
+\end{frontmatter}
+
+%\BXHEAD[7]
+
+\section{Introduction}
+
+
+Many problems in engineering sciences and industry are modelled mathematically by
+initial--boundary value problems comprising systems of coupled, nonlinear partial
+and/or ordinary differential equations. These problems often consider complex
+geometries, with initial and/or boundary conditions that depend on measured
+data~\cite{Kumar2016}. 
+In some applications, not only the solution, but also its derivatives are of
+interest~\cite{Kumar2016,carey1982derivative}.
+For many problems of practical interest, analytical or semi-analytical solutions are not available, and hence one has to resort to numerical solution methods, such as the finite difference, finite volume, and finite element methods. The latter will be adopted throughout this paper and applied to one-dimensional boundary value problems.
+
+The accuracy of the numerically obtained solution is influenced by many sources of
+errors~\cite{ferziger2012computational}: firstly, modelling errors in the set-up of
+the models, such as the simplification of realistic domains and governing equations
+and the approximation of initial and boundary conditions; next, truncation errors due
+to the discretization of the computational domain and the use of basis functions for
+the function spaces defined on it; then, round-off errors due to the adoption of
+finite-precision computer arithmetics, rather than exact arithmetics; finally,
+iteration errors resulting from the artificially controlled tolerance of iterative
+solvers. 
+
+One tacitly assumes that most errors are well-balanced and/or negligibly small. In
+this paper, the focus is on the truncation error ($E_{\rm T}$) and the round-off
+($E_{\rm R}$), by considering idealized problems, which do not introduce modelling
+errors, and using a direct solver, which avoids the introduction of iterative errors.
+In particular, the round-off error is often ignored based on the argument that it
+will be `sufficiently small' if just IEEE-754 double-precision floating-point
+arithmetics~\cite{zuras2008ieee} are adopted. Therefore, to improve the accuracy,
+i.e.~to decrease $E_{\rm T}$, one often reduces the mesh width
+($h$-refinement), increases the approximation order ($p$-refinement),
+or applies both strategies simultaneously
+($hp$-refinement)~\cite{guo1986hp,gockenbach2006understanding}. 
+
+The common characteristic of these methods is to increase the number of degrees of freedom (DoFs).
+However, $E_{\rm R}$ increases with the number of DoFs, and dominates the total error
+if more and more DoFs are employed~\cite{alvarez2012round,Babuska2018Roundoff}. While
+typically an impractically large number of DoFs is required for $E_{\rm R}$ to
+dominate the total error if low(est)-order approximations are used, the number can be
+very small if high-order approximations are adopted, which are nowadays becoming more
+and more popular. This shift to higher order approximations makes the results more
+prone to be dominated by round-off errors. Despite this alarming observation, to the
+authors' best knowledge, only very few publications address the impact of accumulated
+round-off errors on the overall accuracy of the final solution or take them into
+account explicitly in the error-estimation procedure. The general rule of thumb is
+still to perform as many $h$-refinements as possible considering the
+available computer hardware.
+
+The aim of this paper is to systematically analyse the influence of the round-off
+error on the total error when using $h$-refinements for different orders of
+$p$. Not only the solution but also its first and second derivatives are
+investigated for one-dimensional, second order model problems, assuming the second
+derivative exists in the weak sense~\cite{necas2011direct}. Both the standard finite
+element method (FEM) and the mixed FEM~\cite{boffi2013mixed} are analysed for
+multiple $p$'s. Furthermore, the following factors are considered: types of
+boundary conditions and methods of implementing them, choices and configurations of
+the linear system solver, orders of magnitude of the variables and coefficients.
+Based on the statistics of the evolution of the round-off error, we propose an
+algorithm to predict the best accuracy $E_{\min}$ that occurs when the sum of
+$E_{\rm T}$ and $E_{\rm R}$ is the smallest, and the corresponding number of DoFs
+($N_{\rm opt}$).
+
+The paper is organized as follows. The model problem, finite element formulation and numerical implementation are described in  \xref{section_model_problem_FEM_formulation_numerical_implementation}. The approach to predicting ${E}_{\rm {min}}$ is illustrated in  \xref{section_error_evolution_and_prediction}. The statistics on the evolution of the round-off error are given in  \xref{section_error_constants}. The algorithm for realizing the approach is put forward in  \xref{section_algorithm}, followed by its validation by a Helmholtz problem in  \xref{section_validation}. The conclusions are drawn in  \xref{paragraph on conclusion}.
+
+
+\section{Model problem, finite element formulation and numerical implementation}
+ \xlabel{section_model_problem_FEM_formulation_numerical_implementation}
+
+\subsection{Model problem}
+
+
+Consider the following one-dimensional second-order differential equation:
+\begin{equation}
+  -\left(d(x) u_x \right)_x + r(x)u(x) = f(x),\qquad x \in I = [0,1], \xlabel{1d_second_order_differential_equation}
+\end{equation}
+with $u$ denoting the unknown variable, which can either be real or complex, $f(x) \in L^2 (I)$ a prescribed right-hand side, and $d(x)$ and $r(x)$ continuous coefficient functions.
+By choosing $d(x)=1$ and $r(x)=0$, Eq.~\neqref{1d_second_order_differential_equation} reduces to the Poisson equation; for
+$d(x)>0$ and not constant, the diffusion equation is found when $r(x)=0$, and
+the Helmholtz equation~\citep{haberman2012applied} is found when $r(x) \neq 0$. 
+The boundary conditions are $u(x)=g(x)$ on $\Gamma_D$ and $d(x)u_x=h(x)$ on $\Gamma_N$, where $\Gamma_D$ and $\Gamma_N$ are the boundaries where Dirichlet and Neumann boundary conditions are imposed, respectively.
+
+\subsection{Finite element formulation}
+  \xlabel{FE formulation}
+
+For convenience, we introduce two inner products~\citep{lipschutz2009linear}:
+\begin{subequations}
+\begin{align}
+ \langle f_1, \,f_2 \rangle &= \int _I f_1(x) f_2(x) \, dx, \\
+   \langle f_1, \,f_2 \rangle _{\Gamma} &= f_1(x_0) f_2(x_0).
+\end{align}
+\end{subequations}
+where $f_1(x)$ and $f_2(x)$ are continuous functions defined on the unit interval $I$, $\Gamma$ denotes the boundary of $I$, and $x_0$ denotes the values of $x$ on $\Gamma$.
+
+\subsubsection{The standard {\?{FEM}}}
+
+
+The weak form of Eq.~\neqref{1d_second_order_differential_equation} is derived in \xref{derivation_weak_form_SM}. Imposing the Dirichlet boundary conditions strongly, the weak form is read as:
+\bstmisrc
+    \begin{equation} \xlabel{sm_weak_form_Diri_strong} 
+\isrc{\boxed{ 
+\begin{aligned}
+&\text{Weak~form}~ 1 ~~~~~~~~~\\
+&\text{Find $u \in H _D^1 (I)$ such that:} \\
+&\langle {\eta} _{ x }, \, du _{ x } \rangle + \langle\eta, \, ru\rangle = \langle\eta, \, f \rangle + \langle\eta, \, hn\rangle_{\Gamma _N} \qquad \forall \eta \in H _{D0}^1 (I),\\
+&\text{with} \\
+&~~~~~~~~~~~~~H_{D} ^1 (I) = \{t \; | \; t \in H^1 (I), \; t = g \text{ on } \Gamma _D \},  \\
+&~~~~~~~~~~~~H_{D0} ^1 (I) = \{t \; | \; t \in H^1 (I), \; t = 0 \text{ on } \Gamma _D\}.\\
+\end{aligned}
+ }}
+\end{equation}\estmisrc
+Imposing the Dirichlet boundary conditions in the weak sense~\cite{freund1995weakly},
+the weak form reads:
+\bstmisrc
+    \begin{equation}\xlabel{sm_weak_form_Diri_weak}
+    \isrc{
+\boxed{
+\begin{aligned}
+&\text{Weak~form}~ 2 ~~~~~~~~~\\
+&\text{Find } u \in H ^1 (I) \text{ such that:}\\
+& \langle { \eta} _{ x }, \, du_x \rangle + \langle \eta, \, ru \rangle - \langle \eta, \, du_x n \rangle_{\Gamma _D} + \langle \eta _x, \, u n \rangle_{\Gamma _D} - \langle \eta, \, \rho u n \rangle_{\Gamma _D} \\ 
+&= \langle \eta, \, f \rangle + \langle \eta, \, h n \rangle_{\Gamma _N} + \langle \eta _x, \, g n \rangle_{\Gamma _D} - \langle \eta, \, \rho g n \rangle_{\Gamma _D} \qquad \forall \eta \in H ^1 (I), \\
+&\text{where } \rho \text{ is a } \text{{positive}} \text{ value that serves as the penalty parameter}.
+\end{aligned}
+ }}
+\end{equation}\estmisrc
+In both forms, $\eta$ denotes the test function, $n$ is equal to 1 at $x=1$, and $-1$ at $x=0$; the terms on the right-hand sides consist of information of Neumann boundary conditions which vanishes if no Neumann boundary conditions are prescribed. We approximate $u$ by a linear combination of a finite number of basis functions:
+\begin{equation}
+ u \approx u_h ^{(p)} = \sum _ {i=1} ^{m} u _{i} \varphi _{i}^{(p)}. \xlabel{sm_u_approx}
+\end{equation}
+Here, $p$ is the element degree, $m$ is the number of DoFs, which equals $p \times t + 1$, with $t$ denoting the total number of grid cells; $u_i$'s are the values of $u_h^{(p)}$ at the DoFs; $\varphi _{i}^{(p)}$'s are $C^0$-continuous Lagrange basis functions supported by {Gauss--Lobatto points}, which feature the Kronecker-delta property, i.e.~$\varphi _{i}^{(p)} (x_j)=\delta_{ij}$, with $x_j$ denoting the support point. This type of element will be referred to as $P_p$. Taking $\eta$ equal to $\varphi ^{(p)}_{k},~ k=1, \,2, \, \ldots , \, m$, the resulting linear system of equations is read as
+\begin{equation}
+ A {U} = F,    \xlabel{matrix_equation_std}
+\end{equation}
+where $A$ is the stiffness matrix, $F$ the right-hand side and $U=[u_1,\,\ldots,\,u_m]^\top$.
+
+\subsubsection{The mixed {\?{FEM}}}
+
+
+As a first step, we introduce the auxiliary variable
+\begin{subequations}
+\begin{equation}
+   v(x) = - d(x)u_x, \xlabel{mm_strong_form_1} 
+\end{equation}  
+allowing Eq.~\neqref{1d_second_order_differential_equation} to be rewritten as
+\begin{equation}
+  -v_x - r(x)u(x) = -f(x).  \xlabel{mm_strong_form_2}
+\end{equation}
+ \xlabel{mm_strong_form_block}
+\end{subequations}
+The weak form of Eq.~\neqref{1d_second_order_differential_equation} using the mixed FEM, derived in \xref{derivation_weak_form_MM}, is given by:
+\begin{msrc}
+    \begin{subequations}
+\begin{empheq}[box=\fbox]{align}
+&\text{Weak~form}~ 3 ~~~~~~~~~\notag\\
+&\text{Find $v \in H_{N}^1 (I)$ and $u \in L ^2 (I)$ such that:}\notag\\
+& ~~~~~~~\;\langle w, \, d^{-1}v \rangle - \langle w_x, \,  u \rangle = -\langle w, \, g n \rangle_{\Gamma_D} \qquad \forall w \in H_{N0}^1 (I), \xlabel{mm_weak_form_1}\\ 
+& ~~~~~~~~~- \langle q, \, v_x \rangle - \langle q, \, ru \rangle = -\langle q, \, f \rangle \qquad \forall q \in L ^2 (I), \xlabel{mm_weak_form_2}\\
+&    \text{with}\notag\\
+& ~~~~~~~~~~~~~~~ H_{N} ^1 (I) = \{t \; | \; t \in H^1 (I), \; t = -h \text{ on } \Gamma _N \},  \notag\\
+& ~~~~~~~~~~~~~\, H_{N0} ^1 (I) = \{t \; | \; t \in H^1 (I), \; t = 0 \text{ on } \Gamma _N\}. \notag 
+\end{empheq}
+\label{mm_weak_form_block}
+\end{subequations}\end{msrc}
+\unskip\ignorespaces In this form, $w$ and $q$ denote the test functions of $v$ and $u$, respectively, and $n$ has the same interpretation as before. We approximate $v$ and $u$ by:
+\setcounter{equation}{8}
+\begin{subequations}
+\begin{align}
+ v \approx v _h^{(p)} &= \sum _ {i=1} ^{m} v _{i} \varphi _{i}^{(p)},     \xlabel{mm_u_approx}  \\
+ u \approx u _h^{(p-1)} &= \sum _ {j=1} ^{p} u _{sj} \psi _{j}^{(p-1)} \text{ in cell }s, \text{ for } s=1,\,2, \, \ldots, \,t, \xlabel{mm_v_approx}
+\end{align}
+ \xlabel{mm_var_approx_block}
+\end{subequations}
+where $m$ is the number of DoFs for $v_h^{(p)}$, which is equal to $p \times t + 1$, $v_i$'s are the values of $v_h^{(p)}$ at the DoFs, and $\varphi _{i}^{(p)}$'s are of the same type of basis functions used in Eq.~\neqref{sm_u_approx}; $u_{sj}$'s are the values of $u_h^{(p-1)}$ at the DoFs, $\psi _{j}^{(p-1)}$'s are discontinuous Lagrange basis functions, which implies that two independent $u_{sj}$'s have been assigned at the cell interfaces. This pair of elements will be referred to as $P_p/P_{p-1}^{\text{disc}}$. Replacing $w$ and $q$ by $\varphi _{k}^{(p)} , ~{k} = 1, \,2, \, \ldots , \, p \times t + 1$, and $ \psi _{e}^{(p-1)} ,~ {e} = 1, \,2, \, \ldots , \, p \times t$, respectively, the resulting coupled linear system of equations that has to be solved is read as:
+\begin{equation}
+ \left[ 
+\begin{array}{cc} M & B  \\ B^\top & 0 
+\end{array}
+\right] \left[ 
+\begin{array}{cc} {V} \\ {U} 
+\end{array}
+\right] =\left[ 
+\begin{array}{cc} G \\ H 
+\end{array}
+\right], \xlabel{matrix_equation_mix}
+\end{equation}
+where the mass matrix $M$, discrete gradient operator $B$, and its transpose, the discrete divergence operator $B^\top$, comprise the left-hand side; $G$ and $H$ are the components of the right-hand side; $V=[v_1,\,\ldots,\,v_m]^\top$ and $U=[u_{11},\,\ldots,\,u_{1p},\,\ldots,\,\ubrk u_{t1},\,\ldots,\,u_{tp}]^\top$, respectively.
+
+For the sake of readability, we will drop the superscript ($p$) or ($p-1$) whenever the approximation order is clear
+from the context.
+
+\subsection{Numerical implementation}
+
+
+\subsubsection{Solution technique}
+
+
+All results are computed in IEEE-754 double precision~\cite{zuras2008ieee} using the
+deal.\rom{2} finite element library~\cite{alzetta2018deal}. Unless stated otherwise,
+the computational mesh is obtained by globally refining a single element that covers
+the interval $I$, and the Dirichlet boundary conditions are imposed
+strongly. The former means that, when the solution is real valued, the number of DoFs
+equals $2^{R} \times p+1$ using the standard FEM and $2 \times 2^{R} \times p+1$ using the mixed FEM, at
+the $R$th refinement; when the solution is complex valued, the above numbers
+double since deal.\rom{2} does not provide native support for complex-valued problems
+and, hence, all components need to be split into their real and imaginary parts.
+
+To compute the occurring integrals, sufficiently accurate Gaussian quadrature formulas are used. 
+To solve the systems of equations, the UMFPACK solver~\cite{davis2004algorithm},
+which implements the multi-frontal LU factorization approach, is used unless stated
+otherwise. This solver results in relatively fast computations of the problems
+considered in this paper, and prevents the iteration errors of iterative solvers. The
+derivatives of the numerical solution, which are $u_{h,x}$ and $u_{h,xx}$ in the
+standard FEM and only $v_{h,x}$ in the mixed FEM, are computed in the classical
+finite element manner, e.g.~$u_{h,x}=\sum _{i=1}^m u_i\varphi_{i,x}$ yields an approximation to $u_x$
+using standard FEM. Note that, each differentiation decreases the element degree by
+one.
+
+\subsubsection{Error estimation}
+
+
+For the numerical results $var_h$, where $var$ can be $u$, $u_x$ and $u_{xx}$ of the standard FEM, and $u$, $v$ and $v_x$ of the mixed FEM, the error measured in the $L_2$ norm is used. It is defined as
+\begin{subequations}
+ \xlabel{formula_abs_error}
+\begin{equation}
+\xlabel{formula_abs_error_analytical}
+E_{h}= {\| var_{h}- {var}_{\rm exc}\| _{2}}
+\end{equation}
+when the exact solution ${var}_{\rm exc}$ is available, and~\cite{Runborg2012VerifyingNC}
+\begin{equation}
+\xlabel{formula_abs_error_numerical}
+{\widetilde {E_{h}}}= {\| var_{h}- {var}_{h/2}\| _{2}}
+\end{equation}
+otherwise,
+\end{subequations}
+where $var_{h/2}$ is the numerical solution computed on a mesh once refined with grid size $h/2$. 
+
+\subsubsection{Convergence of the solution}
+
+
+When the number of DoFs is relatively large, but the round-off error does not exceed
+the truncation error, the error converges at a fixed rate, known as asymptotic
+convergence rate, of which the value is one order higher than the approximation
+order~\cite{gockenbach2006understanding}. In practice, the convergence rate in the
+numerical experiments can be calculated from either 
+\begin{subequations}
+ \xlabel{formula_order_of_convergence_block}
+\begin{equation}
+ Q=\log _2 \left( \frac{E_{h}}{E_{h/2}} \right)
+ \xlabel{formula_order_of_convergence_analytical_solution}
+\end{equation}
+using Eq.~\neqref{formula_abs_error_analytical}, or
+\begin{equation}
+ \widetilde{Q}=\log _2 \left( \frac{\widetilde {E_{h}}}{\widetilde {E_{h/2}}} \right)  \xlabel{formula_order_of_convergence_finer_solution}
+\end{equation}
+using Eq.~\neqref{formula_abs_error_numerical}.
+\end{subequations}
+
+
+\section{Approach to predicting the highest attainable accuracy}
+      \xlabel{section_error_evolution_and_prediction}
+
+A conceptual sketch of $E_h$ against the number of DoFs ($N_h$) in a
+log--log plot can be found in   \xref{error_evolution_one_p}, also
+%\QUERY[3]
+see~\cite{butcher2016numerical}.
+When $N_h$ is relatively small ($N_h<N_c$), $E_h$ does not decrease at the aforementioned asymptotic order of convergence, and only when $N_h$ is large enough ($N_c \leqslant N_h < N_{\rm opt}$) this asymptotic order of convergence is attained.  The transition from the first phase, denoted by black circles, to the second phase, denoted by green circles, is usually fast, cf.  \xref{error_evolution_one_p}. $E_h$ in both phases is controlled by the truncation error $E_{\rm T}$; in the second phase $E_h$ can be represented by
+\begin{equation}
+ E_{h} \approx E_{\rm T} = \alpha_{\rm T}{N_{h}}^{-\beta_{\rm T}}.  \xlabel{formula_truncation_error}
+\end{equation}
+Here $\alpha_{\rm T}$ is the offset, and $\beta_{\rm T}$ is the slope of the line approximating $E_h$, equalling the asymptotic order of convergence, see \xref{proof_slope_ET} for the proof. Note that, $\alpha_{\rm T}$ can be inverted by using
+\begin{equation}
+ \alpha_{\rm T} = {E_{\rm c}}/{N_{\rm c}}^{- \beta_{\rm T}},  \xlabel{formula_offset_truncation_error}
+\end{equation}
+at the beginning of the second phase, where $E_{\rm c}$ equals the corresponding error $E_h$.
+
+When $N_h$ is increased too much ($N_h \geqslant N_{\rm opt}$), the round-off error
+$E_{\rm R}$ starts to dominate and $E_h$ increases, illustrated by orange
+circles. At this phase, the slope of the line approximating $E_h$, denoted by
+$\beta_{\rm R}$, tends to be fixed~\cite{Babuska2018Roundoff,WalterFrei}. The parameter
+$\beta_{\rm R}$ and the associated offset, denoted by $\alpha_{\rm R}$, are investigated in
+detail in  \xref{section_error_constants}. As will be shown there, $\alpha_{\rm R}$ and
+$\beta_{\rm R}$ are fixed constants, which allow us to estimate $E_h$ as
+\begin{equation}
+ E_{h} \approx E_{\rm R} = \alpha_{\rm R}{N_{h}}^{\beta_{\rm R}}.  \xlabel{formula_round_off_error}
+\end{equation}
+In summary, the evolution of $E_h$ is described in \tabref{phases_error}, and depicted in  \xref{error_evolution_one_p}.
+
+
+\begin{figure}
+\caption{Conceptual sketch of the error evolution against the number of $\text{DoFs}$.\coltext\xlabel{error_evolution_one_p}}
+\includegraphics{gr1}
+\end{figure}
+ 
+\begin{table}[width=0.7\textwidth] 
+\caption{Description of the evolution of $E_h$.}
+
+\xlabel{phases_error}
+\begin{tabular}{P{60pt}P{60pt}P{60pt}P{60pt}}
+\beginthead
+ & 1. {$N_h < N_{\rm c}$} & 2. {$N_{\rm c} \leqslant N_h < N_{\rm opt}$} & 3. {$N_{\rm opt} \leqslant N_h$} \\ 
+ \endthead
+\rowhead  Feature & {Decreasing but not converging at slope $\beta_{\rm T}$} & {Decreasing and converging at slope $\beta_{\rm T}$, with the offset $\alpha_{\rm T}$} & {Increasing and converging at slope $\beta_{\rm R}$, with the offset $\alpha_{\rm R}$} \\\hline 
+Dominant error & \multicolumn{2}{L}{Truncation error} & Round-off error \\ \hline
+Formula&--&$E_h \approx E_{\rm T}=\alpha_{\rm T}{N_h}^{-\beta_{\rm T}}$ & $E_h \approx E_{\rm R}=\alpha_{\rm R} {N_h}^{\beta _{\rm R}}$ 
+\botline
+\end{tabular}
+\end{table}
+
+Since the evolution of $E_{h}$ ($=E_{\rm T}+E_{\rm R}$) is known after entering the second phase, by solving
+\begin{equation}
+    \frac{d(E_{\rm T}+E_{\rm R})}{dN}=0,    \xlabel{derivative_condition_N_opt}
+\end{equation}
+we can predict the optimal number of DoFs
+\begin{subequations}
+\begin{equation}
+ N_{\rm opt} = \left( \frac{\alpha_{\rm T} \beta_{\rm T}}{\alpha _{\rm R} \beta_{\rm R}} \right)^{\frac{1}{\beta_{\rm T} + \beta_{\rm R}}},
+\end{equation}
+and hence, the highest attainable accuracy is given by
+\begin{equation}
+ E_{\min}= \alpha_{\rm T} {N_{\rm opt}}^{- {\beta _{\rm T}}}+\alpha_{\rm R} {N_{\rm opt}}^{{\beta _{\rm R}}}.
+\end{equation}
+\end{subequations}
+
+\section{Results}
+   \xlabel{section_error_constants}
+
+In this section, we assess the general values of $\alpha_{\rm R}$ and $\beta_{\rm R}$.
+We start with a benchmark Poisson equation, for which the influences of solution strategies and boundary conditions are investigated, and then consider more general parameters for the Poisson equation, as well as the diffusion and Helmholtz equations.
+
+\subsection{Benchmark \?{Poisson} equation}
+  \xlabel{section_preliminary_results}
+
+We consider the Poisson equation with $f(x)=-e^{- (x-1/2)^2} \left({4x^2 - 4x -1} \right)$. The boundary conditions are imposed as follows: $u(0)=u(1)= e^{-1/4}$. The exact solution reads $u(x)=e^{- (x-1/2)^2}$. The error $E_h$ of the resulting solution $u$, and its first and second derivatives, using the standard FEM and the mixed FEM, with $p$ ranging from 1 to 5 are in  \xref{py_bench_Pois_SM} and  \xref{py_bench_Pois_MM}, respectively. In these figures, $\alpha_{\rm R}$ and $\beta_{\rm R}$ are denoted.
+
+\begin{figure}
+\caption{Absolute errors for the benchmark Poisson equation using the standard FEM.\xlabel{py_bench_Pois_SM}}
+\includegraphics{gr2}
+\end{figure}
+
+\begin{figure}
+\caption{Absolute errors for the benchmark Poisson equation using the mixed FEM.\xlabel{py_bench_Pois_MM}}
+\includegraphics{gr3}
+\end{figure}
+
+It is found that, for all dependent variables and their derivatives, the values of $\alpha_{\rm R}$ and $\beta_{\rm R}$ of different element degrees are the same. The statistics of the former can be found in  \xref{alpha_R_benchmark_Poisson}. The values of $\beta_{\rm R}$ only depend on the FEM method, and are 1 using the mixed FEM and 2 using the standard FEM. Notably, $\alpha_{\rm R}$ is of order 10\tsup{\tmin16}, which is as expected when using double precision, and tends to increase slightly with increasing order of derivative. Furthermore, $\alpha_{\rm R}$ of the mixed FEM is smaller than that of the standard FEM.  
+
+For larger $p$, $E_{\rm T}$ decreases faster such that smaller ${E}_{\text{min}}$ can be obtained, see  \xref{E_min_benchmark_Poisson}. In general, smaller $E_{\min}$ can be obtained using the mixed FEM compared to using the standard FEM.
+
+\nosubfloat
+%%
+%%-------------------------------Author Instruction------------------------------%%
+%%  During production stage we have merged the below subfigures into a single    %%
+%%  figure for easier handling. If you want to update the figure, please upload  %%
+%%  a composite figure of all the subfigures including the replaced subfigure.   %%
+%%  However, if you still want to upload them as subfigures, then you may need   %%
+%%  to upload the rest of the figure parts as well. Filenames should be same as  %%
+%%  that we have mentioned in the \includegraphics{} commands. If you are        %%
+%%  uploading subfigures, please do not forget to comment out the command        %%
+%%  \nosubfloat which is given right at the top of this environment.             %%
+%%
+
+\begin{figure}
+\caption{Statistics on $\alpha_{\rm R}$ and $E_{\rm min}$ of the benchmark Poisson equation. The blue colour denotes results using the standard FEM and the red colour denotes results using the mixed FEM.\coltext\xlabel{alpha_R_E_min_benchmark_Poisson}}
+\subfloat[]{\xlabel{alpha_R_benchmark_Poisson}\includegraphics{gr4a}}
+\subfloat[]{\xlabel{E_min_benchmark_Poisson}\includegraphics{gr4b}}
+\end{figure}
+
+In  \xref[range]{section_sensitivity_solver,section_sensitivity_BC}, the sensitivity of the above results will be investigated, using $P_2$ elements for the standard FEM and $P_4/P_3^{\rm disc}$ elements for the mixed FEM.
+
+\subsubsection{Solution strategy}
+  \xlabel{section_sensitivity_solver}
+
+In this section, we investigate the influence of the solution strategy on the
+accuracy of the numerical solution. In particular, we compare the outcome when
+applying the direct solver UMFPACK with that of using the iterative Conjugate
+Gradient (CG) method~\cite{ginsburg1963cg}, which can be applied when the left-hand
+side, e.g.~$A$ in Eq.~\neqref{matrix_equation_std}, is symmetric and
+positive definite. The tolerance of the CG solver is a small number, denoted by
+$tol_{prm}$, in the standard FEM, and the product of a small number $tol_{prm}$ and
+the $L_2$ norm of the corresponding right-hand side in the mixed FEM.
+When the $L_2$ norm of the residual, e.g.~$\| F-Au\| _2$ in Eq.~\neqref{matrix_equation_std}, is smaller than the tolerance, the iteration is stopped.
+
+
+\paragraph*{The standard \?{FEM}}
+
+
+For $tol_{prm}=$ 10\tsup{\tmin10} and 10\tsup{\tmin4}, the absolute errors of $u$, $u_{x}$ and $u_{xx}$ using the CG solver are shown in  \xref{py_bench_Pois_SM_error_solution_strategy}, in comparison with that using the direct solver UMFPACK. 
+
+\begin{figure}
+\caption{Influence of the CG solver on the accuracy using the standard FEM.\xlabel{py_bench_Pois_SM_error_solution_strategy}}
+\includegraphics{gr5}
+\end{figure}
+
+When $tol_{prm}$ is adequately small, i.e.~$tol_{prm}=10^{-10}$, the round-off error for the solution and the first derivative using the CG solver is the same with that using the UMFPACK solver; the round-off error for the second derivative using the CG solver increases faster than that using the UMFPACK solver.
+When $tol_{prm}$ is too large, i.e.~$tol_{prm}=10^{-4}$, the error contribution due to the iterative solver dominates both truncation and round-off errors for an intermediate number of DoFs. 
+
+\paragraph*{The mixed \?{FEM}}
+
+
+Since the resulting matrix Eq.~\neqref{matrix_equation_mix} is indefinite, a widely used alternative is to decouple the fully coupled monolithic approach using Schur's complement
+\begin{subequations}
+\begin{align}
+  B^{\top} M^{-1} B U &= B^{\top} M^{-1} G - H,  \xlabel{schur_complement_solution} \\
+  MV&=G-BU      \xlabel{schur_complement_gradient}
+\end{align}
+      \xlabel{schur_complement_block}
+\end{subequations}
+\unskip\ignorespaces and solve both equations in segregated manner, i.e.~Eq.~\neqref{schur_complement_solution} is solved in the first place to obtain $U$, which is then substituted into Eq.~\neqref{schur_complement_gradient} to obtain $V$.
+
+Eq.~\neqref{schur_complement_solution} involves the term $M^{-1} G$ on the right-hand side, which is computed by solving the auxiliary linear system $MY=G$ by using either the UMFPACK or the CG solver. The same options are available for solving Eq.~\neqref{schur_complement_gradient}. 
+
+The difficulty in solving Eq.~\neqref{schur_complement_solution} lies in not assembling the Schur complement matrix explicitly since it comprises $M^{-1}$. 
+The CG solver only makes use of matrix--vector products of the form $(B^{\top}M^{-1}B)W$, which can be computed by the following three-step algorithm: $X=BW$, $MY=X$ and $Z=B^{\top}Y$. As before, the linear system $MY=X$ can be solved by the UMFPACK or the CG solver.
+
+We first investigate the influence of $tol_{prm}$ of the CG solver on the accuracy of the solutions when the left-hand side is $B^{\top}M^{-1}B$. In this case, the UMFPACK solver is used to solve the matrix equations when the left-hand side is $M$.  
+For $tol_{prm}$ being 10\tsup{\tmin16} and 10\tsup{\tmin10}, the results are shown in  \xref{py_bench_Pois_MM_error_solution_strategy_schur_variant_other_UMF}, in comparison with that obtained from solving the monolithic Eq.~\neqref{matrix_equation_mix} directly using the UMFPACK solver.
+It shows that, for the problem at hand, the monolithic solution approach yields by far the most accurate solution and derivative values. The round-off error for $v_{x}$ increases fastest using the Schur complement approach even though $tol_{prm}$ is sufficiently small, i.e.~$tol_{prm}=10^{-16}$, which makes the highest attainable accuracy much lower.
+When $tol_{prm}$ is less strict, i.e.~$tol_{prm}=10^{-10}$, the iteration error dominates the total error instead of the round-off error.
+
+\begin{figure}[,belowfloat=5pt]
+\caption{Influence of the CG solver on the accuracy when the left-hand side is the Schur complement using the mixed FEM.\xlabel{py_bench_Pois_MM_error_solution_strategy_schur_variant_other_UMF}}
+\includegraphics{gr6}
+\end{figure}
+
+Next, we investigate the influence of $tol_{prm}$ of the CG solver when the left-hand side is $M$. In this case, the CG solver with $tol_{prm}$ being 10\tsup{\tmin16} is used to solve the matrix equation with the left-hand side being $B^{\top}M^{-1}B$. For $tol_{prm}$ being 10\tsup{\tmin16} and 10\tsup{\tmin10}, the results are shown in  \xref{py_bench_Pois_MM_error_solution_strategy_schur_1em16_M_variant}, in comparison with that obtained from solving the monolithic Eq.~\neqref{matrix_equation_mix} directly using the UMFPACK solver.
+It also shows that, when the tolerance is less strict, i.e.~$tol_{prm}=10^{-10}$, the iteration error dominates the total error before the round-off error.
+
+\begin{figure}
+\caption{Influence of the CG solver on the accuracy when the left-hand side is $M$ using the mixed FEM.\xlabel{py_bench_Pois_MM_error_solution_strategy_schur_1em16_M_variant}}
+\includegraphics{gr7}
+\end{figure}
+
+In summary, in comparison with the UMFPACK solver, the CG solver gives the same accuracy for $u$ and $u_{x}$ but less accuracy for $u_{xx}$ using the standard FEM, and gives smaller accuracy for all the three variables using the mixed FEM when $tol_{prm}$ is strict enough; the CG solver introduces iteration errors for both the standard FEM and the mixed FEM when $tol_{prm}$ is less strict. Thereby, we continue with the UMFPACK solver in our algorithm to obtain higher accuracy.
+
+\subsubsection{Boundary condition}
+ \xlabel{section_sensitivity_BC}
+
+In this section, two aspects of the influence of the boundary conditions on the round-off error are investigated: first the method of implementing the Dirichlet boundary conditions, and secondly types of boundary conditions. 
+
+For the first aspect, using Weak form 2 for $\rho=50$ and $10^6$, the errors are depicted in  \xref{py_bench_Pois_SM_error_boundary_weak}, in comparison with that using Weak form 1. As can be seen, both the weak imposition and the strong imposition of the Dirichlet boundary condition yield the same trend line for the round-off error for the solution and its derivatives, and the magnitude of the penalty parameter in the weak imposition makes no difference. In addition, small penalty parameters might lead to larger truncation errors for $u$, but the difference diminishes when the penalty parameter is large enough.
+
+\begin{figure}
+\caption{Influence of the weak imposition of the Dirichlet boundary condition on the accuracy.\xlabel{py_bench_Pois_SM_error_boundary_weak}}
+\includegraphics{gr8}
+\end{figure}
+
+To construct the problem for the second aspect, the Dirichlet boundary condition at the left boundary ($x=0$) is kept while the Dirichlet boundary condition at the right boundary ($x=1$) is replaced by the Neumann boundary condition $u_x (1) = -e^{-1/4}$, leading to the same solution and derivative profiles. 
+
+
+ \paragraph*{The standard \?{FEM}}
+
+Using the standard FEM, the offsets $\alpha_{\rm R}$ for the two types of boundary conditions are depicted in  \xref{boundary_type_benchmark_Poisson_std}. 
+For the Dirichlet/Neumann boundary condition, the offsets $\alpha_{\rm R}$ for $u$ and $u_x$ are slightly larger than that for the Dirichlet/Dirichlet boundary condition by a factor of 3.5 and 2, respectively. The offsets $\alpha_{\rm R}$ for $u_{xx}$ are identical for the two types of boundary conditions.
+
+\paragraph*{The mixed \?{FEM}}
+
+Using the mixed FEM, the offsets $\alpha_{\rm R}$ for the two types of boundary conditions are depicted in  \xref{boundary_type_benchmark_Poisson_mix}.
+As can be seen, the type of boundary conditions plays a more important role for $\alpha_{\rm R}$ for the solution than $\alpha_{\rm R}$ for other variables.
+
+
+%%
+%%-------------------------------Author Instruction------------------------------%%
+%%  During production stage we have merged the below subfigures into a single    %%
+%%  figure for easier handling. If you want to update the figure, please upload  %%
+%%  a composite figure of all the subfigures including the replaced subfigure.   %%
+%%  However, if you still want to upload them as subfigures, then you may need   %%
+%%  to upload the rest of the figure parts as well. Filenames should be same as  %%
+%%  that we have mentioned in the \includegraphics{} commands. If you are        %%
+%%  uploading subfigures, please do not forget to comment out the command        %%
+%%  \nosubfloat which is given right at the top of this environment.             %%
+%%
+
+\begin{figure}
+\caption{Comparison of $\alpha_{\rm R}$ for imposing Dirichlet/Dirichlet and Dirichlet/Neumann boundary conditions.\xlabel{boundary_type_benchmark_Poisson}}
+\subfloat[]{\xlabel{boundary_type_benchmark_Poisson_std}\includegraphics{gr9a}}
+\subfloat[]{\xlabel{boundary_type_benchmark_Poisson_mix}\includegraphics{gr9b}}
+\end{figure}
+
+In summary, $\alpha_{\rm R}$ are relatively independent of the variations in the type of boundary conditions and the method Dirichlet boundary conditions are implemented, which is an important prerequisite for our a posteriori refinement strategy to be applicable for a wide range of problems. However, since the asymptotic behaviour of the truncation error is essential in our algorithm, we continue with the strong imposition of the Dirichlet boundary condition.
+
+In  \xref[range]{section_general_Poisson,section_d_and_r}, where the influences of $u(x)$, $d(x)$ and $r(x)$ are investigated, we only consider the Dirichlet boundary conditions, and still use $P_2$ elements for the standard FEM and $P_4/P_3^{\rm disc}$ elements for the mixed FEM.
+
+
+\subsection{General \?{Poisson} equation}
+     \xlabel{section_general_Poisson}
+
+In this section, we will again consider the Poisson equation, but now focus on the influence of the order of magnitude of the solution and right-hand side on $\alpha_{\rm R}$.
+To cover a wide range of scenarios, we choose the cases shown in \tabref{scaling_cases_Poisson}. 
+Each case contains a coefficient $c_i,~i=1,2, \ldots , 5$, which is varied over several orders of magnitude so that the $L_2$ norm of the solution, denoted by $\| u\| _2$, and the $L_2$ norm of the right-hand side, denoted by $\| f\| _2$, extend over a wide range of magnitudes.  \xref{l2_norm_u_f} gives an overview of the distribution of $\| u\| _2$ and $\| f\| _2$ for Cases 1--4.
+
+\begin{table}[width=0.8\textwidth] 
+\extrarowheight=2pt
+\caption{Setting of the Poisson equation with different right-hand sides.}
+
+\xlabel{scaling_cases_Poisson}
+\begin{tabular}{LLLLL}
+\beginthead
+{Case} & {$f(x)$}  & \multicolumn{2}{L}{Boundary conditions} & {$u(x)$} \\
+\cline{3-4}
+& & $u(0)$ & $u(1)$ & \\ 
+\endthead
+\rowhead  {1} & {$\sin (2 \pi c_1x)$} & {0}& ${(2 \pi c_1)}^{-2} \sin (2 \pi c_1)$ & ${(2 \pi c_1)}^{-2} \sin (2 \pi c_1x)$\\ \hline
+2 & ${-e^{-{c_2}{(x-1/2)^2}} \cdot  \left({4{c_2}^2(x-1/2)^2 -2c_2} \right)}$ & $e^{-c_2/4}$ & $e^{-c_2/4}$ & $e^{-{c_2}{{(x-1/2)^2}}}$ \\ \hline
+3 & $\sin (2 \pi c_3 x) +1$ & 0 & ${(2 \pi c_3)}^{-2}\sin (2 \pi c_3)-\frac{1}{2}$ & ${(2 \pi c_3)}^{-2}\sin (2 \pi c_3 x)-\frac{x^2}{2}$ \\ \hline
+4 & $(2 \pi c_4) \sin (2 \pi c_4 x)$ & 0 & ${(2 \pi c_4)}^{-1} \sin (2 \pi c_4)$ & ${(2 \pi c_4)}^{-1} \sin (2 \pi c_4x)$ \\ \hline
+5 & 0 & 0 & ${c_5}^{-1}$ & ${c_5}^{-1} x$ 
+\botline
+\end{tabular}
+\end{table}
+
+
+\begin{figure}
+\caption{Distribution of $\| u\| _2$ and $\| f\| _2$ of the Poisson equations in \tabref{scaling_cases_Poisson}.\xlabel{l2_norm_u_f}}
+\includegraphics{gr10}
+\end{figure}
+
+For these Poisson problems, the error basically evolves according to that shown in  \xref{error_evolution_one_p}. To summarize, $\beta_{\rm R}$ is 2 using the standard FEM and 1 using the mixed FEM. $\alpha_{\rm R}$ against $\| u\| _2$ is shown in  \xref{py_offset_summary_Pois_sm} for the standard FEM; $\alpha_{\rm R}$ against $\| u\| _2$ or $\| v\| _2$, depending on the dependent variable of interest, is shown in  \xref{py_offset_summary_Pois_mm} for the mixed FEM.
+
+For all the variables using both the standard FEM and the mixed FEM, the distribution of $\alpha_{\rm R}$ can be approximated by a straight line. This implies that $\alpha_{\rm R}$ has a power-law relation with the horizontal coordinate. The power term, represented by the slope of the line, is 1 for all the relations; the constant term, represented by the intercept of the line, is denoted in the figure. The latter reads 2e-17, 5e-17 and 5e-16 for $u$, $u_x$ and $u_{xx}$, respectively, using the standard FEM, and 1e-18, 1e-16 and 5e-16 for $u$, $v$ and $v_x$, respectively, using the mixed FEM. Note that, the intercept is the value of $\alpha_{\rm R}$ when the horizontal coordinate is 1. Therefore, $\alpha_{\rm R}$ has a linear relation with the $L_2$ norm of the dependent variable. We express $\alpha_{\rm R}$ as the product of a constant and the magnitude of $\| u\| _2$ or $\| v\| _2$ that is shown in \tabref{relation_alpha_R_l2_norm_std}.
+
+%%
+%%-------------------------------Author Instruction------------------------------%%
+%%  During production stage we have merged the below subfigures into a single    %%
+%%  figure for easier handling. If you want to update the figure, please upload  %%
+%%  a composite figure of all the subfigures including the replaced subfigure.   %%
+%%  However, if you still want to upload them as subfigures, then you may need   %%
+%%  to upload the rest of the figure parts as well. Filenames should be same as  %%
+%%  that we have mentioned in the \includegraphics{} commands. If you are        %%
+%%  uploading subfigures, please do not forget to comment out the command        %%
+%%  \nosubfloat which is given right at the top of this environment.             %%
+%%
+
+\begin{figure}
+\caption{$\alpha_{\rm R}$ for the influence of $u(x)$.\xlabel{py_offset_summary_Pois}}
+\subfloat[]{\xlabel{py_offset_summary_Pois_sm}\includegraphics{gr11a}}
+\subfloat[]{\xlabel{py_offset_summary_Pois_mm}\includegraphics{gr11b}}
+\end{figure}
+
+\begin{table}[width=0.7\textwidth] 
+\caption{$\alpha_{\rm R}$ in terms of the product of a constant and the $L_2$ norm $\Vert u\Vert _2$ or $\Vert v\Vert _2$, dependent on the specific dependent variable, for one-dimensional Poisson equations.}\xlabel{relation_alpha_R_l2_norm_std}
+\begin{tabular}{LLLLLL}
+\beginthead
+\multicolumn{3}{L}{(a) The standard FEM}&\multicolumn{3}{L}{(b) The mixed FEM}\\
+\cline{1-3}
+\cline{4-6}
+Variable & \multicolumn{2}{L}{$\alpha_{\rm R}$}& Variable & \multicolumn{2}{L}{$\alpha_{\rm R}$} \\ 
+\endthead
+\rowhead  $u$ &2e\tmin17& \multirow{3}*{$\Biggm\}\times \Vert u\Vert _2$}& $u$ &1e\tmin18& \multirow{2}*{$\biggm\}\times \Vert u\Vert _2$} \\  
+$u_x$ &5e\tmin17&& $v$ &1e\tmin16&  \\ \stmrowsep[3pt]
+$u_{xx}$ &5e\tmin16& &$v_x$ &5e\tmin16& $\times \Vert v\Vert _2$ 
+\botline
+\end{tabular}
+\end{table}
+
+\subsection{General diffusion and \?{\?{{Helmholtz}}} equation}
+ \xlabel{section_d_and_r}
+
+The coefficient $d(x)$ is taken from \tabref{d_diffusion_equations} for the diffusion equations, and $d(x)=1$ is taken for the Helmholtz equations, with $r(x)$ taken from \tabref{r_Helmholtz_equations}. The analytical solution $u$ is the same as the benchmark Poisson equation, of which $\| u\| _2=0.92$ and $\| v\| _2=0.5$. 
+
+\begin{table}[width=0.7\textwidth] 
+\caption{Various $d(x)$ for the diffusion equations.} 
+\xlabel{d_diffusion_equations}
+\begin{tabular}{LLLLLL}
+\beginthead
+Case &$d(x)$ & $\Vert d\Vert _2$ & Case &$d(x)$ & $\Vert d\Vert _2$ \\ 
+\endthead
+\rowhead  1 & 0.01 & 0.01 & 7 & $1+\sin(10x)$ & 1.14 \\ 
+2 & 0.1 & 0.1 & 8 & $1+\sin(100x)$ & 1.06 \\ 
+3 & 1 & 1 & 9 & $1+x$ & 1.5 \\ 
+4 & 10 & 10 & 10 & $1+10x$ & 6.7 \\ 
+5 & 100 & 100 & 11& $1+100x$ & 58.6 \\ 
+6 & $1+\sin(x)$ & 1.23 & &&
+\botline
+\end{tabular}
+\end{table}
+
+\begin{table}[width=0.3\textwidth,belowfloat=15pt] 
+\caption{Various $r(x)$ for the Helmholtz equations.} 
+\xlabel{r_Helmholtz_equations}
+\begin{tabular}{LLL}
+\beginthead
+Case & $r(x)$ & $\Vert r\Vert _2$ \\ 
+\endthead
+\rowhead  1 & 0.01 & 0.01 \\ 
+2 & 0.1 & 0.1 \\  
+3 & 1 & 1 \\  
+4 & 10 & 10 \\  
+5 & 100 & 100 
+\botline
+\end{tabular}
+\end{table}
+
+Again the errors show the same behaviour as that shown in  \xref{error_evolution_one_p}. The coefficient $\beta_{\rm R}$ is 2 using the standard FEM and 1 using the mixed FEM. 
+
+The parameter $\alpha_{\rm R}$ against $\| d\| _2$ is shown in  \xref{py_offset_summary_diff} for the diffusion equations. Using the standard FEM, $\alpha_{\rm R}$ is independent of $\| d\| _2$ for $u$, $u_x$ and $u_{xx}$, with the upper bound reading 2e-17, 5e-17 and 1e-15, respectively. Using the mixed FEM, $\alpha_{\rm R}$ is independent of $\| d\| _2$ for $u$, but is linearly dependent on $\| d\| _2$ for both $v$ and $v_x$. The upper bound for $u$ reads 5e-17; the intercept for $v$ and $v_x$ reads 2e-16 and 5e-16, respectively.
+The parameter $\alpha_{\rm R}$ against $\| r\| _2$ is shown in  \xref{py_offset_summary_Helm} for the Helmholtz equations.
+Visibly, $\alpha_{\rm R}$ is independent of $\| r\| _2$ using both the standard FEM and the mixed FEM. Using the standard FEM, $\alpha_{\rm R}$ reads 2e-17, 5e-17 and 2e-16 for $u$, $u_x$ and $u_{xx}$, respectively; using the mixed FEM, $\alpha_{\rm R}$ reads 1e-19, 1e-16 and 2e-16 for $u$, $v$ and $v_x$, respectively.
+
+%%
+%%-------------------------------Author Instruction------------------------------%%
+%%  During production stage we have merged the below subfigures into a single    %%
+%%  figure for easier handling. If you want to update the figure, please upload  %%
+%%  a composite figure of all the subfigures including the replaced subfigure.   %%
+%%  However, if you still want to upload them as subfigures, then you may need   %%
+%%  to upload the rest of the figure parts as well. Filenames should be same as  %%
+%%  that we have mentioned in the \includegraphics{} commands. If you are        %%
+%%  uploading subfigures, please do not forget to comment out the command        %%
+%%  \nosubfloat which is given right at the top of this environment.             %%
+%%
+
+\begin{figure}[,belowfloat=21pt]
+\caption{$\alpha_{\rm R}$ for the general diffusion equations.\xlabel{py_offset_summary_diff}}
+\subfloat[]{\xlabel{py_offset_summary_diff_sm}\includegraphics{gr12a}}
+\subfloat[]{\xlabel{py_offset_summary_diff_mm}\includegraphics{gr12b}}
+\end{figure}
+
+%%
+%%-------------------------------Author Instruction------------------------------%%
+%%  During production stage we have merged the below subfigures into a single    %%
+%%  figure for easier handling. If you want to update the figure, please upload  %%
+%%  a composite figure of all the subfigures including the replaced subfigure.   %%
+%%  However, if you still want to upload them as subfigures, then you may need   %%
+%%  to upload the rest of the figure parts as well. Filenames should be same as  %%
+%%  that we have mentioned in the \includegraphics{} commands. If you are        %%
+%%  uploading subfigures, please do not forget to comment out the command        %%
+%%  \nosubfloat which is given right at the top of this environment.             %%
+%%
+
+\begin{figure}[,belowfloat=5pt]
+\caption{$\alpha_{\rm R}$ for the general Helmholtz equations.\xlabel{py_offset_summary_Helm}}
+\subfloat[]{\xlabel{py_offset_summary_Helm_sm}\includegraphics{gr13a}}
+\subfloat[]{\xlabel{py_offset_summary_Helm_mm}\includegraphics{gr13b}}
+\end{figure}
+
+In  \xref[range]{py_offset_summary_diff,py_offset_summary_Helm}, we do not take the influence of $\| u\| _2$ or$\| v\| _2$ into account. Since $\| u\| _2$ is of order 1, we omit its influence on $\alpha_{\rm R}$ for the standard FEM and on $\alpha_{\rm R}$ of $u$ and $v$ for the mixed FEM. Since $\| v\| _2$ is half of 1, we multiply the intercept of $\alpha_{\rm R}$ of $v_x$ in  \xref{py_offset_summary_diff_mm} and the upper bound of $\alpha_{\rm R}$ of $v_x$ in  \xref{py_offset_summary_Helm_mm} by 2, for validating the constant term of $\alpha_{\rm R}$ in \tabref{relation_alpha_R_l2_norm_std}.
+
+Comparing the resulting $\alpha_{\rm R}$ of the diffusion equations with the constant term of $\alpha_{\rm R}$ in \tabref{relation_alpha_R_l2_norm_std}, for the standard FEM, the constant term of $\alpha_{\rm R}$ of $u$ and $u_x$ does not change, while that of $u_{xx}$ increases to 1e-15; for the mixed FEM, the constant term of $\alpha_{\rm R}$ of $u$ increases to 5e-17, that of $v$ becomes 2e-16 $\times \| d\| _2$, and that of $v_x$ increases to 1e-15. Therefore, we amend $\alpha_{\rm R}$ in \tabref{relation_alpha_R_l2_norm_std} to be that shown in \tabref{relation_alpha_R_l2_norm_amended_std}. Note that, for the constant term of $\alpha_{\rm R}$ of $u$ of the mixed FEM, considering most of its values of the diffusion equations are smaller than 2e-17, which is the value we obtain for the standard FEM, we choose 2e-17 as its value. Furthermore, since the constant term of $\alpha_{\rm R}$ of the Helmholtz equations is smaller than that in \tabref{relation_alpha_R_l2_norm_amended_std}, its effect can be ignored.
+
+
+\begin{table}[width=0.7\textwidth,belowfloat=21pt] 
+\caption{$\alpha_{\rm R}$ in terms of the product of a constant and the $L_2$ norm $\Vert u\Vert _2$ or $\Vert v\Vert _2$, dependent on the specific dependent variable, for one-dimensional second order differential equations.}\xlabel{relation_alpha_R_l2_norm_amended_std}
+\begin{tabular}{LLLLLL}
+\beginthead
+\multicolumn{3}{L}{(a) The standard FEM}&\multicolumn{3}{L}{(b) The mixed FEM}\\
+\cline{1-3}
+\cline{4-6}
+Variable & \multicolumn{2}{L}{$\alpha_{\rm R}$} &Variable & \multicolumn{2}{L}{$\alpha_{\rm R}$} \\  
+\endthead
+\rowhead  $u$ &2e\tmin17& \multirow{3}*{$\Biggm\}\times \Vert u\Vert _2$} &$u$ &2e\tmin17& \multirow{2}*{$\biggm\}\times\Vert u\Vert _2$}\\ 
+$u_x$ &5e\tmin17& &$v$ & 2e-16 $\times \Vert d\Vert _2$ &  \\ \stmrowsep[3pt]
+$u_{xx}$ &1e\tmin15&& $v_x$ &1e\tmin15& $\times \Vert v\Vert _2$ 
+\botline
+\end{tabular}
+\end{table}
+
+Summarizing  \xref[range]{section_general_Poisson,section_d_and_r}, the order of magnitude of the coefficient $r(x)$ is basically irrelevant; the order of magnitude of the dependent variable and the coefficient $d(x)$ can be mitigated when their values are known. Specifically, the value of the order of magnitude of the dependent variable can be obtained from a built-in function in our algorithm, and that of $d(x)$ can be obtained by carrying out simple integration.
+
+ \section{A posteriori algorithm for finding the optimal number of degrees of freedom}
+  \xlabel{section_algorithm}
+
+Based on the validation experiments from the previous section, we introduce a novel a posteriori algorithm for determining $E_{\min}$ and its associated $N_{\rm opt}$ for the solution and its first and second derivatives without performing brute-force mesh refinement. We call the algorithm $DoFinder$.
+
+In $DoFinder$, we define the following coefficients and use them in the steps given below.
+\begin{itemize}
+  \renewcommand\labelitemi{--}
+  \item a minimal number of $h$-refinements before carrying out `\textit{NORMALIZATION}' and `\textit{PREDICTION}', denoted by $R_{\min}$, with the following default values:
+\begin{equation}
+\begin{aligned}
+      R_{\min}&=
+\begin{cases}
+ 9-p &\text{ for }p < 6, \\
+ 4 &\text{ otherwise.}
+\end{cases}
+\end{aligned}
+\end{equation}
+  We choose this parameter mainly because the error might increase, or decrease faster than the asymptotic order of convergence for coarse refinements, especially for lower-order elements.
+  \item the allowed maximum $N_h$: $10^8$, denoted by $N_{\max}$.  
+  \item a stopping criterion $c_s$ for seeking the $L_2$ norm of the dependent variable, of which the value is 0.001 by default. We choose this parameter because the analytical solution does not exist for most practical problems.
+  \item a relaxation coefficient $c_r$ for seeking the asymptotic order of convergence, with the following default values:
+\begin{equation}
+\begin{aligned}
+ c_r &=
+\begin{cases}
+   0.9 &\text{ for }p<4, \\
+   0.7 &\text{ for }4 \leqslant p < 10, \\
+   0.5 &\text{ otherwise.}
+\end{cases}
+\end{aligned}
+\end{equation}
+  \item the offset $\alpha _{\rm R}$, see \tabref{relation_alpha_R_l2_norm_amended_std} for the default values.
+\end{itemize}
+
+ The procedure of $DoFinder$ consists of four steps, which are explained below:
+
+\paragraph*{Step-1}
+ `\textit{INPUT}'. In this step, the custom input shown in~\tabref{settings_algorithm} has to be provided.
+
+\begin{table}[width=0.5\textwidth] 
+\caption{Custom input of $DoFinder$}\xlabel{settings_algorithm}
+\begin{tabular}{LL}
+    
+    \beginthead
+    Type & Item  \\
+    \endthead
+\rowhead    Problem & $\bullet$ The differential equation to be solved \\
+       & $\bullet$ Variables of interest \\ \hline
+    FEM     & $\bullet$ Standard or mixed formulation \\
+      & $\bullet$ An ordered array of element degrees $\{p_{\min}, \ldots, {p}_{\max}\}$ 
+\botline
+\end{tabular}
+\end{table}
+
+\paragraph*{Step-2}
+ `\textit{NORMALIZATION}'. The function of this step is to find the $L_2$ norm of the dependent variable, in which elements of degree $p_{\min}$ are used. The specific procedure can be found in Algorithm \stmxref{algo_scaling_factor}{1}. \pbk
+
+
+
+\begin{fsrc}
+\IncMargin{11pt}
+\begin{algorithm}[H]
+\caption{NORMALIZATION}
+\label{algo_scaling_factor}
+\While{$N_h<N_{\rm max}$}
+{
+    \eIf{$\left|\frac{\|var_{h}\|_{2} - \|var_{2h}\|_{2}}{\|var_{h}\|_{2}} \right| < c_s$}
+    {
+        $\|var\|_{2}$ $\gets$ $\|var_{h}\|_{2}$\;
+        break\;
+    }
+    {
+        $h$ $\gets$ $h/2$\;
+        calculate $\|var_h\|_{2}$\;    
+    }
+}
+\end{algorithm}
+\end{fsrc}                                                                   
+\paragraph*{Step-3}
+ `\textit{PREDICTION}'. This step finds $E_{\min}$ for each $var$ and $p$ of interest, as illustrated in  \xref{error_evolution_one_p}.
+The procedure for carrying out this step can be found in Algorithm \stmxref{block_PREDICTION}{2}.
+
+
+
+\begin{fsrc}
+\IncMargin{11pt}
+\begin{algorithm}[H]
+\caption{PREDICTION}			% Seeking the analytical order of convergence Predicting $N_{\rm opt}$ and $E_{\rm min}$
+\label{block_PREDICTION}
+    \While{$N_h<N_{\rm max}$ \textbf{\textup{and}} $\widetilde {E_{h}}>E_{\rm R}$}
+    {
+        $\widetilde{Q}$ $\gets$ $\log _2 \left( {\widetilde {E_{2h}}}/{\widetilde {E_{h}}} \right)$\;
+        \eIf
+        {
+            $\widetilde{Q} \geqslant \beta_{\rm T} \times c_r$
+        }
+        {
+            $N_{\rm c} \gets N_h$\;
+            $E_{\rm c} \gets \widetilde {E_{h}}$\;
+            $\alpha_{\rm T}$ $\gets$ ${E_{\rm c}}/{N_{\rm c}}^{- \beta_{\rm T}}$\;
+            $N_{\rm opt} \gets \left( \frac{\alpha_{\rm T} \beta_{\rm T}}{\alpha _{\rm R} \beta_{\rm R}} \right)^{\frac{1}{\beta_{\rm R} + \beta_{\rm T}}}$\;
+            $E_{\rm min} \gets \alpha_{\rm T} {N_{\rm opt}}^{- {\beta _{\rm T}}} + \alpha_{\rm R} {N_{\rm opt}}^{{\beta _{\rm R}}}$\;
+
+        }
+        {
+            $h$ $\gets$ $h/2$\;
+            calculate $\widetilde {E_{h}}$\;
+        }
+	}    
+\end{algorithm}
+\end{fsrc}
+
+\paragraph*{Step-4}
+ `\textit{OUTPUT}'. In this step, we output $E_{\min}$, $N_{\rm opt}$, etc., obtained from \textit{Step-3}.
+
+\section{Validation}
+  \xlabel{section_validation}
+
+In what follows, we validate the strategy discussed in  \xref{section_error_evolution_and_prediction} by using the following Helmholtz problem:
+\begin{equation}
+  \left((0.01+x)(1.01-x) u_x \right)_x -(0.01i) u(x) = 1.0,\qquad x \in I = [0,1], \xlabel{1D_Helmholtz_equation_application}
+\end{equation}
+with homogeneous Dirichlet and Neumann boundary conditions imposed as follows: $u(0)=0$ and $u_x(1)=0$.
+Both the standard FEM and the mixed FEM are investigated, with the element degree $p$ taken in $\{1, 2, \ldots, 5\}$. Variables $u$, $u_x$ and $u_{xx}$ using the standard FEM and $u$, $v$ and $v_x$ using the mixed FEM are investigated.
+
+\subsection{Accuracy analysis}
+     \xlabel{section_accuracy_analysis}
+Using $DoFinder$ and the brute-force approach, $E_{\min}$'s are compared in  \xref{E_min_application}. As can be seen, $E_{\min}$ can be predicted correctly. Note that, for $p=1$ using the mixed FEM, we cannot obtain $E_{\min}$ of the brute-force approach because of the limited hardware. The associated $N_{\rm opt}$ using $DoFinder$ is shown in  \xref{N_opt_application}, and it is used to compute the solution of the optimal grid in  \xref{section_efficiency_analysis}.
+
+\begin{figure}[,belowfloat=12pt]
+\caption{$E_{\rm min}$ for Eq. \neqref{1D_Helmholtz_equation_application} using $DoFinder$. The filled circle denotes results using the brute-force approach.\xlabel{E_min_application}}
+\includegraphics{gr14}
+\end{figure}
+
+\begin{figure}[,belowfloat=10pt]
+\caption{$N_{\rm opt}$ for Eq. \neqref{1D_Helmholtz_equation_application} using $DoFinder$.\xlabel{N_opt_application}}
+\includegraphics{gr15}
+\end{figure}
+
+ \subsection{Efficiency analysis}
+    \xlabel{section_efficiency_analysis}
+
+The CPU time required by $DoFinder$ and the brute-force approach is shown in  \xref{CPU_brut} and  \xref{CPU_pred_only}, respectively. In general, the CPU time associated with the brute-force approach decreases with increasing element degree. In comparison with the CPU time of the brute-force approach, the CPU time of $DoFinder$ is negligible.
+
+\begin{figure}
+\caption{CPU time required by the brute-force approach to obtain $E_{\rm min}$ for Eq. \neqref{1D_Helmholtz_equation_application}.\xlabel{CPU_brut}}
+\includegraphics{gr16}
+\end{figure}
+
+\begin{figure}
+\caption{CPU time required by $DoFinder$ to obtain $E_{\rm min}$ for Eq. \neqref{1D_Helmholtz_equation_application}.\xlabel{CPU_pred_only}}
+\includegraphics{gr17}
+\end{figure}
+
+Furthermore, to obtain the solution on the optimal grid based on $DoFinder$, the computation time can be saved much in comparison with that using the brute-force approach.  \xref{CPU_saved} gives the percentage of the CPU time saved by $DoFinder$. It shows a saving of the CPU time of around 70\% for both the standard FEM and the mixed FEM. 
+
+\begin{figure}
+\caption{Percentage of CPU time saved by $DoFinder$ to obtain $E_{\rm min}$ for Eq. \neqref{1D_Helmholtz_equation_application}.\xlabel{CPU_saved}}
+\includegraphics{gr18}
+\end{figure}
+
+ \subsection{Further development}
+      \xlabel{section_further_development}
+
+For a given tolerance of a variable, denoted by $tol_{var}$, we are able to quickly select the available FEM method, the associated minimal available $p$ and minimal available number of DoFs. For example, when $tol_{u}=1$e-9, we can only achieve it using the mixed FEM, the associated minimal available $p$ is 2, and minimal available number of DoFs is 638876.
+
+\section{Conclusions}
+  \xlabel{paragraph on conclusion}
+
+A novel approach is presented to predict the highest attainable accuracy for second order, ordinary differential equations using the finite element method.
+In contrast to the brute-force approach, which uses successive $h$-refinements, this approach uses only a few coarse grid refinements to reach the region of asymptotic convergence. 
+This approach is viable for the solution and its first and second derivatives, for both the standard FEM and the mixed FEM, for all element degrees.
+The algorithm for implementing the approach shows that the highest attainable accuracy can be accurately predicted using negligible CPU time and the CPU time to obtain this solution explicitly is significantly reduced: to compute the solution with the highest attainable accuracy using our approach results in a reduction of CPU time by around 70\% for both the standard FEM and  the mixed FEM.
+Future research will focus on the extension of this approach to 2D second order problems, where the influence of the linear system solver, local mesh refinement and boundary conditions might be significantly different from 1D problems. 
+
+\appendix{}
+\section[pfx={Appendix\space}]{Derivation of the weak form}
+  \xlabel{weak form appendix}
+
+\subsection{The standard {\?{FEM}}}
+  \xlabel{derivation_weak_form_SM}
+
+Multiplying Eq.~\neqref{1d_second_order_differential_equation} by a test function $\eta \in H ^1 (I)$, and integrating it over $I$ yield
+\numberwithin{equation}{section}
+\setcounter{equation}{0}
+\begin{equation}
+\langle \eta, \, -\left( d u_x \right)_x + ru \rangle = \langle \eta, \, f \rangle. \xlabel{sm_weak_form_inte}
+\end{equation}
+By applying Gauss's theorem, we obtain
+\begin{equation}
+ \langle {\eta} _x, \, d u_x \rangle + \langle \eta, \, ru \rangle = \langle \eta, \, f \rangle + \langle \eta, \, d u_x n \rangle_{ {\Gamma}}.  \xlabel{sm_weak_form_gauss}
+\end{equation}
+Substituting the natural boundary conditions, i.e.~$d(x)u_x=h(x)$ on $\Gamma_N$, and taking $\eta=0$ on $\Gamma_{D}$ render Eq.~\neqref{sm_weak_form_Diri_strong}; substituting the natural boundary conditions, not taking $\eta=0$ on $\Gamma_{D}$, but adding auxiliary terms render Eq.~\neqref{sm_weak_form_Diri_weak}.
+
+\subsection{The mixed {\?{FEM}}}
+  \xlabel{derivation_weak_form_MM}
+Multiplying Eq.~\neqref{mm_strong_form_1} by a test function of $v$, i.e.~$w \in H _{N0}^{1}(I)$, and integrating it over $I$ yield
+\begin{subequations}
+\begin{equation}
+  \langle d^{-1}v + u _x, w \rangle = 0. \xlabel{mm_weak_form_1_inte}
+\end{equation}
+Applying Gauss's theorem to Eq.~\neqref{mm_weak_form_1_inte}, it becomes
+\begin{equation}
+ \langle w, \, d^{-1}v \rangle - \langle w_x, \,  u \rangle = -\langle w, \, u n\rangle_{\Gamma _D}.  \xlabel{mm_weak_form_1_gauss}
+\end{equation}
+\end{subequations}
+Substituting the natural boundary conditions, i.e.~$u(x)=g(x)$ on $\Gamma_D$, renders Eq.~\nstmxref{mm_weak_form_1}{(8a)}. Note that, unlike the standard FEM, the essential boundary conditions are imposed on $\Gamma _N$ and the natural boundary conditions are imposed on $\Gamma _D$ for the mixed FEM.
+
+Multiplying Eq.~\neqref{mm_strong_form_2} by a test function of $u$, i.e.~$q \in L^2 (I)$, and integrating it over $I$ yield
+\begin{equation}
+- \langle q , \, v_x \rangle - \langle q, \, ru \rangle = - \langle q, \, f \rangle,
+\end{equation}
+which results in Eq.~\nstmxref{mm_weak_form_2}{(8b)}.
+
+\section[pfx={Appendix\space}]{Proof of the slope of the decrease of the error}
+    \xlabel{proof_slope_ET}
+
+Here we give the proof for the standard FEM. The process for the mixed FEM is similar. 
+
+For the grid size $h$ and element degree $p$, the number of DoFs
+\begin{equation}
+N_h=(1/h) \times p+1.   \xlabel{formula_Nh}
+\end{equation}
+Therefore,
+\begin{equation}
+h=\frac{p}{N_h-1}.  \xlabel{formula_h}
+\end{equation}
+Since the error~\cite{gockenbach2006understanding}
+\begin{equation}
+E_h \leqslant Ch^{p+1},   \xlabel{formula_Eh_with_h}
+\end{equation}
+substituting Eq.~\neqref{formula_h} into Eq.~\neqref{formula_Eh_with_h}, we obtain
+\begin{equation}
+E_h \leqslant C_1(N_h-1)^{-(p+1)},   \xlabel{formula_Eh_with_Nh}
+\end{equation}
+where $C_1=C p^{p+1}$. Therefore, the slope is $\beta_{\rm T}=p+1$
+
+\back{}
+%\QUERY[4]
+
+\nocite{*}
+
+\bibliographystyle{stm-xml-sort-num}
+
+\bibliography{\jobname}
+
+
+\begin{bibwrite}{\jobname.bib}
+@preamble{"\tfbibfldoff[issn]"}
+%\QUERY[5]
+@article{Kumar2016,
+ serialno={1},
+ 
+ author={Kumar, Mohit and Schuttelaars, Henk M. and Roos, Pieter C. and
+  M{\"o}ller, Matthias},
+ year={2016},
+title={Three-dimensional semi-idealized model for tidal motion in tidal
+  estuaries},
+ journal={\rvtOD},
+ volume={66},
+ number={1},
+  pages={99--118},
+ issn={1616-7228},
+}
+
+
+@article{carey1982derivative,
+ serialno={2},
+ author={Carey, G.F.},
+ year={1982},
+title={Derivative calculation from finite element solutions},
+ journal={\rvtCMAME},
+ volume={35},
+ number={1},
+  pages={1--14},
+ orgname = {Elsevier},
+}
+
+
+@book{ferziger2012computational,
+ serialno={3},
+ author={Ferziger, Joel H. and Peric, Milovan},
+ year={2012},
+booktitle={Computational Methods for Fluid Dynamics},
+ orgname = {Springer Science \& Business Media},
+}
+
+
+@book{zuras2008ieee,
+ serialno={4},
+ author={Zuras, Dan and Cowlishaw, Mike and Aiken, Alex and Applegate, Matthew
+  and Bailey, David and Bass, Steve and Bhandarkar, Dileep and Bhat, Mahesh and
+  Bindel, David and Boldo, Sylvie and others},
+ year={2008},
+booktitle={{{IEEE}} Standard for Floating-Point Arithmetic, IEEE Std 754-2008},
+  pages={1--70},
+ orgname = {IEEE},
+}
+
+
+@article{guo1986hp,
+ serialno={5},
+ author={Guo, B. and Babu{\v{s}}ka, I.},
+ year={1986},
+title={The hp version of the finite element method},
+ journal={\rvtComMec},
+ volume={1},
+ number={1},
+  pages={21--41},
+ orgname = {Springer},
+}
+
+
+@book{gockenbach2006understanding,
+ serialno={6},
+ author={Gockenbach, Mark S.},
+ year={2006},
+booktitle={Understanding and Implementing the Finite Element Method, Vol. 97},
+ orgname = {Siam},
+}
+
+
+@article{alvarez2012round,
+ serialno={7},
+ author={Alvarez-Aramberri, Julen and Pardo, David and Paszynski, Maciej and
+  Collier, Nathan and Dalcin, Lisandro and Calo, Victor M},
+ year={2012},
+title={On round-off error for adaptive finite element methods},
+ journal={\rvtPComS},
+ volume={9},
+  pages={1474--1483},
+ orgname = {Elsevier},
+}
+
+
+@article{Babuska2018Roundoff,
+ serialno={8},
+ author={Babuska, Ivo and S\"oderlind, Gustaf},
+ year={2018},
+title={On Roundoff Error Growth in Elliptic Problems},
+ journal={\rvtACMTMS},
+ volume={44},
+ number={3},
+  pages={1--22},
+}
+
+
+@book{necas2011direct,
+ serialno={9},
+ author={Necas, Jindrich},
+ year={2011},
+booktitle={Direct Methods in the Theory of Elliptic Equations},
+ orgname = {Springer Science \& Business Media},
+}
+
+
+@book{boffi2013mixed,
+ serialno={10},
+ author={Boffi, Daniele and Brezzi, Franco and Fortin, Michel and others},
+ year={2013},
+booktitle={Mixed Finite Element Methods and Applications, Vol. 44},
+ orgname = {Springer},
+}
+
+
+@book{haberman2012applied,
+ serialno={11},
+ author={Haberman, Richard},
+ year={2012},
+booktitle={Applied Partial Differential Equations with Fourier Series and Boundary
+  Value Problems},
+ orgname = {Pearson Higher Ed},
+}
+
+
+@book{lipschutz2009linear,
+ serialno={12},
+ author={Lipschutz, Seymour and Lipson, Marc},
+ year={2009},
+booktitle={Linear Algebra: {S}chaum's Outlines},
+ orgname = {McGraw-Hill},
+}
+
+
+@others{freund1995weakly,
+ serialno={13},
+ author={Freund, Jouni and Stenberg, Rolf},
+ year={1995},
+commn={On weakly imposed boundary conditions for second order problems, in: Proceedings of the Ninth Int. Conf. Finite Elements in Fluids, Venice, 1995, pp. 327--336},
+}
+
+
+@article{alzetta2018deal,
+ serialno={14},
+ author={Alzetta, Giovanni and Arndt, Daniel and Bangerth, Wolfgang and Boddu,
+  Vishal and Brands, Benjamin and Davydov, Denis and Gassm{\"o}ller, Rene and
+  Heister, Timo and Heltai, Luca and Kormann, Katharina and others},
+ year={2018},
+title={The deal.II library, version 9.0},
+ journal={\rvtJNumM},
+ volume={26},
+ number={4},
+  pages={173--183},
+ orgname = {De Gruyter},
+}
+
+
+@article{davis2004algorithm,
+ serialno={15},
+ author={Davis, Timothy A.},
+ year={2004},
+title={Algorithm 832: {\?{UMFPACK}} \?V4.3 -- an unsymmetric-pattern multifrontal
+  method},
+ journal={\rvtACMTMSTOMS},
+ volume={30},
+ number={2},
+  pages={196--199},
+ orgname = {ACM},
+}
+
+
+@book{Runborg2012VerifyingNC,
+ serialno={16},
+ author={Olof Runborg},
+ year={2012},
+booktitle={Lecture Notes in Numerical Solutions of Differential Equations
+  (DN2255): {V}erifying Numerical Convergence Rates},
+ orgname = {KTH Computer Science and Communication},
+}
+
+
+@book{butcher2016numerical,
+ serialno={17},
+ author={Butcher, John Charles},
+ year={2016},
+booktitle={Numerical Methods for Ordinary Differential Equations},
+ orgname = {John Wiley \& Sons},
+}
+
+
+@custombib{WalterFrei,
+mypattern={[authors,atitle,midc][booktag,bktitle,yr,endbooktag,bibpages,bibdoi][post,myehost]},
+ serialno={18},
+title={Meshing Considerations for Linear Static Problems},
+ post={\myehost{https://www.comsol.com/blogs/meshing-considerations-linear-static-problems/}. (Accessed: 9 December 2019)},
+ year={2019},
+}
+
+
+@article{ginsburg1963cg,
+ serialno={19},
+ author={Ginsburg, Theo},
+ year={1963},
+title={The Conjugate Gradient Method},
+ journal={\rvtNumMat},
+ volume={5},
+ number={1},
+  pages={191--200},
+ orgname = {Springer-Verlag New York, Inc.},
+ city = {Secaucus, NJ, USA},
+ issn={0029-599X},
+}
+
+\end{bibwrite}
+
+
+
+\newbox\uncitedrefsbox
+\setbox\uncitedrefsbox=\vbox{\xref[nosort]{TeXFolio:fig4,TeXFolio:fig9,TeXFolio:fig11}}
+
+\end{document}
+
+
+
+
+
+

@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: error_2d_mar_3_21.aux
+Reallocating 'name_of_file' (item size: 1) to 6 items.
+The style file: unsrt.bst
+Reallocating 'name_of_file' (item size: 1) to 11 items.
+Database file #1: bibfile_2d.bib
+You've used 20 entries,
+            1791 wiz_defined-function locations,
+            570 strings with 6691 characters,
+and the built_in function-call counts, 4020 in all, are:
+= -- 341
+> -- 188
+< -- 4
++ -- 72
+- -- 52
+* -- 239
+:= -- 643
+add.period$ -- 58
+call.type$ -- 20
+change.case$ -- 14
+chr.to.int$ -- 0
+cite$ -- 20
+duplicate$ -- 187
+empty$ -- 411
+format.name$ -- 52
+if$ -- 900
+int.to.chr$ -- 0
+int.to.str$ -- 20
+missing$ -- 22
+newline$ -- 101
+num.names$ -- 19
+pop$ -- 81
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 78
+stack$ -- 0
+substring$ -- 188
+swap$ -- 35
+text.length$ -- 4
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 36
+width$ -- 22
+write$ -- 212

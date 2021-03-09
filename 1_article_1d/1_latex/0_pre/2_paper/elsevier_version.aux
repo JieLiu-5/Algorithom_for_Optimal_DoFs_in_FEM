@@ -1,0 +1,866 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\emailauthor{j.liu-5@tudelft.nl}{Jie Liu\corref {cor1}}
+\emailauthor{m.moller@tudelft.nl}{Matthias M\"oller}
+\emailauthor{h.m.schuttelaars@tudelft.nl}{Henk M. Schuttelaars}
+\Newlabel{cor1}{1}
+\citation{Kumar2016}
+\citation{Kumar2016,carey1982derivative}
+\citation{ferziger2012computational}
+\citation{zuras2008ieee}
+\providecommand \oddpage@label [2]{}
+\Newlabel{1}{a}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\citation{gockenbach2006understanding}
+\citation{guo1986hp}
+\citation{Babuska2018Roundoff}
+\citation{ling1984numerical,mou2017example}
+\citation{ainsworth1992procedure,kelly1983posteriori}
+\citation{boffi2013mixed}
+\citation{boffi2013mixed}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Model problem, finite element formulation and numerical implementation}{3}{section.2}\protected@file@percent }
+\newlabel{section_model_problem_FEM_formulation_numerical_implementation}{{2}{3}{Model problem, finite element formulation and numerical implementation}{section.2}{}}
+\newlabel{section_model_problem_FEM_formulation_numerical_implementation@cref}{{[section][2][]2}{[1][3][]3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Model problem}{3}{subsection.2.1}\protected@file@percent }
+\newlabel{1D_general_Helmholtz_equation}{{1}{3}{Model problem}{equation.2.1}{}}
+\newlabel{1D_general_Helmholtz_equation@cref}{{[equation][1][]1}{[1][3][]3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Finite element formulation}{3}{subsection.2.2}\protected@file@percent }
+\newlabel{FE formulation}{{2.2}{3}{Finite element formulation}{subsection.2.2}{}}
+\newlabel{FE formulation@cref}{{[subsection][2][2]2.2}{[1][3][]3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.1}The standard FEM}{4}{subsubsection.2.2.1}\protected@file@percent }
+\newlabel{1D_general_SM_weak_form_Diri_strong}{{3}{4}{The standard FEM}{equation.2.3}{}}
+\newlabel{1D_general_SM_weak_form_Diri_strong@cref}{{[equation][3][]3}{[1][3][]4}}
+\newlabel{1D_general_SM_weak_form_Diri_weak}{{4}{4}{The standard FEM}{equation.2.4}{}}
+\newlabel{1D_general_SM_weak_form_Diri_weak@cref}{{[equation][4][]4}{[1][4][]4}}
+\newlabel{General_SM_u_approx}{{5}{4}{The standard FEM}{equation.2.5}{}}
+\newlabel{General_SM_u_approx@cref}{{[equation][5][]5}{[1][4][]4}}
+\newlabel{matrix equation std FEM}{{6}{4}{The standard FEM}{equation.2.6}{}}
+\newlabel{matrix equation std FEM@cref}{{[equation][6][]6}{[1][4][]4}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.2}The mixed FEM}{5}{subsubsection.2.2.2}\protected@file@percent }
+\newlabel{Gene_MM_strong1}{{7a}{5}{The mixed FEM}{equation.2.1}{}}
+\newlabel{Gene_MM_strong1@cref}{{[subequation][1][7]7a}{[1][4][]5}}
+\newlabel{Gene_MM_strong2}{{7b}{5}{The mixed FEM}{equation.2.2}{}}
+\newlabel{Gene_MM_strong2@cref}{{[subequation][2][7]7b}{[1][5][]5}}
+\newlabel{1D_general_MM_2in1}{{7}{5}{The mixed FEM}{equation.2.2}{}}
+\newlabel{1D_general_MM_2in1@cref}{{[subequation][7][]7}{[1][5][]5}}
+\newlabel{1D_General_MM_weak_1}{{8a}{5}{The mixed FEM}{equation.2.1}{}}
+\newlabel{1D_General_MM_weak_1@cref}{{[subequation][1][8]8a}{[1][5][]5}}
+\newlabel{1D_General_MM_weak_2}{{8b}{5}{The mixed FEM}{equation.2.2}{}}
+\newlabel{1D_General_MM_weak_2@cref}{{[subequation][2][8]8b}{[1][5][]5}}
+\newlabel{1D_General_MM_weak_2in1}{{8}{5}{The mixed FEM}{equation.2.2}{}}
+\newlabel{1D_General_MM_weak_2in1@cref}{{[subequation][8][]8}{[1][5][]5}}
+\newlabel{General_MM_var_approx1}{{9a}{5}{The mixed FEM}{equation.2.1}{}}
+\newlabel{General_MM_var_approx1@cref}{{[subequation][1][9]9a}{[1][5][]5}}
+\newlabel{General_MM_var_approx2}{{9b}{5}{The mixed FEM}{equation.2.2}{}}
+\newlabel{General_MM_var_approx2@cref}{{[subequation][2][9]9b}{[1][5][]5}}
+\newlabel{General_MM_var_approx}{{9}{5}{The mixed FEM}{equation.2.2}{}}
+\newlabel{General_MM_var_approx@cref}{{[subequation][9][]9}{[1][5][]5}}
+\newlabel{matrix equation mix FEM}{{10}{5}{The mixed FEM}{equation.2.10}{}}
+\newlabel{matrix equation mix FEM@cref}{{[equation][10][]10}{[1][5][]5}}
+\citation{zuras2008ieee}
+\citation{alzetta2018deal}
+\citation{davis2004algorithm}
+\citation{Runborg2012VerifyingNC}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Numerical implementation}{6}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.1}Solution technique}{6}{subsubsection.2.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.2}Error estimation}{6}{subsubsection.2.3.2}\protected@file@percent }
+\newlabel{formula_abs_error}{{11}{6}{Error estimation}{equation.2.11}{}}
+\newlabel{formula_abs_error@cref}{{[subequation][11][]11}{[1][6][]6}}
+\newlabel{formula_abs_error_analytical}{{11a}{6}{Error estimation}{equation.2.1}{}}
+\newlabel{formula_abs_error_analytical@cref}{{[subequation][1][11]11a}{[1][6][]6}}
+\newlabel{formula_abs_error_numerical}{{11b}{6}{Error estimation}{equation.2.2}{}}
+\newlabel{formula_abs_error_numerical@cref}{{[subequation][2][11]11b}{[1][6][]6}}
+\citation{gockenbach2006understanding}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.3}Convergence of the solution}{7}{subsubsection.2.3.3}\protected@file@percent }
+\newlabel{formula_order_of_convergence}{{12}{7}{Convergence of the solution}{equation.2.12}{}}
+\newlabel{formula_order_of_convergence@cref}{{[subequation][12][]12}{[1][7][]7}}
+\newlabel{formula_order_of_convergence_finer_solution}{{12b}{7}{Convergence of the solution}{equation.2.2}{}}
+\newlabel{formula_order_of_convergence_finer_solution@cref}{{[subequation][2][12]12b}{[1][7][]7}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces sss}}{7}{table.caption.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{convergence_order_sample_equations}{{1}{7}{sss}{table.caption.1}{}}
+\newlabel{convergence_order_sample_equations@cref}{{[table][1][]1}{[1][7][]7}}
+\newlabel{convergence_order_sample_equations_std}{{1(a)}{7}{sss}{table.caption.1}{}}
+\newlabel{convergence_order_sample_equations_std@cref}{{[subtable][1][1]1(a)}{[1][7][]7}}
+\newlabel{sub@convergence_order_sample_equations_std}{{(a)}{7}{sss}{table.caption.1}{}}
+\newlabel{sub@convergence_order_sample_equations_std@cref}{{[subtable][1][1]1(a)}{[1][7][]7}}
+\newlabel{convergence_order_sample_equations_mix}{{1(b)}{7}{sss}{table.caption.1}{}}
+\newlabel{convergence_order_sample_equations_mix@cref}{{[subtable][2][1]1(b)}{[1][7][]7}}
+\newlabel{sub@convergence_order_sample_equations_mix}{{(b)}{7}{sss}{table.caption.1}{}}
+\newlabel{sub@convergence_order_sample_equations_mix@cref}{{[subtable][2][1]1(b)}{[1][7][]7}}
+\citation{Babuska2018Roundoff,WalterFrei}
+\@writefile{toc}{\contentsline {section}{\numberline {3}General behaviour of the discretization error and approach to predict the highest attainable accuracy}{8}{section.3}\protected@file@percent }
+\newlabel{section_behaviour_discretization_error_and_prediction}{{3}{8}{General behaviour of the discretization error and approach to predict the highest attainable accuracy}{section.3}{}}
+\newlabel{section_behaviour_discretization_error_and_prediction@cref}{{[section][3][]3}{[1][8][]8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Conceptual sketch of the dependency of the discretization error on the number of $\text  {DoFs}$.\relax }}{8}{figure.caption.2}\protected@file@percent }
+\newlabel{sketch_discretization_error_one_p}{{1}{8}{Conceptual sketch of the dependency of the discretization error on the number of $\text {DoFs}$.\relax }{figure.caption.2}{}}
+\newlabel{sketch_discretization_error_one_p@cref}{{[figure][1][]1}{[1][8][]8}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces sss}}{8}{table.caption.3}\protected@file@percent }
+\newlabel{phase_discretization_error}{{2}{8}{sss}{table.caption.3}{}}
+\newlabel{phase_discretization_error@cref}{{[table][2][]2}{[1][8][]8}}
+\newlabel{formula_offset_truncation_error}{{13}{9}{General behaviour of the discretization error and approach to predict the highest attainable accuracy}{equation.3.13}{}}
+\newlabel{formula_offset_truncation_error@cref}{{[equation][13][]13}{[1][8][]9}}
+\newlabel{derivative_condition_N_opt}{{14}{9}{General behaviour of the discretization error and approach to predict the highest attainable accuracy}{equation.3.14}{}}
+\newlabel{derivative_condition_N_opt@cref}{{[equation][14][]14}{[1][9][]9}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Numerical quantification of the round-off error}{9}{section.4}\protected@file@percent }
+\newlabel{section_numerical_results_sensitivity}{{4}{9}{Numerical quantification of the round-off error}{section.4}{}}
+\newlabel{section_numerical_results_sensitivity@cref}{{[section][4][]4}{[1][9][]9}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces sss}}{9}{table.caption.4}\protected@file@percent }
+\newlabel{benchmark one-dimensional equations}{{3}{9}{sss}{table.caption.4}{}}
+\newlabel{benchmark one-dimensional equations@cref}{{[table][3][]3}{[1][9][]9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Preliminary results}{9}{subsection.4.1}\protected@file@percent }
+\newlabel{section_preliminary_results}{{4.1}{9}{Preliminary results}{subsection.4.1}{}}
+\newlabel{section_preliminary_results@cref}{{[subsection][1][4]4.1}{[1][9][]9}}
+\citation{kahan2013floating}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1}Benchmark Poisson equation}{10}{subsubsection.4.1.1}\protected@file@percent }
+\newlabel{py_bench_Pois_SM_solu}{{2(a)}{10}{Solution\relax }{figure.caption.5}{}}
+\newlabel{py_bench_Pois_SM_solu@cref}{{[subfigure][1][2]2(a)}{[1][10][]10}}
+\newlabel{sub@py_bench_Pois_SM_solu}{{(a)}{10}{Solution\relax }{figure.caption.5}{}}
+\newlabel{sub@py_bench_Pois_SM_solu@cref}{{[subfigure][1][2]2(a)}{[1][10][]10}}
+\newlabel{py_bench_Pois_SM_grad}{{2(b)}{10}{First derivative\relax }{figure.caption.5}{}}
+\newlabel{py_bench_Pois_SM_grad@cref}{{[subfigure][2][2]2(b)}{[1][10][]10}}
+\newlabel{sub@py_bench_Pois_SM_grad}{{(b)}{10}{First derivative\relax }{figure.caption.5}{}}
+\newlabel{sub@py_bench_Pois_SM_grad@cref}{{[subfigure][2][2]2(b)}{[1][10][]10}}
+\newlabel{py_bench_Pois_SM_2ndd}{{2(c)}{10}{Second derivative\relax }{figure.caption.5}{}}
+\newlabel{py_bench_Pois_SM_2ndd@cref}{{[subfigure][3][2]2(c)}{[1][10][]10}}
+\newlabel{sub@py_bench_Pois_SM_2ndd}{{(c)}{10}{Second derivative\relax }{figure.caption.5}{}}
+\newlabel{sub@py_bench_Pois_SM_2ndd@cref}{{[subfigure][3][2]2(c)}{[1][10][]10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Absolute errors for the benchmark Poisson equation using the standard FEM.\relax }}{10}{figure.caption.5}\protected@file@percent }
+\newlabel{py_bench_Pois_SM}{{2}{10}{Absolute errors for the benchmark Poisson equation using the standard FEM.\relax }{figure.caption.5}{}}
+\newlabel{py_bench_Pois_SM@cref}{{[figure][2][]2}{[1][10][]10}}
+\newlabel{py_bench_Pois_MM_solu}{{3(a)}{10}{Solution\relax }{figure.caption.6}{}}
+\newlabel{py_bench_Pois_MM_solu@cref}{{[subfigure][1][3]3(a)}{[1][10][]10}}
+\newlabel{sub@py_bench_Pois_MM_solu}{{(a)}{10}{Solution\relax }{figure.caption.6}{}}
+\newlabel{sub@py_bench_Pois_MM_solu@cref}{{[subfigure][1][3]3(a)}{[1][10][]10}}
+\newlabel{py_bench_Pois_MM_grad}{{3(b)}{10}{First derivative\relax }{figure.caption.6}{}}
+\newlabel{py_bench_Pois_MM_grad@cref}{{[subfigure][2][3]3(b)}{[1][10][]10}}
+\newlabel{sub@py_bench_Pois_MM_grad}{{(b)}{10}{First derivative\relax }{figure.caption.6}{}}
+\newlabel{sub@py_bench_Pois_MM_grad@cref}{{[subfigure][2][3]3(b)}{[1][10][]10}}
+\newlabel{py_bench_Pois_MM_2ndd}{{3(c)}{10}{Second derivative\relax }{figure.caption.6}{}}
+\newlabel{py_bench_Pois_MM_2ndd@cref}{{[subfigure][3][3]3(c)}{[1][10][]10}}
+\newlabel{sub@py_bench_Pois_MM_2ndd}{{(c)}{10}{Second derivative\relax }{figure.caption.6}{}}
+\newlabel{sub@py_bench_Pois_MM_2ndd@cref}{{[subfigure][3][3]3(c)}{[1][10][]10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Absolute errors for the benchmark Poisson equation using the mixed FEM.\relax }}{10}{figure.caption.6}\protected@file@percent }
+\newlabel{py_bench_Pois_MM}{{3}{10}{Absolute errors for the benchmark Poisson equation using the mixed FEM.\relax }{figure.caption.6}{}}
+\newlabel{py_bench_Pois_MM@cref}{{[figure][3][]3}{[1][10][]10}}
+\citation{ginsburg1963cg}
+\newlabel{alpha_R_benchmark_Poisson}{{4(a)}{11}{Poisson\relax }{figure.caption.7}{}}
+\newlabel{alpha_R_benchmark_Poisson@cref}{{[subfigure][1][4]4(a)}{[1][11][]11}}
+\newlabel{sub@alpha_R_benchmark_Poisson}{{(a)}{11}{Poisson\relax }{figure.caption.7}{}}
+\newlabel{sub@alpha_R_benchmark_Poisson@cref}{{[subfigure][1][4]4(a)}{[1][11][]11}}
+\newlabel{alpha_R_benchmark_diffusion}{{4(b)}{11}{Diffusion\relax }{figure.caption.7}{}}
+\newlabel{alpha_R_benchmark_diffusion@cref}{{[subfigure][2][4]4(b)}{[1][11][]11}}
+\newlabel{sub@alpha_R_benchmark_diffusion}{{(b)}{11}{Diffusion\relax }{figure.caption.7}{}}
+\newlabel{sub@alpha_R_benchmark_diffusion@cref}{{[subfigure][2][4]4(b)}{[1][11][]11}}
+\newlabel{alpha_R_benchmark_Helmholtz}{{4(c)}{11}{Helmholtz\relax }{figure.caption.7}{}}
+\newlabel{alpha_R_benchmark_Helmholtz@cref}{{[subfigure][3][4]4(c)}{[1][11][]11}}
+\newlabel{sub@alpha_R_benchmark_Helmholtz}{{(c)}{11}{Helmholtz\relax }{figure.caption.7}{}}
+\newlabel{sub@alpha_R_benchmark_Helmholtz@cref}{{[subfigure][3][4]4(c)}{[1][11][]11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces $\alpha _{\rm  R}$ for the benchmark equations.\relax }}{11}{figure.caption.7}\protected@file@percent }
+\newlabel{alpha_R_benchmark}{{4}{11}{$\alpha _{\rm R}$ for the benchmark equations.\relax }{figure.caption.7}{}}
+\newlabel{alpha_R_benchmark@cref}{{[figure][4][]4}{[1][11][]11}}
+\newlabel{E_min_benchmark_Poisson}{{5(a)}{11}{Poisson\relax }{figure.caption.8}{}}
+\newlabel{E_min_benchmark_Poisson@cref}{{[subfigure][1][5]5(a)}{[1][11][]11}}
+\newlabel{sub@E_min_benchmark_Poisson}{{(a)}{11}{Poisson\relax }{figure.caption.8}{}}
+\newlabel{sub@E_min_benchmark_Poisson@cref}{{[subfigure][1][5]5(a)}{[1][11][]11}}
+\newlabel{E_min_benchmark_diffusion}{{5(b)}{11}{Diffusion\relax }{figure.caption.8}{}}
+\newlabel{E_min_benchmark_diffusion@cref}{{[subfigure][2][5]5(b)}{[1][11][]11}}
+\newlabel{sub@E_min_benchmark_diffusion}{{(b)}{11}{Diffusion\relax }{figure.caption.8}{}}
+\newlabel{sub@E_min_benchmark_diffusion@cref}{{[subfigure][2][5]5(b)}{[1][11][]11}}
+\newlabel{E_min_benchmark_Helmholtz}{{5(c)}{11}{Helmholtz\relax }{figure.caption.8}{}}
+\newlabel{E_min_benchmark_Helmholtz@cref}{{[subfigure][3][5]5(c)}{[1][11][]11}}
+\newlabel{sub@E_min_benchmark_Helmholtz}{{(c)}{11}{Helmholtz\relax }{figure.caption.8}{}}
+\newlabel{sub@E_min_benchmark_Helmholtz@cref}{{[subfigure][3][5]5(c)}{[1][11][]11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces $E_{\rm  min}$ for the benchmark equations. The blue color denotes the standard FEM, and the red color denotes the mixed FEM.\relax }}{11}{figure.caption.8}\protected@file@percent }
+\newlabel{E_min_benchmark}{{5}{11}{$E_{\rm min}$ for the benchmark equations. The blue color denotes the standard FEM, and the red color denotes the mixed FEM.\relax }{figure.caption.8}{}}
+\newlabel{E_min_benchmark@cref}{{[figure][5][]5}{[1][11][]11}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.2}Benchmark diffusion and Helmholtz equations}{11}{subsubsection.4.1.2}\protected@file@percent }
+\newlabel{section_equation_type}{{4.1.2}{11}{Benchmark diffusion and Helmholtz equations}{subsubsection.4.1.2}{}}
+\newlabel{section_equation_type@cref}{{[subsubsection][2][4,1]4.1.2}{[1][11][]11}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Sensitivity analysis}{11}{subsection.4.2}\protected@file@percent }
+\newlabel{section_sensitivity}{{4.2}{11}{Sensitivity analysis}{subsection.4.2}{}}
+\newlabel{section_sensitivity@cref}{{[subsection][2][4]4.2}{[1][11][]11}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}Solution strategy}{12}{subsubsection.4.2.1}\protected@file@percent }
+\newlabel{section_solver}{{4.2.1}{12}{Solution strategy}{subsubsection.4.2.1}{}}
+\newlabel{section_solver@cref}{{[subsubsection][1][4,2]4.2.1}{[1][11][]12}}
+\@writefile{toc}{\contentsline {paragraph}{The standard FEM}{12}{section*.9}\protected@file@percent }
+\newlabel{py_bench_Pois_SM_error_solution_strategy_solu}{{6(a)}{12}{Solution\relax }{figure.caption.10}{}}
+\newlabel{py_bench_Pois_SM_error_solution_strategy_solu@cref}{{[subfigure][1][6]6(a)}{[1][12][]12}}
+\newlabel{sub@py_bench_Pois_SM_error_solution_strategy_solu}{{(a)}{12}{Solution\relax }{figure.caption.10}{}}
+\newlabel{sub@py_bench_Pois_SM_error_solution_strategy_solu@cref}{{[subfigure][1][6]6(a)}{[1][12][]12}}
+\newlabel{py_bench_Pois_SM_error_solution_strategy_grad}{{6(b)}{12}{First derivative\relax }{figure.caption.10}{}}
+\newlabel{py_bench_Pois_SM_error_solution_strategy_grad@cref}{{[subfigure][2][6]6(b)}{[1][12][]12}}
+\newlabel{sub@py_bench_Pois_SM_error_solution_strategy_grad}{{(b)}{12}{First derivative\relax }{figure.caption.10}{}}
+\newlabel{sub@py_bench_Pois_SM_error_solution_strategy_grad@cref}{{[subfigure][2][6]6(b)}{[1][12][]12}}
+\newlabel{py_bench_Pois_SM_error_solution_strategy_2ndd}{{6(c)}{12}{Second derivative\relax }{figure.caption.10}{}}
+\newlabel{py_bench_Pois_SM_error_solution_strategy_2ndd@cref}{{[subfigure][3][6]6(c)}{[1][12][]12}}
+\newlabel{sub@py_bench_Pois_SM_error_solution_strategy_2ndd}{{(c)}{12}{Second derivative\relax }{figure.caption.10}{}}
+\newlabel{sub@py_bench_Pois_SM_error_solution_strategy_2ndd@cref}{{[subfigure][3][6]6(c)}{[1][12][]12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Comparison of the errors using the CG solver and the UMFPACK solver.\relax }}{12}{figure.caption.10}\protected@file@percent }
+\newlabel{py_bench_Pois_SM_error_solution_strategy}{{6}{12}{Comparison of the errors using the CG solver and the UMFPACK solver.\relax }{figure.caption.10}{}}
+\newlabel{py_bench_Pois_SM_error_solution_strategy@cref}{{[figure][6][]6}{[1][12][]12}}
+\@writefile{toc}{\contentsline {paragraph}{The mixed FEM}{12}{section*.11}\protected@file@percent }
+\newlabel{schur_complement_solution}{{16a}{12}{The mixed FEM}{equation.4.1}{}}
+\newlabel{schur_complement_solution@cref}{{[subequation][1][16]16a}{[1][12][]12}}
+\newlabel{schur_complement_gradient}{{16b}{12}{The mixed FEM}{equation.4.2}{}}
+\newlabel{schur_complement_gradient@cref}{{[subequation][2][16]16b}{[1][12][]12}}
+\newlabel{schur_complement_solu_grad}{{16}{12}{The mixed FEM}{equation.4.2}{}}
+\newlabel{schur_complement_solu_grad@cref}{{[subequation][16][]16}{[1][12][]12}}
+\newlabel{Fig:py_bench_Pois_MM_error_solution_strategy_schur_variant_other_UMF_solu}{{7(a)}{13}{Solution\relax }{figure.caption.12}{}}
+\newlabel{Fig:py_bench_Pois_MM_error_solution_strategy_schur_variant_other_UMF_solu@cref}{{[subfigure][1][7]7(a)}{[1][13][]13}}
+\newlabel{sub@Fig:py_bench_Pois_MM_error_solution_strategy_schur_variant_other_UMF_solu}{{(a)}{13}{Solution\relax }{figure.caption.12}{}}
+\newlabel{sub@Fig:py_bench_Pois_MM_error_solution_strategy_schur_variant_other_UMF_solu@cref}{{[subfigure][1][7]7(a)}{[1][13][]13}}
+\newlabel{Fig:py_bench_Pois_MM_error_solution_strategy_schur_variant_other_UMF_grad}{{7(b)}{13}{First derivative\relax }{figure.caption.12}{}}
+\newlabel{Fig:py_bench_Pois_MM_error_solution_strategy_schur_variant_other_UMF_grad@cref}{{[subfigure][2][7]7(b)}{[1][13][]13}}
+\newlabel{sub@Fig:py_bench_Pois_MM_error_solution_strategy_schur_variant_other_UMF_grad}{{(b)}{13}{First derivative\relax }{figure.caption.12}{}}
+\newlabel{sub@Fig:py_bench_Pois_MM_error_solution_strategy_schur_variant_other_UMF_grad@cref}{{[subfigure][2][7]7(b)}{[1][13][]13}}
+\newlabel{Fig:py_bench_Pois_MM_error_solution_strategy_schur_variant_other_UMF_2ndd}{{7(c)}{13}{Second derivative\relax }{figure.caption.12}{}}
+\newlabel{Fig:py_bench_Pois_MM_error_solution_strategy_schur_variant_other_UMF_2ndd@cref}{{[subfigure][3][7]7(c)}{[1][13][]13}}
+\newlabel{sub@Fig:py_bench_Pois_MM_error_solution_strategy_schur_variant_other_UMF_2ndd}{{(c)}{13}{Second derivative\relax }{figure.caption.12}{}}
+\newlabel{sub@Fig:py_bench_Pois_MM_error_solution_strategy_schur_variant_other_UMF_2ndd@cref}{{[subfigure][3][7]7(c)}{[1][13][]13}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Influence of the CG solver on the accuracy when the left-hand side is the Schur complement using the mixed FEM.\relax }}{13}{figure.caption.12}\protected@file@percent }
+\newlabel{Fig:py_bench_Pois_MM_error_solution_strategy_schur_variant_other_UMF}{{7}{13}{Influence of the CG solver on the accuracy when the left-hand side is the Schur complement using the mixed FEM.\relax }{figure.caption.12}{}}
+\newlabel{Fig:py_bench_Pois_MM_error_solution_strategy_schur_variant_other_UMF@cref}{{[figure][7][]7}{[1][13][]13}}
+\newlabel{py_bench_Pois_MM_error_solution_strategy_schur_1em16_M_variant_solu}{{8(a)}{14}{Solution\relax }{figure.caption.13}{}}
+\newlabel{py_bench_Pois_MM_error_solution_strategy_schur_1em16_M_variant_solu@cref}{{[subfigure][1][8]8(a)}{[1][13][]14}}
+\newlabel{sub@py_bench_Pois_MM_error_solution_strategy_schur_1em16_M_variant_solu}{{(a)}{14}{Solution\relax }{figure.caption.13}{}}
+\newlabel{sub@py_bench_Pois_MM_error_solution_strategy_schur_1em16_M_variant_solu@cref}{{[subfigure][1][8]8(a)}{[1][13][]14}}
+\newlabel{py_bench_Pois_MM_error_solution_strategy_schur_1em16_M_variant_grad}{{8(b)}{14}{First derivative\relax }{figure.caption.13}{}}
+\newlabel{py_bench_Pois_MM_error_solution_strategy_schur_1em16_M_variant_grad@cref}{{[subfigure][2][8]8(b)}{[1][13][]14}}
+\newlabel{sub@py_bench_Pois_MM_error_solution_strategy_schur_1em16_M_variant_grad}{{(b)}{14}{First derivative\relax }{figure.caption.13}{}}
+\newlabel{sub@py_bench_Pois_MM_error_solution_strategy_schur_1em16_M_variant_grad@cref}{{[subfigure][2][8]8(b)}{[1][13][]14}}
+\newlabel{py_bench_Pois_MM_error_solution_strategy_schur_1em16_M_variant_2ndd}{{8(c)}{14}{Second derivative\relax }{figure.caption.13}{}}
+\newlabel{py_bench_Pois_MM_error_solution_strategy_schur_1em16_M_variant_2ndd@cref}{{[subfigure][3][8]8(c)}{[1][13][]14}}
+\newlabel{sub@py_bench_Pois_MM_error_solution_strategy_schur_1em16_M_variant_2ndd}{{(c)}{14}{Second derivative\relax }{figure.caption.13}{}}
+\newlabel{sub@py_bench_Pois_MM_error_solution_strategy_schur_1em16_M_variant_2ndd@cref}{{[subfigure][3][8]8(c)}{[1][13][]14}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Influence of the CG solver on the accuracy when the left-hand side is $M$ using the mixed FEM.\relax }}{14}{figure.caption.13}\protected@file@percent }
+\newlabel{py_bench_Pois_MM_error_solution_strategy_schur_1em16_M_variant}{{8}{14}{Influence of the CG solver on the accuracy when the left-hand side is $M$ using the mixed FEM.\relax }{figure.caption.13}{}}
+\newlabel{py_bench_Pois_MM_error_solution_strategy_schur_1em16_M_variant@cref}{{[figure][8][]8}{[1][13][]14}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.2}Order of magnitude}{14}{subsubsection.4.2.2}\protected@file@percent }
+\newlabel{section_scaling}{{4.2.2}{14}{Order of magnitude}{subsubsection.4.2.2}{}}
+\newlabel{section_scaling@cref}{{[subsubsection][2][4,2]4.2.2}{[1][14][]14}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces w}}{14}{table.caption.14}\protected@file@percent }
+\newlabel{scaling_cases_Poisson}{{4}{14}{w}{table.caption.14}{}}
+\newlabel{scaling_cases_Poisson@cref}{{[table][4][]4}{[1][14][]14}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Distribution of $\delimiter "026B30D u_{\rm  exc}\delimiter "026B30D _2$ and $\delimiter "026B30D f\delimiter "026B30D _2$ for the test cases with the settings from Table \ref  {scaling_cases_Poisson}. The color density increases with the value of the coefficient $c_i$.\relax }}{15}{figure.caption.15}\protected@file@percent }
+\newlabel{L2 norm u f}{{9}{15}{Distribution of $\|u_{\rm exc}\|_2$ and $\|f\|_2$ for the test cases with the settings from Table \ref {scaling_cases_Poisson}. The color density increases with the value of the coefficient $c_i$.\relax }{figure.caption.15}{}}
+\newlabel{L2 norm u f@cref}{{[figure][9][]9}{[1][14][]15}}
+\newlabel{scaling_std_FEM}{{4.2.2}{15}{The standard FEM}{section*.16}{}}
+\newlabel{scaling_std_FEM@cref}{{[subsubsection][2][4,2]4.2.2}{[1][15][]15}}
+\newlabel{py_L2_Pois1_SM_scaling_no_solu}{{10(a)}{15}{Solution\relax }{figure.caption.17}{}}
+\newlabel{py_L2_Pois1_SM_scaling_no_solu@cref}{{[subfigure][1][10]10(a)}{[1][15][]15}}
+\newlabel{sub@py_L2_Pois1_SM_scaling_no_solu}{{(a)}{15}{Solution\relax }{figure.caption.17}{}}
+\newlabel{sub@py_L2_Pois1_SM_scaling_no_solu@cref}{{[subfigure][1][10]10(a)}{[1][15][]15}}
+\newlabel{py_L2_Pois1_SM_scaling_no_grad}{{10(b)}{15}{First derivative\relax }{figure.caption.17}{}}
+\newlabel{py_L2_Pois1_SM_scaling_no_grad@cref}{{[subfigure][2][10]10(b)}{[1][15][]15}}
+\newlabel{sub@py_L2_Pois1_SM_scaling_no_grad}{{(b)}{15}{First derivative\relax }{figure.caption.17}{}}
+\newlabel{sub@py_L2_Pois1_SM_scaling_no_grad@cref}{{[subfigure][2][10]10(b)}{[1][15][]15}}
+\newlabel{py_L2_Pois1_SM_scaling_no_2ndd}{{10(c)}{15}{Second derivative\relax }{figure.caption.17}{}}
+\newlabel{py_L2_Pois1_SM_scaling_no_2ndd@cref}{{[subfigure][3][10]10(c)}{[1][15][]15}}
+\newlabel{sub@py_L2_Pois1_SM_scaling_no_2ndd}{{(c)}{15}{Second derivative\relax }{figure.caption.17}{}}
+\newlabel{sub@py_L2_Pois1_SM_scaling_no_2ndd@cref}{{[subfigure][3][10]10(c)}{[1][15][]15}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Absolute errors for different $c_1$ using the standard FEM without scaling the right-hand side.\relax }}{15}{figure.caption.17}\protected@file@percent }
+\newlabel{Pois_SM_rhs_solu orig}{{10}{15}{Absolute errors for different $c_1$ using the standard FEM without scaling the right-hand side.\relax }{figure.caption.17}{}}
+\newlabel{Pois_SM_rhs_solu orig@cref}{{[figure][10][]10}{[1][15][]15}}
+\newlabel{py_L2_Pois1_SM_scaling_S_solu}{{11(a)}{15}{Solution\relax }{figure.caption.18}{}}
+\newlabel{py_L2_Pois1_SM_scaling_S_solu@cref}{{[subfigure][1][11]11(a)}{[1][15][]15}}
+\newlabel{sub@py_L2_Pois1_SM_scaling_S_solu}{{(a)}{15}{Solution\relax }{figure.caption.18}{}}
+\newlabel{sub@py_L2_Pois1_SM_scaling_S_solu@cref}{{[subfigure][1][11]11(a)}{[1][15][]15}}
+\newlabel{py_L2_Pois1_SM_scaling_S_grad}{{11(b)}{15}{First derivative\relax }{figure.caption.18}{}}
+\newlabel{py_L2_Pois1_SM_scaling_S_grad@cref}{{[subfigure][2][11]11(b)}{[1][15][]15}}
+\newlabel{sub@py_L2_Pois1_SM_scaling_S_grad}{{(b)}{15}{First derivative\relax }{figure.caption.18}{}}
+\newlabel{sub@py_L2_Pois1_SM_scaling_S_grad@cref}{{[subfigure][2][11]11(b)}{[1][15][]15}}
+\newlabel{py_L2_Pois1_SM_scaling_S_2ndd}{{11(c)}{15}{Second derivative\relax }{figure.caption.18}{}}
+\newlabel{py_L2_Pois1_SM_scaling_S_2ndd@cref}{{[subfigure][3][11]11(c)}{[1][15][]15}}
+\newlabel{sub@py_L2_Pois1_SM_scaling_S_2ndd}{{(c)}{15}{Second derivative\relax }{figure.caption.18}{}}
+\newlabel{sub@py_L2_Pois1_SM_scaling_S_2ndd@cref}{{[subfigure][3][11]11(c)}{[1][15][]15}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Absolute errors for different $c_1$ using the standard FEM with scheme $S$.\relax }}{15}{figure.caption.18}\protected@file@percent }
+\newlabel{py_L2_Pois1_SM_scaling_S}{{11}{15}{Absolute errors for different $c_1$ using the standard FEM with scheme $S$.\relax }{figure.caption.18}{}}
+\newlabel{py_L2_Pois1_SM_scaling_S@cref}{{[figure][11][]11}{[1][15][]15}}
+\@writefile{toc}{\contentsline {paragraph}{The standard FEM}{16}{figure.caption.18}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces sss}}{16}{table.caption.19}\protected@file@percent }
+\newlabel{scaling schemes std and mix FEM}{{5}{16}{sss}{table.caption.19}{}}
+\newlabel{scaling schemes std and mix FEM@cref}{{[table][5][]5}{[1][16][]16}}
+\newlabel{scaling_mix_FEM}{{4.2.2}{16}{The mixed FEM}{section*.20}{}}
+\newlabel{scaling_mix_FEM@cref}{{[subsubsection][2][4,2]4.2.2}{[1][16][]16}}
+\@writefile{toc}{\contentsline {paragraph}{The mixed FEM}{16}{section*.20}\protected@file@percent }
+\newlabel{py_L2_Pois1_MM_scaling_no_solu}{{12(a)}{17}{Solution\relax }{figure.caption.21}{}}
+\newlabel{py_L2_Pois1_MM_scaling_no_solu@cref}{{[subfigure][1][12]12(a)}{[1][16][]17}}
+\newlabel{sub@py_L2_Pois1_MM_scaling_no_solu}{{(a)}{17}{Solution\relax }{figure.caption.21}{}}
+\newlabel{sub@py_L2_Pois1_MM_scaling_no_solu@cref}{{[subfigure][1][12]12(a)}{[1][16][]17}}
+\newlabel{py_L2_Pois1_MM_scaling_no_grad}{{12(b)}{17}{First derivative\relax }{figure.caption.21}{}}
+\newlabel{py_L2_Pois1_MM_scaling_no_grad@cref}{{[subfigure][2][12]12(b)}{[1][16][]17}}
+\newlabel{sub@py_L2_Pois1_MM_scaling_no_grad}{{(b)}{17}{First derivative\relax }{figure.caption.21}{}}
+\newlabel{sub@py_L2_Pois1_MM_scaling_no_grad@cref}{{[subfigure][2][12]12(b)}{[1][16][]17}}
+\newlabel{py_L2_Pois1_MM_scaling_no_2ndd}{{12(c)}{17}{Second derivative\relax }{figure.caption.21}{}}
+\newlabel{py_L2_Pois1_MM_scaling_no_2ndd@cref}{{[subfigure][3][12]12(c)}{[1][16][]17}}
+\newlabel{sub@py_L2_Pois1_MM_scaling_no_2ndd}{{(c)}{17}{Second derivative\relax }{figure.caption.21}{}}
+\newlabel{sub@py_L2_Pois1_MM_scaling_no_2ndd@cref}{{[subfigure][3][12]12(c)}{[1][16][]17}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Absolute errors for different $c_1$ using the mixed FEM without scaling the right-hand side.\relax }}{17}{figure.caption.21}\protected@file@percent }
+\newlabel{Pois_pLov2pi2sin_MM_rhs orig}{{12}{17}{Absolute errors for different $c_1$ using the mixed FEM without scaling the right-hand side.\relax }{figure.caption.21}{}}
+\newlabel{Pois_pLov2pi2sin_MM_rhs orig@cref}{{[figure][12][]12}{[1][16][]17}}
+\newlabel{py_L2_Pois1_MM_scaling_M1_solu}{{13(a)}{17}{Solution\relax }{figure.caption.22}{}}
+\newlabel{py_L2_Pois1_MM_scaling_M1_solu@cref}{{[subfigure][1][13]13(a)}{[1][16][]17}}
+\newlabel{sub@py_L2_Pois1_MM_scaling_M1_solu}{{(a)}{17}{Solution\relax }{figure.caption.22}{}}
+\newlabel{sub@py_L2_Pois1_MM_scaling_M1_solu@cref}{{[subfigure][1][13]13(a)}{[1][16][]17}}
+\newlabel{py_L2_Pois1_MM_scaling_M1_grad}{{13(b)}{17}{First derivative\relax }{figure.caption.22}{}}
+\newlabel{py_L2_Pois1_MM_scaling_M1_grad@cref}{{[subfigure][2][13]13(b)}{[1][16][]17}}
+\newlabel{sub@py_L2_Pois1_MM_scaling_M1_grad}{{(b)}{17}{First derivative\relax }{figure.caption.22}{}}
+\newlabel{sub@py_L2_Pois1_MM_scaling_M1_grad@cref}{{[subfigure][2][13]13(b)}{[1][16][]17}}
+\newlabel{py_L2_Pois1_MM_scaling_M1_2ndd}{{13(c)}{17}{Second derivative\relax }{figure.caption.22}{}}
+\newlabel{py_L2_Pois1_MM_scaling_M1_2ndd@cref}{{[subfigure][3][13]13(c)}{[1][16][]17}}
+\newlabel{sub@py_L2_Pois1_MM_scaling_M1_2ndd}{{(c)}{17}{Second derivative\relax }{figure.caption.22}{}}
+\newlabel{sub@py_L2_Pois1_MM_scaling_M1_2ndd@cref}{{[subfigure][3][13]13(c)}{[1][16][]17}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Absolute errors for different $c_1$ using the mixed FEM with scheme $M_1$.\relax }}{17}{figure.caption.22}\protected@file@percent }
+\newlabel{Pois_pLov2pi2sin_MM_rhs M1}{{13}{17}{Absolute errors for different $c_1$ using the mixed FEM with scheme $M_1$.\relax }{figure.caption.22}{}}
+\newlabel{Pois_pLov2pi2sin_MM_rhs M1@cref}{{[figure][13][]13}{[1][16][]17}}
+\newlabel{py_L2_Pois1_MM_scaling_M2_solu}{{14(a)}{18}{Solution\relax }{figure.caption.23}{}}
+\newlabel{py_L2_Pois1_MM_scaling_M2_solu@cref}{{[subfigure][1][14]14(a)}{[1][17][]18}}
+\newlabel{sub@py_L2_Pois1_MM_scaling_M2_solu}{{(a)}{18}{Solution\relax }{figure.caption.23}{}}
+\newlabel{sub@py_L2_Pois1_MM_scaling_M2_solu@cref}{{[subfigure][1][14]14(a)}{[1][17][]18}}
+\newlabel{py_L2_Pois1_MM_scaling_M2_grad}{{14(b)}{18}{First derivative\relax }{figure.caption.23}{}}
+\newlabel{py_L2_Pois1_MM_scaling_M2_grad@cref}{{[subfigure][2][14]14(b)}{[1][17][]18}}
+\newlabel{sub@py_L2_Pois1_MM_scaling_M2_grad}{{(b)}{18}{First derivative\relax }{figure.caption.23}{}}
+\newlabel{sub@py_L2_Pois1_MM_scaling_M2_grad@cref}{{[subfigure][2][14]14(b)}{[1][17][]18}}
+\newlabel{py_L2_Pois1_MM_scaling_M2_2ndd}{{14(c)}{18}{Second derivative\relax }{figure.caption.23}{}}
+\newlabel{py_L2_Pois1_MM_scaling_M2_2ndd@cref}{{[subfigure][3][14]14(c)}{[1][17][]18}}
+\newlabel{sub@py_L2_Pois1_MM_scaling_M2_2ndd}{{(c)}{18}{Second derivative\relax }{figure.caption.23}{}}
+\newlabel{sub@py_L2_Pois1_MM_scaling_M2_2ndd@cref}{{[subfigure][3][14]14(c)}{[1][17][]18}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Absolute errors for different $c_1$ using the mixed FEM with scheme $M_2$.\relax }}{18}{figure.caption.23}\protected@file@percent }
+\newlabel{Pois_pLov2pi2sin_MM_rhs M2}{{14}{18}{Absolute errors for different $c_1$ using the mixed FEM with scheme $M_2$.\relax }{figure.caption.23}{}}
+\newlabel{Pois_pLov2pi2sin_MM_rhs M2@cref}{{[figure][14][]14}{[1][17][]18}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Generalized values of $\alpha _{\rm  R}$ for Eq. (\ref  {1D_general_Helmholtz_equation}).\relax }}{18}{table.caption.24}\protected@file@percent }
+\newlabel{value_alpha_R_generalized}{{6}{18}{Generalized values of $\alpha _{\rm R}$ for Eq. (\ref {1D_general_Helmholtz_equation}).\relax }{table.caption.24}{}}
+\newlabel{value_alpha_R_generalized@cref}{{[table][6][]6}{[1][17][]18}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.3}Boundary conditions}{18}{subsubsection.4.2.3}\protected@file@percent }
+\newlabel{section_BC}{{4.2.3}{18}{Boundary conditions}{subsubsection.4.2.3}{}}
+\newlabel{section_BC@cref}{{[subsubsection][3][4,2]4.2.3}{[1][18][]18}}
+\@writefile{toc}{\contentsline {paragraph}{The standard FEM}{18}{section*.26}\protected@file@percent }
+\newlabel{py_bench_Pois_SM_error_boundary_weak_solu}{{15(a)}{19}{Solution\relax }{figure.caption.25}{}}
+\newlabel{py_bench_Pois_SM_error_boundary_weak_solu@cref}{{[subfigure][1][15]15(a)}{[1][18][]19}}
+\newlabel{sub@py_bench_Pois_SM_error_boundary_weak_solu}{{(a)}{19}{Solution\relax }{figure.caption.25}{}}
+\newlabel{sub@py_bench_Pois_SM_error_boundary_weak_solu@cref}{{[subfigure][1][15]15(a)}{[1][18][]19}}
+\newlabel{py_bench_Pois_SM_error_boundary_weak_grad}{{15(b)}{19}{First derivative\relax }{figure.caption.25}{}}
+\newlabel{py_bench_Pois_SM_error_boundary_weak_grad@cref}{{[subfigure][2][15]15(b)}{[1][18][]19}}
+\newlabel{sub@py_bench_Pois_SM_error_boundary_weak_grad}{{(b)}{19}{First derivative\relax }{figure.caption.25}{}}
+\newlabel{sub@py_bench_Pois_SM_error_boundary_weak_grad@cref}{{[subfigure][2][15]15(b)}{[1][18][]19}}
+\newlabel{py_bench_Pois_SM_error_boundary_weak_2ndd}{{15(c)}{19}{Second derivative\relax }{figure.caption.25}{}}
+\newlabel{py_bench_Pois_SM_error_boundary_weak_2ndd@cref}{{[subfigure][3][15]15(c)}{[1][18][]19}}
+\newlabel{sub@py_bench_Pois_SM_error_boundary_weak_2ndd}{{(c)}{19}{Second derivative\relax }{figure.caption.25}{}}
+\newlabel{sub@py_bench_Pois_SM_error_boundary_weak_2ndd@cref}{{[subfigure][3][15]15(c)}{[1][18][]19}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Comparison of the errors for imposing the Dirichlet boundary condition strongly and weakly.\relax }}{19}{figure.caption.25}\protected@file@percent }
+\newlabel{py_bench_Pois_SM_error_boundary_weak}{{15}{19}{Comparison of the errors for imposing the Dirichlet boundary condition strongly and weakly.\relax }{figure.caption.25}{}}
+\newlabel{py_bench_Pois_SM_error_boundary_weak@cref}{{[figure][15][]15}{[1][18][]19}}
+\@writefile{toc}{\contentsline {paragraph}{The mixed FEM}{19}{section*.27}\protected@file@percent }
+\newlabel{boundary_type_benchmark_Poisson_std}{{16(a)}{19}{The standard FEM\relax }{figure.caption.28}{}}
+\newlabel{boundary_type_benchmark_Poisson_std@cref}{{[subfigure][1][16]16(a)}{[1][19][]19}}
+\newlabel{sub@boundary_type_benchmark_Poisson_std}{{(a)}{19}{The standard FEM\relax }{figure.caption.28}{}}
+\newlabel{sub@boundary_type_benchmark_Poisson_std@cref}{{[subfigure][1][16]16(a)}{[1][19][]19}}
+\newlabel{boundary_type_benchmark_Poisson_mix}{{16(b)}{19}{The mixed FEM\relax }{figure.caption.28}{}}
+\newlabel{boundary_type_benchmark_Poisson_mix@cref}{{[subfigure][2][16]16(b)}{[1][19][]19}}
+\newlabel{sub@boundary_type_benchmark_Poisson_mix}{{(b)}{19}{The mixed FEM\relax }{figure.caption.28}{}}
+\newlabel{sub@boundary_type_benchmark_Poisson_mix@cref}{{[subfigure][2][16]16(b)}{[1][19][]19}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Comparison of the errors for imposing Dirichlet/Dirichlet and Dirichlet/Neumann boundary conditions.\relax }}{19}{figure.caption.28}\protected@file@percent }
+\newlabel{boundary_type_benchmark_Poisson}{{16}{19}{Comparison of the errors for imposing Dirichlet/Dirichlet and Dirichlet/Neumann boundary conditions.\relax }{figure.caption.28}{}}
+\newlabel{boundary_type_benchmark_Poisson@cref}{{[figure][16][]16}{[1][19][]19}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}A posteriori algorithm for finding the optimal number of degrees of freedom}{19}{section.5}\protected@file@percent }
+\newlabel{section_algorithm}{{5}{19}{A posteriori algorithm for finding the optimal number of degrees of freedom}{section.5}{}}
+\newlabel{section_algorithm@cref}{{[section][5][]5}{[1][19][]19}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Settings of the algorithm.\relax }}{20}{table.caption.29}\protected@file@percent }
+\newlabel{settings_algorithm}{{7}{20}{Settings of the algorithm.\relax }{table.caption.29}{}}
+\newlabel{settings_algorithm@cref}{{[table][7][]7}{[1][19][]20}}
+\@writefile{toc}{\contentsline {paragraph}{Step-1}{21}{section*.30}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Step-2}{21}{section*.31}\protected@file@percent }
+\@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces NORMALIZATION\relax }}{21}{algocf.1}\protected@file@percent }
+\newlabel{algo_scaling_factor}{{1}{21}{Step-2}{algocf.1}{}}
+\newlabel{algo_scaling_factor@cref}{{[algocf][1][]1}{[1][21][]21}}
+\@writefile{toc}{\contentsline {paragraph}{Step-3}{21}{section*.32}\protected@file@percent }
+\@writefile{loa}{\contentsline {algocf}{\numberline {2}{\ignorespaces PREDICTION\relax }}{21}{algocf.2}\protected@file@percent }
+\newlabel{block_PREDICTION}{{2}{21}{Step-3}{algocf.2}{}}
+\newlabel{block_PREDICTION@cref}{{[algocf][2][]2}{[1][21][]21}}
+\@writefile{toc}{\contentsline {paragraph}{Step-4}{21}{section*.33}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Validation}{22}{section.6}\protected@file@percent }
+\newlabel{section_validation}{{6}{22}{Validation}{section.6}{}}
+\newlabel{section_validation@cref}{{[section][6][]6}{[1][21][]22}}
+\newlabel{1D_Helmholtz_equation_application}{{19}{22}{Validation}{equation.6.19}{}}
+\newlabel{1D_Helmholtz_equation_application@cref}{{[equation][19][]19}{[1][21][]22}}
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Comparison of $E_{\rm  min}$ for Eq. (\ref  {1D_Helmholtz_equation_application}) using the algorithm and the brute-force refinement. The blue color denotes the standard FEM, and the red color denotes the mixed FEM.\relax }}{22}{figure.caption.34}\protected@file@percent }
+\newlabel{E_min_application}{{17}{22}{Comparison of $E_{\rm min}$ for Eq. (\ref {1D_Helmholtz_equation_application}) using the algorithm and the brute-force refinement. The blue color denotes the standard FEM, and the red color denotes the mixed FEM.\relax }{figure.caption.34}{}}
+\newlabel{E_min_application@cref}{{[figure][17][]17}{[1][22][]22}}
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Comparison of the CPU time to obtain $E_{\rm  min}$ for Eq. (\ref  {1D_Helmholtz_equation_application}) using the algorithm and the brute-force refinement. The blue color denotes the standard FEM, and the red color denotes the mixed FEM.\relax }}{23}{figure.caption.35}\protected@file@percent }
+\newlabel{CPU_algorithm_brute_force}{{18}{23}{Comparison of the CPU time to obtain $E_{\rm min}$ for Eq. (\ref {1D_Helmholtz_equation_application}) using the algorithm and the brute-force refinement. The blue color denotes the standard FEM, and the red color denotes the mixed FEM.\relax }{figure.caption.35}{}}
+\newlabel{CPU_algorithm_brute_force@cref}{{[figure][18][]18}{[1][22][]23}}
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Percentage of CPU time saved using the algorithm. The blue color denotes the standard FEM, and the red color denotes the mixed FEM.\relax }}{23}{figure.caption.36}\protected@file@percent }
+\newlabel{Percentage_CPU_Saved}{{19}{23}{Percentage of CPU time saved using the algorithm. The blue color denotes the standard FEM, and the red color denotes the mixed FEM.\relax }{figure.caption.36}{}}
+\newlabel{Percentage_CPU_Saved@cref}{{[figure][19][]19}{[1][22][]23}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusions}{23}{section.7}\protected@file@percent }
+\newlabel{paragraph on conclusion}{{7}{23}{Conclusions}{section.7}{}}
+\newlabel{paragraph on conclusion@cref}{{[section][7][]7}{[1][23][]23}}
+\citation{bazilevs2007weak}
+\@writefile{toc}{\let\numberline\tmptocnumberline}
+\@writefile{toc}{\contentsline {section}{\numberline {Appendix \nobreakspace  {}A}Derivation of the weak form}{24}{appendix.A}\protected@file@percent }
+\newlabel{weak form appendix}{{Appendix \nobreakspace  {}A}{24}{Derivation of the weak form}{appendix.A}{}}
+\newlabel{weak form appendix@cref}{{[appendix][1][2147483647]Appendix \nobreakspace  {}A}{[1][24][]24}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {Appendix \nobreakspace  {}A.1}The standard FEM}{24}{subsection.A.1}\protected@file@percent }
+\newlabel{derivation_weak_form_SM}{{Appendix \nobreakspace  {}A.1}{24}{The standard FEM}{subsection.A.1}{}}
+\newlabel{derivation_weak_form_SM@cref}{{[subappendix][1][2147483647,1]Appendix \nobreakspace  {}A.1}{[1][24][]24}}
+\newlabel{1D_general_inte}{{A.1}{24}{The standard FEM}{equation.A.1}{}}
+\newlabel{1D_general_inte@cref}{{[equation][1][2147483647,1]A.1}{[1][24][]24}}
+\newlabel{1D_general_gauss}{{A.2}{24}{The standard FEM}{equation.A.2}{}}
+\newlabel{1D_general_gauss@cref}{{[equation][2][2147483647,1]A.2}{[1][24][]24}}
+\newlabel{1D_general_SM_weak_form_no_boundary}{{A.3}{24}{The standard FEM}{equation.A.3}{}}
+\newlabel{1D_general_SM_weak_form_no_boundary@cref}{{[equation][3][2147483647,1]A.3}{[1][24][]24}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {Appendix \nobreakspace  {}A.2}The mixed FEM}{24}{subsection.A.2}\protected@file@percent }
+\newlabel{derivation_weak_form_MM}{{Appendix \nobreakspace  {}A.2}{24}{The mixed FEM}{subsection.A.2}{}}
+\newlabel{derivation_weak_form_MM@cref}{{[subappendix][2][2147483647,1]Appendix \nobreakspace  {}A.2}{[1][24][]24}}
+\newlabel{Gene_MM_weak1_inte}{{A.4a}{24}{The mixed FEM}{equation.A.1}{}}
+\newlabel{Gene_MM_weak1_inte@cref}{{[subequation][1][2147483647,4]A.4a}{[1][24][]24}}
+\newlabel{1D_Poisson_classical_Dint2}{{A.4b}{24}{The mixed FEM}{equation.A.2}{}}
+\newlabel{1D_Poisson_classical_Dint2@cref}{{[subequation][2][2147483647,4]A.4b}{[1][24][]24}}
+\@writefile{toc}{\contentsline {section}{\numberline {Appendix \nobreakspace  {}B}Numerical results of the benchmark diffusion and Helmholtz equations}{25}{appendix.B}\protected@file@percent }
+\newlabel{discretization_error_bench_diff_Helm}{{Appendix \nobreakspace  {}B}{25}{Numerical results of the benchmark diffusion and Helmholtz equations}{appendix.B}{}}
+\newlabel{discretization_error_bench_diff_Helm@cref}{{[appendix][2][2147483647]Appendix \nobreakspace  {}B}{[1][25][]25}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {Appendix \nobreakspace  {}B.1}The diffusion equation}{25}{subsection.B.1}\protected@file@percent }
+\newlabel{discretization_error_bench_diff}{{Appendix \nobreakspace  {}B.1}{25}{The diffusion equation}{subsection.B.1}{}}
+\newlabel{discretization_error_bench_diff@cref}{{[subappendix][1][2147483647,2]Appendix \nobreakspace  {}B.1}{[1][25][]25}}
+\newlabel{py_bench_diff_SM_solu}{{B.20(a)}{25}{Solution\relax }{figure.caption.37}{}}
+\newlabel{py_bench_diff_SM_solu@cref}{{[subfigure][1][2147483647,20]B.20(a)}{[1][25][]25}}
+\newlabel{sub@py_bench_diff_SM_solu}{{(a)}{25}{Solution\relax }{figure.caption.37}{}}
+\newlabel{sub@py_bench_diff_SM_solu@cref}{{[subfigure][1][2147483647,20]B.20(a)}{[1][25][]25}}
+\newlabel{py_bench_diff_SM_grad}{{B.20(b)}{25}{First derivative\relax }{figure.caption.37}{}}
+\newlabel{py_bench_diff_SM_grad@cref}{{[subfigure][2][2147483647,20]B.20(b)}{[1][25][]25}}
+\newlabel{sub@py_bench_diff_SM_grad}{{(b)}{25}{First derivative\relax }{figure.caption.37}{}}
+\newlabel{sub@py_bench_diff_SM_grad@cref}{{[subfigure][2][2147483647,20]B.20(b)}{[1][25][]25}}
+\newlabel{py_bench_diff_SM_2ndd}{{B.20(c)}{25}{Second derivative\relax }{figure.caption.37}{}}
+\newlabel{py_bench_diff_SM_2ndd@cref}{{[subfigure][3][2147483647,20]B.20(c)}{[1][25][]25}}
+\newlabel{sub@py_bench_diff_SM_2ndd}{{(c)}{25}{Second derivative\relax }{figure.caption.37}{}}
+\newlabel{sub@py_bench_diff_SM_2ndd@cref}{{[subfigure][3][2147483647,20]B.20(c)}{[1][25][]25}}
+\@writefile{lof}{\contentsline {figure}{\numberline {B.20}{\ignorespaces Absolute errors for the benchmark diffusion equation using the standard FEM.\relax }}{25}{figure.caption.37}\protected@file@percent }
+\newlabel{py_bench_diff_SM}{{B.20}{25}{Absolute errors for the benchmark diffusion equation using the standard FEM.\relax }{figure.caption.37}{}}
+\newlabel{py_bench_diff_SM@cref}{{[figure][20][2147483647]B.20}{[1][25][]25}}
+\newlabel{py_bench_diff_MM_solu}{{B.21(a)}{25}{Solution\relax }{figure.caption.38}{}}
+\newlabel{py_bench_diff_MM_solu@cref}{{[subfigure][1][2147483647,21]B.21(a)}{[1][25][]25}}
+\newlabel{sub@py_bench_diff_MM_solu}{{(a)}{25}{Solution\relax }{figure.caption.38}{}}
+\newlabel{sub@py_bench_diff_MM_solu@cref}{{[subfigure][1][2147483647,21]B.21(a)}{[1][25][]25}}
+\newlabel{py_bench_diff_MM_grad}{{B.21(b)}{25}{First derivative\relax }{figure.caption.38}{}}
+\newlabel{py_bench_diff_MM_grad@cref}{{[subfigure][2][2147483647,21]B.21(b)}{[1][25][]25}}
+\newlabel{sub@py_bench_diff_MM_grad}{{(b)}{25}{First derivative\relax }{figure.caption.38}{}}
+\newlabel{sub@py_bench_diff_MM_grad@cref}{{[subfigure][2][2147483647,21]B.21(b)}{[1][25][]25}}
+\newlabel{py_bench_diff_MM_2ndd}{{B.21(c)}{25}{Second derivative\relax }{figure.caption.38}{}}
+\newlabel{py_bench_diff_MM_2ndd@cref}{{[subfigure][3][2147483647,21]B.21(c)}{[1][25][]25}}
+\newlabel{sub@py_bench_diff_MM_2ndd}{{(c)}{25}{Second derivative\relax }{figure.caption.38}{}}
+\newlabel{sub@py_bench_diff_MM_2ndd@cref}{{[subfigure][3][2147483647,21]B.21(c)}{[1][25][]25}}
+\@writefile{lof}{\contentsline {figure}{\numberline {B.21}{\ignorespaces Absolute errors for the benchmark diffusion equation using the mixed FEM\relax }}{25}{figure.caption.38}\protected@file@percent }
+\newlabel{py_bench_diff_MM}{{B.21}{25}{Absolute errors for the benchmark diffusion equation using the mixed FEM\relax }{figure.caption.38}{}}
+\newlabel{py_bench_diff_MM@cref}{{[figure][21][2147483647]B.21}{[1][25][]25}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {Appendix \nobreakspace  {}B.2}The Helmholtz equation}{26}{subsection.B.2}\protected@file@percent }
+\newlabel{discretization_error_bench_Helm}{{Appendix \nobreakspace  {}B.2}{26}{The Helmholtz equation}{subsection.B.2}{}}
+\newlabel{discretization_error_bench_Helm@cref}{{[subappendix][2][2147483647,2]Appendix \nobreakspace  {}B.2}{[1][26][]26}}
+\newlabel{py_bench_Helm_SM_solu}{{B.22(a)}{26}{Solution\relax }{figure.caption.39}{}}
+\newlabel{py_bench_Helm_SM_solu@cref}{{[subfigure][1][2147483647,22]B.22(a)}{[1][26][]26}}
+\newlabel{sub@py_bench_Helm_SM_solu}{{(a)}{26}{Solution\relax }{figure.caption.39}{}}
+\newlabel{sub@py_bench_Helm_SM_solu@cref}{{[subfigure][1][2147483647,22]B.22(a)}{[1][26][]26}}
+\newlabel{py_bench_Helm_SM_grad}{{B.22(b)}{26}{First derivative\relax }{figure.caption.39}{}}
+\newlabel{py_bench_Helm_SM_grad@cref}{{[subfigure][2][2147483647,22]B.22(b)}{[1][26][]26}}
+\newlabel{sub@py_bench_Helm_SM_grad}{{(b)}{26}{First derivative\relax }{figure.caption.39}{}}
+\newlabel{sub@py_bench_Helm_SM_grad@cref}{{[subfigure][2][2147483647,22]B.22(b)}{[1][26][]26}}
+\newlabel{py_bench_Helm_SM_2ndd}{{B.22(c)}{26}{Second derivative\relax }{figure.caption.39}{}}
+\newlabel{py_bench_Helm_SM_2ndd@cref}{{[subfigure][3][2147483647,22]B.22(c)}{[1][26][]26}}
+\newlabel{sub@py_bench_Helm_SM_2ndd}{{(c)}{26}{Second derivative\relax }{figure.caption.39}{}}
+\newlabel{sub@py_bench_Helm_SM_2ndd@cref}{{[subfigure][3][2147483647,22]B.22(c)}{[1][26][]26}}
+\@writefile{lof}{\contentsline {figure}{\numberline {B.22}{\ignorespaces Absolute errors for the benchmark Helmholtz equation using the standard FEM.\relax }}{26}{figure.caption.39}\protected@file@percent }
+\newlabel{py_bench_Helm_SM}{{B.22}{26}{Absolute errors for the benchmark Helmholtz equation using the standard FEM.\relax }{figure.caption.39}{}}
+\newlabel{py_bench_Helm_SM@cref}{{[figure][22][2147483647]B.22}{[1][26][]26}}
+\newlabel{py_bench_Helm_MM_solu}{{B.23(a)}{26}{Solution\relax }{figure.caption.40}{}}
+\newlabel{py_bench_Helm_MM_solu@cref}{{[subfigure][1][2147483647,23]B.23(a)}{[1][26][]26}}
+\newlabel{sub@py_bench_Helm_MM_solu}{{(a)}{26}{Solution\relax }{figure.caption.40}{}}
+\newlabel{sub@py_bench_Helm_MM_solu@cref}{{[subfigure][1][2147483647,23]B.23(a)}{[1][26][]26}}
+\newlabel{py_bench_Helm_MM_grad}{{B.23(b)}{26}{First derivative\relax }{figure.caption.40}{}}
+\newlabel{py_bench_Helm_MM_grad@cref}{{[subfigure][2][2147483647,23]B.23(b)}{[1][26][]26}}
+\newlabel{sub@py_bench_Helm_MM_grad}{{(b)}{26}{First derivative\relax }{figure.caption.40}{}}
+\newlabel{sub@py_bench_Helm_MM_grad@cref}{{[subfigure][2][2147483647,23]B.23(b)}{[1][26][]26}}
+\newlabel{py_bench_Helm_MM_2ndd}{{B.23(c)}{26}{Second derivative\relax }{figure.caption.40}{}}
+\newlabel{py_bench_Helm_MM_2ndd@cref}{{[subfigure][3][2147483647,23]B.23(c)}{[1][26][]26}}
+\newlabel{sub@py_bench_Helm_MM_2ndd}{{(c)}{26}{Second derivative\relax }{figure.caption.40}{}}
+\newlabel{sub@py_bench_Helm_MM_2ndd@cref}{{[subfigure][3][2147483647,23]B.23(c)}{[1][26][]26}}
+\@writefile{lof}{\contentsline {figure}{\numberline {B.23}{\ignorespaces Absolute errors for the benchmark Helmholtz equation using the mixed FEM.\relax }}{26}{figure.caption.40}\protected@file@percent }
+\newlabel{py_bench_Helm_MM}{{B.23}{26}{Absolute errors for the benchmark Helmholtz equation using the mixed FEM.\relax }{figure.caption.40}{}}
+\newlabel{py_bench_Helm_MM@cref}{{[figure][23][2147483647]B.23}{[1][26][]26}}
+\@writefile{toc}{\contentsline {section}{\numberline {Appendix \nobreakspace  {}C}$L_2$ norms and absolute errors for different cases in Table \ref  {scaling_cases_Poisson}}{27}{appendix.C}\protected@file@percent }
+\newlabel{results_order_of_magnitude_other_cases}{{Appendix \nobreakspace  {}C}{27}{\texorpdfstring {$L_2$}{} norms and absolute errors for different cases in Table \ref {scaling_cases_Poisson}}{appendix.C}{}}
+\newlabel{results_order_of_magnitude_other_cases@cref}{{[appendix][3][2147483647]Appendix \nobreakspace  {}C}{[1][27][]27}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {Appendix \nobreakspace  {}C.1}$L_2$ norms}{27}{subsection.C.1}\protected@file@percent }
+\newlabel{L2_norm_scaling_cases}{{Appendix \nobreakspace  {}C.1}{27}{\texorpdfstring {$L_2$}{} norms}{subsection.C.1}{}}
+\newlabel{L2_norm_scaling_cases@cref}{{[subappendix][1][2147483647,3]Appendix \nobreakspace  {}C.1}{[1][27][]27}}
+\newlabel{L2_norm_case_1}{{C.24(a)}{27}{Case 1\relax }{figure.caption.41}{}}
+\newlabel{L2_norm_case_1@cref}{{[subfigure][1][2147483647,24]C.24(a)}{[1][27][]27}}
+\newlabel{sub@L2_norm_case_1}{{(a)}{27}{Case 1\relax }{figure.caption.41}{}}
+\newlabel{sub@L2_norm_case_1@cref}{{[subfigure][1][2147483647,24]C.24(a)}{[1][27][]27}}
+\newlabel{L2_norm_case_2}{{C.24(b)}{27}{Case 2\relax }{figure.caption.41}{}}
+\newlabel{L2_norm_case_2@cref}{{[subfigure][2][2147483647,24]C.24(b)}{[1][27][]27}}
+\newlabel{sub@L2_norm_case_2}{{(b)}{27}{Case 2\relax }{figure.caption.41}{}}
+\newlabel{sub@L2_norm_case_2@cref}{{[subfigure][2][2147483647,24]C.24(b)}{[1][27][]27}}
+\newlabel{L2_norm_case_3}{{C.24(c)}{27}{Case 3\relax }{figure.caption.41}{}}
+\newlabel{L2_norm_case_3@cref}{{[subfigure][3][2147483647,24]C.24(c)}{[1][27][]27}}
+\newlabel{sub@L2_norm_case_3}{{(c)}{27}{Case 3\relax }{figure.caption.41}{}}
+\newlabel{sub@L2_norm_case_3@cref}{{[subfigure][3][2147483647,24]C.24(c)}{[1][27][]27}}
+\newlabel{L2_norm_case_4}{{C.24(d)}{27}{Case 4\relax }{figure.caption.41}{}}
+\newlabel{L2_norm_case_4@cref}{{[subfigure][4][2147483647,24]C.24(d)}{[1][27][]27}}
+\newlabel{sub@L2_norm_case_4}{{(d)}{27}{Case 4\relax }{figure.caption.41}{}}
+\newlabel{sub@L2_norm_case_4@cref}{{[subfigure][4][2147483647,24]C.24(d)}{[1][27][]27}}
+\newlabel{L2_norm_case_5}{{C.24(e)}{27}{Case 5\relax }{figure.caption.41}{}}
+\newlabel{L2_norm_case_5@cref}{{[subfigure][5][2147483647,24]C.24(e)}{[1][27][]27}}
+\newlabel{sub@L2_norm_case_5}{{(e)}{27}{Case 5\relax }{figure.caption.41}{}}
+\newlabel{sub@L2_norm_case_5@cref}{{[subfigure][5][2147483647,24]C.24(e)}{[1][27][]27}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.24}{\ignorespaces $L_2$ norms of $u$, $u_{x}$ and $u_{xx}$ for different cases in Table \ref  {scaling_cases_Poisson}.\relax }}{27}{figure.caption.41}\protected@file@percent }
+\newlabel{L2_norms_cases_1_to_5}{{C.24}{27}{$L_2$ norms of $u$, $u_{x}$ and $u_{xx}$ for different cases in Table \ref {scaling_cases_Poisson}.\relax }{figure.caption.41}{}}
+\newlabel{L2_norms_cases_1_to_5@cref}{{[figure][24][2147483647]C.24}{[1][27][]27}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {Appendix \nobreakspace  {}C.2}Absolute errors}{28}{subsection.C.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {Appendix \nobreakspace  {}C.2.1}The standard FEM}{28}{subsubsection.C.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Case 2}{28}{section*.42}\protected@file@percent }
+\newlabel{py_L2_Pois2_SM_scaling_no_solu}{{C.25(a)}{28}{Solution\relax }{figure.caption.43}{}}
+\newlabel{py_L2_Pois2_SM_scaling_no_solu@cref}{{[subfigure][1][2147483647,25]C.25(a)}{[1][28][]28}}
+\newlabel{sub@py_L2_Pois2_SM_scaling_no_solu}{{(a)}{28}{Solution\relax }{figure.caption.43}{}}
+\newlabel{sub@py_L2_Pois2_SM_scaling_no_solu@cref}{{[subfigure][1][2147483647,25]C.25(a)}{[1][28][]28}}
+\newlabel{py_L2_Pois2_SM_scaling_no_grad}{{C.25(b)}{28}{First derivative\relax }{figure.caption.43}{}}
+\newlabel{py_L2_Pois2_SM_scaling_no_grad@cref}{{[subfigure][2][2147483647,25]C.25(b)}{[1][28][]28}}
+\newlabel{sub@py_L2_Pois2_SM_scaling_no_grad}{{(b)}{28}{First derivative\relax }{figure.caption.43}{}}
+\newlabel{sub@py_L2_Pois2_SM_scaling_no_grad@cref}{{[subfigure][2][2147483647,25]C.25(b)}{[1][28][]28}}
+\newlabel{py_L2_Pois2_SM_scaling_no_2ndd}{{C.25(c)}{28}{Second derivative\relax }{figure.caption.43}{}}
+\newlabel{py_L2_Pois2_SM_scaling_no_2ndd@cref}{{[subfigure][3][2147483647,25]C.25(c)}{[1][28][]28}}
+\newlabel{sub@py_L2_Pois2_SM_scaling_no_2ndd}{{(c)}{28}{Second derivative\relax }{figure.caption.43}{}}
+\newlabel{sub@py_L2_Pois2_SM_scaling_no_2ndd@cref}{{[subfigure][3][2147483647,25]C.25(c)}{[1][28][]28}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.25}{\ignorespaces Absolute errors for Case 2 in Table \ref  {scaling_cases_Poisson} using the standard FEM without scaling the right-hand side.\relax }}{28}{figure.caption.43}\protected@file@percent }
+\newlabel{py_L2_Pois2_SM_scaling_no}{{C.25}{28}{Absolute errors for Case 2 in Table \ref {scaling_cases_Poisson} using the standard FEM without scaling the right-hand side.\relax }{figure.caption.43}{}}
+\newlabel{py_L2_Pois2_SM_scaling_no@cref}{{[figure][25][2147483647]C.25}{[1][28][]28}}
+\newlabel{py_L2_Pois2_SM_scaling_S_solu}{{C.26(a)}{28}{Solution\relax }{figure.caption.44}{}}
+\newlabel{py_L2_Pois2_SM_scaling_S_solu@cref}{{[subfigure][1][2147483647,26]C.26(a)}{[1][28][]28}}
+\newlabel{sub@py_L2_Pois2_SM_scaling_S_solu}{{(a)}{28}{Solution\relax }{figure.caption.44}{}}
+\newlabel{sub@py_L2_Pois2_SM_scaling_S_solu@cref}{{[subfigure][1][2147483647,26]C.26(a)}{[1][28][]28}}
+\newlabel{py_L2_Pois2_SM_scaling_S_grad}{{C.26(b)}{28}{First derivative\relax }{figure.caption.44}{}}
+\newlabel{py_L2_Pois2_SM_scaling_S_grad@cref}{{[subfigure][2][2147483647,26]C.26(b)}{[1][28][]28}}
+\newlabel{sub@py_L2_Pois2_SM_scaling_S_grad}{{(b)}{28}{First derivative\relax }{figure.caption.44}{}}
+\newlabel{sub@py_L2_Pois2_SM_scaling_S_grad@cref}{{[subfigure][2][2147483647,26]C.26(b)}{[1][28][]28}}
+\newlabel{py_L2_Pois2_SM_scaling_S_2ndd}{{C.26(c)}{28}{Second derivative\relax }{figure.caption.44}{}}
+\newlabel{py_L2_Pois2_SM_scaling_S_2ndd@cref}{{[subfigure][3][2147483647,26]C.26(c)}{[1][28][]28}}
+\newlabel{sub@py_L2_Pois2_SM_scaling_S_2ndd}{{(c)}{28}{Second derivative\relax }{figure.caption.44}{}}
+\newlabel{sub@py_L2_Pois2_SM_scaling_S_2ndd@cref}{{[subfigure][3][2147483647,26]C.26(c)}{[1][28][]28}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.26}{\ignorespaces Absolute errors for Case 2 in Table \ref  {scaling_cases_Poisson} using scheme $S$.\relax }}{28}{figure.caption.44}\protected@file@percent }
+\newlabel{py_L2_Pois2_SM_scaling_S}{{C.26}{28}{Absolute errors for Case 2 in Table \ref {scaling_cases_Poisson} using scheme $S$.\relax }{figure.caption.44}{}}
+\newlabel{py_L2_Pois2_SM_scaling_S@cref}{{[figure][26][2147483647]C.26}{[1][28][]28}}
+\@writefile{toc}{\contentsline {paragraph}{Case 3}{28}{section*.45}\protected@file@percent }
+\newlabel{py_L2_Pois3_SM_scaling_no_solu}{{C.27(a)}{29}{Solution\relax }{figure.caption.46}{}}
+\newlabel{py_L2_Pois3_SM_scaling_no_solu@cref}{{[subfigure][1][2147483647,27]C.27(a)}{[1][28][]29}}
+\newlabel{sub@py_L2_Pois3_SM_scaling_no_solu}{{(a)}{29}{Solution\relax }{figure.caption.46}{}}
+\newlabel{sub@py_L2_Pois3_SM_scaling_no_solu@cref}{{[subfigure][1][2147483647,27]C.27(a)}{[1][28][]29}}
+\newlabel{py_L2_Pois3_SM_scaling_no_grad}{{C.27(b)}{29}{First derivative\relax }{figure.caption.46}{}}
+\newlabel{py_L2_Pois3_SM_scaling_no_grad@cref}{{[subfigure][2][2147483647,27]C.27(b)}{[1][28][]29}}
+\newlabel{sub@py_L2_Pois3_SM_scaling_no_grad}{{(b)}{29}{First derivative\relax }{figure.caption.46}{}}
+\newlabel{sub@py_L2_Pois3_SM_scaling_no_grad@cref}{{[subfigure][2][2147483647,27]C.27(b)}{[1][28][]29}}
+\newlabel{py_L2_Pois3_SM_scaling_no_2ndd}{{C.27(c)}{29}{Second derivative\relax }{figure.caption.46}{}}
+\newlabel{py_L2_Pois3_SM_scaling_no_2ndd@cref}{{[subfigure][3][2147483647,27]C.27(c)}{[1][28][]29}}
+\newlabel{sub@py_L2_Pois3_SM_scaling_no_2ndd}{{(c)}{29}{Second derivative\relax }{figure.caption.46}{}}
+\newlabel{sub@py_L2_Pois3_SM_scaling_no_2ndd@cref}{{[subfigure][3][2147483647,27]C.27(c)}{[1][28][]29}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.27}{\ignorespaces Absolute errors for Case 3 in Table \ref  {scaling_cases_Poisson} using the standard FEM without scaling the right-hand side.\relax }}{29}{figure.caption.46}\protected@file@percent }
+\newlabel{py_L2_Pois3_SM_scaling_no}{{C.27}{29}{Absolute errors for Case 3 in Table \ref {scaling_cases_Poisson} using the standard FEM without scaling the right-hand side.\relax }{figure.caption.46}{}}
+\newlabel{py_L2_Pois3_SM_scaling_no@cref}{{[figure][27][2147483647]C.27}{[1][28][]29}}
+\newlabel{py_L2_Pois3_SM_scaling_S_solu}{{C.28(a)}{29}{Solution\relax }{figure.caption.47}{}}
+\newlabel{py_L2_Pois3_SM_scaling_S_solu@cref}{{[subfigure][1][2147483647,28]C.28(a)}{[1][28][]29}}
+\newlabel{sub@py_L2_Pois3_SM_scaling_S_solu}{{(a)}{29}{Solution\relax }{figure.caption.47}{}}
+\newlabel{sub@py_L2_Pois3_SM_scaling_S_solu@cref}{{[subfigure][1][2147483647,28]C.28(a)}{[1][28][]29}}
+\newlabel{py_L2_Pois3_SM_scaling_S_grad}{{C.28(b)}{29}{First derivative\relax }{figure.caption.47}{}}
+\newlabel{py_L2_Pois3_SM_scaling_S_grad@cref}{{[subfigure][2][2147483647,28]C.28(b)}{[1][28][]29}}
+\newlabel{sub@py_L2_Pois3_SM_scaling_S_grad}{{(b)}{29}{First derivative\relax }{figure.caption.47}{}}
+\newlabel{sub@py_L2_Pois3_SM_scaling_S_grad@cref}{{[subfigure][2][2147483647,28]C.28(b)}{[1][28][]29}}
+\newlabel{py_L2_Pois3_SM_scaling_S_2ndd}{{C.28(c)}{29}{Second derivative\relax }{figure.caption.47}{}}
+\newlabel{py_L2_Pois3_SM_scaling_S_2ndd@cref}{{[subfigure][3][2147483647,28]C.28(c)}{[1][28][]29}}
+\newlabel{sub@py_L2_Pois3_SM_scaling_S_2ndd}{{(c)}{29}{Second derivative\relax }{figure.caption.47}{}}
+\newlabel{sub@py_L2_Pois3_SM_scaling_S_2ndd@cref}{{[subfigure][3][2147483647,28]C.28(c)}{[1][28][]29}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.28}{\ignorespaces Absolute errors of Case 3 in Table \ref  {scaling_cases_Poisson} using scheme $S$.\relax }}{29}{figure.caption.47}\protected@file@percent }
+\newlabel{py_L2_Pois3_SM_scaling_S}{{C.28}{29}{Absolute errors of Case 3 in Table \ref {scaling_cases_Poisson} using scheme $S$.\relax }{figure.caption.47}{}}
+\newlabel{py_L2_Pois3_SM_scaling_S@cref}{{[figure][28][2147483647]C.28}{[1][28][]29}}
+\@writefile{toc}{\contentsline {paragraph}{Case 4}{29}{section*.48}\protected@file@percent }
+\newlabel{py_L2_Pois4_SM_scaling_no_solu}{{C.29(a)}{29}{Solution\relax }{figure.caption.49}{}}
+\newlabel{py_L2_Pois4_SM_scaling_no_solu@cref}{{[subfigure][1][2147483647,29]C.29(a)}{[1][29][]29}}
+\newlabel{sub@py_L2_Pois4_SM_scaling_no_solu}{{(a)}{29}{Solution\relax }{figure.caption.49}{}}
+\newlabel{sub@py_L2_Pois4_SM_scaling_no_solu@cref}{{[subfigure][1][2147483647,29]C.29(a)}{[1][29][]29}}
+\newlabel{py_L2_Pois4_SM_scaling_no_grad}{{C.29(b)}{29}{First derivative\relax }{figure.caption.49}{}}
+\newlabel{py_L2_Pois4_SM_scaling_no_grad@cref}{{[subfigure][2][2147483647,29]C.29(b)}{[1][29][]29}}
+\newlabel{sub@py_L2_Pois4_SM_scaling_no_grad}{{(b)}{29}{First derivative\relax }{figure.caption.49}{}}
+\newlabel{sub@py_L2_Pois4_SM_scaling_no_grad@cref}{{[subfigure][2][2147483647,29]C.29(b)}{[1][29][]29}}
+\newlabel{py_L2_Pois4_SM_scaling_no_2ndd}{{C.29(c)}{29}{Second derivative\relax }{figure.caption.49}{}}
+\newlabel{py_L2_Pois4_SM_scaling_no_2ndd@cref}{{[subfigure][3][2147483647,29]C.29(c)}{[1][29][]29}}
+\newlabel{sub@py_L2_Pois4_SM_scaling_no_2ndd}{{(c)}{29}{Second derivative\relax }{figure.caption.49}{}}
+\newlabel{sub@py_L2_Pois4_SM_scaling_no_2ndd@cref}{{[subfigure][3][2147483647,29]C.29(c)}{[1][29][]29}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.29}{\ignorespaces Absolute errors for Case 4 in Table \ref  {scaling_cases_Poisson} using the standard FEM without scaling the right-hand side.\relax }}{29}{figure.caption.49}\protected@file@percent }
+\newlabel{py_L2_Pois4_SM_scaling_no}{{C.29}{29}{Absolute errors for Case 4 in Table \ref {scaling_cases_Poisson} using the standard FEM without scaling the right-hand side.\relax }{figure.caption.49}{}}
+\newlabel{py_L2_Pois4_SM_scaling_no@cref}{{[figure][29][2147483647]C.29}{[1][29][]29}}
+\@writefile{toc}{\contentsline {paragraph}{Case 5}{29}{section*.51}\protected@file@percent }
+\newlabel{py_L2_Pois4_SM_scaling_S_solu}{{C.30(a)}{30}{Solution\relax }{figure.caption.50}{}}
+\newlabel{py_L2_Pois4_SM_scaling_S_solu@cref}{{[subfigure][1][2147483647,30]C.30(a)}{[1][29][]30}}
+\newlabel{sub@py_L2_Pois4_SM_scaling_S_solu}{{(a)}{30}{Solution\relax }{figure.caption.50}{}}
+\newlabel{sub@py_L2_Pois4_SM_scaling_S_solu@cref}{{[subfigure][1][2147483647,30]C.30(a)}{[1][29][]30}}
+\newlabel{py_L2_Pois4_SM_scaling_S_grad}{{C.30(b)}{30}{First derivative\relax }{figure.caption.50}{}}
+\newlabel{py_L2_Pois4_SM_scaling_S_grad@cref}{{[subfigure][2][2147483647,30]C.30(b)}{[1][29][]30}}
+\newlabel{sub@py_L2_Pois4_SM_scaling_S_grad}{{(b)}{30}{First derivative\relax }{figure.caption.50}{}}
+\newlabel{sub@py_L2_Pois4_SM_scaling_S_grad@cref}{{[subfigure][2][2147483647,30]C.30(b)}{[1][29][]30}}
+\newlabel{py_L2_Pois4_SM_scaling_S_2ndd}{{C.30(c)}{30}{Second derivative\relax }{figure.caption.50}{}}
+\newlabel{py_L2_Pois4_SM_scaling_S_2ndd@cref}{{[subfigure][3][2147483647,30]C.30(c)}{[1][29][]30}}
+\newlabel{sub@py_L2_Pois4_SM_scaling_S_2ndd}{{(c)}{30}{Second derivative\relax }{figure.caption.50}{}}
+\newlabel{sub@py_L2_Pois4_SM_scaling_S_2ndd@cref}{{[subfigure][3][2147483647,30]C.30(c)}{[1][29][]30}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.30}{\ignorespaces Absolute errors of Case 4 in Table \ref  {scaling_cases_Poisson} using scheme $S$.\relax }}{30}{figure.caption.50}\protected@file@percent }
+\newlabel{py_L2_Pois4_SM_scaling_S}{{C.30}{30}{Absolute errors of Case 4 in Table \ref {scaling_cases_Poisson} using scheme $S$.\relax }{figure.caption.50}{}}
+\newlabel{py_L2_Pois4_SM_scaling_S@cref}{{[figure][30][2147483647]C.30}{[1][29][]30}}
+\newlabel{py_L2_Pois5_SM_scaling_no_solu}{{C.31(a)}{30}{Solution\relax }{figure.caption.52}{}}
+\newlabel{py_L2_Pois5_SM_scaling_no_solu@cref}{{[subfigure][1][2147483647,31]C.31(a)}{[1][29][]30}}
+\newlabel{sub@py_L2_Pois5_SM_scaling_no_solu}{{(a)}{30}{Solution\relax }{figure.caption.52}{}}
+\newlabel{sub@py_L2_Pois5_SM_scaling_no_solu@cref}{{[subfigure][1][2147483647,31]C.31(a)}{[1][29][]30}}
+\newlabel{py_L2_Pois5_SM_scaling_no_grad}{{C.31(b)}{30}{First derivative\relax }{figure.caption.52}{}}
+\newlabel{py_L2_Pois5_SM_scaling_no_grad@cref}{{[subfigure][2][2147483647,31]C.31(b)}{[1][29][]30}}
+\newlabel{sub@py_L2_Pois5_SM_scaling_no_grad}{{(b)}{30}{First derivative\relax }{figure.caption.52}{}}
+\newlabel{sub@py_L2_Pois5_SM_scaling_no_grad@cref}{{[subfigure][2][2147483647,31]C.31(b)}{[1][29][]30}}
+\newlabel{py_L2_Pois5_SM_scaling_no_2ndd}{{C.31(c)}{30}{Second derivative\relax }{figure.caption.52}{}}
+\newlabel{py_L2_Pois5_SM_scaling_no_2ndd@cref}{{[subfigure][3][2147483647,31]C.31(c)}{[1][29][]30}}
+\newlabel{sub@py_L2_Pois5_SM_scaling_no_2ndd}{{(c)}{30}{Second derivative\relax }{figure.caption.52}{}}
+\newlabel{sub@py_L2_Pois5_SM_scaling_no_2ndd@cref}{{[subfigure][3][2147483647,31]C.31(c)}{[1][29][]30}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.31}{\ignorespaces Absolute errors for Case 5 in Table \ref  {scaling_cases_Poisson} using the standard FEM without scaling the right-hand side.\relax }}{30}{figure.caption.52}\protected@file@percent }
+\newlabel{py_L2_Pois5_SM_scaling_no}{{C.31}{30}{Absolute errors for Case 5 in Table \ref {scaling_cases_Poisson} using the standard FEM without scaling the right-hand side.\relax }{figure.caption.52}{}}
+\newlabel{py_L2_Pois5_SM_scaling_no@cref}{{[figure][31][2147483647]C.31}{[1][29][]30}}
+\newlabel{py_L2_Pois5_SM_scaling_S_solu}{{C.32(a)}{30}{Solution\relax }{figure.caption.53}{}}
+\newlabel{py_L2_Pois5_SM_scaling_S_solu@cref}{{[subfigure][1][2147483647,32]C.32(a)}{[1][29][]30}}
+\newlabel{sub@py_L2_Pois5_SM_scaling_S_solu}{{(a)}{30}{Solution\relax }{figure.caption.53}{}}
+\newlabel{sub@py_L2_Pois5_SM_scaling_S_solu@cref}{{[subfigure][1][2147483647,32]C.32(a)}{[1][29][]30}}
+\newlabel{py_L2_Pois5_SM_scaling_S_grad}{{C.32(b)}{30}{First derivative\relax }{figure.caption.53}{}}
+\newlabel{py_L2_Pois5_SM_scaling_S_grad@cref}{{[subfigure][2][2147483647,32]C.32(b)}{[1][29][]30}}
+\newlabel{sub@py_L2_Pois5_SM_scaling_S_grad}{{(b)}{30}{First derivative\relax }{figure.caption.53}{}}
+\newlabel{sub@py_L2_Pois5_SM_scaling_S_grad@cref}{{[subfigure][2][2147483647,32]C.32(b)}{[1][29][]30}}
+\newlabel{py_L2_Pois5_SM_scaling_S_2ndd}{{C.32(c)}{30}{Second derivative\relax }{figure.caption.53}{}}
+\newlabel{py_L2_Pois5_SM_scaling_S_2ndd@cref}{{[subfigure][3][2147483647,32]C.32(c)}{[1][29][]30}}
+\newlabel{sub@py_L2_Pois5_SM_scaling_S_2ndd}{{(c)}{30}{Second derivative\relax }{figure.caption.53}{}}
+\newlabel{sub@py_L2_Pois5_SM_scaling_S_2ndd@cref}{{[subfigure][3][2147483647,32]C.32(c)}{[1][29][]30}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.32}{\ignorespaces Absolute errors of Case 5 in Table \ref  {scaling_cases_Poisson} using scheme $S$.\relax }}{30}{figure.caption.53}\protected@file@percent }
+\newlabel{py_L2_Pois5_SM_scaling_S}{{C.32}{30}{Absolute errors of Case 5 in Table \ref {scaling_cases_Poisson} using scheme $S$.\relax }{figure.caption.53}{}}
+\newlabel{py_L2_Pois5_SM_scaling_S@cref}{{[figure][32][2147483647]C.32}{[1][29][]30}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {Appendix \nobreakspace  {}C.2.2}The mixed FEM}{30}{subsubsection.C.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Case 2}{30}{section*.54}\protected@file@percent }
+\newlabel{py_L2_Pois2_MM_scaling_no_solu}{{C.33(a)}{31}{Solution\relax }{figure.caption.55}{}}
+\newlabel{py_L2_Pois2_MM_scaling_no_solu@cref}{{[subfigure][1][2147483647,33]C.33(a)}{[1][30][]31}}
+\newlabel{sub@py_L2_Pois2_MM_scaling_no_solu}{{(a)}{31}{Solution\relax }{figure.caption.55}{}}
+\newlabel{sub@py_L2_Pois2_MM_scaling_no_solu@cref}{{[subfigure][1][2147483647,33]C.33(a)}{[1][30][]31}}
+\newlabel{py_L2_Pois2_MM_scaling_no_grad}{{C.33(b)}{31}{First derivative\relax }{figure.caption.55}{}}
+\newlabel{py_L2_Pois2_MM_scaling_no_grad@cref}{{[subfigure][2][2147483647,33]C.33(b)}{[1][30][]31}}
+\newlabel{sub@py_L2_Pois2_MM_scaling_no_grad}{{(b)}{31}{First derivative\relax }{figure.caption.55}{}}
+\newlabel{sub@py_L2_Pois2_MM_scaling_no_grad@cref}{{[subfigure][2][2147483647,33]C.33(b)}{[1][30][]31}}
+\newlabel{py_L2_Pois2_MM_scaling_no_2ndd}{{C.33(c)}{31}{Second derivative\relax }{figure.caption.55}{}}
+\newlabel{py_L2_Pois2_MM_scaling_no_2ndd@cref}{{[subfigure][3][2147483647,33]C.33(c)}{[1][30][]31}}
+\newlabel{sub@py_L2_Pois2_MM_scaling_no_2ndd}{{(c)}{31}{Second derivative\relax }{figure.caption.55}{}}
+\newlabel{sub@py_L2_Pois2_MM_scaling_no_2ndd@cref}{{[subfigure][3][2147483647,33]C.33(c)}{[1][30][]31}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.33}{\ignorespaces Absolute errors for Case 2 in Table \ref  {scaling_cases_Poisson} using the mixed FEM without scaling the right-hand side.\relax }}{31}{figure.caption.55}\protected@file@percent }
+\newlabel{py_L2_Pois2_MM_scaling_no}{{C.33}{31}{Absolute errors for Case 2 in Table \ref {scaling_cases_Poisson} using the mixed FEM without scaling the right-hand side.\relax }{figure.caption.55}{}}
+\newlabel{py_L2_Pois2_MM_scaling_no@cref}{{[figure][33][2147483647]C.33}{[1][30][]31}}
+\newlabel{py_L2_Pois2_MM_scaling_M1_solu}{{C.34(a)}{31}{Solution\relax }{figure.caption.56}{}}
+\newlabel{py_L2_Pois2_MM_scaling_M1_solu@cref}{{[subfigure][1][2147483647,34]C.34(a)}{[1][30][]31}}
+\newlabel{sub@py_L2_Pois2_MM_scaling_M1_solu}{{(a)}{31}{Solution\relax }{figure.caption.56}{}}
+\newlabel{sub@py_L2_Pois2_MM_scaling_M1_solu@cref}{{[subfigure][1][2147483647,34]C.34(a)}{[1][30][]31}}
+\newlabel{py_L2_Pois2_MM_scaling_M1_grad}{{C.34(b)}{31}{First derivative\relax }{figure.caption.56}{}}
+\newlabel{py_L2_Pois2_MM_scaling_M1_grad@cref}{{[subfigure][2][2147483647,34]C.34(b)}{[1][30][]31}}
+\newlabel{sub@py_L2_Pois2_MM_scaling_M1_grad}{{(b)}{31}{First derivative\relax }{figure.caption.56}{}}
+\newlabel{sub@py_L2_Pois2_MM_scaling_M1_grad@cref}{{[subfigure][2][2147483647,34]C.34(b)}{[1][30][]31}}
+\newlabel{py_L2_Pois2_MM_scaling_M1_2ndd}{{C.34(c)}{31}{Second derivative\relax }{figure.caption.56}{}}
+\newlabel{py_L2_Pois2_MM_scaling_M1_2ndd@cref}{{[subfigure][3][2147483647,34]C.34(c)}{[1][30][]31}}
+\newlabel{sub@py_L2_Pois2_MM_scaling_M1_2ndd}{{(c)}{31}{Second derivative\relax }{figure.caption.56}{}}
+\newlabel{sub@py_L2_Pois2_MM_scaling_M1_2ndd@cref}{{[subfigure][3][2147483647,34]C.34(c)}{[1][30][]31}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.34}{\ignorespaces Absolute errors for Case 2 in Table \ref  {scaling_cases_Poisson} using scheme $M_1$.\relax }}{31}{figure.caption.56}\protected@file@percent }
+\newlabel{py_L2_Pois2_MM_scaling_M1}{{C.34}{31}{Absolute errors for Case 2 in Table \ref {scaling_cases_Poisson} using scheme $M_1$.\relax }{figure.caption.56}{}}
+\newlabel{py_L2_Pois2_MM_scaling_M1@cref}{{[figure][34][2147483647]C.34}{[1][30][]31}}
+\newlabel{py_L2_Pois2_MM_scaling_M2_solu}{{C.35(a)}{31}{Solution\relax }{figure.caption.57}{}}
+\newlabel{py_L2_Pois2_MM_scaling_M2_solu@cref}{{[subfigure][1][2147483647,35]C.35(a)}{[1][30][]31}}
+\newlabel{sub@py_L2_Pois2_MM_scaling_M2_solu}{{(a)}{31}{Solution\relax }{figure.caption.57}{}}
+\newlabel{sub@py_L2_Pois2_MM_scaling_M2_solu@cref}{{[subfigure][1][2147483647,35]C.35(a)}{[1][30][]31}}
+\newlabel{py_L2_Pois2_MM_scaling_M2_grad}{{C.35(b)}{31}{First derivative\relax }{figure.caption.57}{}}
+\newlabel{py_L2_Pois2_MM_scaling_M2_grad@cref}{{[subfigure][2][2147483647,35]C.35(b)}{[1][30][]31}}
+\newlabel{sub@py_L2_Pois2_MM_scaling_M2_grad}{{(b)}{31}{First derivative\relax }{figure.caption.57}{}}
+\newlabel{sub@py_L2_Pois2_MM_scaling_M2_grad@cref}{{[subfigure][2][2147483647,35]C.35(b)}{[1][30][]31}}
+\newlabel{py_L2_Pois2_MM_scaling_M2_2ndd}{{C.35(c)}{31}{Second derivative\relax }{figure.caption.57}{}}
+\newlabel{py_L2_Pois2_MM_scaling_M2_2ndd@cref}{{[subfigure][3][2147483647,35]C.35(c)}{[1][30][]31}}
+\newlabel{sub@py_L2_Pois2_MM_scaling_M2_2ndd}{{(c)}{31}{Second derivative\relax }{figure.caption.57}{}}
+\newlabel{sub@py_L2_Pois2_MM_scaling_M2_2ndd@cref}{{[subfigure][3][2147483647,35]C.35(c)}{[1][30][]31}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.35}{\ignorespaces Absolute errors for Case 2 in Table \ref  {scaling_cases_Poisson} using scheme $M_2$.\relax }}{31}{figure.caption.57}\protected@file@percent }
+\newlabel{py_L2_Pois2_MM_scaling_M2}{{C.35}{31}{Absolute errors for Case 2 in Table \ref {scaling_cases_Poisson} using scheme $M_2$.\relax }{figure.caption.57}{}}
+\newlabel{py_L2_Pois2_MM_scaling_M2@cref}{{[figure][35][2147483647]C.35}{[1][30][]31}}
+\@writefile{toc}{\contentsline {paragraph}{Case 3}{31}{section*.58}\protected@file@percent }
+\newlabel{py_L2_Pois3_MM_scaling_no_solu}{{C.36(a)}{32}{Solution\relax }{figure.caption.59}{}}
+\newlabel{py_L2_Pois3_MM_scaling_no_solu@cref}{{[subfigure][1][2147483647,36]C.36(a)}{[1][31][]32}}
+\newlabel{sub@py_L2_Pois3_MM_scaling_no_solu}{{(a)}{32}{Solution\relax }{figure.caption.59}{}}
+\newlabel{sub@py_L2_Pois3_MM_scaling_no_solu@cref}{{[subfigure][1][2147483647,36]C.36(a)}{[1][31][]32}}
+\newlabel{py_L2_Pois3_MM_scaling_no_grad}{{C.36(b)}{32}{First derivative\relax }{figure.caption.59}{}}
+\newlabel{py_L2_Pois3_MM_scaling_no_grad@cref}{{[subfigure][2][2147483647,36]C.36(b)}{[1][31][]32}}
+\newlabel{sub@py_L2_Pois3_MM_scaling_no_grad}{{(b)}{32}{First derivative\relax }{figure.caption.59}{}}
+\newlabel{sub@py_L2_Pois3_MM_scaling_no_grad@cref}{{[subfigure][2][2147483647,36]C.36(b)}{[1][31][]32}}
+\newlabel{py_L2_Pois3_MM_scaling_no_2ndd}{{C.36(c)}{32}{Second derivative\relax }{figure.caption.59}{}}
+\newlabel{py_L2_Pois3_MM_scaling_no_2ndd@cref}{{[subfigure][3][2147483647,36]C.36(c)}{[1][31][]32}}
+\newlabel{sub@py_L2_Pois3_MM_scaling_no_2ndd}{{(c)}{32}{Second derivative\relax }{figure.caption.59}{}}
+\newlabel{sub@py_L2_Pois3_MM_scaling_no_2ndd@cref}{{[subfigure][3][2147483647,36]C.36(c)}{[1][31][]32}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.36}{\ignorespaces Absolute errors for Case 3 in Table \ref  {scaling_cases_Poisson} using the mixed FEM without scaling the right-hand side.\relax }}{32}{figure.caption.59}\protected@file@percent }
+\newlabel{py_L2_Pois3_MM_scaling_no}{{C.36}{32}{Absolute errors for Case 3 in Table \ref {scaling_cases_Poisson} using the mixed FEM without scaling the right-hand side.\relax }{figure.caption.59}{}}
+\newlabel{py_L2_Pois3_MM_scaling_no@cref}{{[figure][36][2147483647]C.36}{[1][31][]32}}
+\newlabel{py_L2_Pois3_MM_scaling_M1_solu}{{C.37(a)}{32}{Solution\relax }{figure.caption.60}{}}
+\newlabel{py_L2_Pois3_MM_scaling_M1_solu@cref}{{[subfigure][1][2147483647,37]C.37(a)}{[1][31][]32}}
+\newlabel{sub@py_L2_Pois3_MM_scaling_M1_solu}{{(a)}{32}{Solution\relax }{figure.caption.60}{}}
+\newlabel{sub@py_L2_Pois3_MM_scaling_M1_solu@cref}{{[subfigure][1][2147483647,37]C.37(a)}{[1][31][]32}}
+\newlabel{py_L2_Pois3_MM_scaling_M1_grad}{{C.37(b)}{32}{First derivative\relax }{figure.caption.60}{}}
+\newlabel{py_L2_Pois3_MM_scaling_M1_grad@cref}{{[subfigure][2][2147483647,37]C.37(b)}{[1][31][]32}}
+\newlabel{sub@py_L2_Pois3_MM_scaling_M1_grad}{{(b)}{32}{First derivative\relax }{figure.caption.60}{}}
+\newlabel{sub@py_L2_Pois3_MM_scaling_M1_grad@cref}{{[subfigure][2][2147483647,37]C.37(b)}{[1][31][]32}}
+\newlabel{py_L2_Pois3_MM_scaling_M1_2ndd}{{C.37(c)}{32}{Second derivative\relax }{figure.caption.60}{}}
+\newlabel{py_L2_Pois3_MM_scaling_M1_2ndd@cref}{{[subfigure][3][2147483647,37]C.37(c)}{[1][31][]32}}
+\newlabel{sub@py_L2_Pois3_MM_scaling_M1_2ndd}{{(c)}{32}{Second derivative\relax }{figure.caption.60}{}}
+\newlabel{sub@py_L2_Pois3_MM_scaling_M1_2ndd@cref}{{[subfigure][3][2147483647,37]C.37(c)}{[1][31][]32}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.37}{\ignorespaces Absolute errors for Case 3 in Table \ref  {scaling_cases_Poisson} using scheme $M_1$.\relax }}{32}{figure.caption.60}\protected@file@percent }
+\newlabel{py_L2_Pois3_MM_scaling_M1}{{C.37}{32}{Absolute errors for Case 3 in Table \ref {scaling_cases_Poisson} using scheme $M_1$.\relax }{figure.caption.60}{}}
+\newlabel{py_L2_Pois3_MM_scaling_M1@cref}{{[figure][37][2147483647]C.37}{[1][31][]32}}
+\newlabel{py_L2_Pois3_MM_scaling_M2_solu}{{C.38(a)}{32}{Solution\relax }{figure.caption.61}{}}
+\newlabel{py_L2_Pois3_MM_scaling_M2_solu@cref}{{[subfigure][1][2147483647,38]C.38(a)}{[1][31][]32}}
+\newlabel{sub@py_L2_Pois3_MM_scaling_M2_solu}{{(a)}{32}{Solution\relax }{figure.caption.61}{}}
+\newlabel{sub@py_L2_Pois3_MM_scaling_M2_solu@cref}{{[subfigure][1][2147483647,38]C.38(a)}{[1][31][]32}}
+\newlabel{py_L2_Pois3_MM_scaling_M2_grad}{{C.38(b)}{32}{First derivative\relax }{figure.caption.61}{}}
+\newlabel{py_L2_Pois3_MM_scaling_M2_grad@cref}{{[subfigure][2][2147483647,38]C.38(b)}{[1][31][]32}}
+\newlabel{sub@py_L2_Pois3_MM_scaling_M2_grad}{{(b)}{32}{First derivative\relax }{figure.caption.61}{}}
+\newlabel{sub@py_L2_Pois3_MM_scaling_M2_grad@cref}{{[subfigure][2][2147483647,38]C.38(b)}{[1][31][]32}}
+\newlabel{py_L2_Pois3_MM_scaling_M2_2ndd}{{C.38(c)}{32}{Second derivative\relax }{figure.caption.61}{}}
+\newlabel{py_L2_Pois3_MM_scaling_M2_2ndd@cref}{{[subfigure][3][2147483647,38]C.38(c)}{[1][31][]32}}
+\newlabel{sub@py_L2_Pois3_MM_scaling_M2_2ndd}{{(c)}{32}{Second derivative\relax }{figure.caption.61}{}}
+\newlabel{sub@py_L2_Pois3_MM_scaling_M2_2ndd@cref}{{[subfigure][3][2147483647,38]C.38(c)}{[1][31][]32}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.38}{\ignorespaces Absolute errors for Case 3 in Table \ref  {scaling_cases_Poisson} using scheme $M_2$.\relax }}{32}{figure.caption.61}\protected@file@percent }
+\newlabel{py_L2_Pois3_MM_scaling_M2}{{C.38}{32}{Absolute errors for Case 3 in Table \ref {scaling_cases_Poisson} using scheme $M_2$.\relax }{figure.caption.61}{}}
+\newlabel{py_L2_Pois3_MM_scaling_M2@cref}{{[figure][38][2147483647]C.38}{[1][31][]32}}
+\@writefile{toc}{\contentsline {paragraph}{Case 4}{32}{section*.62}\protected@file@percent }
+\newlabel{py_L2_Pois4_MM_scaling_no_solu}{{C.39(a)}{33}{Solution\relax }{figure.caption.63}{}}
+\newlabel{py_L2_Pois4_MM_scaling_no_solu@cref}{{[subfigure][1][2147483647,39]C.39(a)}{[1][32][]33}}
+\newlabel{sub@py_L2_Pois4_MM_scaling_no_solu}{{(a)}{33}{Solution\relax }{figure.caption.63}{}}
+\newlabel{sub@py_L2_Pois4_MM_scaling_no_solu@cref}{{[subfigure][1][2147483647,39]C.39(a)}{[1][32][]33}}
+\newlabel{py_L2_Pois4_MM_scaling_no_grad}{{C.39(b)}{33}{First derivative\relax }{figure.caption.63}{}}
+\newlabel{py_L2_Pois4_MM_scaling_no_grad@cref}{{[subfigure][2][2147483647,39]C.39(b)}{[1][32][]33}}
+\newlabel{sub@py_L2_Pois4_MM_scaling_no_grad}{{(b)}{33}{First derivative\relax }{figure.caption.63}{}}
+\newlabel{sub@py_L2_Pois4_MM_scaling_no_grad@cref}{{[subfigure][2][2147483647,39]C.39(b)}{[1][32][]33}}
+\newlabel{py_L2_Pois4_MM_scaling_no_2ndd}{{C.39(c)}{33}{Second derivative\relax }{figure.caption.63}{}}
+\newlabel{py_L2_Pois4_MM_scaling_no_2ndd@cref}{{[subfigure][3][2147483647,39]C.39(c)}{[1][32][]33}}
+\newlabel{sub@py_L2_Pois4_MM_scaling_no_2ndd}{{(c)}{33}{Second derivative\relax }{figure.caption.63}{}}
+\newlabel{sub@py_L2_Pois4_MM_scaling_no_2ndd@cref}{{[subfigure][3][2147483647,39]C.39(c)}{[1][32][]33}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.39}{\ignorespaces Absolute errors for Case 4 in Table \ref  {scaling_cases_Poisson} using the mixed FEM without scaling the right-hand side.\relax }}{33}{figure.caption.63}\protected@file@percent }
+\newlabel{py_L2_Pois4_MM_scaling_no}{{C.39}{33}{Absolute errors for Case 4 in Table \ref {scaling_cases_Poisson} using the mixed FEM without scaling the right-hand side.\relax }{figure.caption.63}{}}
+\newlabel{py_L2_Pois4_MM_scaling_no@cref}{{[figure][39][2147483647]C.39}{[1][32][]33}}
+\newlabel{py_L2_Pois4_MM_scaling_M1_solu}{{C.40(a)}{33}{Solution\relax }{figure.caption.64}{}}
+\newlabel{py_L2_Pois4_MM_scaling_M1_solu@cref}{{[subfigure][1][2147483647,40]C.40(a)}{[1][32][]33}}
+\newlabel{sub@py_L2_Pois4_MM_scaling_M1_solu}{{(a)}{33}{Solution\relax }{figure.caption.64}{}}
+\newlabel{sub@py_L2_Pois4_MM_scaling_M1_solu@cref}{{[subfigure][1][2147483647,40]C.40(a)}{[1][32][]33}}
+\newlabel{py_L2_Pois4_MM_scaling_M1_grad}{{C.40(b)}{33}{First derivative\relax }{figure.caption.64}{}}
+\newlabel{py_L2_Pois4_MM_scaling_M1_grad@cref}{{[subfigure][2][2147483647,40]C.40(b)}{[1][32][]33}}
+\newlabel{sub@py_L2_Pois4_MM_scaling_M1_grad}{{(b)}{33}{First derivative\relax }{figure.caption.64}{}}
+\newlabel{sub@py_L2_Pois4_MM_scaling_M1_grad@cref}{{[subfigure][2][2147483647,40]C.40(b)}{[1][32][]33}}
+\newlabel{py_L2_Pois4_MM_scaling_M1_2ndd}{{C.40(c)}{33}{Second derivative\relax }{figure.caption.64}{}}
+\newlabel{py_L2_Pois4_MM_scaling_M1_2ndd@cref}{{[subfigure][3][2147483647,40]C.40(c)}{[1][32][]33}}
+\newlabel{sub@py_L2_Pois4_MM_scaling_M1_2ndd}{{(c)}{33}{Second derivative\relax }{figure.caption.64}{}}
+\newlabel{sub@py_L2_Pois4_MM_scaling_M1_2ndd@cref}{{[subfigure][3][2147483647,40]C.40(c)}{[1][32][]33}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.40}{\ignorespaces Absolute errors for Case 4 in Table \ref  {scaling_cases_Poisson} using scheme $M_1$.\relax }}{33}{figure.caption.64}\protected@file@percent }
+\newlabel{py_L2_Pois4_MM_scaling_M1}{{C.40}{33}{Absolute errors for Case 4 in Table \ref {scaling_cases_Poisson} using scheme $M_1$.\relax }{figure.caption.64}{}}
+\newlabel{py_L2_Pois4_MM_scaling_M1@cref}{{[figure][40][2147483647]C.40}{[1][32][]33}}
+\newlabel{py_L2_Pois4_MM_scaling_M2_solu}{{C.41(a)}{33}{Solution\relax }{figure.caption.65}{}}
+\newlabel{py_L2_Pois4_MM_scaling_M2_solu@cref}{{[subfigure][1][2147483647,41]C.41(a)}{[1][32][]33}}
+\newlabel{sub@py_L2_Pois4_MM_scaling_M2_solu}{{(a)}{33}{Solution\relax }{figure.caption.65}{}}
+\newlabel{sub@py_L2_Pois4_MM_scaling_M2_solu@cref}{{[subfigure][1][2147483647,41]C.41(a)}{[1][32][]33}}
+\newlabel{py_L2_Pois4_MM_scaling_M2_grad}{{C.41(b)}{33}{First derivative\relax }{figure.caption.65}{}}
+\newlabel{py_L2_Pois4_MM_scaling_M2_grad@cref}{{[subfigure][2][2147483647,41]C.41(b)}{[1][32][]33}}
+\newlabel{sub@py_L2_Pois4_MM_scaling_M2_grad}{{(b)}{33}{First derivative\relax }{figure.caption.65}{}}
+\newlabel{sub@py_L2_Pois4_MM_scaling_M2_grad@cref}{{[subfigure][2][2147483647,41]C.41(b)}{[1][32][]33}}
+\newlabel{py_L2_Pois4_MM_scaling_M2_2ndd}{{C.41(c)}{33}{Second derivative\relax }{figure.caption.65}{}}
+\newlabel{py_L2_Pois4_MM_scaling_M2_2ndd@cref}{{[subfigure][3][2147483647,41]C.41(c)}{[1][32][]33}}
+\newlabel{sub@py_L2_Pois4_MM_scaling_M2_2ndd}{{(c)}{33}{Second derivative\relax }{figure.caption.65}{}}
+\newlabel{sub@py_L2_Pois4_MM_scaling_M2_2ndd@cref}{{[subfigure][3][2147483647,41]C.41(c)}{[1][32][]33}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.41}{\ignorespaces Absolute errors for Case 4 in Table \ref  {scaling_cases_Poisson} using scheme $M_2$.\relax }}{33}{figure.caption.65}\protected@file@percent }
+\newlabel{py_L2_Pois4_MM_scaling_M2}{{C.41}{33}{Absolute errors for Case 4 in Table \ref {scaling_cases_Poisson} using scheme $M_2$.\relax }{figure.caption.65}{}}
+\newlabel{py_L2_Pois4_MM_scaling_M2@cref}{{[figure][41][2147483647]C.41}{[1][32][]33}}
+\@writefile{toc}{\contentsline {paragraph}{Case 5}{33}{section*.66}\protected@file@percent }
+\bibstyle{unsrt}
+\bibdata{mybibfile}
+\bibcite{Kumar2016}{{1}{}{{}}{{}}}
+\bibcite{carey1982derivative}{{2}{}{{}}{{}}}
+\bibcite{ferziger2012computational}{{3}{}{{}}{{}}}
+\bibcite{zuras2008ieee}{{4}{}{{}}{{}}}
+\newlabel{py_L2_Pois5_MM_scaling_no_solu}{{C.42(a)}{34}{Solution\relax }{figure.caption.67}{}}
+\newlabel{py_L2_Pois5_MM_scaling_no_solu@cref}{{[subfigure][1][2147483647,42]C.42(a)}{[1][33][]34}}
+\newlabel{sub@py_L2_Pois5_MM_scaling_no_solu}{{(a)}{34}{Solution\relax }{figure.caption.67}{}}
+\newlabel{sub@py_L2_Pois5_MM_scaling_no_solu@cref}{{[subfigure][1][2147483647,42]C.42(a)}{[1][33][]34}}
+\newlabel{py_L2_Pois5_MM_scaling_no_grad}{{C.42(b)}{34}{First derivative\relax }{figure.caption.67}{}}
+\newlabel{py_L2_Pois5_MM_scaling_no_grad@cref}{{[subfigure][2][2147483647,42]C.42(b)}{[1][33][]34}}
+\newlabel{sub@py_L2_Pois5_MM_scaling_no_grad}{{(b)}{34}{First derivative\relax }{figure.caption.67}{}}
+\newlabel{sub@py_L2_Pois5_MM_scaling_no_grad@cref}{{[subfigure][2][2147483647,42]C.42(b)}{[1][33][]34}}
+\newlabel{py_L2_Pois5_MM_scaling_no_2ndd}{{C.42(c)}{34}{Second derivative\relax }{figure.caption.67}{}}
+\newlabel{py_L2_Pois5_MM_scaling_no_2ndd@cref}{{[subfigure][3][2147483647,42]C.42(c)}{[1][33][]34}}
+\newlabel{sub@py_L2_Pois5_MM_scaling_no_2ndd}{{(c)}{34}{Second derivative\relax }{figure.caption.67}{}}
+\newlabel{sub@py_L2_Pois5_MM_scaling_no_2ndd@cref}{{[subfigure][3][2147483647,42]C.42(c)}{[1][33][]34}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.42}{\ignorespaces Absolute errors for Case 5 in Table \ref  {scaling_cases_Poisson} using the mixed FEM without scaling the right-hand side.\relax }}{34}{figure.caption.67}\protected@file@percent }
+\newlabel{py_L2_Pois5_MM_scaling_no}{{C.42}{34}{Absolute errors for Case 5 in Table \ref {scaling_cases_Poisson} using the mixed FEM without scaling the right-hand side.\relax }{figure.caption.67}{}}
+\newlabel{py_L2_Pois5_MM_scaling_no@cref}{{[figure][42][2147483647]C.42}{[1][33][]34}}
+\newlabel{py_L2_Pois5_MM_scaling_M1_solu}{{C.43(a)}{34}{Solution\relax }{figure.caption.68}{}}
+\newlabel{py_L2_Pois5_MM_scaling_M1_solu@cref}{{[subfigure][1][2147483647,43]C.43(a)}{[1][33][]34}}
+\newlabel{sub@py_L2_Pois5_MM_scaling_M1_solu}{{(a)}{34}{Solution\relax }{figure.caption.68}{}}
+\newlabel{sub@py_L2_Pois5_MM_scaling_M1_solu@cref}{{[subfigure][1][2147483647,43]C.43(a)}{[1][33][]34}}
+\newlabel{py_L2_Pois5_MM_scaling_M1_grad}{{C.43(b)}{34}{First derivative\relax }{figure.caption.68}{}}
+\newlabel{py_L2_Pois5_MM_scaling_M1_grad@cref}{{[subfigure][2][2147483647,43]C.43(b)}{[1][33][]34}}
+\newlabel{sub@py_L2_Pois5_MM_scaling_M1_grad}{{(b)}{34}{First derivative\relax }{figure.caption.68}{}}
+\newlabel{sub@py_L2_Pois5_MM_scaling_M1_grad@cref}{{[subfigure][2][2147483647,43]C.43(b)}{[1][33][]34}}
+\newlabel{py_L2_Pois5_MM_scaling_M1_2ndd}{{C.43(c)}{34}{Second derivative\relax }{figure.caption.68}{}}
+\newlabel{py_L2_Pois5_MM_scaling_M1_2ndd@cref}{{[subfigure][3][2147483647,43]C.43(c)}{[1][33][]34}}
+\newlabel{sub@py_L2_Pois5_MM_scaling_M1_2ndd}{{(c)}{34}{Second derivative\relax }{figure.caption.68}{}}
+\newlabel{sub@py_L2_Pois5_MM_scaling_M1_2ndd@cref}{{[subfigure][3][2147483647,43]C.43(c)}{[1][33][]34}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.43}{\ignorespaces Absolute errors for Case 5 in Table \ref  {scaling_cases_Poisson} using scheme $M_1$.\relax }}{34}{figure.caption.68}\protected@file@percent }
+\newlabel{py_L2_Pois5_MM_scaling_M1}{{C.43}{34}{Absolute errors for Case 5 in Table \ref {scaling_cases_Poisson} using scheme $M_1$.\relax }{figure.caption.68}{}}
+\newlabel{py_L2_Pois5_MM_scaling_M1@cref}{{[figure][43][2147483647]C.43}{[1][33][]34}}
+\newlabel{py_L2_Pois5_MM_scaling_M2_solu}{{C.44(a)}{34}{Solution\relax }{figure.caption.69}{}}
+\newlabel{py_L2_Pois5_MM_scaling_M2_solu@cref}{{[subfigure][1][2147483647,44]C.44(a)}{[1][33][]34}}
+\newlabel{sub@py_L2_Pois5_MM_scaling_M2_solu}{{(a)}{34}{Solution\relax }{figure.caption.69}{}}
+\newlabel{sub@py_L2_Pois5_MM_scaling_M2_solu@cref}{{[subfigure][1][2147483647,44]C.44(a)}{[1][33][]34}}
+\newlabel{py_L2_Pois5_MM_scaling_M2_grad}{{C.44(b)}{34}{First derivative\relax }{figure.caption.69}{}}
+\newlabel{py_L2_Pois5_MM_scaling_M2_grad@cref}{{[subfigure][2][2147483647,44]C.44(b)}{[1][33][]34}}
+\newlabel{sub@py_L2_Pois5_MM_scaling_M2_grad}{{(b)}{34}{First derivative\relax }{figure.caption.69}{}}
+\newlabel{sub@py_L2_Pois5_MM_scaling_M2_grad@cref}{{[subfigure][2][2147483647,44]C.44(b)}{[1][33][]34}}
+\newlabel{py_L2_Pois5_MM_scaling_M2_2ndd}{{C.44(c)}{34}{Second derivative\relax }{figure.caption.69}{}}
+\newlabel{py_L2_Pois5_MM_scaling_M2_2ndd@cref}{{[subfigure][3][2147483647,44]C.44(c)}{[1][33][]34}}
+\newlabel{sub@py_L2_Pois5_MM_scaling_M2_2ndd}{{(c)}{34}{Second derivative\relax }{figure.caption.69}{}}
+\newlabel{sub@py_L2_Pois5_MM_scaling_M2_2ndd@cref}{{[subfigure][3][2147483647,44]C.44(c)}{[1][33][]34}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.44}{\ignorespaces Absolute errors for Case 5 in Table \ref  {scaling_cases_Poisson} using scheme $M_2$.\relax }}{34}{figure.caption.69}\protected@file@percent }
+\newlabel{py_L2_Pois5_MM_scaling_M2}{{C.44}{34}{Absolute errors for Case 5 in Table \ref {scaling_cases_Poisson} using scheme $M_2$.\relax }{figure.caption.69}{}}
+\newlabel{py_L2_Pois5_MM_scaling_M2@cref}{{[figure][44][2147483647]C.44}{[1][33][]34}}
+\bibcite{gockenbach2006understanding}{{5}{}{{}}{{}}}
+\bibcite{guo1986hp}{{6}{}{{}}{{}}}
+\bibcite{Babuska2018Roundoff}{{7}{}{{}}{{}}}
+\bibcite{ling1984numerical}{{8}{}{{}}{{}}}
+\bibcite{mou2017example}{{9}{}{{}}{{}}}
+\bibcite{ainsworth1992procedure}{{10}{}{{}}{{}}}
+\bibcite{kelly1983posteriori}{{11}{}{{}}{{}}}
+\bibcite{boffi2013mixed}{{12}{}{{}}{{}}}
+\bibcite{alzetta2018deal}{{13}{}{{}}{{}}}
+\bibcite{davis2004algorithm}{{14}{}{{}}{{}}}
+\bibcite{Runborg2012VerifyingNC}{{15}{}{{}}{{}}}
+\bibcite{WalterFrei}{{16}{}{{}}{{}}}
+\bibcite{kahan2013floating}{{17}{}{{}}{{}}}
+\bibcite{ginsburg1963cg}{{18}{}{{}}{{}}}
+\bibcite{bazilevs2007weak}{{19}{}{{}}{{}}}
+\providecommand\NAT@force@numbers{}\NAT@force@numbers

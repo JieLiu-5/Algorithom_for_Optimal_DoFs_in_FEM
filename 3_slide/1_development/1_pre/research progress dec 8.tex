@@ -1,0 +1,147 @@
+% TU Delft beamer template
+% Author: Erwin Walraven (initial version was created by Maarten Abbink)
+% Delft Universiy of Technology
+
+\documentclass{beamer}
+%\usepackage[english]{babel}
+%\usepackage{calc}
+%\usepackage[absolute,overlay]{textpos}
+%\usepackage{graphicx}
+%\usepackage{subfig}
+%\usepackage{amsmath}
+%\usepackage{amsfonts}
+%\usepackage{amsthm}
+%\usepackage{mathtools}
+%\usepackage{comment}
+%\usepackage{MnSymbol,wasysym}
+
+
+%\setbeamertemplate{navigation symbols}{} % remove navigation symbols
+%\mode<presentation>{\usetheme{tud}}
+\usetheme{Madrid}
+\usecolortheme{beaver}
+
+
+\usepackage{multirow}
+\usepackage{makecell}
+\renewcommand{\footnotesize}{\fontsize{7pt}{9pt}\selectfont}
+
+\usepackage{tikzsymbols}
+
+\setbeamertemplate{caption}[numbered]
+
+\usepackage{subfig}
+
+\makeatletter       % for rom in deal.ii symbol
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+
+\title[]{Report on the 2D Paper}
+\institute[]{Delft University of Technology, the Netherlands}
+\author{Jie Liu}
+%\date{}
+
+\begin{document}
+{
+\setbeamertemplate{footline}{\usebeamertemplate*{minimal footline}}
+\frame{\titlepage}
+}
+
+\section{Introduction}
+\begin{frame}
+\frametitle{Problem statement}
+\vspace{-7em}
+\begin{block}{Equation to be solved}
+\scriptsize
+\begin{equation}
+ \nabla \cdot (T_1 \nabla u) + T_2 \frac{\partial{u}}{\partial{x}} + T_3 \frac{\partial{u}}{\partial{y}} + T_4 u = f,\qquad (x,y) \in \Omega = [0,\,1] \times [0,\,1],
+ \label{problem_to_be_investigated}
+\end{equation}
+where $T_1$, $T_2$, $T_3$ and $T_4$ are coefficient functions\footnote{$T_2$ and $T_3$ have not been included practically in the code yet.}. The solution $u$ can be both real-valued and complex-valued if not stated otherwise. By choosing different $T_i$, we can have Poisson, diffusion or Helmholtz problems.
+\end{block}
+\end{frame}
+
+\begin{frame}{Aim of the second paper}
+\vspace{-8em}
+\begin{enumerate}
+ \item To determine $\alpha_{\rm R}$ and $\beta_{\rm R}$ for different FEM methods of different FEM packages for various 2D problems.
+ \item To choose FEM methods/elements that give smaller round-off error, i.e. $\alpha_{\rm R}$ and $\beta_{\rm R}$.
+ \item To apply the strategy in the 1D paper to find the optimal number of DoFs of 2D problems$^{*}$.
+\end{enumerate}
+\end{frame}
+
+
+
+\begin{frame}{FEM Status}
+\vspace{-3em}
+The status of the application of FEM methods of different FEM packages, including deal.\rom{2} and FEniCS, on various Eq.~(\ref{problem_to_be_investigated}) is shown in Table~\ref{table_status_fem_application}.
+\begin{table}[!ht]
+\scriptsize
+\begin{tabular}{ l | c | c}
+ & deal.\rom{2} & FEniCS \\ \hline
+ Standard FEM ($P_p$) & $\Smiley$\footnote{Working well.} & $\Smiley$ \\ \hline
+ Mixed FEM ($RT_p/P_{p}^{\rm disc}$) & $\Smiley$ & -- \\ \hline
+ Mixed FEM ($BDM_p/Q_{p-1}^{\rm disc}$)\footnote{The notation $Q$ is based on the notation in the deal.\rom{2} code.} & $\Smiley$ & $\Smiley$
+\end{tabular}
+\caption{Status of application of FEM methods. The element degree $p$ can be of different order if not stated otherwise.}
+\label{table_status_fem_application}
+\end{table}
+\end{frame}
+
+\section{Progress}
+\begin{frame}{Progress}
+\vspace{-3.5em}
+\begin{block}{deal.\rom{2}}
+\begin{itemize}
+ \item The latest version of deal.\rom{2} (9.2.0) works. However, the problem of higher-order $BDM$ elements still exists, i.e. $p\leq 7$\footnote{The specific function that gives an error is PolynomialsP$\langle2\rangle$::create\_polynomial\_ordering()}.
+ \item There is also a limitation for the degree of $RT$ elements in deal.\rom{2}, which is $p\leq 13$.
+ \item For $P$ elements, $p$ can be as large as 515.
+ \item The components of different error norms are illustrated.
+\end{itemize}
+\end{block}
+\begin{block}{FEniCS}
+\begin{itemize}
+ \item The round-off error of the standard and mixed ($BDM$ elements) FEMs is analyzed with the order of convergence being correct.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\section{Discussion}
+\begin{frame}{Discussion}
+\vspace{-9em}
+\begin{enumerate}
+ \item Results of FEniCS or IGA as a supplement?
+ \item Based on the results of 2D problems, using the relative error instead of the absolute error for the 2D case? 
+ \item Super convergence common when using $RT_p/P_{p}^{\rm disc}$ elements solving a problem with the solution only varying on the $x$ direction in deal.\rom{2}?
+\end{enumerate}
+\end{frame}
+
+
+\section{Future work}
+\begin{frame}{Future work}
+\vspace{-8em}
+\begin{itemize}
+ \item To consider $T_2$ and $T_3$, i.e. first-order parts, of Eq.~(\ref{problem_to_be_investigated}) in deal.\rom{2}.
+ \item To investigate only the round-off error of $BDM_p/DGQ_{p-1}^{\rm disc}$ elements for $p$ ranging from 1 to 7.
+ \item To integrate the function for computing the errors when using $BDM$ elements in FEniCS.
+ \item To compare the round-off error of $BDM$ elements of deal.\rom{2} and FEniCS.
+\end{itemize}
+\end{frame}
+
+\section{Next topic}
+\begin{frame}{Possible topics of the third paper}
+\vspace{-11em}
+\begin{enumerate}
+ \item Applying the mixed FEM on problems caused by boundary layers and/or constructing a method to avoid these boundary layers~\cite{kumar2016three}.
+ \item 2D lagrangian polynomials not the same order in each direction, which is a feature of the IGA analysis?
+\end{enumerate}
+\end{frame}
+
+\bibliographystyle{unsrt}
+\bibliography{bibfile_presentation}
+
+\end{document}

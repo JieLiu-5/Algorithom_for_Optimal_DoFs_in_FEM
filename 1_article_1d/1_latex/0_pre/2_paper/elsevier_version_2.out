@@ -1,0 +1,27 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Model problem, finite element formulation and numerical implementation}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Model problem}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Finite element formulation}{section.2}% 4
+\BOOKMARK [3][-]{subsubsection.2.2.1}{The standard FEM}{subsection.2.2}% 5
+\BOOKMARK [3][-]{subsubsection.2.2.2}{The mixed FEM}{subsection.2.2}% 6
+\BOOKMARK [2][-]{subsection.2.3}{Numerical implementation}{section.2}% 7
+\BOOKMARK [3][-]{subsubsection.2.3.1}{Solution technique}{subsection.2.3}% 8
+\BOOKMARK [3][-]{subsubsection.2.3.2}{Error estimation}{subsection.2.3}% 9
+\BOOKMARK [1][-]{section.3}{Approach to finding the highest attainable accuracy}{}% 10
+\BOOKMARK [2][-]{subsection.3.1}{Error Evolution}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.2}{Implementation process}{section.3}% 12
+\BOOKMARK [1][-]{section.4}{Determination of the error constants in Fig. 1}{}% 13
+\BOOKMARK [2][-]{subsection.4.1}{Real-valued problems with only Dirichlet boundary conditions}{section.4}% 14
+\BOOKMARK [3][-]{subsubsection.4.1.1}{One element degree}{subsection.4.1}% 15
+\BOOKMARK [3][-]{subsubsection.4.1.2}{Multiple element degree}{subsection.4.1}% 16
+\BOOKMARK [2][-]{subsection.4.2}{Problems of Neumann boundary conditions and complex numbers}{section.4}% 17
+\BOOKMARK [1][-]{section.5}{Sensitivity analysis}{}% 18
+\BOOKMARK [2][-]{subsection.5.1}{Weak imposition of the Dirichlet boundary condition}{section.5}% 19
+\BOOKMARK [2][-]{subsection.5.2}{Solution strategy}{section.5}% 20
+\BOOKMARK [1][-]{section.6}{Algorithm and its application}{}% 21
+\BOOKMARK [2][-]{subsection.6.1}{Algorithm specifications}{section.6}% 22
+\BOOKMARK [2][-]{subsection.6.2}{Application}{section.6}% 23
+\BOOKMARK [1][-]{section.7}{Conclusions}{}% 24
+\BOOKMARK [1][-]{appendix.A}{Derivation of the weak form}{}% 25
+\BOOKMARK [2][-]{subsection.A.1}{The standard FEM}{appendix.A}% 26
+\BOOKMARK [2][-]{subsection.A.2}{The mixed FEM}{appendix.A}% 27

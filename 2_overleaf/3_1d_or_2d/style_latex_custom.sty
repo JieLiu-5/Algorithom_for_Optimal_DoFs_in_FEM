@@ -1,0 +1,68 @@
+
+
+\usepackage{subcaption}             % used in subtable
+\usepackage{graphicx}
+\usepackage{amsmath, amsfonts, amsthm}            % for subequations
+\usepackage{mathtools, amssymb}          % for \leqslant
+\newcommand{\ddn}[2]{\frac{\mathrm{d}}{\mathrm{d}#1}#2}
+\newcommand{\ddt}{\frac{\mathrm{d}}{\mathrm{d}t}}
+
+\usepackage{upgreek}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{soul}
+\usepackage{multirow}
+
+\usepackage{array}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}} 
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}} 
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}} 
+
+
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}           % for items inside a table
+\usepackage{makecell}       % used inside a table
+\usepackage{pbox}           % for weak form 3
+\usepackage{empheq}
+\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+
+
+\usepackage{colortbl}
+\usepackage{esvect}
+\usepackage{spreadtab}
+\usepackage{numprint}
+\usepackage{xstring}
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\usepackage[symbol]{footmisc}
+
+\usepackage{siunitx}
+
+\makeatletter       % for rom in deal.ii symbol
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+\usepackage{enumitem}
+
+\usepackage{hyperref}               
+
+
+\usepackage{cleveref}
+\crefformat{section}{\S#2#1#3}  % see manual of cleveref, section 8.2.1
+\crefformat{subsection}{\S#2#1#3}
+\crefformat{subsubsection}{\S#2#1#3}
+
+\captionsetup[figure]{labelfont={bf},name={Fig.},labelsep=period}
+\captionsetup[table]{labelfont={bf},name={Table},labelsep=space,justification=justified,singlelinecheck=false}      % the last two commands for left-align the caption
+
+\usepackage[labelformat=simple]{subcaption}	        	% order of subfigures with brackets
+\renewcommand\thesubfigure{(\alph{subfigure})}
+\renewcommand\thesubtable{(\alph{subtable})}
+
+\usepackage{pgfplots}       % for tikzpicture
+\pgfplotsset{compat=1.7}
+
+\pdfsuppresswarningpagegroup=1      % eliminate warning 'multiple pdfs with page group included in a single page'
+
+\usepackage[ruled,linesnumbered]{algorithm2e}		% for algorithm
+\usepackage{booktabs}       % http://ctan.org/pkg/booktabs
+
+\usepackage{lineno}       
+\modulolinenumbers[1]

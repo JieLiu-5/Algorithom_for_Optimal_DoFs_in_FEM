@@ -1,0 +1,27 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: oned_paper_revision_apr_20_2020.aux
+The style file: unsrt.bst
+I couldn't open database file 3_writing/1_1d/mybibfile.bib
+---line 258 of file oned_paper_revision_apr_20_2020.aux
+ : \bibdata{3_writing/1_1d/mybibfile
+ :                                  }
+I'm skipping whatever remains of this command
+I found no database files---while reading file oned_paper_revision_apr_20_2020.aux
+Warning--I didn't find a database entry for "Kumar2016"
+Warning--I didn't find a database entry for "carey1982derivative"
+Warning--I didn't find a database entry for "ferziger2012computational"
+Warning--I didn't find a database entry for "zuras2008ieee"
+Warning--I didn't find a database entry for "gockenbach2006understanding"
+Warning--I didn't find a database entry for "guo1986hp"
+Warning--I didn't find a database entry for "Babuska2018Roundoff"
+Warning--I didn't find a database entry for "ling1984numerical"
+Warning--I didn't find a database entry for "mou2017example"
+Warning--I didn't find a database entry for "ainsworth1992procedure"
+Warning--I didn't find a database entry for "kelly1983posteriori"
+Warning--I didn't find a database entry for "boffi2013mixed"
+Warning--I didn't find a database entry for "alzetta2018deal"
+Warning--I didn't find a database entry for "davis2004algorithm"
+Warning--I didn't find a database entry for "Runborg2012VerifyingNC"
+Warning--I didn't find a database entry for "WalterFrei"
+Warning--I didn't find a database entry for "Alglib_custom"
+Warning--I didn't find a database entry for "ginsburg1963cg"
+(There were 2 error messages)

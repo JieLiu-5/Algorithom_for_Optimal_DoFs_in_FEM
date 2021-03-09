@@ -1,0 +1,19 @@
+\begin{thebibliography}{1}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{LiuMH2018apractical}
+J.~Liu, H.~M. Schuttelaars, M.~M\"oller, A practical a posteriori strategy to
+  determine the optimal number of degrees of freedom for $hp$-refinement in
+  finite element methods, in preparation.
+
+\bibitem{alzetta2018deal}
+G.~Alzetta, D.~Arndt, W.~Bangerth, V.~Boddu, B.~Brands, D.~Davydov,
+  R.~Gassm{\"o}ller, T.~Heister, L.~Heltai, K.~Kormann, et~al., The deal. ii
+  library, version 9.0, Journal of Numerical Mathematics 26~(4) (2018)
+  173--183.
+
+\end{thebibliography}

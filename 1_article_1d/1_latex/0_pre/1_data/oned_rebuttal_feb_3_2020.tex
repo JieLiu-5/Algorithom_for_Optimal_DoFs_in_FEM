@@ -1,0 +1,150 @@
+\documentclass[review,3p]{elsarticle}
+
+\usepackage{lineno,hyperref}
+\modulolinenumbers[5]
+\usepackage{subcaption}             % used in subtable
+\usepackage{amsmath,amsfonts,amsthm}            % for subequations
+
+\usepackage{mathtools,amssymb}          % for \leqslant
+\newcommand{\ddn}[2]{\frac{\mathrm{d}}{\mathrm{d}#1}#2}
+\newcommand{\ddt}{\frac{\mathrm{d}}{\mathrm{d}t}}
+
+
+\usepackage{upgreek}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{soul}
+\usepackage{multirow}
+
+\usepackage{array}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}} 
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}} 
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}} 
+
+\usepackage{booktabs}       % http://ctan.org/pkg/booktabs
+
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}           % for items inside a table
+\usepackage{makecell}       % used inside a table
+\usepackage{pbox}           % for weak form 3
+\usepackage{empheq}
+\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+
+
+\usepackage{colortbl}
+\usepackage{esvect}
+\usepackage{spreadtab}
+\usepackage{numprint}
+\usepackage{xstring}
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\usepackage[symbol]{footmisc}
+
+\usepackage{siunitx}
+
+\makeatletter       % for rom in deal.ii symbol
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+\usepackage{enumitem}
+
+\usepackage{cleveref}
+\crefformat{section}{\S#2#1#3} % see manual of cleveref, section 8.2.1
+\crefformat{subsection}{\S#2#1#3}
+\crefformat{subsubsection}{\S#2#1#3}
+
+\captionsetup[figure]{labelfont={bf},name={Fig.},labelsep=period}
+\captionsetup[table]{labelfont={bf},name={Table},labelsep=space}
+
+\usepackage[labelformat=simple]{subcaption}	        	% order of subfigure with brackets
+\renewcommand\thesubfigure{(\alph{subfigure})}
+\renewcommand\thesubtable{(\alph{subtable})}
+
+
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+
+\usepackage{pgfplots}       % for tikzpicture
+
+\pdfsuppresswarningpagegroup=1      % eliminate warning 'multiple pdfs with page group included in a single page'
+
+\usepackage[ruled,linesnumbered]{algorithm2e}		% for algorithm
+
+
+\begin{document}
+
+\section{$\alpha_{\rm R}$ for different types of equations}         \label{discretization_error_bench_pois_diff_Helm}
+
+We consider the benchmark Poisson equation, i.e. $u=e^{- (x-1/2)^2}$, but we extend it to diffusion and Helmholtz equations by choosing different $d(x)$ and $r(x)$, see Table~\ref{setting_equation_types} for the settings. The variables in $d(x)$ and $r(x)$ are denoted as $c_d$ and $c_h$, respectively, for which the values of the former ranges from 1 to $10^4$, and that of the latter is equal to 1.
+
+\begin{table}[!ht]
+\caption [sss] {Settings of the Poisson, diffusion and Helmholtz equations.}		% \footnotemark
+\label{setting_equation_types} 
+\centering
+ \begin{tabular}{|C{2.5cm}|C{4.2cm}|C{3.8cm}|C{4cm}|} \hline   
+{} & {``Poisson''} & {``diffusion''} & {``Helmholtz''} \\ \hline
+{$d(x)$} & {$1$} & $1+0.5\sin(c_dx)$ & $1+0.5\sin(x)$  \\	\hline
+{$r(x)$} & {0} & 0 & $c_h$ \\	\hline
+% {$f(x)$} & {$-e^{- (x-1/2)^2} \left({4x^2 - 4x -1} \right)$}  & $-2 \pi \cos (2 \pi x) + 4 {\pi}^2 \sin (2 \pi x)(x+1)$ & 0 \\ \hline
+% {$\|f(x)\|_2$} & {1.60} & {42.99} & {0.00} \\	\hline
+% \multirow{2}{2cm}{\centering Boundary conditions} & {$u(0) = e^{-1/4}$} & $u(0)=0$& $u (0) = 1$ \\	\cline{2-4}
+% &$u(1) = e^{-1/4}$ & $u_x(1)=2 \pi$  &$ u_x(1) = 0$ \\	\hline
+% Analytical solution $u_{\text{exc}}$ & {$e^{- (x-1/2)^2}$} & $\sin (2 \pi x)$ & $a e^{(1+i) x} + (1-a) e^{-i x}$, $a=1/{((1-i) e^{1+2i}+1)}$ \\	\hline
+% {$\|u_{\text{exc}}\|_2$} & {0.92} & 0.71 & 1.26 \\	\hline
+\end{tabular}
+\end{table}
+
+
+The offset $\alpha_{\rm R}$ for the three types of equations using the standard FEM ($P_2$ elements) and the mixed FEM ($P_4/P_3^{\rm disc}$ elements) are shown in 2 writing 1 1d summary of offsets.
+%Fig.~\ref{alpha_R_equation_type}. 
+% Not that, for the Helmholtz equation, only $c_h=1$ is considered.
+
+%\begin{figure}[!ht]
+%\hspace{0.2cm}
+%% \centering
+%\begin{subfigure}{7.5cm}
+%    \includegraphics[width=1.0\linewidth]{alpha_R_equation_type_SM.png}
+%    \caption{The standard FEM.}
+%    \label{Fig:alpha_R_equation_type_SM}   
+%\end{subfigure}
+%\hspace{0.7cm}
+%\begin{subfigure}{7.5cm}
+%    \includegraphics[width=1.0\linewidth]{alpha_R_equation_type_MM.png}
+%    \caption{The mixed FEM.}
+%    \label{Fig:alpha_R_equation_type_MM}   
+%\end{subfigure}
+%\caption{$\alpha_{\rm R}$ for different types of equations.}
+%\label{alpha_R_equation_type}
+%\end{figure}
+
+It shows that the offset $\alpha_{\rm R}$ is generally not affected by the types of equations considered.
+However, if we increase $c_h$ for the Helmholtz equation, $\alpha_{\rm R}$ for the solution and first derivative would decrease, see Fig.~\ref{py_oned_helm_p_exp_minus_x_minus_0p5_square_d_1_plus_0p5sinx_SM_error_normal_coeff_variant}.
+%\newpage
+
+\begin{figure}[!ht]
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.0\linewidth]{py_oned_helm_p_exp_minus_x_minus_0p5_square_d_1_plus_0p5sinx_SM_error_normal_coeff_variant_solu.pdf}
+        \caption{Solution}
+        \label{py_oned_helm_p_exp_minus_x_minus_0p5_square_d_1_plus_0p5sinx_SM_error_normal_coeff_variant_solu}
+    \end{subfigure}
+    \hspace{-0.2cm}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.0\linewidth]{py_oned_helm_p_exp_minus_x_minus_0p5_square_d_1_plus_0p5sinx_SM_error_normal_coeff_variant_grad.pdf}
+        \caption{First derivative}
+        \label{py_oned_helm_p_exp_minus_x_minus_0p5_square_d_1_plus_0p5sinx_SM_error_normal_coeff_variant_grad}
+    \end{subfigure}
+    \hspace{-0.2cm}
+    \begin{subfigure}{5.5cm}
+        \includegraphics[width=1.0\linewidth]{py_oned_helm_p_exp_minus_x_minus_0p5_square_d_1_plus_0p5sinx_SM_error_normal_coeff_variant_2ndd.pdf}
+        \caption{Second derivative}
+        \label{py_oned_helm_p_exp_minus_x_minus_0p5_square_d_1_plus_0p5sinx_SM_error_normal_coeff_variant_2ndd}
+    \end{subfigure}
+\caption{Absolute errors for the Helmholtz equation using the standard FEM for different $c_h$.}
+\label{py_oned_helm_p_exp_minus_x_minus_0p5_square_d_1_plus_0p5sinx_SM_error_normal_coeff_variant}
+\end{figure}
+
+% \newpage
+% 
+% \bibliographystyle{unsrt}  
+% \bibliography{mybibfile}  %%% Remove comment to use the external .bib file (using bibtex).
+
+
+\end{document}

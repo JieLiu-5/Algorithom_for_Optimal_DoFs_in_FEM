@@ -1,0 +1,113 @@
+\begin{thebibliography}{10}
+
+\bibitem{liu386balancing}
+Jie Liu, Matthias M{\"o}ller, and Henk~M Schuttelaars.
+\newblock Balancing truncation and round-off errors in fem: One-dimensional
+  analysis.
+\newblock {\em Journal of Computational and Applied Mathematics}, 386:113219,
+  2021.
+
+\bibitem{bangerth2007deal}
+Wolfgang Bangerth, Ralf Hartmann, and Guido Kanschat.
+\newblock deal. ii—a general-purpose object-oriented finite element library.
+\newblock {\em ACM Transactions on Mathematical Software (TOMS)}, 33(4):24,
+  2007.
+
+\bibitem{alnaes2015fenics}
+Martin Aln{\ae}s, Jan Blechta, Johan Hake, August Johansson, Benjamin Kehlet,
+  Anders Logg, Chris Richardson, Johannes Ring, Marie~E Rognes, and Garth~N
+  Wells.
+\newblock The fenics project version 1.5.
+\newblock {\em Archive of Numerical Software}, 3(100), 2015.
+
+\bibitem{boffi2013mixed}
+Daniele Boffi, Franco Brezzi, Michel Fortin, et~al.
+\newblock {\em Mixed finite element methods and applications}, volume~44.
+\newblock Springer, 2013.
+
+\bibitem{quoraSCALARfunction}
+Gopal Menon.
+\newblock What is a scalar function?, 2018.
+\newblock [Online; accessed 14-January-2021].
+
+\bibitem{rognes2010efficient}
+Marie~E Rognes, Robert~C Kirby, and Anders Logg.
+\newblock Efficient assembly of h(div) and h(curl) conforming finite elements.
+\newblock {\em SIAM Journal on Scientific Computing}, 31(6):4130--4151, 2010.
+
+\bibitem{lipschutz2009linear}
+Seymour Lipschutz and Marc Lipson.
+\newblock {\em Linear Algebra: Schaum's Outlines}.
+\newblock McGraw-Hill, 2009.
+
+\bibitem{chen2005finite}
+Zhangxin Chen.
+\newblock {\em Finite element methods and their applications}.
+\newblock Springer Science \& Business Media, 2005.
+
+\bibitem{kumar2017three}
+Mohit Kumar, Henk~M Schuttelaars, and Pieter~C Roos.
+\newblock Three-dimensional semi-idealized model for estuarine turbidity maxima
+  in tidally dominated estuaries.
+\newblock {\em Ocean Modelling}, 113:1--21, 2017.
+
+\bibitem{dealiiRTelement}
+Raviart thomas elements in deal.ii, 2020.
+\newblock [Online; accessed 7-Jan-2020].
+
+\bibitem{dealiiDGPelement}
+Dgp elements in deal.ii, 2020.
+\newblock [Online; accessed 17-November-2020].
+
+\bibitem{zuras2008ieee}
+Dan Zuras, Mike Cowlishaw, Alex Aiken, Matthew Applegate, David Bailey, Steve
+  Bass, Dileep Bhandarkar, Mahesh Bhat, David Bindel, Sylvie Boldo, et~al.
+\newblock {IEEE} standard for floating-point arithmetic.
+\newblock {\em IEEE Std 754-2008}, pages 1--70, 2008.
+
+\bibitem{davis2004algorithm}
+Timothy~A Davis.
+\newblock Algorithm 832: {UMFPACK} {V}4.3 -- an unsymmetric-pattern
+  multifrontal method.
+\newblock {\em ACM Transactions on Mathematical Software (TOMS)},
+  30(2):196--199, 2004.
+
+\bibitem{ref1}
+Stan~Z. Li and Anil Jain, editors.
+\newblock {\em L2 norm}, pages 883--883.
+\newblock Springer US, Boston, MA, 2009.
+
+\bibitem{Runborg2012VerifyingNC}
+Olof Runborg.
+\newblock {\em Verifying Numerical Convergence Rates}.
+\newblock KTH Computer Science and Communication, 2012.
+
+\bibitem{gockenbach2006understanding}
+Mark~S Gockenbach.
+\newblock {\em Understanding and implementing the finite element method},
+  volume~97.
+\newblock Siam, 2006.
+
+\bibitem{butcher2016numerical}
+John~Charles Butcher.
+\newblock {\em Numerical methods for ordinary differential equations}.
+\newblock John Wiley \& Sons, 2016.
+
+\bibitem{salari2000code}
+Kambiz Salari and Patrick Knupp.
+\newblock Code verification by the method of manufactured solutions.
+\newblock Technical report, Sandia National Labs., Albuquerque, NM (US); Sandia
+  National Labs~…, 2000.
+
+\bibitem{roache2002code}
+Patrick~J Roache.
+\newblock Code verification by the method of manufactured solutions.
+\newblock {\em J. Fluids Eng.}, 124(1):4--10, 2002.
+
+\bibitem{gfrerer2018code}
+Michael~H Gfrerer and Martin Schanz.
+\newblock Code verification examples based on the method of manufactured
+  solutions for kirchhoff--love and reissner--mindlin shell analysis.
+\newblock {\em Engineering with Computers}, 34(4):775--785, 2018.
+
+\end{thebibliography}

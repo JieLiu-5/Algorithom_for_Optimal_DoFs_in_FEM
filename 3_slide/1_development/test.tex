@@ -1,0 +1,47 @@
+\documentclass{beamer}
+
+
+\usepackage{multirow}
+\usepackage{makecell}
+\renewcommand{\footnotesize}{\fontsize{7pt}{9pt}\selectfont}
+
+\usepackage{tikzsymbols}
+
+
+\setbeamertemplate{caption}[numbered]
+
+%\setbeamertemplate{navigation symbols}{} % remove navigation symbols
+%\mode<presentation>{\usetheme{tud}}
+
+\usepackage{subfig}
+
+\makeatletter       % for rom in deal.ii symbol
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+\usepackage{microtype}
+\usepackage{soul}
+
+\usepackage{babel} 
+%\usepackage[T1]{fontenc} 
+\usepackage[utf8]{inputenc}
+
+
+%Information to be included in the title page:
+\title{Sample title}
+\author{Anonymous}
+\institute{Overleaf}
+\date{2014}
+
+
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+\frametitle{Sample frame title}
+This is a text in the first frame. This is a text in the first frame. This is a text in the first frame.
+\end{frame}
+
+\end{document}

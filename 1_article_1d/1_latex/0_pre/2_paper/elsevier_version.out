@@ -1,0 +1,33 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Model problem, finite element formulation and numerical implementation}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Model problem}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Finite element formulation}{section.2}% 4
+\BOOKMARK [3][-]{subsubsection.2.2.1}{The standard FEM}{subsection.2.2}% 5
+\BOOKMARK [3][-]{subsubsection.2.2.2}{The mixed FEM}{subsection.2.2}% 6
+\BOOKMARK [2][-]{subsection.2.3}{Numerical implementation}{section.2}% 7
+\BOOKMARK [3][-]{subsubsection.2.3.1}{Solution technique}{subsection.2.3}% 8
+\BOOKMARK [3][-]{subsubsection.2.3.2}{Error estimation}{subsection.2.3}% 9
+\BOOKMARK [3][-]{subsubsection.2.3.3}{Convergence of the solution}{subsection.2.3}% 10
+\BOOKMARK [1][-]{section.3}{General behaviour of the discretization error and approach to predict the highest attainable accuracy}{}% 11
+\BOOKMARK [1][-]{section.4}{Numerical quantification of the round-off error}{}% 12
+\BOOKMARK [2][-]{subsection.4.1}{Preliminary results}{section.4}% 13
+\BOOKMARK [3][-]{subsubsection.4.1.1}{Benchmark Poisson equation}{subsection.4.1}% 14
+\BOOKMARK [3][-]{subsubsection.4.1.2}{Benchmark diffusion and Helmholtz equations}{subsection.4.1}% 15
+\BOOKMARK [2][-]{subsection.4.2}{Sensitivity analysis}{section.4}% 16
+\BOOKMARK [3][-]{subsubsection.4.2.1}{Solution strategy}{subsection.4.2}% 17
+\BOOKMARK [3][-]{subsubsection.4.2.2}{Order of magnitude}{subsection.4.2}% 18
+\BOOKMARK [3][-]{subsubsection.4.2.3}{Boundary conditions}{subsection.4.2}% 19
+\BOOKMARK [1][-]{section.5}{A posteriori algorithm for finding the optimal number of degrees of freedom}{}% 20
+\BOOKMARK [1][-]{section.6}{Validation}{}% 21
+\BOOKMARK [1][-]{section.7}{Conclusions}{}% 22
+\BOOKMARK [1][-]{appendix.A}{Derivation of the weak form}{}% 23
+\BOOKMARK [2][-]{subsection.A.1}{The standard FEM}{appendix.A}% 24
+\BOOKMARK [2][-]{subsection.A.2}{The mixed FEM}{appendix.A}% 25
+\BOOKMARK [1][-]{appendix.B}{Numerical results of the benchmark diffusion and Helmholtz equations}{}% 26
+\BOOKMARK [2][-]{subsection.B.1}{The diffusion equation}{appendix.B}% 27
+\BOOKMARK [2][-]{subsection.B.2}{The Helmholtz equation}{appendix.B}% 28
+\BOOKMARK [1][-]{appendix.C}{ norms and absolute errors for different cases in Table 4}{}% 29
+\BOOKMARK [2][-]{subsection.C.1}{ norms}{appendix.C}% 30
+\BOOKMARK [2][-]{subsection.C.2}{Absolute errors}{appendix.C}% 31
+\BOOKMARK [3][-]{subsubsection.C.2.1}{The standard FEM}{subsection.C.2}% 32
+\BOOKMARK [3][-]{subsubsection.C.2.2}{The mixed FEM}{subsection.C.2}% 33

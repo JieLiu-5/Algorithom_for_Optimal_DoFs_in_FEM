@@ -1,0 +1,116 @@
+\begin{thebibliography}{10}
+
+\bibitem{Kumar2016}
+Mohit Kumar, Henk~M. Schuttelaars, Pieter~C. Roos, and Matthias M{\"o}ller.
+\newblock Three-dimensional semi-idealized model for tidal motion in tidal
+  estuaries.
+\newblock {\em Ocean Dynamics}, 66(1):99--118, 2016.
+
+\bibitem{carey1982derivative}
+GF~Carey.
+\newblock Derivative calculation from finite element solutions.
+\newblock {\em Computer Methods in Applied Mechanics and Engineering},
+  35(1):1--14, 1982.
+
+\bibitem{ferziger2012computational}
+Joel~H Ferziger and Milovan Peric.
+\newblock {\em Computational methods for fluid dynamics}.
+\newblock Springer Science \& Business Media, 2012.
+
+\bibitem{zuras2008ieee}
+Dan Zuras, Mike Cowlishaw, Alex Aiken, Matthew Applegate, David Bailey, Steve
+  Bass, Dileep Bhandarkar, Mahesh Bhat, David Bindel, Sylvie Boldo, et~al.
+\newblock {IEEE} standard for floating-point arithmetic.
+\newblock {\em IEEE Std 754-2008}, pages 1--70, 2008.
+
+\bibitem{gockenbach2006understanding}
+Mark~S Gockenbach.
+\newblock {\em Understanding and implementing the finite element method},
+  volume~97.
+\newblock Siam, 2006.
+
+\bibitem{guo1986hp}
+B~Guo and I~Babu{\v{s}}ka.
+\newblock The hp version of the finite element method.
+\newblock {\em Computational Mechanics}, 1(1):21--41, 1986.
+
+\bibitem{Babuska2018Roundoff}
+Ivo Babuska and Gustaf S\"oderlind.
+\newblock On roundoff error growth in elliptic problems.
+\newblock {\em ACM Transactions on Mathematical Software}, 44(3):1--22, 2018.
+
+\bibitem{ling1984numerical}
+Fuyun Ling and J~Proakis.
+\newblock Numerical accuracy and stability: Two problems of adaptive estimation
+  algorithms caused by round-off error.
+\newblock In {\em Acoustics, Speech, and Signal Processing, IEEE International
+  Conference on ICASSP'84.}, volume~9, pages 571--574. IEEE, 1984.
+
+\bibitem{mou2017example}
+Shan-Cong Mou, Yu-Xuan Luan, Wen-Tao Ji, Jian-Fei Zhang, and Wen-Quan Tao.
+\newblock An example for the effect of round-off errors on numerical heat
+  transfer.
+\newblock {\em Numerical Heat Transfer, Part B: Fundamentals}, 72(1):21--32,
+  2017.
+
+\bibitem{ainsworth1992procedure}
+Mark Ainsworth and J~Tinsley Oden.
+\newblock A procedure for a posteriori error estimation for hp finite element
+  methods.
+\newblock {\em Computer Methods in Applied Mechanics and Engineering},
+  101(1-3):73--96, 1992.
+
+\bibitem{kelly1983posteriori}
+DW~Kelly, De~SR Gago, OC~Zienkiewicz, I~Babuska, et~al.
+\newblock A posteriori error analysis and adaptive processes in the finite
+  element method: Part {I} -- error analysis.
+\newblock {\em International Journal for Numerical Methods in Engineering},
+  19(11):1593--1619, 1983.
+
+\bibitem{boffi2013mixed}
+Daniele Boffi, Franco Brezzi, Michel Fortin, et~al.
+\newblock {\em Mixed finite element methods and applications}, volume~44.
+\newblock Springer, 2013.
+
+\bibitem{alzetta2018deal}
+Giovanni Alzetta, Daniel Arndt, Wolfgang Bangerth, Vishal Boddu, Benjamin
+  Brands, Denis Davydov, Rene Gassm{\"o}ller, Timo Heister, Luca Heltai,
+  Katharina Kormann, et~al.
+\newblock The deal.\rom{2} library, version 9.0.
+\newblock {\em Journal of Numerical Mathematics}, 26(4):173--183, 2018.
+
+\bibitem{davis2004algorithm}
+Timothy~A Davis.
+\newblock Algorithm 832: {UMFPACK} {V}4.3 -- an unsymmetric-pattern
+  multifrontal method.
+\newblock {\em ACM Transactions on Mathematical Software (TOMS)},
+  30(2):196--199, 2004.
+
+\bibitem{Runborg2012VerifyingNC}
+Olof Runborg.
+\newblock Lecture notes in numerical solutions of differential equations
+  (dn2255): Verifying numerical convergence rates, 2012.
+
+\bibitem{WalterFrei}
+Meshing considerations for linear static problems.
+\newblock
+  \url{https://www.comsol.com/blogs/meshing-considerations-linear-static-problems/}.
+\newblock Accessed: 2019-12-9.
+
+\bibitem{kahan2013floating}
+W~Kahan.
+\newblock Floating-point tricks to solve boundary-value problems faster.
+\newblock {\em University of California@ Berkeley}, 2013.
+
+\bibitem{ginsburg1963cg}
+Theo Ginsburg.
+\newblock The conjugate gradient method.
+\newblock {\em Numer. Math.}, 5(1):191--200, December 1963.
+
+\bibitem{bazilevs2007weak}
+Yuri Bazilevs and Thomas~JR Hughes.
+\newblock Weak imposition of {D}irichlet boundary conditions in fluid
+  mechanics.
+\newblock {\em Computers \& Fluids}, 36(1):12--26, 2007.
+
+\end{thebibliography}

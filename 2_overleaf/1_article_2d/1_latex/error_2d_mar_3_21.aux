@@ -1,0 +1,877 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{liu386balancing}
+\citation{liu386balancing}
+\citation{liu386balancing}
+\citation{bangerth2007deal}
+\citation{alnaes2015fenics}
+\citation{liu386balancing}
+\providecommand \oddpage@label [2]{}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\citation{boffi2013mixed}
+\citation{quoraSCALARfunction}
+\citation{boffi2013mixed}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Model problem, finite element formulation and numerical implementation}{2}{section.2}\protected@file@percent }
+\newlabel{section_model_problem_FEM_formulation_numerical_implementation}{{2}{2}{Model problem, finite element formulation and numerical implementation}{section.2}{}}
+\newlabel{section_model_problem_FEM_formulation_numerical_implementation@cref}{{[section][2][]2}{[1][2][]2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Model problem}{2}{subsection.2.1}\protected@file@percent }
+\newlabel{section_model_problem}{{2.1}{2}{Model problem}{subsection.2.1}{}}
+\newlabel{section_model_problem@cref}{{[subsection][1][2]2.1}{[1][2][]2}}
+\newlabel{2d_second_order_differential_equation}{{1}{2}{Model problem}{equation.2.1}{}}
+\newlabel{2d_second_order_differential_equation@cref}{{[equation][1][]1}{[1][2][]2}}
+\citation{boffi2013mixed}
+\citation{quoraSCALARfunction}
+\citation{rognes2010efficient}
+\citation{lipschutz2009linear}
+\citation{chen2005finite}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Finite element formulation}{3}{subsection.2.2}\protected@file@percent }
+\newlabel{FE formulation}{{2.2}{3}{Finite element formulation}{subsection.2.2}{}}
+\newlabel{FE formulation@cref}{{[subsection][2][2]2.2}{[1][2][]3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.1}Preliminaries}{3}{subsubsection.2.2.1}\protected@file@percent }
+\newlabel{definition_l2_space}{{2a}{3}{Preliminaries}{equation.2.2alph1}{}}
+\newlabel{definition_l2_space@cref}{{[subequation][1][2]2a}{[1][2][]3}}
+\newlabel{definition_hm_space}{{2b}{3}{Preliminaries}{equation.2.2alph2}{}}
+\newlabel{definition_hm_space@cref}{{[subequation][2][2]2b}{[1][3][]3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.2}The standard FEM}{4}{subsubsection.2.2.2}\protected@file@percent }
+\newlabel{sm_weak_form_Diri_strong}{{5}{4}{The standard FEM}{equation.2.5}{}}
+\newlabel{sm_weak_form_Diri_strong@cref}{{[equation][5][]5}{[1][3][]4}}
+\newlabel{sm_u_approx}{{6}{4}{The standard FEM}{equation.2.6}{}}
+\newlabel{sm_u_approx@cref}{{[equation][6][]6}{[1][4][]4}}
+\newlabel{matrix_equation_std}{{7}{4}{The standard FEM}{equation.2.7}{}}
+\newlabel{matrix_equation_std@cref}{{[equation][7][]7}{[1][4][]4}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.3}The mixed FEM}{4}{subsubsection.2.2.3}\protected@file@percent }
+\newlabel{mm_strong_form_1}{{8a}{4}{The mixed FEM}{equation.2.8alph1}{}}
+\newlabel{mm_strong_form_1@cref}{{[subequation][1][8]8a}{[1][4][]4}}
+\newlabel{mm_strong_form_2}{{8b}{4}{The mixed FEM}{equation.2.8alph2}{}}
+\newlabel{mm_strong_form_2@cref}{{[subequation][2][8]8b}{[1][4][]4}}
+\citation{kumar2017three}
+\citation{dealiiRTelement}
+\citation{rognes2010efficient}
+\citation{boffi2013mixed}
+\newlabel{mm_strong_form_block}{{8}{5}{The mixed FEM}{equation.2.8alph2}{}}
+\newlabel{mm_strong_form_block@cref}{{[subequation][8][]8}{[1][4][]5}}
+\newlabel{mm_weak_form_1}{{9a}{5}{The mixed FEM}{equation.2.9alph1}{}}
+\newlabel{mm_weak_form_1@cref}{{[subequation][1][9]9a}{[1][4][]5}}
+\newlabel{mm_weak_form_2}{{9b}{5}{The mixed FEM}{equation.2.9alph2}{}}
+\newlabel{mm_weak_form_2@cref}{{[subequation][2][9]9b}{[1][4][]5}}
+\newlabel{mm_weak_form_block}{{9}{5}{The mixed FEM}{AMS.1}{}}
+\newlabel{mm_weak_form_block@cref}{{[subequation][9][]9}{[1][5][]5}}
+\newlabel{mm_alter_strong_form_1}{{10a}{5}{The mixed FEM}{equation.2.10alph1}{}}
+\newlabel{mm_alter_strong_form_1@cref}{{[subequation][1][10]10a}{[1][5][]5}}
+\newlabel{mm_alter_strong_form_2}{{10b}{5}{The mixed FEM}{equation.2.10alph2}{}}
+\newlabel{mm_alter_strong_form_2@cref}{{[subequation][2][10]10b}{[1][5][]5}}
+\newlabel{mm_alter_weak_form_1}{{11a}{5}{The mixed FEM}{equation.2.11alph1}{}}
+\newlabel{mm_alter_weak_form_1@cref}{{[subequation][1][11]11a}{[1][5][]5}}
+\newlabel{mm_alter_weak_form_2}{{11b}{5}{The mixed FEM}{equation.2.11alph2}{}}
+\newlabel{mm_alter_weak_form_2@cref}{{[subequation][2][11]11b}{[1][5][]5}}
+\newlabel{mm_alter_weak_form_block}{{11}{5}{The mixed FEM}{AMS.2}{}}
+\newlabel{mm_alter_weak_form_block@cref}{{[subequation][11][]11}{[1][5][]5}}
+\citation{dealiiRTelement}
+\citation{boffi2013mixed}
+\citation{dealiiDGPelement}
+\citation{dealiiDGPelement}
+\@writefile{toc}{\contentsline {paragraph}{$RT_p/Q_{p}^{\rm  disc}$ elemensts}{6}{section*.3}\protected@file@percent }
+\newlabel{mm_rt_v_approx}{{13a}{6}{\texorpdfstring {$RT_p/Q_{p}^{\rm disc}$}{RTpQpdisc} elemensts}{equation.2.13alph1}{}}
+\newlabel{mm_rt_v_approx@cref}{{[subequation][1][13]13a}{[1][6][]6}}
+\newlabel{mm_rt_u_approx}{{13b}{6}{\texorpdfstring {$RT_p/Q_{p}^{\rm disc}$}{RTpQpdisc} elemensts}{equation.2.13alph2}{}}
+\newlabel{mm_rt_u_approx@cref}{{[subequation][2][13]13b}{[1][6][]6}}
+\newlabel{mm_rt_var_approx_block}{{13}{6}{\texorpdfstring {$RT_p/Q_{p}^{\rm disc}$}{RTpQpdisc} elemensts}{equation.2.13alph2}{}}
+\newlabel{mm_rt_var_approx_block@cref}{{[subequation][13][]13}{[1][6][]6}}
+\@writefile{toc}{\contentsline {paragraph}{$BDM_p/P_{p-1}^{\rm  disc}$ elemensts}{6}{section*.4}\protected@file@percent }
+\citation{zuras2008ieee}
+\citation{bangerth2007deal}
+\citation{davis2004algorithm}
+\citation{ref1}
+\citation{Runborg2012VerifyingNC}
+\citation{bangerth2007deal,boffi2013mixed}
+\newlabel{matrix_equation_mix}{{15}{7}{\texorpdfstring {$BDM_p/P_{p-1}^{\rm disc}$}{BDMpPp-1disc} elemensts}{equation.2.15}{}}
+\newlabel{matrix_equation_mix@cref}{{[equation][15][]15}{[1][7][]7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Numerical implementation}{7}{subsection.2.3}\protected@file@percent }
+\newlabel{numerical_implementation}{{2.3}{7}{Numerical implementation}{subsection.2.3}{}}
+\newlabel{numerical_implementation@cref}{{[subsection][3][2]2.3}{[1][7][]7}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.1}Solution technique}{7}{subsubsection.2.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.2}Error estimation}{7}{subsubsection.2.3.2}\protected@file@percent }
+\newlabel{formular_error_l2}{{16}{7}{Error estimation}{equation.2.16}{}}
+\newlabel{formular_error_l2@cref}{{[equation][16][]16}{[1][7][]7}}
+\newlabel{formular_error_l2_vector}{{17}{7}{Error estimation}{equation.2.17}{}}
+\newlabel{formular_error_l2_vector@cref}{{[equation][17][]17}{[1][7][]7}}
+\citation{bangerth2007deal}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Quantities of which the $L_2$ norm exists in theory.\relax }}{8}{table.caption.5}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{components_existent_numerically}{{1}{8}{Quantities of which the $L_2$ norm exists in theory.\relax }{table.caption.5}{}}
+\newlabel{components_existent_numerically@cref}{{[table][1][]1}{[1][8][]8}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Quantities of which the error is computed.\relax }}{8}{table.caption.6}\protected@file@percent }
+\newlabel{components_being_computded_for_the_error}{{2}{8}{Quantities of which the error is computed.\relax }{table.caption.6}{}}
+\newlabel{components_being_computded_for_the_error@cref}{{[table][2][]2}{[1][8][]8}}
+\citation{gockenbach2006understanding}
+\citation{butcher2016numerical}
+\citation{salari2000code,roache2002code,gfrerer2018code}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.3}Convergence of the solution}{9}{subsubsection.2.3.3}\protected@file@percent }
+\newlabel{formula_order_of_convergence_analytical_solution}{{18}{9}{Convergence of the solution}{equation.2.18}{}}
+\newlabel{formula_order_of_convergence_analytical_solution@cref}{{[equation][18][]18}{[1][9][]9}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Sketch of the strategy to predict the highest attainable accuracy}{9}{section.3}\protected@file@percent }
+\newlabel{section_error_evolution_and_prediction}{{3}{9}{Sketch of the strategy to predict the highest attainable accuracy}{section.3}{}}
+\newlabel{section_error_evolution_and_prediction@cref}{{[section][3][]3}{[1][9][]9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Conceptual sketch of the error evolution against the number of $\text  {DoFs}$.\relax }}{9}{figure.caption.7}\protected@file@percent }
+\newlabel{error_evolution_one_p}{{1}{9}{Conceptual sketch of the error evolution against the number of $\text {DoFs}$.\relax }{figure.caption.7}{}}
+\newlabel{error_evolution_one_p@cref}{{[figure][1][]1}{[1][9][]9}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}2D problems}{10}{section.4}\protected@file@percent }
+\newlabel{section_benchmark_problems}{{4}{10}{2D problems}{section.4}{}}
+\newlabel{section_benchmark_problems@cref}{{[section][4][]4}{[1][10][]10}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Various $D(\mathbf  {x})$'s.\relax }}{10}{table.caption.8}\protected@file@percent }
+\newlabel{expression_coefficient_d}{{3}{10}{Various $D(\mathbf {x})$'s.\relax }{table.caption.8}{}}
+\newlabel{expression_coefficient_d@cref}{{[table][3][]3}{[1][10][]10}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Current status of the results for the benchmark problems in Table\nobreakspace  {}\ref  {expression_coefficient_d}.\relax }}{10}{table.caption.9}\protected@file@percent }
+\newlabel{FEM_methods_for_diffusion_varying}{{4}{10}{Current status of the results for the benchmark problems in Table~\ref {expression_coefficient_d}.\relax }{table.caption.9}{}}
+\newlabel{FEM_methods_for_diffusion_varying@cref}{{[table][4][]4}{[1][10][]10}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}1D problems}{11}{section.5}\protected@file@percent }
+\newlabel{section_decrease_beta_r_1d}{{5}{11}{1D problems}{section.5}{}}
+\newlabel{section_decrease_beta_r_1d@cref}{{[section][5][]5}{[1][11][]11}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Poisson problems}{11}{subsection.5.1}\protected@file@percent }
+\newlabel{section_decrease_beta_r_1d_pois}{{5.1}{11}{Poisson problems}{subsection.5.1}{}}
+\newlabel{section_decrease_beta_r_1d_pois@cref}{{[subsection][1][5]5.1}{[1][11][]11}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Various Poisson problems and the resulting $\beta _{\rm  R}$ and $\alpha _{\rm  R}$ in deal.II.\relax }}{11}{table.caption.10}\protected@file@percent }
+\newlabel{results_various_Pois_1d_dealii}{{5}{11}{Various Poisson problems and the resulting $\beta _{\rm R}$ and $\alpha _{\rm R}$ in deal.\rom {2}.\relax }{table.caption.10}{}}
+\newlabel{results_various_Pois_1d_dealii@cref}{{[table][5][]5}{[1][11][]11}}
+\newlabel{alpha_R_beta_R_mesh_0_pois_0_u_x_m_0p5_square_0_sm_solu}{{2(a)}{12}{$u$\caption@thelabel \relax }{figure.caption.11}{}}
+\newlabel{alpha_R_beta_R_mesh_0_pois_0_u_x_m_0p5_square_0_sm_solu@cref}{{[subfigure][1][2]2(a)}{[1][11][]12}}
+\newlabel{sub@alpha_R_beta_R_mesh_0_pois_0_u_x_m_0p5_square_0_sm_solu}{{(a)}{12}{$u$\caption@thelabel \relax }{figure.caption.11}{}}
+\newlabel{sub@alpha_R_beta_R_mesh_0_pois_0_u_x_m_0p5_square_0_sm_solu@cref}{{[subfigure][1][2]2(a)}{[1][11][]12}}
+\newlabel{alpha_R_beta_R_mesh_0_pois_0_u_x_m_0p5_square_0_sm_grad}{{2(b)}{12}{$u_x$\caption@thelabel \relax }{figure.caption.11}{}}
+\newlabel{alpha_R_beta_R_mesh_0_pois_0_u_x_m_0p5_square_0_sm_grad@cref}{{[subfigure][2][2]2(b)}{[1][11][]12}}
+\newlabel{sub@alpha_R_beta_R_mesh_0_pois_0_u_x_m_0p5_square_0_sm_grad}{{(b)}{12}{$u_x$\caption@thelabel \relax }{figure.caption.11}{}}
+\newlabel{sub@alpha_R_beta_R_mesh_0_pois_0_u_x_m_0p5_square_0_sm_grad@cref}{{[subfigure][2][2]2(b)}{[1][11][]12}}
+\newlabel{alpha_R_beta_R_mesh_0_pois_0_u_x_m_0p5_square_0_sm_2ndd}{{2(c)}{12}{$u_{xx}$\caption@thelabel \relax }{figure.caption.11}{}}
+\newlabel{alpha_R_beta_R_mesh_0_pois_0_u_x_m_0p5_square_0_sm_2ndd@cref}{{[subfigure][3][2]2(c)}{[1][11][]12}}
+\newlabel{sub@alpha_R_beta_R_mesh_0_pois_0_u_x_m_0p5_square_0_sm_2ndd}{{(c)}{12}{$u_{xx}$\caption@thelabel \relax }{figure.caption.11}{}}
+\newlabel{sub@alpha_R_beta_R_mesh_0_pois_0_u_x_m_0p5_square_0_sm_2ndd@cref}{{[subfigure][3][2]2(c)}{[1][11][]12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Illustration of $\beta _{\rm  R}$ and $\alpha _{\rm  R}$ using $Q_p$ elements for the 1D Poisson problem in deal.II.\relax }}{12}{figure.caption.11}\protected@file@percent }
+\newlabel{alpha_R_beta_R_mesh_0_pois_0_u_x_m_0p5_square_0_sm}{{2}{12}{Illustration of $\beta _{\rm R}$ and $\alpha _{\rm R}$ using $Q_p$ elements for the 1D Poisson problem in deal.\rom {2}.\relax }{figure.caption.11}{}}
+\newlabel{alpha_R_beta_R_mesh_0_pois_0_u_x_m_0p5_square_0_sm@cref}{{[figure][2][]2}{[1][11][]12}}
+\newlabel{alpha_R_beta_R_mesh_0_pois_1_u_exp_m_x_m_0p5_square_0_sm_solu}{{3(a)}{12}{$u$\caption@thelabel \relax }{figure.caption.12}{}}
+\newlabel{alpha_R_beta_R_mesh_0_pois_1_u_exp_m_x_m_0p5_square_0_sm_solu@cref}{{[subfigure][1][3]3(a)}{[1][11][]12}}
+\newlabel{sub@alpha_R_beta_R_mesh_0_pois_1_u_exp_m_x_m_0p5_square_0_sm_solu}{{(a)}{12}{$u$\caption@thelabel \relax }{figure.caption.12}{}}
+\newlabel{sub@alpha_R_beta_R_mesh_0_pois_1_u_exp_m_x_m_0p5_square_0_sm_solu@cref}{{[subfigure][1][3]3(a)}{[1][11][]12}}
+\newlabel{alpha_R_beta_R_mesh_0_pois_1_u_exp_m_x_m_0p5_square_0_sm_grad}{{3(b)}{12}{$u_x$\caption@thelabel \relax }{figure.caption.12}{}}
+\newlabel{alpha_R_beta_R_mesh_0_pois_1_u_exp_m_x_m_0p5_square_0_sm_grad@cref}{{[subfigure][2][3]3(b)}{[1][11][]12}}
+\newlabel{sub@alpha_R_beta_R_mesh_0_pois_1_u_exp_m_x_m_0p5_square_0_sm_grad}{{(b)}{12}{$u_x$\caption@thelabel \relax }{figure.caption.12}{}}
+\newlabel{sub@alpha_R_beta_R_mesh_0_pois_1_u_exp_m_x_m_0p5_square_0_sm_grad@cref}{{[subfigure][2][3]3(b)}{[1][11][]12}}
+\newlabel{alpha_R_beta_R_mesh_0_pois_1_u_exp_m_x_m_0p5_square_0_sm_2ndd}{{3(c)}{12}{$u_{xx}$\caption@thelabel \relax }{figure.caption.12}{}}
+\newlabel{alpha_R_beta_R_mesh_0_pois_1_u_exp_m_x_m_0p5_square_0_sm_2ndd@cref}{{[subfigure][3][3]3(c)}{[1][11][]12}}
+\newlabel{sub@alpha_R_beta_R_mesh_0_pois_1_u_exp_m_x_m_0p5_square_0_sm_2ndd}{{(c)}{12}{$u_{xx}$\caption@thelabel \relax }{figure.caption.12}{}}
+\newlabel{sub@alpha_R_beta_R_mesh_0_pois_1_u_exp_m_x_m_0p5_square_0_sm_2ndd@cref}{{[subfigure][3][3]3(c)}{[1][11][]12}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Illustration of $\beta _{\rm  R}$ and $\alpha _{\rm  R}$ using $Q_p$ elements for the 1D Poisson problem in deal.II.\relax }}{12}{figure.caption.12}\protected@file@percent }
+\newlabel{alpha_R_beta_R_mesh_0_pois_1_u_exp_m_x_m_0p5_square_0_sm}{{3}{12}{Illustration of $\beta _{\rm R}$ and $\alpha _{\rm R}$ using $Q_p$ elements for the 1D Poisson problem in deal.\rom {2}.\relax }{figure.caption.12}{}}
+\newlabel{alpha_R_beta_R_mesh_0_pois_1_u_exp_m_x_m_0p5_square_0_sm@cref}{{[figure][3][]3}{[1][11][]12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Diffusion problems}{12}{subsection.5.2}\protected@file@percent }
+\newlabel{section_decrease_beta_r_1d_diff}{{5.2}{12}{Diffusion problems}{subsection.5.2}{}}
+\newlabel{section_decrease_beta_r_1d_diff@cref}{{[subsection][2][5]5.2}{[1][12][]12}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Various diffusion problems and the resulting $\beta _{\rm  R}$ and $\alpha _{\rm  R}$ in deal.II.\relax }}{13}{table.caption.13}\protected@file@percent }
+\newlabel{results_various_d_for_beta_r_decrease_1d_dealii}{{6}{13}{Various diffusion problems and the resulting $\beta _{\rm R}$ and $\alpha _{\rm R}$ in deal.\rom {2}.\relax }{table.caption.13}{}}
+\newlabel{results_various_d_for_beta_r_decrease_1d_dealii@cref}{{[table][6][]6}{[1][12][]13}}
+\newlabel{alpha_R_beta_R_mesh_1_diff_0_u_x_m_0p5_square_0_sm_solu}{{4(a)}{13}{$u$\caption@thelabel \relax }{figure.caption.14}{}}
+\newlabel{alpha_R_beta_R_mesh_1_diff_0_u_x_m_0p5_square_0_sm_solu@cref}{{[subfigure][1][4]4(a)}{[1][12][]13}}
+\newlabel{sub@alpha_R_beta_R_mesh_1_diff_0_u_x_m_0p5_square_0_sm_solu}{{(a)}{13}{$u$\caption@thelabel \relax }{figure.caption.14}{}}
+\newlabel{sub@alpha_R_beta_R_mesh_1_diff_0_u_x_m_0p5_square_0_sm_solu@cref}{{[subfigure][1][4]4(a)}{[1][12][]13}}
+\newlabel{alpha_R_beta_R_mesh_1_diff_0_u_x_m_0p5_square_0_sm_grad}{{4(b)}{13}{$u_x$\caption@thelabel \relax }{figure.caption.14}{}}
+\newlabel{alpha_R_beta_R_mesh_1_diff_0_u_x_m_0p5_square_0_sm_grad@cref}{{[subfigure][2][4]4(b)}{[1][12][]13}}
+\newlabel{sub@alpha_R_beta_R_mesh_1_diff_0_u_x_m_0p5_square_0_sm_grad}{{(b)}{13}{$u_x$\caption@thelabel \relax }{figure.caption.14}{}}
+\newlabel{sub@alpha_R_beta_R_mesh_1_diff_0_u_x_m_0p5_square_0_sm_grad@cref}{{[subfigure][2][4]4(b)}{[1][12][]13}}
+\newlabel{alpha_R_beta_R_mesh_1_diff_0_u_x_m_0p5_square_0_sm_2ndd}{{4(c)}{13}{$u_{xx}$\caption@thelabel \relax }{figure.caption.14}{}}
+\newlabel{alpha_R_beta_R_mesh_1_diff_0_u_x_m_0p5_square_0_sm_2ndd@cref}{{[subfigure][3][4]4(c)}{[1][12][]13}}
+\newlabel{sub@alpha_R_beta_R_mesh_1_diff_0_u_x_m_0p5_square_0_sm_2ndd}{{(c)}{13}{$u_{xx}$\caption@thelabel \relax }{figure.caption.14}{}}
+\newlabel{sub@alpha_R_beta_R_mesh_1_diff_0_u_x_m_0p5_square_0_sm_2ndd@cref}{{[subfigure][3][4]4(c)}{[1][12][]13}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Illustration of $\beta _{\rm  R}$ and $\alpha _{\rm  R}$ using $Q_p$ elements for the 1D diffusion problem in deal.II.\relax }}{13}{figure.caption.14}\protected@file@percent }
+\newlabel{alpha_R_beta_R_mesh_1_diff_0_u_x_m_0p5_square_0_sm}{{4}{13}{Illustration of $\beta _{\rm R}$ and $\alpha _{\rm R}$ using $Q_p$ elements for the 1D diffusion problem in deal.\rom {2}.\relax }{figure.caption.14}{}}
+\newlabel{alpha_R_beta_R_mesh_1_diff_0_u_x_m_0p5_square_0_sm@cref}{{[figure][4][]4}{[1][12][]13}}
+\newlabel{alpha_R_beta_R_mesh_1_diff_1_u_exp_m_x_m_0p5_square_0_sm_solu}{{5(a)}{13}{$u$\caption@thelabel \relax }{figure.caption.15}{}}
+\newlabel{alpha_R_beta_R_mesh_1_diff_1_u_exp_m_x_m_0p5_square_0_sm_solu@cref}{{[subfigure][1][5]5(a)}{[1][12][]13}}
+\newlabel{sub@alpha_R_beta_R_mesh_1_diff_1_u_exp_m_x_m_0p5_square_0_sm_solu}{{(a)}{13}{$u$\caption@thelabel \relax }{figure.caption.15}{}}
+\newlabel{sub@alpha_R_beta_R_mesh_1_diff_1_u_exp_m_x_m_0p5_square_0_sm_solu@cref}{{[subfigure][1][5]5(a)}{[1][12][]13}}
+\newlabel{alpha_R_beta_R_mesh_1_diff_1_u_exp_m_x_m_0p5_square_0_sm_grad}{{5(b)}{13}{$u_x$\caption@thelabel \relax }{figure.caption.15}{}}
+\newlabel{alpha_R_beta_R_mesh_1_diff_1_u_exp_m_x_m_0p5_square_0_sm_grad@cref}{{[subfigure][2][5]5(b)}{[1][12][]13}}
+\newlabel{sub@alpha_R_beta_R_mesh_1_diff_1_u_exp_m_x_m_0p5_square_0_sm_grad}{{(b)}{13}{$u_x$\caption@thelabel \relax }{figure.caption.15}{}}
+\newlabel{sub@alpha_R_beta_R_mesh_1_diff_1_u_exp_m_x_m_0p5_square_0_sm_grad@cref}{{[subfigure][2][5]5(b)}{[1][12][]13}}
+\newlabel{alpha_R_beta_R_mesh_1_diff_1_u_exp_m_x_m_0p5_square_0_sm_2ndd}{{5(c)}{13}{$u_{xx}$\caption@thelabel \relax }{figure.caption.15}{}}
+\newlabel{alpha_R_beta_R_mesh_1_diff_1_u_exp_m_x_m_0p5_square_0_sm_2ndd@cref}{{[subfigure][3][5]5(c)}{[1][12][]13}}
+\newlabel{sub@alpha_R_beta_R_mesh_1_diff_1_u_exp_m_x_m_0p5_square_0_sm_2ndd}{{(c)}{13}{$u_{xx}$\caption@thelabel \relax }{figure.caption.15}{}}
+\newlabel{sub@alpha_R_beta_R_mesh_1_diff_1_u_exp_m_x_m_0p5_square_0_sm_2ndd@cref}{{[subfigure][3][5]5(c)}{[1][12][]13}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Illustration of $\beta _{\rm  R}$ and $\alpha _{\rm  R}$ using $Q_p$ elements for the 1D diffusion problem in deal.II.\relax }}{13}{figure.caption.15}\protected@file@percent }
+\newlabel{alpha_R_beta_R_mesh_1_diff_1_u_exp_m_x_m_0p5_square_0_sm}{{5}{13}{Illustration of $\beta _{\rm R}$ and $\alpha _{\rm R}$ using $Q_p$ elements for the 1D diffusion problem in deal.\rom {2}.\relax }{figure.caption.15}{}}
+\newlabel{alpha_R_beta_R_mesh_1_diff_1_u_exp_m_x_m_0p5_square_0_sm@cref}{{[figure][5][]5}{[1][12][]13}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Helmholtz problems}{13}{subsection.5.3}\protected@file@percent }
+\newlabel{section_decrease_beta_r_1d_helm}{{5.3}{13}{Helmholtz problems}{subsection.5.3}{}}
+\newlabel{section_decrease_beta_r_1d_helm@cref}{{[subsection][3][5]5.3}{[1][13][]13}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Various Helmholtz problems and the resulting $\beta _{\rm  R}$ and $\alpha _{\rm  R}$ in deal.II.\relax }}{14}{table.caption.16}\protected@file@percent }
+\newlabel{results_various_helmholtz_problems_for_beta_r_decrease_1d_dealii}{{7}{14}{Various Helmholtz problems and the resulting $\beta _{\rm R}$ and $\alpha _{\rm R}$ in deal.\rom {2}.\relax }{table.caption.16}{}}
+\newlabel{results_various_helmholtz_problems_for_beta_r_decrease_1d_dealii@cref}{{[table][7][]7}{[1][13][]14}}
+\newlabel{alpha_R_beta_R_mesh_2_helm_0_u_x_m_0p5_square_0_sm_solu}{{6(a)}{14}{$u$\caption@thelabel \relax }{figure.caption.17}{}}
+\newlabel{alpha_R_beta_R_mesh_2_helm_0_u_x_m_0p5_square_0_sm_solu@cref}{{[subfigure][1][6]6(a)}{[1][13][]14}}
+\newlabel{sub@alpha_R_beta_R_mesh_2_helm_0_u_x_m_0p5_square_0_sm_solu}{{(a)}{14}{$u$\caption@thelabel \relax }{figure.caption.17}{}}
+\newlabel{sub@alpha_R_beta_R_mesh_2_helm_0_u_x_m_0p5_square_0_sm_solu@cref}{{[subfigure][1][6]6(a)}{[1][13][]14}}
+\newlabel{alpha_R_beta_R_mesh_2_helm_0_u_x_m_0p5_square_0_sm_grad}{{6(b)}{14}{$u_x$\caption@thelabel \relax }{figure.caption.17}{}}
+\newlabel{alpha_R_beta_R_mesh_2_helm_0_u_x_m_0p5_square_0_sm_grad@cref}{{[subfigure][2][6]6(b)}{[1][13][]14}}
+\newlabel{sub@alpha_R_beta_R_mesh_2_helm_0_u_x_m_0p5_square_0_sm_grad}{{(b)}{14}{$u_x$\caption@thelabel \relax }{figure.caption.17}{}}
+\newlabel{sub@alpha_R_beta_R_mesh_2_helm_0_u_x_m_0p5_square_0_sm_grad@cref}{{[subfigure][2][6]6(b)}{[1][13][]14}}
+\newlabel{alpha_R_beta_R_mesh_2_helm_0_u_x_m_0p5_square_0_sm_2ndd}{{6(c)}{14}{$u_{xx}$\caption@thelabel \relax }{figure.caption.17}{}}
+\newlabel{alpha_R_beta_R_mesh_2_helm_0_u_x_m_0p5_square_0_sm_2ndd@cref}{{[subfigure][3][6]6(c)}{[1][13][]14}}
+\newlabel{sub@alpha_R_beta_R_mesh_2_helm_0_u_x_m_0p5_square_0_sm_2ndd}{{(c)}{14}{$u_{xx}$\caption@thelabel \relax }{figure.caption.17}{}}
+\newlabel{sub@alpha_R_beta_R_mesh_2_helm_0_u_x_m_0p5_square_0_sm_2ndd@cref}{{[subfigure][3][6]6(c)}{[1][13][]14}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Illustration of $\beta _{\rm  R}$ and $\alpha _{\rm  R}$ using $Q_p$ elements for the 1D Helmholtz problem in deal.II.\relax }}{14}{figure.caption.17}\protected@file@percent }
+\newlabel{alpha_R_beta_R_mesh_2_helm_0_u_x_m_0p5_square_0_sm}{{6}{14}{Illustration of $\beta _{\rm R}$ and $\alpha _{\rm R}$ using $Q_p$ elements for the 1D Helmholtz problem in deal.\rom {2}.\relax }{figure.caption.17}{}}
+\newlabel{alpha_R_beta_R_mesh_2_helm_0_u_x_m_0p5_square_0_sm@cref}{{[figure][6][]6}{[1][13][]14}}
+\newlabel{alpha_R_beta_R_mesh_2_helm_1_u_exp_m_x_m_0p5_square_0_sm_solu}{{7(a)}{14}{$u$\caption@thelabel \relax }{figure.caption.18}{}}
+\newlabel{alpha_R_beta_R_mesh_2_helm_1_u_exp_m_x_m_0p5_square_0_sm_solu@cref}{{[subfigure][1][7]7(a)}{[1][13][]14}}
+\newlabel{sub@alpha_R_beta_R_mesh_2_helm_1_u_exp_m_x_m_0p5_square_0_sm_solu}{{(a)}{14}{$u$\caption@thelabel \relax }{figure.caption.18}{}}
+\newlabel{sub@alpha_R_beta_R_mesh_2_helm_1_u_exp_m_x_m_0p5_square_0_sm_solu@cref}{{[subfigure][1][7]7(a)}{[1][13][]14}}
+\newlabel{alpha_R_beta_R_mesh_2_helm_1_u_exp_m_x_m_0p5_square_0_sm_grad}{{7(b)}{14}{$u_x$\caption@thelabel \relax }{figure.caption.18}{}}
+\newlabel{alpha_R_beta_R_mesh_2_helm_1_u_exp_m_x_m_0p5_square_0_sm_grad@cref}{{[subfigure][2][7]7(b)}{[1][13][]14}}
+\newlabel{sub@alpha_R_beta_R_mesh_2_helm_1_u_exp_m_x_m_0p5_square_0_sm_grad}{{(b)}{14}{$u_x$\caption@thelabel \relax }{figure.caption.18}{}}
+\newlabel{sub@alpha_R_beta_R_mesh_2_helm_1_u_exp_m_x_m_0p5_square_0_sm_grad@cref}{{[subfigure][2][7]7(b)}{[1][13][]14}}
+\newlabel{alpha_R_beta_R_mesh_2_helm_1_u_exp_m_x_m_0p5_square_0_sm_2ndd}{{7(c)}{14}{$u_{xx}$\caption@thelabel \relax }{figure.caption.18}{}}
+\newlabel{alpha_R_beta_R_mesh_2_helm_1_u_exp_m_x_m_0p5_square_0_sm_2ndd@cref}{{[subfigure][3][7]7(c)}{[1][13][]14}}
+\newlabel{sub@alpha_R_beta_R_mesh_2_helm_1_u_exp_m_x_m_0p5_square_0_sm_2ndd}{{(c)}{14}{$u_{xx}$\caption@thelabel \relax }{figure.caption.18}{}}
+\newlabel{sub@alpha_R_beta_R_mesh_2_helm_1_u_exp_m_x_m_0p5_square_0_sm_2ndd@cref}{{[subfigure][3][7]7(c)}{[1][13][]14}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Illustration of $\beta _{\rm  R}$ and $\alpha _{\rm  R}$ using $Q_p$ elements for the 1D Helmholtz problem in deal.II.\relax }}{14}{figure.caption.18}\protected@file@percent }
+\newlabel{alpha_R_beta_R_mesh_2_helm_1_u_exp_m_x_m_0p5_square_0_sm}{{7}{14}{Illustration of $\beta _{\rm R}$ and $\alpha _{\rm R}$ using $Q_p$ elements for the 1D Helmholtz problem in deal.\rom {2}.\relax }{figure.caption.18}{}}
+\newlabel{alpha_R_beta_R_mesh_2_helm_1_u_exp_m_x_m_0p5_square_0_sm@cref}{{[figure][7][]7}{[1][13][]14}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Algorithm}{15}{section.6}\protected@file@percent }
+\newlabel{section_algorithm}{{6}{15}{Algorithm}{section.6}{}}
+\newlabel{section_algorithm@cref}{{[section][6][]6}{[1][14][]15}}
+\@writefile{toc}{\contentsline {paragraph}{Step-1}{15}{section*.19}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Custom input of $DoFinder$.\relax }}{15}{table.caption.20}\protected@file@percent }
+\newlabel{settings_algorithm}{{8}{15}{Custom input of $DoFinder$.\relax }{table.caption.20}{}}
+\newlabel{settings_algorithm@cref}{{[table][8][]8}{[1][15][]15}}
+\@writefile{toc}{\contentsline {paragraph}{Step-2}{16}{section*.21}\protected@file@percent }
+\@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces NORMALIZATION\relax }}{16}{algocf.1}\protected@file@percent }
+\newlabel{algo_scaling_factor}{{1}{16}{Step-2}{algocf.1}{}}
+\newlabel{algo_scaling_factor@cref}{{[algocf][1][]1}{[1][15][]16}}
+\@writefile{toc}{\contentsline {paragraph}{Step-3}{16}{section*.22}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Step-4}{16}{section*.23}\protected@file@percent }
+\@writefile{loa}{\contentsline {algocf}{\numberline {2}{\ignorespaces PREDICTION\relax }}{16}{algocf.2}\protected@file@percent }
+\newlabel{block_PREDICTION}{{2}{16}{Step-4}{algocf.2}{}}
+\newlabel{block_PREDICTION@cref}{{[algocf][2][]2}{[1][16][]16}}
+\@writefile{toc}{\contentsline {paragraph}{Step-5}{16}{section*.24}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Application}{17}{section.7}\protected@file@percent }
+\newlabel{section_validation}{{7}{17}{Application}{section.7}{}}
+\newlabel{section_validation@cref}{{[section][7][]7}{[1][16][]17}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}1D problems}{17}{subsection.7.1}\protected@file@percent }
+\newlabel{1D_Helmholtz_equation_application}{{21}{17}{1D problems}{equation.7.21}{}}
+\newlabel{1D_Helmholtz_equation_application@cref}{{[equation][21][]21}{[1][16][]17}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}2D problems}{17}{subsection.7.2}\protected@file@percent }
+\newlabel{d_validation}{{7.2}{17}{2D problems}{subsection.7.2}{}}
+\newlabel{d_validation@cref}{{[subsection][2][7]7.2}{[1][17][]17}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion}{17}{section.8}\protected@file@percent }
+\newlabel{paragraph_on_conclusion}{{8}{17}{Conclusion}{section.8}{}}
+\newlabel{paragraph_on_conclusion@cref}{{[section][8][]8}{[1][17][]17}}
+\@writefile{toc}{\let\numberline\tmptocnumberline}
+\@writefile{toc}{\contentsline {section}{\numberline {Appendix \nobreakspace  {}A}Derivation of the weak form}{17}{appendix.A}\protected@file@percent }
+\newlabel{weak form appendix}{{Appendix \nobreakspace  {}A}{17}{Derivation of the weak form}{appendix.A}{}}
+\newlabel{weak form appendix@cref}{{[appendix][1][2147483647]Appendix \nobreakspace  {}A}{[1][17][]17}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {Appendix \nobreakspace  {}A.1}The standard FEM}{17}{subsection.A.1}\protected@file@percent }
+\newlabel{derivation_weak_form_SM}{{Appendix \nobreakspace  {}A.1}{17}{The standard FEM}{subsection.A.1}{}}
+\newlabel{derivation_weak_form_SM@cref}{{[subappendix][1][2147483647,1]Appendix \nobreakspace  {}A.1}{[1][17][]17}}
+\newlabel{1D_general_inte}{{A.1}{17}{The standard FEM}{equation.A.1}{}}
+\newlabel{1D_general_inte@cref}{{[equation][1][2147483647,1]A.1}{[1][17][]17}}
+\citation{gockenbach2006understanding}
+\newlabel{1D_general_gauss}{{A.2}{18}{The standard FEM}{equation.A.2}{}}
+\newlabel{1D_general_gauss@cref}{{[equation][2][2147483647,1]A.2}{[1][17][]18}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {Appendix \nobreakspace  {}A.2}The mixed FEM}{18}{subsection.A.2}\protected@file@percent }
+\newlabel{derivation_weak_form_MM}{{Appendix \nobreakspace  {}A.2}{18}{The mixed FEM}{subsection.A.2}{}}
+\newlabel{derivation_weak_form_MM@cref}{{[subappendix][2][2147483647,1]Appendix \nobreakspace  {}A.2}{[1][18][]18}}
+\newlabel{Gene_MM_weak1_a}{{A.3a}{18}{The mixed FEM}{equation.A.3alph1}{}}
+\newlabel{Gene_MM_weak1_a@cref}{{[subequation][1][2147483647,3]A.3a}{[1][18][]18}}
+\newlabel{Gene_MM_weak1_b}{{A.3b}{18}{The mixed FEM}{equation.A.3alph2}{}}
+\newlabel{Gene_MM_weak1_b@cref}{{[subequation][2][2147483647,3]A.3b}{[1][18][]18}}
+\newlabel{Gene_MM_weak1}{{A.3}{18}{The mixed FEM}{equation.A.3alph2}{}}
+\newlabel{Gene_MM_weak1@cref}{{[subequation][3][2147483647,1]A.3}{[1][18][]18}}
+\newlabel{Gene_MM_weak2}{{A.4}{18}{The mixed FEM}{equation.A.4}{}}
+\newlabel{Gene_MM_weak2@cref}{{[equation][4][2147483647,1]A.4}{[1][18][]18}}
+\@writefile{toc}{\contentsline {section}{\numberline {Appendix \nobreakspace  {}B}Determination of $\beta _{\rm  T}$}{18}{appendix.B}\protected@file@percent }
+\newlabel{proof_slope_ET}{{Appendix \nobreakspace  {}B}{18}{Determination of \texorpdfstring {$\beta _{\rm T}$}{beta T}}{appendix.B}{}}
+\newlabel{proof_slope_ET@cref}{{[appendix][2][2147483647]Appendix \nobreakspace  {}B}{[1][18][]18}}
+\@writefile{toc}{\contentsline {paragraph}{The standard FEM}{18}{section*.25}\protected@file@percent }
+\newlabel{formula_Nh}{{B.1}{18}{The standard FEM}{equation.B.1}{}}
+\newlabel{formula_Nh@cref}{{[equation][1][2147483647,2]B.1}{[1][18][]18}}
+\newlabel{formula_h}{{B.2}{18}{The standard FEM}{equation.B.2}{}}
+\newlabel{formula_h@cref}{{[equation][2][2147483647,2]B.2}{[1][18][]18}}
+\newlabel{formula_Eh_with_h}{{B.3}{18}{The standard FEM}{equation.B.3}{}}
+\newlabel{formula_Eh_with_h@cref}{{[equation][3][2147483647,2]B.3}{[1][18][]18}}
+\newlabel{formula_Eh_with_Nh}{{B.4}{18}{The standard FEM}{equation.B.4}{}}
+\newlabel{formula_Eh_with_Nh@cref}{{[equation][4][2147483647,2]B.4}{[1][18][]18}}
+\@writefile{toc}{\contentsline {paragraph}{The mixed FEM with $RT_p/Q_p^{\rm  disc}$ elements}{19}{section*.26}\protected@file@percent }
+\newlabel{formula_Nh_gradient_mm}{{B.5}{19}{The mixed FEM with \texorpdfstring {$RT_p/Q_p^{\rm disc}$}{RT_p/Q_p{disc}} elements}{equation.B.5}{}}
+\newlabel{formula_Nh_gradient_mm@cref}{{[equation][5][2147483647,2]B.5}{[1][18][]19}}
+\newlabel{formula_h_gradient_mm}{{B.6}{19}{The mixed FEM with \texorpdfstring {$RT_p/Q_p^{\rm disc}$}{RT_p/Q_p{disc}} elements}{equation.B.6}{}}
+\newlabel{formula_h_gradient_mm@cref}{{[equation][6][2147483647,2]B.6}{[1][18][]19}}
+\newlabel{formula_Eh_with_Nh_gradient_mm}{{B.7}{19}{The mixed FEM with \texorpdfstring {$RT_p/Q_p^{\rm disc}$}{RT_p/Q_p{disc}} elements}{equation.B.7}{}}
+\newlabel{formula_Eh_with_Nh_gradient_mm@cref}{{[equation][7][2147483647,2]B.7}{[1][19][]19}}
+\newlabel{formula_Nh_solution_mm}{{B.8}{19}{The mixed FEM with \texorpdfstring {$RT_p/Q_p^{\rm disc}$}{RT_p/Q_p{disc}} elements}{equation.B.8}{}}
+\newlabel{formula_Nh_solution_mm@cref}{{[equation][8][2147483647,2]B.8}{[1][19][]19}}
+\newlabel{formula_h_solution_mm}{{B.9}{19}{The mixed FEM with \texorpdfstring {$RT_p/Q_p^{\rm disc}$}{RT_p/Q_p{disc}} elements}{equation.B.9}{}}
+\newlabel{formula_h_solution_mm@cref}{{[equation][9][2147483647,2]B.9}{[1][19][]19}}
+\newlabel{formula_Eh_with_Nh_solution_mm}{{B.10}{19}{The mixed FEM with \texorpdfstring {$RT_p/Q_p^{\rm disc}$}{RT_p/Q_p{disc}} elements}{equation.B.10}{}}
+\newlabel{formula_Eh_with_Nh_solution_mm@cref}{{[equation][10][2147483647,2]B.10}{[1][19][]19}}
+\@writefile{toc}{\contentsline {paragraph}{The mixed FEM with $BDM_p/P_{p-1}^{\rm  disc}$ elements}{19}{section*.27}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {Appendix \nobreakspace  {}C}Illustration of mesh distortion}{19}{appendix.C}\protected@file@percent }
+\newlabel{measuring_distortion_randomly_case_1}{{C.8(a)}{20}{$R=2$\caption@thelabel \relax }{figure.caption.28}{}}
+\newlabel{measuring_distortion_randomly_case_1@cref}{{[subfigure][1][2147483647,8]C.8(a)}{[1][19][]20}}
+\newlabel{sub@measuring_distortion_randomly_case_1}{{(a)}{20}{$R=2$\caption@thelabel \relax }{figure.caption.28}{}}
+\newlabel{sub@measuring_distortion_randomly_case_1@cref}{{[subfigure][1][2147483647,8]C.8(a)}{[1][19][]20}}
+\newlabel{measuring_distortion_randomly_case_2}{{C.8(b)}{20}{$R=3$\caption@thelabel \relax }{figure.caption.28}{}}
+\newlabel{measuring_distortion_randomly_case_2@cref}{{[subfigure][2][2147483647,8]C.8(b)}{[1][19][]20}}
+\newlabel{sub@measuring_distortion_randomly_case_2}{{(b)}{20}{$R=3$\caption@thelabel \relax }{figure.caption.28}{}}
+\newlabel{sub@measuring_distortion_randomly_case_2@cref}{{[subfigure][2][2147483647,8]C.8(b)}{[1][19][]20}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.8}{\ignorespaces Comparison of the distribution of DoFs between the uniform mesh and the randomly distorted mesh when $p=2$.\relax }}{20}{figure.caption.28}\protected@file@percent }
+\newlabel{measuring_distortion_randomly}{{C.8}{20}{Comparison of the distribution of DoFs between the uniform mesh and the randomly distorted mesh when $p=2$.\relax }{figure.caption.28}{}}
+\newlabel{measuring_distortion_randomly@cref}{{[figure][8][2147483647]C.8}{[1][19][]20}}
+\newlabel{measuring_distortion_regularly_1_case_1}{{C.9(a)}{20}{$R=2$\caption@thelabel \relax }{figure.caption.29}{}}
+\newlabel{measuring_distortion_regularly_1_case_1@cref}{{[subfigure][1][2147483647,9]C.9(a)}{[1][20][]20}}
+\newlabel{sub@measuring_distortion_regularly_1_case_1}{{(a)}{20}{$R=2$\caption@thelabel \relax }{figure.caption.29}{}}
+\newlabel{sub@measuring_distortion_regularly_1_case_1@cref}{{[subfigure][1][2147483647,9]C.9(a)}{[1][20][]20}}
+\newlabel{measuring_distortion_regularly_1_case_2}{{C.9(b)}{20}{$R=3$\caption@thelabel \relax }{figure.caption.29}{}}
+\newlabel{measuring_distortion_regularly_1_case_2@cref}{{[subfigure][2][2147483647,9]C.9(b)}{[1][20][]20}}
+\newlabel{sub@measuring_distortion_regularly_1_case_2}{{(b)}{20}{$R=3$\caption@thelabel \relax }{figure.caption.29}{}}
+\newlabel{sub@measuring_distortion_regularly_1_case_2@cref}{{[subfigure][2][2147483647,9]C.9(b)}{[1][20][]20}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.9}{\ignorespaces Comparison of the distribution of DoFs between the uniform mesh and the regularly distorted mesh of Eq.\nobreakspace  {}(\ref  {regular_mesh_1}) when $p=2$.\relax }}{20}{figure.caption.29}\protected@file@percent }
+\newlabel{measuring_distortion_regularly_1}{{C.9}{20}{Comparison of the distribution of DoFs between the uniform mesh and the regularly distorted mesh of Eq.~(\ref {regular_mesh_1}) when $p=2$.\relax }{figure.caption.29}{}}
+\newlabel{measuring_distortion_regularly_1@cref}{{[figure][9][2147483647]C.9}{[1][20][]20}}
+\newlabel{measuring_distortion_regularly_2_case_1}{{C.10(a)}{21}{$R=2$\caption@thelabel \relax }{figure.caption.30}{}}
+\newlabel{measuring_distortion_regularly_2_case_1@cref}{{[subfigure][1][2147483647,10]C.10(a)}{[1][20][]21}}
+\newlabel{sub@measuring_distortion_regularly_2_case_1}{{(a)}{21}{$R=2$\caption@thelabel \relax }{figure.caption.30}{}}
+\newlabel{sub@measuring_distortion_regularly_2_case_1@cref}{{[subfigure][1][2147483647,10]C.10(a)}{[1][20][]21}}
+\newlabel{measuring_distortion_regularly_2_case_2}{{C.10(b)}{21}{$R=3$\caption@thelabel \relax }{figure.caption.30}{}}
+\newlabel{measuring_distortion_regularly_2_case_2@cref}{{[subfigure][2][2147483647,10]C.10(b)}{[1][20][]21}}
+\newlabel{sub@measuring_distortion_regularly_2_case_2}{{(b)}{21}{$R=3$\caption@thelabel \relax }{figure.caption.30}{}}
+\newlabel{sub@measuring_distortion_regularly_2_case_2@cref}{{[subfigure][2][2147483647,10]C.10(b)}{[1][20][]21}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.10}{\ignorespaces Comparison of the distribution of DoFs between the uniform mesh and the regularly distorted mesh of Eq.\nobreakspace  {}(\ref  {regular_mesh_2}) when $p=2$.\relax }}{21}{figure.caption.30}\protected@file@percent }
+\newlabel{measuring_distortion_regularly_2}{{C.10}{21}{Comparison of the distribution of DoFs between the uniform mesh and the regularly distorted mesh of Eq.~(\ref {regular_mesh_2}) when $p=2$.\relax }{figure.caption.30}{}}
+\newlabel{measuring_distortion_regularly_2@cref}{{[figure][10][2147483647]C.10}{[1][20][]21}}
+\newlabel{measuring_distortion_regularly_1_p_1_case_1}{{C.11(a)}{21}{$R=2$\caption@thelabel \relax }{figure.caption.31}{}}
+\newlabel{measuring_distortion_regularly_1_p_1_case_1@cref}{{[subfigure][1][2147483647,11]C.11(a)}{[1][20][]21}}
+\newlabel{sub@measuring_distortion_regularly_1_p_1_case_1}{{(a)}{21}{$R=2$\caption@thelabel \relax }{figure.caption.31}{}}
+\newlabel{sub@measuring_distortion_regularly_1_p_1_case_1@cref}{{[subfigure][1][2147483647,11]C.11(a)}{[1][20][]21}}
+\newlabel{measuring_distortion_regularly_1_p_1_case_2}{{C.11(b)}{21}{$R=3$\caption@thelabel \relax }{figure.caption.31}{}}
+\newlabel{measuring_distortion_regularly_1_p_1_case_2@cref}{{[subfigure][2][2147483647,11]C.11(b)}{[1][20][]21}}
+\newlabel{sub@measuring_distortion_regularly_1_p_1_case_2}{{(b)}{21}{$R=3$\caption@thelabel \relax }{figure.caption.31}{}}
+\newlabel{sub@measuring_distortion_regularly_1_p_1_case_2@cref}{{[subfigure][2][2147483647,11]C.11(b)}{[1][20][]21}}
+\@writefile{lof}{\contentsline {figure}{\numberline {C.11}{\ignorespaces Comparison of the distribution of DoFs between the uniform mesh and the regularly distorted mesh of Eq.\nobreakspace  {}(\ref  {regular_mesh_1}) when $p=1$.\relax }}{21}{figure.caption.31}\protected@file@percent }
+\newlabel{measuring_distortion_regularly_1_p_1}{{C.11}{21}{Comparison of the distribution of DoFs between the uniform mesh and the regularly distorted mesh of Eq.~(\ref {regular_mesh_1}) when $p=1$.\relax }{figure.caption.31}{}}
+\newlabel{measuring_distortion_regularly_1_p_1@cref}{{[figure][11][2147483647]C.11}{[1][20][]21}}
+\@writefile{toc}{\contentsline {section}{\numberline {Appendix \nobreakspace  {}D}Error plotting}{21}{appendix.D}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {Appendix \nobreakspace  {}D.1}Poisson problems}{21}{subsection.D.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {Appendix \nobreakspace  {}D.1.1}Results of the uniform mesh}{21}{subsubsection.D.1.1}\protected@file@percent }
+\newlabel{py_1d_0_pois_0p0_u_x_m_0p5_square_uniform_0_sm_solu}{{D.12(a)}{22}{$u$\caption@thelabel \relax }{figure.caption.32}{}}
+\newlabel{py_1d_0_pois_0p0_u_x_m_0p5_square_uniform_0_sm_solu@cref}{{[subfigure][1][2147483647,12]D.12(a)}{[1][21][]22}}
+\newlabel{sub@py_1d_0_pois_0p0_u_x_m_0p5_square_uniform_0_sm_solu}{{(a)}{22}{$u$\caption@thelabel \relax }{figure.caption.32}{}}
+\newlabel{sub@py_1d_0_pois_0p0_u_x_m_0p5_square_uniform_0_sm_solu@cref}{{[subfigure][1][2147483647,12]D.12(a)}{[1][21][]22}}
+\newlabel{py_1d_0_pois_0p0_u_x_m_0p5_square_uniform_0_sm_grad}{{D.12(b)}{22}{$u_x$\caption@thelabel \relax }{figure.caption.32}{}}
+\newlabel{py_1d_0_pois_0p0_u_x_m_0p5_square_uniform_0_sm_grad@cref}{{[subfigure][2][2147483647,12]D.12(b)}{[1][21][]22}}
+\newlabel{sub@py_1d_0_pois_0p0_u_x_m_0p5_square_uniform_0_sm_grad}{{(b)}{22}{$u_x$\caption@thelabel \relax }{figure.caption.32}{}}
+\newlabel{sub@py_1d_0_pois_0p0_u_x_m_0p5_square_uniform_0_sm_grad@cref}{{[subfigure][2][2147483647,12]D.12(b)}{[1][21][]22}}
+\newlabel{py_1d_0_pois_0p0_u_x_m_0p5_square_uniform_0_sm_2ndd}{{D.12(c)}{22}{$u_{xx}$\caption@thelabel \relax }{figure.caption.32}{}}
+\newlabel{py_1d_0_pois_0p0_u_x_m_0p5_square_uniform_0_sm_2ndd@cref}{{[subfigure][3][2147483647,12]D.12(c)}{[1][21][]22}}
+\newlabel{sub@py_1d_0_pois_0p0_u_x_m_0p5_square_uniform_0_sm_2ndd}{{(c)}{22}{$u_{xx}$\caption@thelabel \relax }{figure.caption.32}{}}
+\newlabel{sub@py_1d_0_pois_0p0_u_x_m_0p5_square_uniform_0_sm_2ndd@cref}{{[subfigure][3][2147483647,12]D.12(c)}{[1][21][]22}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.12}{\ignorespaces Errors using $Q_p$ elements for the 1D Poisson problem with $u=(x-0.5)^2$ in deal.II.\relax }}{22}{figure.caption.32}\protected@file@percent }
+\newlabel{py_1d_0_pois_0p0_u_x_m_0p5_square_uniform_0_sm}{{D.12}{22}{Errors using $Q_p$ elements for the 1D Poisson problem with $u=(x-0.5)^2$ in deal.\rom {2}.\relax }{figure.caption.32}{}}
+\newlabel{py_1d_0_pois_0p0_u_x_m_0p5_square_uniform_0_sm@cref}{{[figure][12][2147483647]D.12}{[1][21][]22}}
+\newlabel{py_1d_0_pois_1p0_u_exp_m_x_m_0p5_square_uniform_0_sm_solu}{{D.13(a)}{22}{$u$\caption@thelabel \relax }{figure.caption.33}{}}
+\newlabel{py_1d_0_pois_1p0_u_exp_m_x_m_0p5_square_uniform_0_sm_solu@cref}{{[subfigure][1][2147483647,13]D.13(a)}{[1][21][]22}}
+\newlabel{sub@py_1d_0_pois_1p0_u_exp_m_x_m_0p5_square_uniform_0_sm_solu}{{(a)}{22}{$u$\caption@thelabel \relax }{figure.caption.33}{}}
+\newlabel{sub@py_1d_0_pois_1p0_u_exp_m_x_m_0p5_square_uniform_0_sm_solu@cref}{{[subfigure][1][2147483647,13]D.13(a)}{[1][21][]22}}
+\newlabel{py_1d_0_pois_1p0_u_exp_m_x_m_0p5_square_uniform_0_sm_grad}{{D.13(b)}{22}{$u_x$\caption@thelabel \relax }{figure.caption.33}{}}
+\newlabel{py_1d_0_pois_1p0_u_exp_m_x_m_0p5_square_uniform_0_sm_grad@cref}{{[subfigure][2][2147483647,13]D.13(b)}{[1][21][]22}}
+\newlabel{sub@py_1d_0_pois_1p0_u_exp_m_x_m_0p5_square_uniform_0_sm_grad}{{(b)}{22}{$u_x$\caption@thelabel \relax }{figure.caption.33}{}}
+\newlabel{sub@py_1d_0_pois_1p0_u_exp_m_x_m_0p5_square_uniform_0_sm_grad@cref}{{[subfigure][2][2147483647,13]D.13(b)}{[1][21][]22}}
+\newlabel{py_1d_0_pois_1p0_u_exp_m_x_m_0p5_square_uniform_0_sm_2ndd}{{D.13(c)}{22}{$u_{xx}$\caption@thelabel \relax }{figure.caption.33}{}}
+\newlabel{py_1d_0_pois_1p0_u_exp_m_x_m_0p5_square_uniform_0_sm_2ndd@cref}{{[subfigure][3][2147483647,13]D.13(c)}{[1][21][]22}}
+\newlabel{sub@py_1d_0_pois_1p0_u_exp_m_x_m_0p5_square_uniform_0_sm_2ndd}{{(c)}{22}{$u_{xx}$\caption@thelabel \relax }{figure.caption.33}{}}
+\newlabel{sub@py_1d_0_pois_1p0_u_exp_m_x_m_0p5_square_uniform_0_sm_2ndd@cref}{{[subfigure][3][2147483647,13]D.13(c)}{[1][21][]22}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.13}{\ignorespaces Errors using $Q_p$ elements for the 1D Poisson problem with $u=e^{-(x-0.5)^2}$ in deal.II.\relax }}{22}{figure.caption.33}\protected@file@percent }
+\newlabel{py_1d_0_pois_1p0_u_exp_m_x_m_0p5_square_uniform_0_sm}{{D.13}{22}{Errors using $Q_p$ elements for the 1D Poisson problem with $u=e^{-(x-0.5)^2}$ in deal.\rom {2}.\relax }{figure.caption.33}{}}
+\newlabel{py_1d_0_pois_1p0_u_exp_m_x_m_0p5_square_uniform_0_sm@cref}{{[figure][13][2147483647]D.13}{[1][21][]22}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {Appendix \nobreakspace  {}D.1.2}Influence of mesh distortion}{22}{subsubsection.D.1.2}\protected@file@percent }
+\newlabel{section_poisson_mesh_distortion}{{Appendix \nobreakspace  {}D.1.2}{22}{Influence of mesh distortion}{subsubsection.D.1.2}{}}
+\newlabel{section_poisson_mesh_distortion@cref}{{[subsubappendix][2][2147483647,4,1]Appendix \nobreakspace  {}D.1.2}{[1][22][]22}}
+\newlabel{regular_mesh_1}{{D.1a}{22}{Influence of mesh distortion}{equation.D.1alph1}{}}
+\newlabel{regular_mesh_1@cref}{{[subequation][1][2147483647,1]D.1a}{[1][22][]22}}
+\newlabel{regular_mesh_2}{{D.1b}{22}{Influence of mesh distortion}{equation.D.1alph2}{}}
+\newlabel{regular_mesh_2@cref}{{[subequation][2][2147483647,1]D.1b}{[1][22][]22}}
+\newlabel{py_1d_0_pois_0p1_u_x_m_0p5_square_randomly_distorted_0_sm_solu}{{D.14(a)}{23}{$u$\caption@thelabel \relax }{figure.caption.34}{}}
+\newlabel{py_1d_0_pois_0p1_u_x_m_0p5_square_randomly_distorted_0_sm_solu@cref}{{[subfigure][1][2147483647,14]D.14(a)}{[1][23][]23}}
+\newlabel{sub@py_1d_0_pois_0p1_u_x_m_0p5_square_randomly_distorted_0_sm_solu}{{(a)}{23}{$u$\caption@thelabel \relax }{figure.caption.34}{}}
+\newlabel{sub@py_1d_0_pois_0p1_u_x_m_0p5_square_randomly_distorted_0_sm_solu@cref}{{[subfigure][1][2147483647,14]D.14(a)}{[1][23][]23}}
+\newlabel{py_1d_0_pois_0p1_u_x_m_0p5_square_randomly_distorted_0_sm_grad}{{D.14(b)}{23}{$u_x$\caption@thelabel \relax }{figure.caption.34}{}}
+\newlabel{py_1d_0_pois_0p1_u_x_m_0p5_square_randomly_distorted_0_sm_grad@cref}{{[subfigure][2][2147483647,14]D.14(b)}{[1][23][]23}}
+\newlabel{sub@py_1d_0_pois_0p1_u_x_m_0p5_square_randomly_distorted_0_sm_grad}{{(b)}{23}{$u_x$\caption@thelabel \relax }{figure.caption.34}{}}
+\newlabel{sub@py_1d_0_pois_0p1_u_x_m_0p5_square_randomly_distorted_0_sm_grad@cref}{{[subfigure][2][2147483647,14]D.14(b)}{[1][23][]23}}
+\newlabel{py_1d_0_pois_0p1_u_x_m_0p5_square_randomly_distorted_0_sm_2ndd}{{D.14(c)}{23}{$u_{xx}$\caption@thelabel \relax }{figure.caption.34}{}}
+\newlabel{py_1d_0_pois_0p1_u_x_m_0p5_square_randomly_distorted_0_sm_2ndd@cref}{{[subfigure][3][2147483647,14]D.14(c)}{[1][23][]23}}
+\newlabel{sub@py_1d_0_pois_0p1_u_x_m_0p5_square_randomly_distorted_0_sm_2ndd}{{(c)}{23}{$u_{xx}$\caption@thelabel \relax }{figure.caption.34}{}}
+\newlabel{sub@py_1d_0_pois_0p1_u_x_m_0p5_square_randomly_distorted_0_sm_2ndd@cref}{{[subfigure][3][2147483647,14]D.14(c)}{[1][23][]23}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.14}{\ignorespaces Errors using $Q_p$ elements for the 1D Poisson problem with $u=(x-0.5)^2$ with the randomly distorted mesh in deal.II.\relax }}{23}{figure.caption.34}\protected@file@percent }
+\newlabel{py_1d_0_pois_0p1_u_x_m_0p5_square_randomly_distorted_0_sm}{{D.14}{23}{Errors using $Q_p$ elements for the 1D Poisson problem with $u=(x-0.5)^2$ with the randomly distorted mesh in deal.\rom {2}.\relax }{figure.caption.34}{}}
+\newlabel{py_1d_0_pois_0p1_u_x_m_0p5_square_randomly_distorted_0_sm@cref}{{[figure][14][2147483647]D.14}{[1][23][]23}}
+\newlabel{py_1d_0_pois_0p2_u_x_m_0p5_square_regularly_1_distorted_0_sm_solu}{{D.15(a)}{23}{$u$\caption@thelabel \relax }{figure.caption.35}{}}
+\newlabel{py_1d_0_pois_0p2_u_x_m_0p5_square_regularly_1_distorted_0_sm_solu@cref}{{[subfigure][1][2147483647,15]D.15(a)}{[1][23][]23}}
+\newlabel{sub@py_1d_0_pois_0p2_u_x_m_0p5_square_regularly_1_distorted_0_sm_solu}{{(a)}{23}{$u$\caption@thelabel \relax }{figure.caption.35}{}}
+\newlabel{sub@py_1d_0_pois_0p2_u_x_m_0p5_square_regularly_1_distorted_0_sm_solu@cref}{{[subfigure][1][2147483647,15]D.15(a)}{[1][23][]23}}
+\newlabel{py_1d_0_pois_0p2_u_x_m_0p5_square_regularly_1_distorted_0_sm_grad}{{D.15(b)}{23}{$u_x$\caption@thelabel \relax }{figure.caption.35}{}}
+\newlabel{py_1d_0_pois_0p2_u_x_m_0p5_square_regularly_1_distorted_0_sm_grad@cref}{{[subfigure][2][2147483647,15]D.15(b)}{[1][23][]23}}
+\newlabel{sub@py_1d_0_pois_0p2_u_x_m_0p5_square_regularly_1_distorted_0_sm_grad}{{(b)}{23}{$u_x$\caption@thelabel \relax }{figure.caption.35}{}}
+\newlabel{sub@py_1d_0_pois_0p2_u_x_m_0p5_square_regularly_1_distorted_0_sm_grad@cref}{{[subfigure][2][2147483647,15]D.15(b)}{[1][23][]23}}
+\newlabel{py_1d_0_pois_0p2_u_x_m_0p5_square_regularly_1_distorted_0_sm_2ndd}{{D.15(c)}{23}{$u_{xx}$\caption@thelabel \relax }{figure.caption.35}{}}
+\newlabel{py_1d_0_pois_0p2_u_x_m_0p5_square_regularly_1_distorted_0_sm_2ndd@cref}{{[subfigure][3][2147483647,15]D.15(c)}{[1][23][]23}}
+\newlabel{sub@py_1d_0_pois_0p2_u_x_m_0p5_square_regularly_1_distorted_0_sm_2ndd}{{(c)}{23}{$u_{xx}$\caption@thelabel \relax }{figure.caption.35}{}}
+\newlabel{sub@py_1d_0_pois_0p2_u_x_m_0p5_square_regularly_1_distorted_0_sm_2ndd@cref}{{[subfigure][3][2147483647,15]D.15(c)}{[1][23][]23}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.15}{\ignorespaces Errors using $Q_p$ elements for the 1D Poisson problem with $u=(x-0.5)^2$ with the regularly distorted mesh of Eq.\nobreakspace  {}(\ref  {regular_mesh_1}) in deal.II.\relax }}{23}{figure.caption.35}\protected@file@percent }
+\newlabel{py_1d_0_pois_0p2_u_x_m_0p5_square_regularly_1_distorted_0_sm}{{D.15}{23}{Errors using $Q_p$ elements for the 1D Poisson problem with $u=(x-0.5)^2$ with the regularly distorted mesh of Eq.~(\ref {regular_mesh_1}) in deal.\rom {2}.\relax }{figure.caption.35}{}}
+\newlabel{py_1d_0_pois_0p2_u_x_m_0p5_square_regularly_1_distorted_0_sm@cref}{{[figure][15][2147483647]D.15}{[1][23][]23}}
+\newlabel{py_1d_0_pois_0p3_u_x_m_0p5_square_regularly_2_distorted_0_sm_solu}{{D.16(a)}{24}{$u$\caption@thelabel \relax }{figure.caption.36}{}}
+\newlabel{py_1d_0_pois_0p3_u_x_m_0p5_square_regularly_2_distorted_0_sm_solu@cref}{{[subfigure][1][2147483647,16]D.16(a)}{[1][24][]24}}
+\newlabel{sub@py_1d_0_pois_0p3_u_x_m_0p5_square_regularly_2_distorted_0_sm_solu}{{(a)}{24}{$u$\caption@thelabel \relax }{figure.caption.36}{}}
+\newlabel{sub@py_1d_0_pois_0p3_u_x_m_0p5_square_regularly_2_distorted_0_sm_solu@cref}{{[subfigure][1][2147483647,16]D.16(a)}{[1][24][]24}}
+\newlabel{py_1d_0_pois_0p3_u_x_m_0p5_square_regularly_2_distorted_0_sm_grad}{{D.16(b)}{24}{$u_x$\caption@thelabel \relax }{figure.caption.36}{}}
+\newlabel{py_1d_0_pois_0p3_u_x_m_0p5_square_regularly_2_distorted_0_sm_grad@cref}{{[subfigure][2][2147483647,16]D.16(b)}{[1][24][]24}}
+\newlabel{sub@py_1d_0_pois_0p3_u_x_m_0p5_square_regularly_2_distorted_0_sm_grad}{{(b)}{24}{$u_x$\caption@thelabel \relax }{figure.caption.36}{}}
+\newlabel{sub@py_1d_0_pois_0p3_u_x_m_0p5_square_regularly_2_distorted_0_sm_grad@cref}{{[subfigure][2][2147483647,16]D.16(b)}{[1][24][]24}}
+\newlabel{py_1d_0_pois_0p3_u_x_m_0p5_square_regularly_2_distorted_0_sm_2ndd}{{D.16(c)}{24}{$u_{xx}$\caption@thelabel \relax }{figure.caption.36}{}}
+\newlabel{py_1d_0_pois_0p3_u_x_m_0p5_square_regularly_2_distorted_0_sm_2ndd@cref}{{[subfigure][3][2147483647,16]D.16(c)}{[1][24][]24}}
+\newlabel{sub@py_1d_0_pois_0p3_u_x_m_0p5_square_regularly_2_distorted_0_sm_2ndd}{{(c)}{24}{$u_{xx}$\caption@thelabel \relax }{figure.caption.36}{}}
+\newlabel{sub@py_1d_0_pois_0p3_u_x_m_0p5_square_regularly_2_distorted_0_sm_2ndd@cref}{{[subfigure][3][2147483647,16]D.16(c)}{[1][24][]24}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.16}{\ignorespaces Errors using $Q_p$ elements for the 1D Poisson problem with $u=(x-0.5)^2$ with the regularly distorted mesh of Eq.\nobreakspace  {}(\ref  {regular_mesh_2}) in deal.II.\relax }}{24}{figure.caption.36}\protected@file@percent }
+\newlabel{py_1d_0_pois_0p3_u_x_m_0p5_square_regularly_2_distorted_0_sm}{{D.16}{24}{Errors using $Q_p$ elements for the 1D Poisson problem with $u=(x-0.5)^2$ with the regularly distorted mesh of Eq.~(\ref {regular_mesh_2}) in deal.\rom {2}.\relax }{figure.caption.36}{}}
+\newlabel{py_1d_0_pois_0p3_u_x_m_0p5_square_regularly_2_distorted_0_sm@cref}{{[figure][16][2147483647]D.16}{[1][24][]24}}
+\newlabel{py_1d_0_pois_1p1_u_exp_m_x_m_0p5_square_randomly_distorted_0_sm_solu}{{D.17(a)}{24}{$u$\caption@thelabel \relax }{figure.caption.37}{}}
+\newlabel{py_1d_0_pois_1p1_u_exp_m_x_m_0p5_square_randomly_distorted_0_sm_solu@cref}{{[subfigure][1][2147483647,17]D.17(a)}{[1][24][]24}}
+\newlabel{sub@py_1d_0_pois_1p1_u_exp_m_x_m_0p5_square_randomly_distorted_0_sm_solu}{{(a)}{24}{$u$\caption@thelabel \relax }{figure.caption.37}{}}
+\newlabel{sub@py_1d_0_pois_1p1_u_exp_m_x_m_0p5_square_randomly_distorted_0_sm_solu@cref}{{[subfigure][1][2147483647,17]D.17(a)}{[1][24][]24}}
+\newlabel{py_1d_0_pois_1p1_u_exp_m_x_m_0p5_square_randomly_distorted_0_sm_grad}{{D.17(b)}{24}{$u_x$\caption@thelabel \relax }{figure.caption.37}{}}
+\newlabel{py_1d_0_pois_1p1_u_exp_m_x_m_0p5_square_randomly_distorted_0_sm_grad@cref}{{[subfigure][2][2147483647,17]D.17(b)}{[1][24][]24}}
+\newlabel{sub@py_1d_0_pois_1p1_u_exp_m_x_m_0p5_square_randomly_distorted_0_sm_grad}{{(b)}{24}{$u_x$\caption@thelabel \relax }{figure.caption.37}{}}
+\newlabel{sub@py_1d_0_pois_1p1_u_exp_m_x_m_0p5_square_randomly_distorted_0_sm_grad@cref}{{[subfigure][2][2147483647,17]D.17(b)}{[1][24][]24}}
+\newlabel{py_1d_0_pois_1p1_u_exp_m_x_m_0p5_square_randomly_distorted_0_sm_2ndd}{{D.17(c)}{24}{$u_{xx}$\caption@thelabel \relax }{figure.caption.37}{}}
+\newlabel{py_1d_0_pois_1p1_u_exp_m_x_m_0p5_square_randomly_distorted_0_sm_2ndd@cref}{{[subfigure][3][2147483647,17]D.17(c)}{[1][24][]24}}
+\newlabel{sub@py_1d_0_pois_1p1_u_exp_m_x_m_0p5_square_randomly_distorted_0_sm_2ndd}{{(c)}{24}{$u_{xx}$\caption@thelabel \relax }{figure.caption.37}{}}
+\newlabel{sub@py_1d_0_pois_1p1_u_exp_m_x_m_0p5_square_randomly_distorted_0_sm_2ndd@cref}{{[subfigure][3][2147483647,17]D.17(c)}{[1][24][]24}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.17}{\ignorespaces Errors using $Q_p$ elements for the 1D Poisson problem with $u=e^{-(x-0.5)^2}$ with the randomly distorted mesh in deal.II.\relax }}{24}{figure.caption.37}\protected@file@percent }
+\newlabel{py_1d_0_pois_1p1_u_exp_m_x_m_0p5_square_randomly_distorted_0_sm}{{D.17}{24}{Errors using $Q_p$ elements for the 1D Poisson problem with $u=e^{-(x-0.5)^2}$ with the randomly distorted mesh in deal.\rom {2}.\relax }{figure.caption.37}{}}
+\newlabel{py_1d_0_pois_1p1_u_exp_m_x_m_0p5_square_randomly_distorted_0_sm@cref}{{[figure][17][2147483647]D.17}{[1][24][]24}}
+\newlabel{py_1d_0_pois_1p2_u_exp_m_x_m_0p5_square_regularly_1_distorted_0_sm_solu}{{D.18(a)}{24}{$u$\caption@thelabel \relax }{figure.caption.38}{}}
+\newlabel{py_1d_0_pois_1p2_u_exp_m_x_m_0p5_square_regularly_1_distorted_0_sm_solu@cref}{{[subfigure][1][2147483647,18]D.18(a)}{[1][24][]24}}
+\newlabel{sub@py_1d_0_pois_1p2_u_exp_m_x_m_0p5_square_regularly_1_distorted_0_sm_solu}{{(a)}{24}{$u$\caption@thelabel \relax }{figure.caption.38}{}}
+\newlabel{sub@py_1d_0_pois_1p2_u_exp_m_x_m_0p5_square_regularly_1_distorted_0_sm_solu@cref}{{[subfigure][1][2147483647,18]D.18(a)}{[1][24][]24}}
+\newlabel{py_1d_0_pois_1p2_u_exp_m_x_m_0p5_square_regularly_1_distorted_0_sm_grad}{{D.18(b)}{24}{$u_x$\caption@thelabel \relax }{figure.caption.38}{}}
+\newlabel{py_1d_0_pois_1p2_u_exp_m_x_m_0p5_square_regularly_1_distorted_0_sm_grad@cref}{{[subfigure][2][2147483647,18]D.18(b)}{[1][24][]24}}
+\newlabel{sub@py_1d_0_pois_1p2_u_exp_m_x_m_0p5_square_regularly_1_distorted_0_sm_grad}{{(b)}{24}{$u_x$\caption@thelabel \relax }{figure.caption.38}{}}
+\newlabel{sub@py_1d_0_pois_1p2_u_exp_m_x_m_0p5_square_regularly_1_distorted_0_sm_grad@cref}{{[subfigure][2][2147483647,18]D.18(b)}{[1][24][]24}}
+\newlabel{py_1d_0_pois_1p2_u_exp_m_x_m_0p5_square_regularly_1_distorted_0_sm_2ndd}{{D.18(c)}{24}{$u_{xx}$\caption@thelabel \relax }{figure.caption.38}{}}
+\newlabel{py_1d_0_pois_1p2_u_exp_m_x_m_0p5_square_regularly_1_distorted_0_sm_2ndd@cref}{{[subfigure][3][2147483647,18]D.18(c)}{[1][24][]24}}
+\newlabel{sub@py_1d_0_pois_1p2_u_exp_m_x_m_0p5_square_regularly_1_distorted_0_sm_2ndd}{{(c)}{24}{$u_{xx}$\caption@thelabel \relax }{figure.caption.38}{}}
+\newlabel{sub@py_1d_0_pois_1p2_u_exp_m_x_m_0p5_square_regularly_1_distorted_0_sm_2ndd@cref}{{[subfigure][3][2147483647,18]D.18(c)}{[1][24][]24}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.18}{\ignorespaces Errors using $Q_p$ elements for the 1D Poisson problem with $u=e^{-(x-0.5)^2}$ with the regularly distorted mesh of Eq.\nobreakspace  {}(\ref  {regular_mesh_1}) in deal.II.\relax }}{24}{figure.caption.38}\protected@file@percent }
+\newlabel{py_1d_0_pois_1p2_u_exp_m_x_m_0p5_square_regularly_1_distorted_0_sm}{{D.18}{24}{Errors using $Q_p$ elements for the 1D Poisson problem with $u=e^{-(x-0.5)^2}$ with the regularly distorted mesh of Eq.~(\ref {regular_mesh_1}) in deal.\rom {2}.\relax }{figure.caption.38}{}}
+\newlabel{py_1d_0_pois_1p2_u_exp_m_x_m_0p5_square_regularly_1_distorted_0_sm@cref}{{[figure][18][2147483647]D.18}{[1][24][]24}}
+\newlabel{py_1d_0_pois_1p3_u_exp_m_x_m_0p5_square_regularly_2_distorted_0_sm_solu}{{D.19(a)}{25}{$u$\caption@thelabel \relax }{figure.caption.39}{}}
+\newlabel{py_1d_0_pois_1p3_u_exp_m_x_m_0p5_square_regularly_2_distorted_0_sm_solu@cref}{{[subfigure][1][2147483647,19]D.19(a)}{[1][25][]25}}
+\newlabel{sub@py_1d_0_pois_1p3_u_exp_m_x_m_0p5_square_regularly_2_distorted_0_sm_solu}{{(a)}{25}{$u$\caption@thelabel \relax }{figure.caption.39}{}}
+\newlabel{sub@py_1d_0_pois_1p3_u_exp_m_x_m_0p5_square_regularly_2_distorted_0_sm_solu@cref}{{[subfigure][1][2147483647,19]D.19(a)}{[1][25][]25}}
+\newlabel{py_1d_0_pois_1p3_u_exp_m_x_m_0p5_square_regularly_2_distorted_0_sm_grad}{{D.19(b)}{25}{$u_x$\caption@thelabel \relax }{figure.caption.39}{}}
+\newlabel{py_1d_0_pois_1p3_u_exp_m_x_m_0p5_square_regularly_2_distorted_0_sm_grad@cref}{{[subfigure][2][2147483647,19]D.19(b)}{[1][25][]25}}
+\newlabel{sub@py_1d_0_pois_1p3_u_exp_m_x_m_0p5_square_regularly_2_distorted_0_sm_grad}{{(b)}{25}{$u_x$\caption@thelabel \relax }{figure.caption.39}{}}
+\newlabel{sub@py_1d_0_pois_1p3_u_exp_m_x_m_0p5_square_regularly_2_distorted_0_sm_grad@cref}{{[subfigure][2][2147483647,19]D.19(b)}{[1][25][]25}}
+\newlabel{py_1d_0_pois_1p3_u_exp_m_x_m_0p5_square_regularly_2_distorted_0_sm_2ndd}{{D.19(c)}{25}{$u_{xx}$\caption@thelabel \relax }{figure.caption.39}{}}
+\newlabel{py_1d_0_pois_1p3_u_exp_m_x_m_0p5_square_regularly_2_distorted_0_sm_2ndd@cref}{{[subfigure][3][2147483647,19]D.19(c)}{[1][25][]25}}
+\newlabel{sub@py_1d_0_pois_1p3_u_exp_m_x_m_0p5_square_regularly_2_distorted_0_sm_2ndd}{{(c)}{25}{$u_{xx}$\caption@thelabel \relax }{figure.caption.39}{}}
+\newlabel{sub@py_1d_0_pois_1p3_u_exp_m_x_m_0p5_square_regularly_2_distorted_0_sm_2ndd@cref}{{[subfigure][3][2147483647,19]D.19(c)}{[1][25][]25}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.19}{\ignorespaces Errors using $Q_p$ elements for the 1D Poisson problem with $u=e^{-(x-0.5)^2}$ with the regularly distorted mesh of Eq.\nobreakspace  {}(\ref  {regular_mesh_2}) in deal.II.\relax }}{25}{figure.caption.39}\protected@file@percent }
+\newlabel{py_1d_0_pois_1p3_u_exp_m_x_m_0p5_square_regularly_2_distorted_0_sm}{{D.19}{25}{Errors using $Q_p$ elements for the 1D Poisson problem with $u=e^{-(x-0.5)^2}$ with the regularly distorted mesh of Eq.~(\ref {regular_mesh_2}) in deal.\rom {2}.\relax }{figure.caption.39}{}}
+\newlabel{py_1d_0_pois_1p3_u_exp_m_x_m_0p5_square_regularly_2_distorted_0_sm@cref}{{[figure][19][2147483647]D.19}{[1][25][]25}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {Appendix \nobreakspace  {}D.1.3}Influence of FEM packages}{26}{subsubsection.D.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{MATLAB}{26}{section*.40}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{FEniCS}{26}{section*.41}\protected@file@percent }
+\newlabel{py_error_fenics_1d_0_pois_0_u_x_m_0p5_square_0_sm_solu}{{D.20(a)}{26}{$u$\caption@thelabel \relax }{figure.caption.42}{}}
+\newlabel{py_error_fenics_1d_0_pois_0_u_x_m_0p5_square_0_sm_solu@cref}{{[subfigure][1][2147483647,20]D.20(a)}{[1][26][]26}}
+\newlabel{sub@py_error_fenics_1d_0_pois_0_u_x_m_0p5_square_0_sm_solu}{{(a)}{26}{$u$\caption@thelabel \relax }{figure.caption.42}{}}
+\newlabel{sub@py_error_fenics_1d_0_pois_0_u_x_m_0p5_square_0_sm_solu@cref}{{[subfigure][1][2147483647,20]D.20(a)}{[1][26][]26}}
+\newlabel{py_error_fenics_1d_0_pois_0_u_x_m_0p5_square_0_sm_grad}{{D.20(b)}{26}{$u_x$\caption@thelabel \relax }{figure.caption.42}{}}
+\newlabel{py_error_fenics_1d_0_pois_0_u_x_m_0p5_square_0_sm_grad@cref}{{[subfigure][2][2147483647,20]D.20(b)}{[1][26][]26}}
+\newlabel{sub@py_error_fenics_1d_0_pois_0_u_x_m_0p5_square_0_sm_grad}{{(b)}{26}{$u_x$\caption@thelabel \relax }{figure.caption.42}{}}
+\newlabel{sub@py_error_fenics_1d_0_pois_0_u_x_m_0p5_square_0_sm_grad@cref}{{[subfigure][2][2147483647,20]D.20(b)}{[1][26][]26}}
+\newlabel{py_error_fenics_1d_0_pois_0_u_x_m_0p5_square_0_sm_2ndd}{{D.20(c)}{26}{$u_{xx}$\caption@thelabel \relax }{figure.caption.42}{}}
+\newlabel{py_error_fenics_1d_0_pois_0_u_x_m_0p5_square_0_sm_2ndd@cref}{{[subfigure][3][2147483647,20]D.20(c)}{[1][26][]26}}
+\newlabel{sub@py_error_fenics_1d_0_pois_0_u_x_m_0p5_square_0_sm_2ndd}{{(c)}{26}{$u_{xx}$\caption@thelabel \relax }{figure.caption.42}{}}
+\newlabel{sub@py_error_fenics_1d_0_pois_0_u_x_m_0p5_square_0_sm_2ndd@cref}{{[subfigure][3][2147483647,20]D.20(c)}{[1][26][]26}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.20}{\ignorespaces Errors using $Q_p$ elements for the 1D Poisson problem with $u=(x-0.5)^2$ in FEniCS.\relax }}{26}{figure.caption.42}\protected@file@percent }
+\newlabel{py_error_fenics_1d_0_pois_0_u_x_m_0p5_square_0_sm}{{D.20}{26}{Errors using $Q_p$ elements for the 1D Poisson problem with $u=(x-0.5)^2$ in FEniCS.\relax }{figure.caption.42}{}}
+\newlabel{py_error_fenics_1d_0_pois_0_u_x_m_0p5_square_0_sm@cref}{{[figure][20][2147483647]D.20}{[1][26][]26}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {Appendix \nobreakspace  {}D.2}Diffusion problems}{26}{subsection.D.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {Appendix \nobreakspace  {}D.2.1}Results of the uniform mesh}{26}{subsubsection.D.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{$u=(x-0.5)^2$}{26}{section*.43}\protected@file@percent }
+\newlabel{py_1d_1_diff_0p00_u_x_m_0p5_square_d_1px_0_sm_solu}{{D.21(a)}{26}{$u$\caption@thelabel \relax }{figure.caption.44}{}}
+\newlabel{py_1d_1_diff_0p00_u_x_m_0p5_square_d_1px_0_sm_solu@cref}{{[subfigure][1][2147483647,21]D.21(a)}{[1][26][]26}}
+\newlabel{sub@py_1d_1_diff_0p00_u_x_m_0p5_square_d_1px_0_sm_solu}{{(a)}{26}{$u$\caption@thelabel \relax }{figure.caption.44}{}}
+\newlabel{sub@py_1d_1_diff_0p00_u_x_m_0p5_square_d_1px_0_sm_solu@cref}{{[subfigure][1][2147483647,21]D.21(a)}{[1][26][]26}}
+\newlabel{py_1d_1_diff_0p00_u_x_m_0p5_square_d_1px_0_sm_grad}{{D.21(b)}{26}{$u_x$\caption@thelabel \relax }{figure.caption.44}{}}
+\newlabel{py_1d_1_diff_0p00_u_x_m_0p5_square_d_1px_0_sm_grad@cref}{{[subfigure][2][2147483647,21]D.21(b)}{[1][26][]26}}
+\newlabel{sub@py_1d_1_diff_0p00_u_x_m_0p5_square_d_1px_0_sm_grad}{{(b)}{26}{$u_x$\caption@thelabel \relax }{figure.caption.44}{}}
+\newlabel{sub@py_1d_1_diff_0p00_u_x_m_0p5_square_d_1px_0_sm_grad@cref}{{[subfigure][2][2147483647,21]D.21(b)}{[1][26][]26}}
+\newlabel{py_1d_1_diff_0p00_u_x_m_0p5_square_d_1px_0_sm_2ndd}{{D.21(c)}{26}{$u_{xx}$\caption@thelabel \relax }{figure.caption.44}{}}
+\newlabel{py_1d_1_diff_0p00_u_x_m_0p5_square_d_1px_0_sm_2ndd@cref}{{[subfigure][3][2147483647,21]D.21(c)}{[1][26][]26}}
+\newlabel{sub@py_1d_1_diff_0p00_u_x_m_0p5_square_d_1px_0_sm_2ndd}{{(c)}{26}{$u_{xx}$\caption@thelabel \relax }{figure.caption.44}{}}
+\newlabel{sub@py_1d_1_diff_0p00_u_x_m_0p5_square_d_1px_0_sm_2ndd@cref}{{[subfigure][3][2147483647,21]D.21(c)}{[1][26][]26}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.21}{\ignorespaces Errors using $Q_p$ elements for the 1D diffusion problem with $u=(x-0.5)^2$ and $D(\mathbf  {x}) = 1+x$ in deal.II.\relax }}{26}{figure.caption.44}\protected@file@percent }
+\newlabel{py_1d_1_diff_0p00_u_x_m_0p5_square_d_1px_0_sm}{{D.21}{26}{Errors using $Q_p$ elements for the 1D diffusion problem with $u=(x-0.5)^2$ and $D(\mathbf {x}) = 1+x$ in deal.\rom {2}.\relax }{figure.caption.44}{}}
+\newlabel{py_1d_1_diff_0p00_u_x_m_0p5_square_d_1px_0_sm@cref}{{[figure][21][2147483647]D.21}{[1][26][]26}}
+\newlabel{py_1d_1_diff_0p4_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_solu}{{D.22(a)}{27}{$u$\caption@thelabel \relax }{figure.caption.45}{}}
+\newlabel{py_1d_1_diff_0p4_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_solu@cref}{{[subfigure][1][2147483647,22]D.22(a)}{[1][26][]27}}
+\newlabel{sub@py_1d_1_diff_0p4_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_solu}{{(a)}{27}{$u$\caption@thelabel \relax }{figure.caption.45}{}}
+\newlabel{sub@py_1d_1_diff_0p4_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_solu@cref}{{[subfigure][1][2147483647,22]D.22(a)}{[1][26][]27}}
+\newlabel{py_1d_1_diff_0p4_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_grad}{{D.22(b)}{27}{$u_x$\caption@thelabel \relax }{figure.caption.45}{}}
+\newlabel{py_1d_1_diff_0p4_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_grad@cref}{{[subfigure][2][2147483647,22]D.22(b)}{[1][26][]27}}
+\newlabel{sub@py_1d_1_diff_0p4_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_grad}{{(b)}{27}{$u_x$\caption@thelabel \relax }{figure.caption.45}{}}
+\newlabel{sub@py_1d_1_diff_0p4_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_grad@cref}{{[subfigure][2][2147483647,22]D.22(b)}{[1][26][]27}}
+\newlabel{py_1d_1_diff_0p4_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_2ndd}{{D.22(c)}{27}{$u_{xx}$\caption@thelabel \relax }{figure.caption.45}{}}
+\newlabel{py_1d_1_diff_0p4_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_2ndd@cref}{{[subfigure][3][2147483647,22]D.22(c)}{[1][26][]27}}
+\newlabel{sub@py_1d_1_diff_0p4_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_2ndd}{{(c)}{27}{$u_{xx}$\caption@thelabel \relax }{figure.caption.45}{}}
+\newlabel{sub@py_1d_1_diff_0p4_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_2ndd@cref}{{[subfigure][3][2147483647,22]D.22(c)}{[1][26][]27}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.22}{\ignorespaces Errors using $Q_p$ elements for the 1D diffusion problem with $u=(x-0.5)^2$ and $D(\mathbf  {x}) = e^{-(x-0.5)^2}$ in deal.II.\relax }}{27}{figure.caption.45}\protected@file@percent }
+\newlabel{py_1d_1_diff_0p4_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm}{{D.22}{27}{Errors using $Q_p$ elements for the 1D diffusion problem with $u=(x-0.5)^2$ and $D(\mathbf {x}) = e^{-(x-0.5)^2}$ in deal.\rom {2}.\relax }{figure.caption.45}{}}
+\newlabel{py_1d_1_diff_0p4_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm@cref}{{[figure][22][2147483647]D.22}{[1][26][]27}}
+\@writefile{toc}{\contentsline {paragraph}{$u=e^{-(x-0.5)^2}$}{27}{section*.46}\protected@file@percent }
+\newlabel{py_1d_1_diff_1p00_u_exp_m_x_m_0p5_square_d_1px_0_sm_solu}{{D.23(a)}{27}{$u$\caption@thelabel \relax }{figure.caption.47}{}}
+\newlabel{py_1d_1_diff_1p00_u_exp_m_x_m_0p5_square_d_1px_0_sm_solu@cref}{{[subfigure][1][2147483647,23]D.23(a)}{[1][27][]27}}
+\newlabel{sub@py_1d_1_diff_1p00_u_exp_m_x_m_0p5_square_d_1px_0_sm_solu}{{(a)}{27}{$u$\caption@thelabel \relax }{figure.caption.47}{}}
+\newlabel{sub@py_1d_1_diff_1p00_u_exp_m_x_m_0p5_square_d_1px_0_sm_solu@cref}{{[subfigure][1][2147483647,23]D.23(a)}{[1][27][]27}}
+\newlabel{py_1d_1_diff_1p00_u_exp_m_x_m_0p5_square_d_1px_0_sm_grad}{{D.23(b)}{27}{$u_x$\caption@thelabel \relax }{figure.caption.47}{}}
+\newlabel{py_1d_1_diff_1p00_u_exp_m_x_m_0p5_square_d_1px_0_sm_grad@cref}{{[subfigure][2][2147483647,23]D.23(b)}{[1][27][]27}}
+\newlabel{sub@py_1d_1_diff_1p00_u_exp_m_x_m_0p5_square_d_1px_0_sm_grad}{{(b)}{27}{$u_x$\caption@thelabel \relax }{figure.caption.47}{}}
+\newlabel{sub@py_1d_1_diff_1p00_u_exp_m_x_m_0p5_square_d_1px_0_sm_grad@cref}{{[subfigure][2][2147483647,23]D.23(b)}{[1][27][]27}}
+\newlabel{py_1d_1_diff_1p00_u_exp_m_x_m_0p5_square_d_1px_0_sm_2ndd}{{D.23(c)}{27}{$u_{xx}$\caption@thelabel \relax }{figure.caption.47}{}}
+\newlabel{py_1d_1_diff_1p00_u_exp_m_x_m_0p5_square_d_1px_0_sm_2ndd@cref}{{[subfigure][3][2147483647,23]D.23(c)}{[1][27][]27}}
+\newlabel{sub@py_1d_1_diff_1p00_u_exp_m_x_m_0p5_square_d_1px_0_sm_2ndd}{{(c)}{27}{$u_{xx}$\caption@thelabel \relax }{figure.caption.47}{}}
+\newlabel{sub@py_1d_1_diff_1p00_u_exp_m_x_m_0p5_square_d_1px_0_sm_2ndd@cref}{{[subfigure][3][2147483647,23]D.23(c)}{[1][27][]27}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.23}{\ignorespaces Errors using $Q_p$ elements for the 1D diffusion problem with $u=e^{-(x-0.5)^2}$ and $D(\mathbf  {x}) = 1+x$ in deal.II.\relax }}{27}{figure.caption.47}\protected@file@percent }
+\newlabel{py_1d_1_diff_1p00_u_exp_m_x_m_0p5_square_d_1px_0_sm}{{D.23}{27}{Errors using $Q_p$ elements for the 1D diffusion problem with $u=e^{-(x-0.5)^2}$ and $D(\mathbf {x}) = 1+x$ in deal.\rom {2}.\relax }{figure.caption.47}{}}
+\newlabel{py_1d_1_diff_1p00_u_exp_m_x_m_0p5_square_d_1px_0_sm@cref}{{[figure][23][2147483647]D.23}{[1][27][]27}}
+\newlabel{py_1d_1_diff_1p2_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_solu}{{D.24(a)}{27}{$u$\caption@thelabel \relax }{figure.caption.48}{}}
+\newlabel{py_1d_1_diff_1p2_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_solu@cref}{{[subfigure][1][2147483647,24]D.24(a)}{[1][27][]27}}
+\newlabel{sub@py_1d_1_diff_1p2_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_solu}{{(a)}{27}{$u$\caption@thelabel \relax }{figure.caption.48}{}}
+\newlabel{sub@py_1d_1_diff_1p2_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_solu@cref}{{[subfigure][1][2147483647,24]D.24(a)}{[1][27][]27}}
+\newlabel{py_1d_1_diff_1p2_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_grad}{{D.24(b)}{27}{$u_x$\caption@thelabel \relax }{figure.caption.48}{}}
+\newlabel{py_1d_1_diff_1p2_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_grad@cref}{{[subfigure][2][2147483647,24]D.24(b)}{[1][27][]27}}
+\newlabel{sub@py_1d_1_diff_1p2_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_grad}{{(b)}{27}{$u_x$\caption@thelabel \relax }{figure.caption.48}{}}
+\newlabel{sub@py_1d_1_diff_1p2_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_grad@cref}{{[subfigure][2][2147483647,24]D.24(b)}{[1][27][]27}}
+\newlabel{py_1d_1_diff_1p2_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_2ndd}{{D.24(c)}{27}{$u_{xx}$\caption@thelabel \relax }{figure.caption.48}{}}
+\newlabel{py_1d_1_diff_1p2_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_2ndd@cref}{{[subfigure][3][2147483647,24]D.24(c)}{[1][27][]27}}
+\newlabel{sub@py_1d_1_diff_1p2_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_2ndd}{{(c)}{27}{$u_{xx}$\caption@thelabel \relax }{figure.caption.48}{}}
+\newlabel{sub@py_1d_1_diff_1p2_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_2ndd@cref}{{[subfigure][3][2147483647,24]D.24(c)}{[1][27][]27}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.24}{\ignorespaces Errors using $Q_p$ elements for the 1D diffusion problem with $u=e^{-(x-0.5)^2}$ and $D(\mathbf  {x}) = e^{-(x-0.5)^2}$ in deal.II.\relax }}{27}{figure.caption.48}\protected@file@percent }
+\newlabel{py_1d_1_diff_1p2_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm}{{D.24}{27}{Errors using $Q_p$ elements for the 1D diffusion problem with $u=e^{-(x-0.5)^2}$ and $D(\mathbf {x}) = e^{-(x-0.5)^2}$ in deal.\rom {2}.\relax }{figure.caption.48}{}}
+\newlabel{py_1d_1_diff_1p2_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm@cref}{{[figure][24][2147483647]D.24}{[1][27][]27}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {Appendix \nobreakspace  {}D.2.2}Influence of mesh distortion}{28}{subsubsection.D.2.2}\protected@file@percent }
+\newlabel{section_diffusion_mesh_distortion}{{Appendix \nobreakspace  {}D.2.2}{28}{Influence of mesh distortion}{subsubsection.D.2.2}{}}
+\newlabel{section_diffusion_mesh_distortion@cref}{{[subsubappendix][2][2147483647,4,2]Appendix \nobreakspace  {}D.2.2}{[1][28][]28}}
+\newlabel{py_1d_1_diff_0p01_u_x_m_0p5_square_d_1px_distorted_0_sm_solu}{{D.25(a)}{28}{$u$\caption@thelabel \relax }{figure.caption.49}{}}
+\newlabel{py_1d_1_diff_0p01_u_x_m_0p5_square_d_1px_distorted_0_sm_solu@cref}{{[subfigure][1][2147483647,25]D.25(a)}{[1][28][]28}}
+\newlabel{sub@py_1d_1_diff_0p01_u_x_m_0p5_square_d_1px_distorted_0_sm_solu}{{(a)}{28}{$u$\caption@thelabel \relax }{figure.caption.49}{}}
+\newlabel{sub@py_1d_1_diff_0p01_u_x_m_0p5_square_d_1px_distorted_0_sm_solu@cref}{{[subfigure][1][2147483647,25]D.25(a)}{[1][28][]28}}
+\newlabel{py_1d_1_diff_0p01_u_x_m_0p5_square_d_1px_distorted_0_sm_grad}{{D.25(b)}{28}{$u_x$\caption@thelabel \relax }{figure.caption.49}{}}
+\newlabel{py_1d_1_diff_0p01_u_x_m_0p5_square_d_1px_distorted_0_sm_grad@cref}{{[subfigure][2][2147483647,25]D.25(b)}{[1][28][]28}}
+\newlabel{sub@py_1d_1_diff_0p01_u_x_m_0p5_square_d_1px_distorted_0_sm_grad}{{(b)}{28}{$u_x$\caption@thelabel \relax }{figure.caption.49}{}}
+\newlabel{sub@py_1d_1_diff_0p01_u_x_m_0p5_square_d_1px_distorted_0_sm_grad@cref}{{[subfigure][2][2147483647,25]D.25(b)}{[1][28][]28}}
+\newlabel{py_1d_1_diff_0p01_u_x_m_0p5_square_d_1px_distorted_0_sm_2ndd}{{D.25(c)}{28}{$u_{xx}$\caption@thelabel \relax }{figure.caption.49}{}}
+\newlabel{py_1d_1_diff_0p01_u_x_m_0p5_square_d_1px_distorted_0_sm_2ndd@cref}{{[subfigure][3][2147483647,25]D.25(c)}{[1][28][]28}}
+\newlabel{sub@py_1d_1_diff_0p01_u_x_m_0p5_square_d_1px_distorted_0_sm_2ndd}{{(c)}{28}{$u_{xx}$\caption@thelabel \relax }{figure.caption.49}{}}
+\newlabel{sub@py_1d_1_diff_0p01_u_x_m_0p5_square_d_1px_distorted_0_sm_2ndd@cref}{{[subfigure][3][2147483647,25]D.25(c)}{[1][28][]28}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.25}{\ignorespaces Errors using $Q_p$ elements for the 1D diffusion problem with $u=(x-0.5)^2$ and $D(\mathbf  {x}) = 1+x$ with the regularly distorted mesh of Eq.\nobreakspace  {}(\ref  {regular_mesh_2}) in deal.II.\relax }}{28}{figure.caption.49}\protected@file@percent }
+\newlabel{py_1d_1_diff_0p01_u_x_m_0p5_square_d_1px_distorted_0_sm}{{D.25}{28}{Errors using $Q_p$ elements for the 1D diffusion problem with $u=(x-0.5)^2$ and $D(\mathbf {x}) = 1+x$ with the regularly distorted mesh of Eq.~(\ref {regular_mesh_2}) in deal.\rom {2}.\relax }{figure.caption.49}{}}
+\newlabel{py_1d_1_diff_0p01_u_x_m_0p5_square_d_1px_distorted_0_sm@cref}{{[figure][25][2147483647]D.25}{[1][28][]28}}
+\newlabel{py_1d_1_diff_1p01_u_exp_m_x_m_0p5_square_d_1px_distorted_0_sm_solu}{{D.26(a)}{28}{$u$\caption@thelabel \relax }{figure.caption.50}{}}
+\newlabel{py_1d_1_diff_1p01_u_exp_m_x_m_0p5_square_d_1px_distorted_0_sm_solu@cref}{{[subfigure][1][2147483647,26]D.26(a)}{[1][28][]28}}
+\newlabel{sub@py_1d_1_diff_1p01_u_exp_m_x_m_0p5_square_d_1px_distorted_0_sm_solu}{{(a)}{28}{$u$\caption@thelabel \relax }{figure.caption.50}{}}
+\newlabel{sub@py_1d_1_diff_1p01_u_exp_m_x_m_0p5_square_d_1px_distorted_0_sm_solu@cref}{{[subfigure][1][2147483647,26]D.26(a)}{[1][28][]28}}
+\newlabel{py_1d_1_diff_1p01_u_exp_m_x_m_0p5_square_d_1px_distorted_0_sm_grad}{{D.26(b)}{28}{$u_x$\caption@thelabel \relax }{figure.caption.50}{}}
+\newlabel{py_1d_1_diff_1p01_u_exp_m_x_m_0p5_square_d_1px_distorted_0_sm_grad@cref}{{[subfigure][2][2147483647,26]D.26(b)}{[1][28][]28}}
+\newlabel{sub@py_1d_1_diff_1p01_u_exp_m_x_m_0p5_square_d_1px_distorted_0_sm_grad}{{(b)}{28}{$u_x$\caption@thelabel \relax }{figure.caption.50}{}}
+\newlabel{sub@py_1d_1_diff_1p01_u_exp_m_x_m_0p5_square_d_1px_distorted_0_sm_grad@cref}{{[subfigure][2][2147483647,26]D.26(b)}{[1][28][]28}}
+\newlabel{py_1d_1_diff_1p01_u_exp_m_x_m_0p5_square_d_1px_distorted_0_sm_2ndd}{{D.26(c)}{28}{$u_{xx}$\caption@thelabel \relax }{figure.caption.50}{}}
+\newlabel{py_1d_1_diff_1p01_u_exp_m_x_m_0p5_square_d_1px_distorted_0_sm_2ndd@cref}{{[subfigure][3][2147483647,26]D.26(c)}{[1][28][]28}}
+\newlabel{sub@py_1d_1_diff_1p01_u_exp_m_x_m_0p5_square_d_1px_distorted_0_sm_2ndd}{{(c)}{28}{$u_{xx}$\caption@thelabel \relax }{figure.caption.50}{}}
+\newlabel{sub@py_1d_1_diff_1p01_u_exp_m_x_m_0p5_square_d_1px_distorted_0_sm_2ndd@cref}{{[subfigure][3][2147483647,26]D.26(c)}{[1][28][]28}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.26}{\ignorespaces Errors using $Q_p$ elements for the 1D diffusion problem with $u=e^{-(x-0.5)^2}$ and $D(\mathbf  {x}) = 1+x$ with the regularly distorted mesh of Eq.\nobreakspace  {}(\ref  {regular_mesh_2}) in deal.II.\relax }}{28}{figure.caption.50}\protected@file@percent }
+\newlabel{py_1d_1_diff_1p01_u_exp_m_x_m_0p5_square_d_1px_distorted_0_sm}{{D.26}{28}{Errors using $Q_p$ elements for the 1D diffusion problem with $u=e^{-(x-0.5)^2}$ and $D(\mathbf {x}) = 1+x$ with the regularly distorted mesh of Eq.~(\ref {regular_mesh_2}) in deal.\rom {2}.\relax }{figure.caption.50}{}}
+\newlabel{py_1d_1_diff_1p01_u_exp_m_x_m_0p5_square_d_1px_distorted_0_sm@cref}{{[figure][26][2147483647]D.26}{[1][28][]28}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {Appendix \nobreakspace  {}D.2.3}Influence of FEM packages}{29}{subsubsection.D.2.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {D.9}{\ignorespaces Various diffusion problems and the resulting $\beta _{\rm  R}$ and $\alpha _{\rm  R}$ in FEniCS.\relax }}{29}{table.caption.51}\protected@file@percent }
+\newlabel{results_various_d_for_beta_r_decrease_1d_fenics}{{D.9}{29}{Various diffusion problems and the resulting $\beta _{\rm R}$ and $\alpha _{\rm R}$ in FEniCS.\relax }{table.caption.51}{}}
+\newlabel{results_various_d_for_beta_r_decrease_1d_fenics@cref}{{[table][9][2147483647]D.9}{[1][29][]29}}
+\newlabel{py_error_fenics_1d_1_u_x_m_0p5_square_d_1px_0_sm_solu}{{D.27(a)}{29}{$u$\caption@thelabel \relax }{figure.caption.52}{}}
+\newlabel{py_error_fenics_1d_1_u_x_m_0p5_square_d_1px_0_sm_solu@cref}{{[subfigure][1][2147483647,27]D.27(a)}{[1][29][]29}}
+\newlabel{sub@py_error_fenics_1d_1_u_x_m_0p5_square_d_1px_0_sm_solu}{{(a)}{29}{$u$\caption@thelabel \relax }{figure.caption.52}{}}
+\newlabel{sub@py_error_fenics_1d_1_u_x_m_0p5_square_d_1px_0_sm_solu@cref}{{[subfigure][1][2147483647,27]D.27(a)}{[1][29][]29}}
+\newlabel{py_error_fenics_1d_1_u_x_m_0p5_square_d_1px_0_sm_grad}{{D.27(b)}{29}{$u_x$\caption@thelabel \relax }{figure.caption.52}{}}
+\newlabel{py_error_fenics_1d_1_u_x_m_0p5_square_d_1px_0_sm_grad@cref}{{[subfigure][2][2147483647,27]D.27(b)}{[1][29][]29}}
+\newlabel{sub@py_error_fenics_1d_1_u_x_m_0p5_square_d_1px_0_sm_grad}{{(b)}{29}{$u_x$\caption@thelabel \relax }{figure.caption.52}{}}
+\newlabel{sub@py_error_fenics_1d_1_u_x_m_0p5_square_d_1px_0_sm_grad@cref}{{[subfigure][2][2147483647,27]D.27(b)}{[1][29][]29}}
+\newlabel{py_error_fenics_1d_1_u_x_m_0p5_square_d_1px_0_sm_2ndd}{{D.27(c)}{29}{$u_{xx}$\caption@thelabel \relax }{figure.caption.52}{}}
+\newlabel{py_error_fenics_1d_1_u_x_m_0p5_square_d_1px_0_sm_2ndd@cref}{{[subfigure][3][2147483647,27]D.27(c)}{[1][29][]29}}
+\newlabel{sub@py_error_fenics_1d_1_u_x_m_0p5_square_d_1px_0_sm_2ndd}{{(c)}{29}{$u_{xx}$\caption@thelabel \relax }{figure.caption.52}{}}
+\newlabel{sub@py_error_fenics_1d_1_u_x_m_0p5_square_d_1px_0_sm_2ndd@cref}{{[subfigure][3][2147483647,27]D.27(c)}{[1][29][]29}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.27}{\ignorespaces Errors using $Q_p$ elements for the 1D diffusion problem with $u=(x-0.5)^2$ and $D(\mathbf  {x}) = 1+x$ in FEniCS.\relax }}{29}{figure.caption.52}\protected@file@percent }
+\newlabel{py_error_fenics_1d_1_u_x_m_0p5_square_d_1px_0_sm}{{D.27}{29}{Errors using $Q_p$ elements for the 1D diffusion problem with $u=(x-0.5)^2$ and $D(\mathbf {x}) = 1+x$ in FEniCS.\relax }{figure.caption.52}{}}
+\newlabel{py_error_fenics_1d_1_u_x_m_0p5_square_d_1px_0_sm@cref}{{[figure][27][2147483647]D.27}{[1][29][]29}}
+\newlabel{py_error_fenics_1d_3_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_solu}{{D.28(a)}{30}{$u$\caption@thelabel \relax }{figure.caption.53}{}}
+\newlabel{py_error_fenics_1d_3_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_solu@cref}{{[subfigure][1][2147483647,28]D.28(a)}{[1][30][]30}}
+\newlabel{sub@py_error_fenics_1d_3_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_solu}{{(a)}{30}{$u$\caption@thelabel \relax }{figure.caption.53}{}}
+\newlabel{sub@py_error_fenics_1d_3_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_solu@cref}{{[subfigure][1][2147483647,28]D.28(a)}{[1][30][]30}}
+\newlabel{py_error_fenics_1d_3_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_grad}{{D.28(b)}{30}{$u_x$\caption@thelabel \relax }{figure.caption.53}{}}
+\newlabel{py_error_fenics_1d_3_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_grad@cref}{{[subfigure][2][2147483647,28]D.28(b)}{[1][30][]30}}
+\newlabel{sub@py_error_fenics_1d_3_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_grad}{{(b)}{30}{$u_x$\caption@thelabel \relax }{figure.caption.53}{}}
+\newlabel{sub@py_error_fenics_1d_3_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_grad@cref}{{[subfigure][2][2147483647,28]D.28(b)}{[1][30][]30}}
+\newlabel{py_error_fenics_1d_3_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_2ndd}{{D.28(c)}{30}{$u_{xx}$\caption@thelabel \relax }{figure.caption.53}{}}
+\newlabel{py_error_fenics_1d_3_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_2ndd@cref}{{[subfigure][3][2147483647,28]D.28(c)}{[1][30][]30}}
+\newlabel{sub@py_error_fenics_1d_3_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_2ndd}{{(c)}{30}{$u_{xx}$\caption@thelabel \relax }{figure.caption.53}{}}
+\newlabel{sub@py_error_fenics_1d_3_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm_2ndd@cref}{{[subfigure][3][2147483647,28]D.28(c)}{[1][30][]30}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.28}{\ignorespaces Errors using $Q_p$ elements for the 1D diffusion problem with $u=(x-0.5)^2$ and $D(\mathbf  {x}) = e^{-(x-0.5)^2}$ in FEniCS.\relax }}{30}{figure.caption.53}\protected@file@percent }
+\newlabel{py_error_fenics_1d_3_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm}{{D.28}{30}{Errors using $Q_p$ elements for the 1D diffusion problem with $u=(x-0.5)^2$ and $D(\mathbf {x}) = e^{-(x-0.5)^2}$ in FEniCS.\relax }{figure.caption.53}{}}
+\newlabel{py_error_fenics_1d_3_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_0_sm@cref}{{[figure][28][2147483647]D.28}{[1][30][]30}}
+\newlabel{py_error_fenics_1d_4_u_x_m_0p5_square_d_0p5_p_cosx_square_0_sm_solu}{{D.29(a)}{30}{$u$\caption@thelabel \relax }{figure.caption.54}{}}
+\newlabel{py_error_fenics_1d_4_u_x_m_0p5_square_d_0p5_p_cosx_square_0_sm_solu@cref}{{[subfigure][1][2147483647,29]D.29(a)}{[1][30][]30}}
+\newlabel{sub@py_error_fenics_1d_4_u_x_m_0p5_square_d_0p5_p_cosx_square_0_sm_solu}{{(a)}{30}{$u$\caption@thelabel \relax }{figure.caption.54}{}}
+\newlabel{sub@py_error_fenics_1d_4_u_x_m_0p5_square_d_0p5_p_cosx_square_0_sm_solu@cref}{{[subfigure][1][2147483647,29]D.29(a)}{[1][30][]30}}
+\newlabel{py_error_fenics_1d_4_u_x_m_0p5_square_d_0p5_p_cosx_square_0_sm_grad}{{D.29(b)}{30}{$u_x$\caption@thelabel \relax }{figure.caption.54}{}}
+\newlabel{py_error_fenics_1d_4_u_x_m_0p5_square_d_0p5_p_cosx_square_0_sm_grad@cref}{{[subfigure][2][2147483647,29]D.29(b)}{[1][30][]30}}
+\newlabel{sub@py_error_fenics_1d_4_u_x_m_0p5_square_d_0p5_p_cosx_square_0_sm_grad}{{(b)}{30}{$u_x$\caption@thelabel \relax }{figure.caption.54}{}}
+\newlabel{sub@py_error_fenics_1d_4_u_x_m_0p5_square_d_0p5_p_cosx_square_0_sm_grad@cref}{{[subfigure][2][2147483647,29]D.29(b)}{[1][30][]30}}
+\newlabel{py_error_fenics_1d_4_u_x_m_0p5_square_d_0p5_p_cosx_square_0_sm_2ndd}{{D.29(c)}{30}{$u_{xx}$\caption@thelabel \relax }{figure.caption.54}{}}
+\newlabel{py_error_fenics_1d_4_u_x_m_0p5_square_d_0p5_p_cosx_square_0_sm_2ndd@cref}{{[subfigure][3][2147483647,29]D.29(c)}{[1][30][]30}}
+\newlabel{sub@py_error_fenics_1d_4_u_x_m_0p5_square_d_0p5_p_cosx_square_0_sm_2ndd}{{(c)}{30}{$u_{xx}$\caption@thelabel \relax }{figure.caption.54}{}}
+\newlabel{sub@py_error_fenics_1d_4_u_x_m_0p5_square_d_0p5_p_cosx_square_0_sm_2ndd@cref}{{[subfigure][3][2147483647,29]D.29(c)}{[1][30][]30}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.29}{\ignorespaces Errors using $Q_p$ elements for the 1D diffusion problem with $u=(x-0.5)^2$ and $D(\mathbf  {x}) = 0.5+ \qopname  \relax o{cos}^2 x$ in FEniCS.\relax }}{30}{figure.caption.54}\protected@file@percent }
+\newlabel{py_error_fenics_1d_4_u_x_m_0p5_square_d_0p5_p_cosx_square_0_sm}{{D.29}{30}{Errors using $Q_p$ elements for the 1D diffusion problem with $u=(x-0.5)^2$ and $D(\mathbf {x}) = 0.5+ \cos ^2 x$ in FEniCS.\relax }{figure.caption.54}{}}
+\newlabel{py_error_fenics_1d_4_u_x_m_0p5_square_d_0p5_p_cosx_square_0_sm@cref}{{[figure][29][2147483647]D.29}{[1][30][]30}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {Appendix \nobreakspace  {}D.3}Helmholtz problems}{30}{subsection.D.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{$u=(x-0.5)^2$}{30}{section*.55}\protected@file@percent }
+\newlabel{py_1d_2_helm_0p0_u_x_m_0p5_square_d_1px_r_1_0_sm_solu}{{D.30(a)}{30}{$u$\caption@thelabel \relax }{figure.caption.56}{}}
+\newlabel{py_1d_2_helm_0p0_u_x_m_0p5_square_d_1px_r_1_0_sm_solu@cref}{{[subfigure][1][2147483647,30]D.30(a)}{[1][30][]30}}
+\newlabel{sub@py_1d_2_helm_0p0_u_x_m_0p5_square_d_1px_r_1_0_sm_solu}{{(a)}{30}{$u$\caption@thelabel \relax }{figure.caption.56}{}}
+\newlabel{sub@py_1d_2_helm_0p0_u_x_m_0p5_square_d_1px_r_1_0_sm_solu@cref}{{[subfigure][1][2147483647,30]D.30(a)}{[1][30][]30}}
+\newlabel{py_1d_2_helm_0p0_u_x_m_0p5_square_d_1px_r_1_0_sm_grad}{{D.30(b)}{30}{$u_x$\caption@thelabel \relax }{figure.caption.56}{}}
+\newlabel{py_1d_2_helm_0p0_u_x_m_0p5_square_d_1px_r_1_0_sm_grad@cref}{{[subfigure][2][2147483647,30]D.30(b)}{[1][30][]30}}
+\newlabel{sub@py_1d_2_helm_0p0_u_x_m_0p5_square_d_1px_r_1_0_sm_grad}{{(b)}{30}{$u_x$\caption@thelabel \relax }{figure.caption.56}{}}
+\newlabel{sub@py_1d_2_helm_0p0_u_x_m_0p5_square_d_1px_r_1_0_sm_grad@cref}{{[subfigure][2][2147483647,30]D.30(b)}{[1][30][]30}}
+\newlabel{py_1d_2_helm_0p0_u_x_m_0p5_square_d_1px_r_1_0_sm_2ndd}{{D.30(c)}{30}{$u_{xx}$\caption@thelabel \relax }{figure.caption.56}{}}
+\newlabel{py_1d_2_helm_0p0_u_x_m_0p5_square_d_1px_r_1_0_sm_2ndd@cref}{{[subfigure][3][2147483647,30]D.30(c)}{[1][30][]30}}
+\newlabel{sub@py_1d_2_helm_0p0_u_x_m_0p5_square_d_1px_r_1_0_sm_2ndd}{{(c)}{30}{$u_{xx}$\caption@thelabel \relax }{figure.caption.56}{}}
+\newlabel{sub@py_1d_2_helm_0p0_u_x_m_0p5_square_d_1px_r_1_0_sm_2ndd@cref}{{[subfigure][3][2147483647,30]D.30(c)}{[1][30][]30}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.30}{\ignorespaces Errors using $Q_p$ elements for the 1D Helmholtz problem with $u=(x-0.5)^2$, $D(\mathbf  {x}) = 1+x$ and $r(\mathbf  {x})=1$ in deal.II.\relax }}{30}{figure.caption.56}\protected@file@percent }
+\newlabel{py_1d_2_helm_0p0_u_x_m_0p5_square_d_1px_r_1_0_sm}{{D.30}{30}{Errors using $Q_p$ elements for the 1D Helmholtz problem with $u=(x-0.5)^2$, $D(\mathbf {x}) = 1+x$ and $r(\mathbf {x})=1$ in deal.\rom {2}.\relax }{figure.caption.56}{}}
+\newlabel{py_1d_2_helm_0p0_u_x_m_0p5_square_d_1px_r_1_0_sm@cref}{{[figure][30][2147483647]D.30}{[1][30][]30}}
+\newlabel{py_1d_2_helm_0p1_u_x_m_0p5_square_d_1px_r_1px_0_sm_solu}{{D.31(a)}{31}{$u$\caption@thelabel \relax }{figure.caption.57}{}}
+\newlabel{py_1d_2_helm_0p1_u_x_m_0p5_square_d_1px_r_1px_0_sm_solu@cref}{{[subfigure][1][2147483647,31]D.31(a)}{[1][30][]31}}
+\newlabel{sub@py_1d_2_helm_0p1_u_x_m_0p5_square_d_1px_r_1px_0_sm_solu}{{(a)}{31}{$u$\caption@thelabel \relax }{figure.caption.57}{}}
+\newlabel{sub@py_1d_2_helm_0p1_u_x_m_0p5_square_d_1px_r_1px_0_sm_solu@cref}{{[subfigure][1][2147483647,31]D.31(a)}{[1][30][]31}}
+\newlabel{py_1d_2_helm_0p1_u_x_m_0p5_square_d_1px_r_1px_0_sm_grad}{{D.31(b)}{31}{$u_x$\caption@thelabel \relax }{figure.caption.57}{}}
+\newlabel{py_1d_2_helm_0p1_u_x_m_0p5_square_d_1px_r_1px_0_sm_grad@cref}{{[subfigure][2][2147483647,31]D.31(b)}{[1][30][]31}}
+\newlabel{sub@py_1d_2_helm_0p1_u_x_m_0p5_square_d_1px_r_1px_0_sm_grad}{{(b)}{31}{$u_x$\caption@thelabel \relax }{figure.caption.57}{}}
+\newlabel{sub@py_1d_2_helm_0p1_u_x_m_0p5_square_d_1px_r_1px_0_sm_grad@cref}{{[subfigure][2][2147483647,31]D.31(b)}{[1][30][]31}}
+\newlabel{py_1d_2_helm_0p1_u_x_m_0p5_square_d_1px_r_1px_0_sm_2ndd}{{D.31(c)}{31}{$u_{xx}$\caption@thelabel \relax }{figure.caption.57}{}}
+\newlabel{py_1d_2_helm_0p1_u_x_m_0p5_square_d_1px_r_1px_0_sm_2ndd@cref}{{[subfigure][3][2147483647,31]D.31(c)}{[1][30][]31}}
+\newlabel{sub@py_1d_2_helm_0p1_u_x_m_0p5_square_d_1px_r_1px_0_sm_2ndd}{{(c)}{31}{$u_{xx}$\caption@thelabel \relax }{figure.caption.57}{}}
+\newlabel{sub@py_1d_2_helm_0p1_u_x_m_0p5_square_d_1px_r_1px_0_sm_2ndd@cref}{{[subfigure][3][2147483647,31]D.31(c)}{[1][30][]31}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.31}{\ignorespaces Errors using $Q_p$ elements for the 1D Helmholtz problem with $u=(x-0.5)^2$, $D(\mathbf  {x}) = 1+x$ and $r(\mathbf  {x})=1+x$ in deal.II.\relax }}{31}{figure.caption.57}\protected@file@percent }
+\newlabel{py_1d_2_helm_0p1_u_x_m_0p5_square_d_1px_r_1px_0_sm}{{D.31}{31}{Errors using $Q_p$ elements for the 1D Helmholtz problem with $u=(x-0.5)^2$, $D(\mathbf {x}) = 1+x$ and $r(\mathbf {x})=1+x$ in deal.\rom {2}.\relax }{figure.caption.57}{}}
+\newlabel{py_1d_2_helm_0p1_u_x_m_0p5_square_d_1px_r_1px_0_sm@cref}{{[figure][31][2147483647]D.31}{[1][30][]31}}
+\newlabel{py_1d_2_helm_0p2_u_x_m_0p5_square_d_1px_r_exp_m_x_m_0p5_square_0_sm_solu}{{D.32(a)}{31}{$u$\caption@thelabel \relax }{figure.caption.58}{}}
+\newlabel{py_1d_2_helm_0p2_u_x_m_0p5_square_d_1px_r_exp_m_x_m_0p5_square_0_sm_solu@cref}{{[subfigure][1][2147483647,32]D.32(a)}{[1][31][]31}}
+\newlabel{sub@py_1d_2_helm_0p2_u_x_m_0p5_square_d_1px_r_exp_m_x_m_0p5_square_0_sm_solu}{{(a)}{31}{$u$\caption@thelabel \relax }{figure.caption.58}{}}
+\newlabel{sub@py_1d_2_helm_0p2_u_x_m_0p5_square_d_1px_r_exp_m_x_m_0p5_square_0_sm_solu@cref}{{[subfigure][1][2147483647,32]D.32(a)}{[1][31][]31}}
+\newlabel{py_1d_2_helm_0p2_u_x_m_0p5_square_d_1px_r_exp_m_x_m_0p5_square_0_sm_grad}{{D.32(b)}{31}{$u_x$\caption@thelabel \relax }{figure.caption.58}{}}
+\newlabel{py_1d_2_helm_0p2_u_x_m_0p5_square_d_1px_r_exp_m_x_m_0p5_square_0_sm_grad@cref}{{[subfigure][2][2147483647,32]D.32(b)}{[1][31][]31}}
+\newlabel{sub@py_1d_2_helm_0p2_u_x_m_0p5_square_d_1px_r_exp_m_x_m_0p5_square_0_sm_grad}{{(b)}{31}{$u_x$\caption@thelabel \relax }{figure.caption.58}{}}
+\newlabel{sub@py_1d_2_helm_0p2_u_x_m_0p5_square_d_1px_r_exp_m_x_m_0p5_square_0_sm_grad@cref}{{[subfigure][2][2147483647,32]D.32(b)}{[1][31][]31}}
+\newlabel{py_1d_2_helm_0p2_u_x_m_0p5_square_d_1px_r_exp_m_x_m_0p5_square_0_sm_2ndd}{{D.32(c)}{31}{$u_{xx}$\caption@thelabel \relax }{figure.caption.58}{}}
+\newlabel{py_1d_2_helm_0p2_u_x_m_0p5_square_d_1px_r_exp_m_x_m_0p5_square_0_sm_2ndd@cref}{{[subfigure][3][2147483647,32]D.32(c)}{[1][31][]31}}
+\newlabel{sub@py_1d_2_helm_0p2_u_x_m_0p5_square_d_1px_r_exp_m_x_m_0p5_square_0_sm_2ndd}{{(c)}{31}{$u_{xx}$\caption@thelabel \relax }{figure.caption.58}{}}
+\newlabel{sub@py_1d_2_helm_0p2_u_x_m_0p5_square_d_1px_r_exp_m_x_m_0p5_square_0_sm_2ndd@cref}{{[subfigure][3][2147483647,32]D.32(c)}{[1][31][]31}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.32}{\ignorespaces Errors using $Q_p$ elements for the 1D Helmholtz problem with $u=(x-0.5)^2$, $D(\mathbf  {x}) = 1+x$ and $r(\mathbf  {x})=e^{-(x-0.5)^2}$ in deal.II.\relax }}{31}{figure.caption.58}\protected@file@percent }
+\newlabel{py_1d_2_helm_0p2_u_x_m_0p5_square_d_1px_r_exp_m_x_m_0p5_square_0_sm}{{D.32}{31}{Errors using $Q_p$ elements for the 1D Helmholtz problem with $u=(x-0.5)^2$, $D(\mathbf {x}) = 1+x$ and $r(\mathbf {x})=e^{-(x-0.5)^2}$ in deal.\rom {2}.\relax }{figure.caption.58}{}}
+\newlabel{py_1d_2_helm_0p2_u_x_m_0p5_square_d_1px_r_exp_m_x_m_0p5_square_0_sm@cref}{{[figure][32][2147483647]D.32}{[1][31][]31}}
+\newlabel{py_1d_2_helm_0p3_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1_0_sm_solu}{{D.33(a)}{31}{$u$\caption@thelabel \relax }{figure.caption.59}{}}
+\newlabel{py_1d_2_helm_0p3_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1_0_sm_solu@cref}{{[subfigure][1][2147483647,33]D.33(a)}{[1][31][]31}}
+\newlabel{sub@py_1d_2_helm_0p3_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1_0_sm_solu}{{(a)}{31}{$u$\caption@thelabel \relax }{figure.caption.59}{}}
+\newlabel{sub@py_1d_2_helm_0p3_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1_0_sm_solu@cref}{{[subfigure][1][2147483647,33]D.33(a)}{[1][31][]31}}
+\newlabel{py_1d_2_helm_0p3_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1_0_sm_grad}{{D.33(b)}{31}{$u_x$\caption@thelabel \relax }{figure.caption.59}{}}
+\newlabel{py_1d_2_helm_0p3_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1_0_sm_grad@cref}{{[subfigure][2][2147483647,33]D.33(b)}{[1][31][]31}}
+\newlabel{sub@py_1d_2_helm_0p3_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1_0_sm_grad}{{(b)}{31}{$u_x$\caption@thelabel \relax }{figure.caption.59}{}}
+\newlabel{sub@py_1d_2_helm_0p3_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1_0_sm_grad@cref}{{[subfigure][2][2147483647,33]D.33(b)}{[1][31][]31}}
+\newlabel{py_1d_2_helm_0p3_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1_0_sm_2ndd}{{D.33(c)}{31}{$u_{xx}$\caption@thelabel \relax }{figure.caption.59}{}}
+\newlabel{py_1d_2_helm_0p3_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1_0_sm_2ndd@cref}{{[subfigure][3][2147483647,33]D.33(c)}{[1][31][]31}}
+\newlabel{sub@py_1d_2_helm_0p3_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1_0_sm_2ndd}{{(c)}{31}{$u_{xx}$\caption@thelabel \relax }{figure.caption.59}{}}
+\newlabel{sub@py_1d_2_helm_0p3_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1_0_sm_2ndd@cref}{{[subfigure][3][2147483647,33]D.33(c)}{[1][31][]31}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.33}{\ignorespaces Errors using $Q_p$ elements for the 1D Helmholtz problem with $u=(x-0.5)^2$, $D(\mathbf  {x}) = e^{-(x-0.5)^2}$ and $r(\mathbf  {x})=1$ in deal.II.\relax }}{31}{figure.caption.59}\protected@file@percent }
+\newlabel{py_1d_2_helm_0p3_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1_0_sm}{{D.33}{31}{Errors using $Q_p$ elements for the 1D Helmholtz problem with $u=(x-0.5)^2$, $D(\mathbf {x}) = e^{-(x-0.5)^2}$ and $r(\mathbf {x})=1$ in deal.\rom {2}.\relax }{figure.caption.59}{}}
+\newlabel{py_1d_2_helm_0p3_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1_0_sm@cref}{{[figure][33][2147483647]D.33}{[1][31][]31}}
+\newlabel{py_1d_2_helm_0p4_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1px_0_sm_solu}{{D.34(a)}{32}{$u$\caption@thelabel \relax }{figure.caption.60}{}}
+\newlabel{py_1d_2_helm_0p4_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1px_0_sm_solu@cref}{{[subfigure][1][2147483647,34]D.34(a)}{[1][31][]32}}
+\newlabel{sub@py_1d_2_helm_0p4_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1px_0_sm_solu}{{(a)}{32}{$u$\caption@thelabel \relax }{figure.caption.60}{}}
+\newlabel{sub@py_1d_2_helm_0p4_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1px_0_sm_solu@cref}{{[subfigure][1][2147483647,34]D.34(a)}{[1][31][]32}}
+\newlabel{py_1d_2_helm_0p4_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1px_0_sm_grad}{{D.34(b)}{32}{$u_x$\caption@thelabel \relax }{figure.caption.60}{}}
+\newlabel{py_1d_2_helm_0p4_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1px_0_sm_grad@cref}{{[subfigure][2][2147483647,34]D.34(b)}{[1][31][]32}}
+\newlabel{sub@py_1d_2_helm_0p4_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1px_0_sm_grad}{{(b)}{32}{$u_x$\caption@thelabel \relax }{figure.caption.60}{}}
+\newlabel{sub@py_1d_2_helm_0p4_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1px_0_sm_grad@cref}{{[subfigure][2][2147483647,34]D.34(b)}{[1][31][]32}}
+\newlabel{py_1d_2_helm_0p4_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1px_0_sm_2ndd}{{D.34(c)}{32}{$u_{xx}$\caption@thelabel \relax }{figure.caption.60}{}}
+\newlabel{py_1d_2_helm_0p4_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1px_0_sm_2ndd@cref}{{[subfigure][3][2147483647,34]D.34(c)}{[1][31][]32}}
+\newlabel{sub@py_1d_2_helm_0p4_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1px_0_sm_2ndd}{{(c)}{32}{$u_{xx}$\caption@thelabel \relax }{figure.caption.60}{}}
+\newlabel{sub@py_1d_2_helm_0p4_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1px_0_sm_2ndd@cref}{{[subfigure][3][2147483647,34]D.34(c)}{[1][31][]32}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.34}{\ignorespaces Errors using $Q_p$ elements for the 1D Helmholtz problem with $u=(x-0.5)^2$, $D(\mathbf  {x}) = e^{-(x-0.5)^2}$ and $r(\mathbf  {x})=1+x$ in deal.II.\relax }}{32}{figure.caption.60}\protected@file@percent }
+\newlabel{py_1d_2_helm_0p4_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1px_0_sm}{{D.34}{32}{Errors using $Q_p$ elements for the 1D Helmholtz problem with $u=(x-0.5)^2$, $D(\mathbf {x}) = e^{-(x-0.5)^2}$ and $r(\mathbf {x})=1+x$ in deal.\rom {2}.\relax }{figure.caption.60}{}}
+\newlabel{py_1d_2_helm_0p4_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1px_0_sm@cref}{{[figure][34][2147483647]D.34}{[1][31][]32}}
+\newlabel{py_1d_2_helm_0p5_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_exp_m_x_m_0p5_square_0_sm_solu}{{D.35(a)}{32}{$u$\caption@thelabel \relax }{figure.caption.61}{}}
+\newlabel{py_1d_2_helm_0p5_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_exp_m_x_m_0p5_square_0_sm_solu@cref}{{[subfigure][1][2147483647,35]D.35(a)}{[1][31][]32}}
+\newlabel{sub@py_1d_2_helm_0p5_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_exp_m_x_m_0p5_square_0_sm_solu}{{(a)}{32}{$u$\caption@thelabel \relax }{figure.caption.61}{}}
+\newlabel{sub@py_1d_2_helm_0p5_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_exp_m_x_m_0p5_square_0_sm_solu@cref}{{[subfigure][1][2147483647,35]D.35(a)}{[1][31][]32}}
+\newlabel{py_1d_2_helm_0p5_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_exp_m_x_m_0p5_square_0_sm_grad}{{D.35(b)}{32}{$u_x$\caption@thelabel \relax }{figure.caption.61}{}}
+\newlabel{py_1d_2_helm_0p5_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_exp_m_x_m_0p5_square_0_sm_grad@cref}{{[subfigure][2][2147483647,35]D.35(b)}{[1][31][]32}}
+\newlabel{sub@py_1d_2_helm_0p5_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_exp_m_x_m_0p5_square_0_sm_grad}{{(b)}{32}{$u_x$\caption@thelabel \relax }{figure.caption.61}{}}
+\newlabel{sub@py_1d_2_helm_0p5_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_exp_m_x_m_0p5_square_0_sm_grad@cref}{{[subfigure][2][2147483647,35]D.35(b)}{[1][31][]32}}
+\newlabel{py_1d_2_helm_0p5_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_exp_m_x_m_0p5_square_0_sm_2ndd}{{D.35(c)}{32}{$u_{xx}$\caption@thelabel \relax }{figure.caption.61}{}}
+\newlabel{py_1d_2_helm_0p5_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_exp_m_x_m_0p5_square_0_sm_2ndd@cref}{{[subfigure][3][2147483647,35]D.35(c)}{[1][31][]32}}
+\newlabel{sub@py_1d_2_helm_0p5_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_exp_m_x_m_0p5_square_0_sm_2ndd}{{(c)}{32}{$u_{xx}$\caption@thelabel \relax }{figure.caption.61}{}}
+\newlabel{sub@py_1d_2_helm_0p5_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_exp_m_x_m_0p5_square_0_sm_2ndd@cref}{{[subfigure][3][2147483647,35]D.35(c)}{[1][31][]32}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.35}{\ignorespaces Errors using $Q_p$ elements for the 1D Helmholtz problem with $u=(x-0.5)^2$, $D(\mathbf  {x}) = e^{-(x-0.5)^2}$ and $r(\mathbf  {x})=e^{-(x-0.5)^2}$ in deal.II.\relax }}{32}{figure.caption.61}\protected@file@percent }
+\newlabel{py_1d_2_helm_0p5_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_exp_m_x_m_0p5_square_0_sm}{{D.35}{32}{Errors using $Q_p$ elements for the 1D Helmholtz problem with $u=(x-0.5)^2$, $D(\mathbf {x}) = e^{-(x-0.5)^2}$ and $r(\mathbf {x})=e^{-(x-0.5)^2}$ in deal.\rom {2}.\relax }{figure.caption.61}{}}
+\newlabel{py_1d_2_helm_0p5_u_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_exp_m_x_m_0p5_square_0_sm@cref}{{[figure][35][2147483647]D.35}{[1][31][]32}}
+\@writefile{toc}{\contentsline {paragraph}{$u=e^{-(x-0.5)^2}$}{32}{section*.62}\protected@file@percent }
+\newlabel{py_1d_2_helm_2p0_u_exp_m_x_m_0p5_square_d_1px_r_1_0_sm_solu}{{D.36(a)}{32}{$u$\caption@thelabel \relax }{figure.caption.63}{}}
+\newlabel{py_1d_2_helm_2p0_u_exp_m_x_m_0p5_square_d_1px_r_1_0_sm_solu@cref}{{[subfigure][1][2147483647,36]D.36(a)}{[1][32][]32}}
+\newlabel{sub@py_1d_2_helm_2p0_u_exp_m_x_m_0p5_square_d_1px_r_1_0_sm_solu}{{(a)}{32}{$u$\caption@thelabel \relax }{figure.caption.63}{}}
+\newlabel{sub@py_1d_2_helm_2p0_u_exp_m_x_m_0p5_square_d_1px_r_1_0_sm_solu@cref}{{[subfigure][1][2147483647,36]D.36(a)}{[1][32][]32}}
+\newlabel{py_1d_2_helm_2p0_u_exp_m_x_m_0p5_square_d_1px_r_1_0_sm_grad}{{D.36(b)}{32}{$u_x$\caption@thelabel \relax }{figure.caption.63}{}}
+\newlabel{py_1d_2_helm_2p0_u_exp_m_x_m_0p5_square_d_1px_r_1_0_sm_grad@cref}{{[subfigure][2][2147483647,36]D.36(b)}{[1][32][]32}}
+\newlabel{sub@py_1d_2_helm_2p0_u_exp_m_x_m_0p5_square_d_1px_r_1_0_sm_grad}{{(b)}{32}{$u_x$\caption@thelabel \relax }{figure.caption.63}{}}
+\newlabel{sub@py_1d_2_helm_2p0_u_exp_m_x_m_0p5_square_d_1px_r_1_0_sm_grad@cref}{{[subfigure][2][2147483647,36]D.36(b)}{[1][32][]32}}
+\newlabel{py_1d_2_helm_2p0_u_exp_m_x_m_0p5_square_d_1px_r_1_0_sm_2ndd}{{D.36(c)}{32}{$u_{xx}$\caption@thelabel \relax }{figure.caption.63}{}}
+\newlabel{py_1d_2_helm_2p0_u_exp_m_x_m_0p5_square_d_1px_r_1_0_sm_2ndd@cref}{{[subfigure][3][2147483647,36]D.36(c)}{[1][32][]32}}
+\newlabel{sub@py_1d_2_helm_2p0_u_exp_m_x_m_0p5_square_d_1px_r_1_0_sm_2ndd}{{(c)}{32}{$u_{xx}$\caption@thelabel \relax }{figure.caption.63}{}}
+\newlabel{sub@py_1d_2_helm_2p0_u_exp_m_x_m_0p5_square_d_1px_r_1_0_sm_2ndd@cref}{{[subfigure][3][2147483647,36]D.36(c)}{[1][32][]32}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.36}{\ignorespaces Errors using $Q_p$ elements for the 1D Helmholtz problem with $u=e^{-(x-0.5)^2}$, $D(\mathbf  {x}) = 1+x$ and $r(\mathbf  {x}) = 1$ in deal.II.\relax }}{32}{figure.caption.63}\protected@file@percent }
+\newlabel{py_1d_2_helm_2p0_u_exp_m_x_m_0p5_square_d_1px_r_1_0_sm}{{D.36}{32}{Errors using $Q_p$ elements for the 1D Helmholtz problem with $u=e^{-(x-0.5)^2}$, $D(\mathbf {x}) = 1+x$ and $r(\mathbf {x}) = 1$ in deal.\rom {2}.\relax }{figure.caption.63}{}}
+\newlabel{py_1d_2_helm_2p0_u_exp_m_x_m_0p5_square_d_1px_r_1_0_sm@cref}{{[figure][36][2147483647]D.36}{[1][32][]32}}
+\newlabel{py_1d_2_helm_2p1_u_exp_m_x_m_0p5_square_d_1px_r_1px_0_sm_solu}{{D.37(a)}{33}{$u$\caption@thelabel \relax }{figure.caption.64}{}}
+\newlabel{py_1d_2_helm_2p1_u_exp_m_x_m_0p5_square_d_1px_r_1px_0_sm_solu@cref}{{[subfigure][1][2147483647,37]D.37(a)}{[1][32][]33}}
+\newlabel{sub@py_1d_2_helm_2p1_u_exp_m_x_m_0p5_square_d_1px_r_1px_0_sm_solu}{{(a)}{33}{$u$\caption@thelabel \relax }{figure.caption.64}{}}
+\newlabel{sub@py_1d_2_helm_2p1_u_exp_m_x_m_0p5_square_d_1px_r_1px_0_sm_solu@cref}{{[subfigure][1][2147483647,37]D.37(a)}{[1][32][]33}}
+\newlabel{py_1d_2_helm_2p1_u_exp_m_x_m_0p5_square_d_1px_r_1px_0_sm_grad}{{D.37(b)}{33}{$u_x$\caption@thelabel \relax }{figure.caption.64}{}}
+\newlabel{py_1d_2_helm_2p1_u_exp_m_x_m_0p5_square_d_1px_r_1px_0_sm_grad@cref}{{[subfigure][2][2147483647,37]D.37(b)}{[1][32][]33}}
+\newlabel{sub@py_1d_2_helm_2p1_u_exp_m_x_m_0p5_square_d_1px_r_1px_0_sm_grad}{{(b)}{33}{$u_x$\caption@thelabel \relax }{figure.caption.64}{}}
+\newlabel{sub@py_1d_2_helm_2p1_u_exp_m_x_m_0p5_square_d_1px_r_1px_0_sm_grad@cref}{{[subfigure][2][2147483647,37]D.37(b)}{[1][32][]33}}
+\newlabel{py_1d_2_helm_2p1_u_exp_m_x_m_0p5_square_d_1px_r_1px_0_sm_2ndd}{{D.37(c)}{33}{$u_{xx}$\caption@thelabel \relax }{figure.caption.64}{}}
+\newlabel{py_1d_2_helm_2p1_u_exp_m_x_m_0p5_square_d_1px_r_1px_0_sm_2ndd@cref}{{[subfigure][3][2147483647,37]D.37(c)}{[1][32][]33}}
+\newlabel{sub@py_1d_2_helm_2p1_u_exp_m_x_m_0p5_square_d_1px_r_1px_0_sm_2ndd}{{(c)}{33}{$u_{xx}$\caption@thelabel \relax }{figure.caption.64}{}}
+\newlabel{sub@py_1d_2_helm_2p1_u_exp_m_x_m_0p5_square_d_1px_r_1px_0_sm_2ndd@cref}{{[subfigure][3][2147483647,37]D.37(c)}{[1][32][]33}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.37}{\ignorespaces Errors using $Q_p$ elements for the 1D Helmholtz problem with $u=e^{-(x-0.5)^2}$, $D(\mathbf  {x}) = 1+x$ and $r(\mathbf  {x}) = 1+x$ in deal.II.\relax }}{33}{figure.caption.64}\protected@file@percent }
+\newlabel{py_1d_2_helm_2p1_u_exp_m_x_m_0p5_square_d_1px_r_1px_0_sm}{{D.37}{33}{Errors using $Q_p$ elements for the 1D Helmholtz problem with $u=e^{-(x-0.5)^2}$, $D(\mathbf {x}) = 1+x$ and $r(\mathbf {x}) = 1+x$ in deal.\rom {2}.\relax }{figure.caption.64}{}}
+\newlabel{py_1d_2_helm_2p1_u_exp_m_x_m_0p5_square_d_1px_r_1px_0_sm@cref}{{[figure][37][2147483647]D.37}{[1][32][]33}}
+\newlabel{py_1d_2_helm_2p2_u_exp_m_x_m_0p5_square_d_1px_r_exp_m_x_m_0p5_square_0_sm_solu}{{D.38(a)}{33}{$u$\caption@thelabel \relax }{figure.caption.65}{}}
+\newlabel{py_1d_2_helm_2p2_u_exp_m_x_m_0p5_square_d_1px_r_exp_m_x_m_0p5_square_0_sm_solu@cref}{{[subfigure][1][2147483647,38]D.38(a)}{[1][32][]33}}
+\newlabel{sub@py_1d_2_helm_2p2_u_exp_m_x_m_0p5_square_d_1px_r_exp_m_x_m_0p5_square_0_sm_solu}{{(a)}{33}{$u$\caption@thelabel \relax }{figure.caption.65}{}}
+\newlabel{sub@py_1d_2_helm_2p2_u_exp_m_x_m_0p5_square_d_1px_r_exp_m_x_m_0p5_square_0_sm_solu@cref}{{[subfigure][1][2147483647,38]D.38(a)}{[1][32][]33}}
+\newlabel{py_1d_2_helm_2p2_u_exp_m_x_m_0p5_square_d_1px_r_exp_m_x_m_0p5_square_0_sm_grad}{{D.38(b)}{33}{$u_x$\caption@thelabel \relax }{figure.caption.65}{}}
+\newlabel{py_1d_2_helm_2p2_u_exp_m_x_m_0p5_square_d_1px_r_exp_m_x_m_0p5_square_0_sm_grad@cref}{{[subfigure][2][2147483647,38]D.38(b)}{[1][32][]33}}
+\newlabel{sub@py_1d_2_helm_2p2_u_exp_m_x_m_0p5_square_d_1px_r_exp_m_x_m_0p5_square_0_sm_grad}{{(b)}{33}{$u_x$\caption@thelabel \relax }{figure.caption.65}{}}
+\newlabel{sub@py_1d_2_helm_2p2_u_exp_m_x_m_0p5_square_d_1px_r_exp_m_x_m_0p5_square_0_sm_grad@cref}{{[subfigure][2][2147483647,38]D.38(b)}{[1][32][]33}}
+\newlabel{py_1d_2_helm_2p2_u_exp_m_x_m_0p5_square_d_1px_r_exp_m_x_m_0p5_square_0_sm_2ndd}{{D.38(c)}{33}{$u_{xx}$\caption@thelabel \relax }{figure.caption.65}{}}
+\newlabel{py_1d_2_helm_2p2_u_exp_m_x_m_0p5_square_d_1px_r_exp_m_x_m_0p5_square_0_sm_2ndd@cref}{{[subfigure][3][2147483647,38]D.38(c)}{[1][32][]33}}
+\newlabel{sub@py_1d_2_helm_2p2_u_exp_m_x_m_0p5_square_d_1px_r_exp_m_x_m_0p5_square_0_sm_2ndd}{{(c)}{33}{$u_{xx}$\caption@thelabel \relax }{figure.caption.65}{}}
+\newlabel{sub@py_1d_2_helm_2p2_u_exp_m_x_m_0p5_square_d_1px_r_exp_m_x_m_0p5_square_0_sm_2ndd@cref}{{[subfigure][3][2147483647,38]D.38(c)}{[1][32][]33}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.38}{\ignorespaces Errors using $Q_p$ elements for the 1D Helmholtz problem with $u=e^{-(x-0.5)^2}$, $D(\mathbf  {x}) = 1+x$ and $r(\mathbf  {x}) = e^{-(x-0.5)^2}$ in deal.II.\relax }}{33}{figure.caption.65}\protected@file@percent }
+\newlabel{py_1d_2_helm_2p2_u_exp_m_x_m_0p5_square_d_1px_r_exp_m_x_m_0p5_square_0_sm}{{D.38}{33}{Errors using $Q_p$ elements for the 1D Helmholtz problem with $u=e^{-(x-0.5)^2}$, $D(\mathbf {x}) = 1+x$ and $r(\mathbf {x}) = e^{-(x-0.5)^2}$ in deal.\rom {2}.\relax }{figure.caption.65}{}}
+\newlabel{py_1d_2_helm_2p2_u_exp_m_x_m_0p5_square_d_1px_r_exp_m_x_m_0p5_square_0_sm@cref}{{[figure][38][2147483647]D.38}{[1][32][]33}}
+\newlabel{py_1d_2_helm_2p3_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1_0_sm_solu}{{D.39(a)}{33}{$u$\caption@thelabel \relax }{figure.caption.66}{}}
+\newlabel{py_1d_2_helm_2p3_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1_0_sm_solu@cref}{{[subfigure][1][2147483647,39]D.39(a)}{[1][33][]33}}
+\newlabel{sub@py_1d_2_helm_2p3_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1_0_sm_solu}{{(a)}{33}{$u$\caption@thelabel \relax }{figure.caption.66}{}}
+\newlabel{sub@py_1d_2_helm_2p3_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1_0_sm_solu@cref}{{[subfigure][1][2147483647,39]D.39(a)}{[1][33][]33}}
+\newlabel{py_1d_2_helm_2p3_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1_0_sm_grad}{{D.39(b)}{33}{$u_x$\caption@thelabel \relax }{figure.caption.66}{}}
+\newlabel{py_1d_2_helm_2p3_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1_0_sm_grad@cref}{{[subfigure][2][2147483647,39]D.39(b)}{[1][33][]33}}
+\newlabel{sub@py_1d_2_helm_2p3_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1_0_sm_grad}{{(b)}{33}{$u_x$\caption@thelabel \relax }{figure.caption.66}{}}
+\newlabel{sub@py_1d_2_helm_2p3_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1_0_sm_grad@cref}{{[subfigure][2][2147483647,39]D.39(b)}{[1][33][]33}}
+\newlabel{py_1d_2_helm_2p3_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1_0_sm_2ndd}{{D.39(c)}{33}{$u_{xx}$\caption@thelabel \relax }{figure.caption.66}{}}
+\newlabel{py_1d_2_helm_2p3_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1_0_sm_2ndd@cref}{{[subfigure][3][2147483647,39]D.39(c)}{[1][33][]33}}
+\newlabel{sub@py_1d_2_helm_2p3_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1_0_sm_2ndd}{{(c)}{33}{$u_{xx}$\caption@thelabel \relax }{figure.caption.66}{}}
+\newlabel{sub@py_1d_2_helm_2p3_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1_0_sm_2ndd@cref}{{[subfigure][3][2147483647,39]D.39(c)}{[1][33][]33}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.39}{\ignorespaces Errors using $Q_p$ elements for the 1D Helmholtz problem with $u=e^{-(x-0.5)^2}$, $D(\mathbf  {x}) = e^{-(x-0.5)^2}$ and $r(\mathbf  {x})=1$ in deal.II.\relax }}{33}{figure.caption.66}\protected@file@percent }
+\newlabel{py_1d_2_helm_2p3_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1_0_sm}{{D.39}{33}{Errors using $Q_p$ elements for the 1D Helmholtz problem with $u=e^{-(x-0.5)^2}$, $D(\mathbf {x}) = e^{-(x-0.5)^2}$ and $r(\mathbf {x})=1$ in deal.\rom {2}.\relax }{figure.caption.66}{}}
+\newlabel{py_1d_2_helm_2p3_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1_0_sm@cref}{{[figure][39][2147483647]D.39}{[1][33][]33}}
+\bibstyle{unsrt}
+\bibdata{bibfile_2d}
+\bibcite{liu386balancing}{{1}{}{{}}{{}}}
+\bibcite{bangerth2007deal}{{2}{}{{}}{{}}}
+\bibcite{alnaes2015fenics}{{3}{}{{}}{{}}}
+\bibcite{boffi2013mixed}{{4}{}{{}}{{}}}
+\bibcite{quoraSCALARfunction}{{5}{}{{}}{{}}}
+\bibcite{rognes2010efficient}{{6}{}{{}}{{}}}
+\bibcite{lipschutz2009linear}{{7}{}{{}}{{}}}
+\bibcite{chen2005finite}{{8}{}{{}}{{}}}
+\bibcite{kumar2017three}{{9}{}{{}}{{}}}
+\bibcite{dealiiRTelement}{{10}{}{{}}{{}}}
+\newlabel{py_1d_2_helm_2p4_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1px_0_sm_solu}{{D.40(a)}{34}{$u$\caption@thelabel \relax }{figure.caption.67}{}}
+\newlabel{py_1d_2_helm_2p4_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1px_0_sm_solu@cref}{{[subfigure][1][2147483647,40]D.40(a)}{[1][33][]34}}
+\newlabel{sub@py_1d_2_helm_2p4_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1px_0_sm_solu}{{(a)}{34}{$u$\caption@thelabel \relax }{figure.caption.67}{}}
+\newlabel{sub@py_1d_2_helm_2p4_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1px_0_sm_solu@cref}{{[subfigure][1][2147483647,40]D.40(a)}{[1][33][]34}}
+\newlabel{py_1d_2_helm_2p4_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1px_0_sm_grad}{{D.40(b)}{34}{$u_x$\caption@thelabel \relax }{figure.caption.67}{}}
+\newlabel{py_1d_2_helm_2p4_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1px_0_sm_grad@cref}{{[subfigure][2][2147483647,40]D.40(b)}{[1][33][]34}}
+\newlabel{sub@py_1d_2_helm_2p4_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1px_0_sm_grad}{{(b)}{34}{$u_x$\caption@thelabel \relax }{figure.caption.67}{}}
+\newlabel{sub@py_1d_2_helm_2p4_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1px_0_sm_grad@cref}{{[subfigure][2][2147483647,40]D.40(b)}{[1][33][]34}}
+\newlabel{py_1d_2_helm_2p4_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1px_0_sm_2ndd}{{D.40(c)}{34}{$u_{xx}$\caption@thelabel \relax }{figure.caption.67}{}}
+\newlabel{py_1d_2_helm_2p4_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1px_0_sm_2ndd@cref}{{[subfigure][3][2147483647,40]D.40(c)}{[1][33][]34}}
+\newlabel{sub@py_1d_2_helm_2p4_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1px_0_sm_2ndd}{{(c)}{34}{$u_{xx}$\caption@thelabel \relax }{figure.caption.67}{}}
+\newlabel{sub@py_1d_2_helm_2p4_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1px_0_sm_2ndd@cref}{{[subfigure][3][2147483647,40]D.40(c)}{[1][33][]34}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.40}{\ignorespaces Errors using $Q_p$ elements for the 1D Helmholtz problem with $u=e^{-(x-0.5)^2}$, $D(\mathbf  {x}) = e^{-(x-0.5)^2}$ and $r(\mathbf  {x})=1+x$ in deal.II.\relax }}{34}{figure.caption.67}\protected@file@percent }
+\newlabel{py_1d_2_helm_2p4_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1px_0_sm}{{D.40}{34}{Errors using $Q_p$ elements for the 1D Helmholtz problem with $u=e^{-(x-0.5)^2}$, $D(\mathbf {x}) = e^{-(x-0.5)^2}$ and $r(\mathbf {x})=1+x$ in deal.\rom {2}.\relax }{figure.caption.67}{}}
+\newlabel{py_1d_2_helm_2p4_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_1px_0_sm@cref}{{[figure][40][2147483647]D.40}{[1][33][]34}}
+\newlabel{py_1d_2_helm_2p5_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_exp_m_x_m_0p5_square_0_sm_solu}{{D.41(a)}{34}{$u$\caption@thelabel \relax }{figure.caption.68}{}}
+\newlabel{py_1d_2_helm_2p5_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_exp_m_x_m_0p5_square_0_sm_solu@cref}{{[subfigure][1][2147483647,41]D.41(a)}{[1][33][]34}}
+\newlabel{sub@py_1d_2_helm_2p5_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_exp_m_x_m_0p5_square_0_sm_solu}{{(a)}{34}{$u$\caption@thelabel \relax }{figure.caption.68}{}}
+\newlabel{sub@py_1d_2_helm_2p5_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_exp_m_x_m_0p5_square_0_sm_solu@cref}{{[subfigure][1][2147483647,41]D.41(a)}{[1][33][]34}}
+\newlabel{py_1d_2_helm_2p5_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_exp_m_x_m_0p5_square_0_sm_grad}{{D.41(b)}{34}{$u_x$\caption@thelabel \relax }{figure.caption.68}{}}
+\newlabel{py_1d_2_helm_2p5_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_exp_m_x_m_0p5_square_0_sm_grad@cref}{{[subfigure][2][2147483647,41]D.41(b)}{[1][33][]34}}
+\newlabel{sub@py_1d_2_helm_2p5_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_exp_m_x_m_0p5_square_0_sm_grad}{{(b)}{34}{$u_x$\caption@thelabel \relax }{figure.caption.68}{}}
+\newlabel{sub@py_1d_2_helm_2p5_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_exp_m_x_m_0p5_square_0_sm_grad@cref}{{[subfigure][2][2147483647,41]D.41(b)}{[1][33][]34}}
+\newlabel{py_1d_2_helm_2p5_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_exp_m_x_m_0p5_square_0_sm_2ndd}{{D.41(c)}{34}{$u_{xx}$\caption@thelabel \relax }{figure.caption.68}{}}
+\newlabel{py_1d_2_helm_2p5_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_exp_m_x_m_0p5_square_0_sm_2ndd@cref}{{[subfigure][3][2147483647,41]D.41(c)}{[1][33][]34}}
+\newlabel{sub@py_1d_2_helm_2p5_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_exp_m_x_m_0p5_square_0_sm_2ndd}{{(c)}{34}{$u_{xx}$\caption@thelabel \relax }{figure.caption.68}{}}
+\newlabel{sub@py_1d_2_helm_2p5_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_exp_m_x_m_0p5_square_0_sm_2ndd@cref}{{[subfigure][3][2147483647,41]D.41(c)}{[1][33][]34}}
+\@writefile{lof}{\contentsline {figure}{\numberline {D.41}{\ignorespaces Errors using $Q_p$ elements for the 1D Helmholtz problem with $u=e^{-(x-0.5)^2}$, $D(\mathbf  {x}) = e^{-(x-0.5)^2}$ and $r(\mathbf  {x}) = e^{-(x-0.5)^2}$ in deal.II.\relax }}{34}{figure.caption.68}\protected@file@percent }
+\newlabel{py_1d_2_helm_2p5_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_exp_m_x_m_0p5_square_0_sm}{{D.41}{34}{Errors using $Q_p$ elements for the 1D Helmholtz problem with $u=e^{-(x-0.5)^2}$, $D(\mathbf {x}) = e^{-(x-0.5)^2}$ and $r(\mathbf {x}) = e^{-(x-0.5)^2}$ in deal.\rom {2}.\relax }{figure.caption.68}{}}
+\newlabel{py_1d_2_helm_2p5_u_exp_m_x_m_0p5_square_d_exp_m_x_m_0p5_square_r_exp_m_x_m_0p5_square_0_sm@cref}{{[figure][41][2147483647]D.41}{[1][33][]34}}
+\bibcite{dealiiDGPelement}{{11}{}{{}}{{}}}
+\bibcite{zuras2008ieee}{{12}{}{{}}{{}}}
+\bibcite{davis2004algorithm}{{13}{}{{}}{{}}}
+\bibcite{ref1}{{14}{}{{}}{{}}}
+\bibcite{Runborg2012VerifyingNC}{{15}{}{{}}{{}}}
+\bibcite{gockenbach2006understanding}{{16}{}{{}}{{}}}
+\bibcite{butcher2016numerical}{{17}{}{{}}{{}}}
+\bibcite{salari2000code}{{18}{}{{}}{{}}}
+\bibcite{roache2002code}{{19}{}{{}}{{}}}
+\bibcite{gfrerer2018code}{{20}{}{{}}{{}}}
+\providecommand\NAT@force@numbers{}\NAT@force@numbers
+\gdef \@abspage@last{35}

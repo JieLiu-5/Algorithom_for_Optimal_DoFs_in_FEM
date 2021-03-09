@@ -1,0 +1,27 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Model problem, finite element formulation and numerical implementation}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Model problem}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Finite element formulation}{section.2}% 4
+\BOOKMARK [3][-]{subsubsection.2.2.1}{The standard FEM}{subsection.2.2}% 5
+\BOOKMARK [3][-]{subsubsection.2.2.2}{The mixed FEM}{subsection.2.2}% 6
+\BOOKMARK [2][-]{subsection.2.3}{Numerical implementation}{section.2}% 7
+\BOOKMARK [3][-]{subsubsection.2.3.1}{Solution technique}{subsection.2.3}% 8
+\BOOKMARK [3][-]{subsubsection.2.3.2}{Error estimation}{subsection.2.3}% 9
+\BOOKMARK [3][-]{subsubsection.2.3.3}{Convergence of the solution}{subsection.2.3}% 10
+\BOOKMARK [1][-]{section.3}{Approach to predicting the highest attainable accuracy}{}% 11
+\BOOKMARK [1][-]{section.4}{Results}{}% 12
+\BOOKMARK [2][-]{subsection.4.1}{Benchmark Poisson equation}{section.4}% 13
+\BOOKMARK [3][-]{subsubsection.4.1.1}{Solution strategy}{subsection.4.1}% 14
+\BOOKMARK [3][-]{subsubsection.4.1.2}{Boundary condition}{subsection.4.1}% 15
+\BOOKMARK [2][-]{subsection.4.2}{General Poisson equation}{section.4}% 16
+\BOOKMARK [2][-]{subsection.4.3}{General diffusion and Helmholtz equation}{section.4}% 17
+\BOOKMARK [1][-]{section.5}{A posteriori algorithm for finding the optimal number of degrees of freedom}{}% 18
+\BOOKMARK [1][-]{section.6}{Validation}{}% 19
+\BOOKMARK [2][-]{subsection.6.1}{Accuracy analysis}{section.6}% 20
+\BOOKMARK [2][-]{subsection.6.2}{Efficiency analysis}{section.6}% 21
+\BOOKMARK [2][-]{subsection.6.3}{Further development}{section.6}% 22
+\BOOKMARK [1][-]{section.7}{Conclusions}{}% 23
+\BOOKMARK [1][-]{appendix.A}{Derivation of the weak form}{}% 24
+\BOOKMARK [2][-]{subsection.A.1}{The standard FEM}{appendix.A}% 25
+\BOOKMARK [2][-]{subsection.A.2}{The mixed FEM}{appendix.A}% 26
+\BOOKMARK [1][-]{appendix.B}{Proof of the slope of the decrease of the error}{}% 27

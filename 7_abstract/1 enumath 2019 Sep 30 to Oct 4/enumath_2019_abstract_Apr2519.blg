@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2016/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: enumath_2019_abstract_Apr2519.aux
+The style file: elsarticle-num.bst
+Database file #1: mybibfile.bib
+You've used 2 entries,
+            2937 wiz_defined-function locations,
+            681 strings with 5678 characters,
+and the built_in function-call counts, 646 in all, are:
+= -- 46
+> -- 44
+< -- 0
++ -- 16
+- -- 14
+* -- 50
+:= -- 121
+add.period$ -- 2
+call.type$ -- 2
+change.case$ -- 2
+chr.to.int$ -- 0
+cite$ -- 2
+duplicate$ -- 14
+empty$ -- 53
+format.name$ -- 16
+if$ -- 143
+int.to.chr$ -- 0
+int.to.str$ -- 2
+missing$ -- 2
+newline$ -- 14
+num.names$ -- 2
+pop$ -- 11
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 34
+stack$ -- 0
+substring$ -- 25
+swap$ -- 1
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 4
+width$ -- 3
+write$ -- 22

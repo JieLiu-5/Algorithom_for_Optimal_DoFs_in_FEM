@@ -1,0 +1,120 @@
+\begin{thebibliography}{10}
+
+\bibitem{Kumar2016}
+Mohit Kumar, Henk~M. Schuttelaars, Pieter~C. Roos, and Matthias M{\"o}ller.
+\newblock Three-dimensional semi-idealized model for tidal motion in tidal
+  estuaries.
+\newblock {\em Ocean Dynamics}, 66(1):99--118, 2016.
+
+\bibitem{carey1982derivative}
+GF~Carey.
+\newblock Derivative calculation from finite element solutions.
+\newblock {\em Computer Methods in Applied Mechanics and Engineering},
+  35(1):1--14, 1982.
+
+\bibitem{ferziger2012computational}
+Joel~H Ferziger and Milovan Peric.
+\newblock {\em Computational methods for fluid dynamics}.
+\newblock Springer Science \& Business Media, 2012.
+
+\bibitem{ling1984numerical}
+Fuyun Ling and J~Proakis.
+\newblock Numerical accuracy and stability: Two problems of adaptive estimation
+  algorithms caused by round-off error.
+\newblock In {\em Acoustics, Speech, and Signal Processing, IEEE International
+  Conference on ICASSP'84.}, volume~9, pages 571--574. IEEE, 1984.
+
+\bibitem{mou2017example}
+Shan-Cong Mou, Yu-Xuan Luan, Wen-Tao Ji, Jian-Fei Zhang, and Wen-Quan Tao.
+\newblock An example for the effect of round-off errors on numerical heat
+  transfer.
+\newblock {\em Numerical Heat Transfer, Part B: Fundamentals}, 72(1):21--32,
+  2017.
+
+\bibitem{alvarez2012round}
+Julen Alvarez-Aramberri, David Pardo, Maciej Paszynski, Nathan Collier,
+  Lisandro Dalcin, and Victor~M Calo.
+\newblock On round-off error for adaptive finite element methods.
+\newblock {\em Procedia Computer Science}, 9:1474--1483, 2012.
+
+\bibitem{boffi2013mixed}
+Daniele Boffi, Franco Brezzi, Michel Fortin, et~al.
+\newblock {\em Mixed finite element methods and applications}, volume~44.
+\newblock Springer, 2013.
+
+\bibitem{necas2011direct}
+Jindrich Necas.
+\newblock {\em Direct methods in the theory of elliptic equations}.
+\newblock Springer Science \& Business Media, 2011.
+
+\bibitem{haberman2012applied}
+Richard Haberman.
+\newblock {\em Applied partial differential equations with Fourier series and
+  boundary value problems}.
+\newblock Pearson Higher Ed, 2012.
+
+\bibitem{lipschutz2009linear}
+Seymour Lipschutz and Marc Lipson.
+\newblock {\em Linear Algebra: Schaum's Outlines}.
+\newblock McGraw-Hill, 2009.
+
+\bibitem{freund1995weakly}
+Jouni Freund and Rolf Stenberg.
+\newblock On weakly imposed boundary conditions for second order problems.
+\newblock In {\em Proceedings of the Ninth Int. Conf. Finite Elements in
+  Fluids}, pages 327--336. Venice, 1995.
+
+\bibitem{zuras2008ieee}
+Dan Zuras, Mike Cowlishaw, Alex Aiken, Matthew Applegate, David Bailey, Steve
+  Bass, Dileep Bhandarkar, Mahesh Bhat, David Bindel, Sylvie Boldo, et~al.
+\newblock {IEEE} standard for floating-point arithmetic.
+\newblock {\em IEEE Std 754-2008}, pages 1--70, 2008.
+
+\bibitem{alzetta2018deal}
+Giovanni Alzetta, Daniel Arndt, Wolfgang Bangerth, Vishal Boddu, Benjamin
+  Brands, Denis Davydov, Rene Gassm{\"o}ller, Timo Heister, Luca Heltai,
+  Katharina Kormann, et~al.
+\newblock The deal.\rom{2} library, version 9.0.
+\newblock {\em Journal of Numerical Mathematics}, 26(4):173--183, 2018.
+
+\bibitem{davis2004algorithm}
+Timothy~A Davis.
+\newblock Algorithm 832: {UMFPACK} {V}4.3 -- an unsymmetric-pattern
+  multifrontal method.
+\newblock {\em ACM Transactions on Mathematical Software (TOMS)},
+  30(2):196--199, 2004.
+
+\bibitem{Runborg2012VerifyingNC}
+Olof Runborg.
+\newblock Lecture notes in numerical solutions of differential equations
+  (dn2255): Verifying numerical convergence rates, 2012.
+
+\bibitem{gockenbach2006understanding}
+Mark~S Gockenbach.
+\newblock {\em Understanding and implementing the finite element method},
+  volume~97.
+\newblock Siam, 2006.
+
+\bibitem{butcher2016numerical}
+John~Charles Butcher.
+\newblock {\em Numerical methods for ordinary differential equations}.
+\newblock John Wiley \& Sons, 2016.
+
+\bibitem{Babuska2018Roundoff}
+Ivo Babuska and Gustaf S\"oderlind.
+\newblock On roundoff error growth in elliptic problems.
+\newblock {\em ACM Transactions on Mathematical Software}, 44(3):1--22, 2018.
+
+\bibitem{WalterFrei}
+Meshing considerations for linear static problems.
+\newblock
+  https://www.comsol.com/blogs/meshing-considerations-linear-static-problems/.
+\newblock Accessed: 2019-12-9.
+
+\bibitem{chernetsky2010effect}
+Alexander~S Chernetsky, Henk~M Schuttelaars, and Stefan~A Talke.
+\newblock The effect of tidal asymmetry and temporal settling lag on sediment
+  trapping in tidal estuaries.
+\newblock {\em Ocean Dynamics}, 60(5):1219--1241, 2010.
+
+\end{thebibliography}

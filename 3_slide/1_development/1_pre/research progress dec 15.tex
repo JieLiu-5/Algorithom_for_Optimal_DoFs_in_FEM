@@ -1,0 +1,124 @@
+% TU Delft beamer template
+% Author: Erwin Walraven (initial version was created by Maarten Abbink)
+% Delft Universiy of Technology
+
+\documentclass{beamer}
+%\usepackage[english]{babel}
+%\usepackage{calc}
+%\usepackage[absolute,overlay]{textpos}
+%\usepackage{graphicx}
+%\usepackage{subfig}
+%\usepackage{amsmath}
+%\usepackage{amsfonts}
+%\usepackage{amsthm}
+%\usepackage{mathtools}
+%\usepackage{comment}
+%\usepackage{MnSymbol,wasysym}
+
+
+%\setbeamertemplate{navigation symbols}{} % remove navigation symbols
+%\mode<presentation>{\usetheme{tud}}
+\usetheme{Madrid}
+\usecolortheme{beaver}
+
+
+\usepackage{multirow}
+\usepackage{makecell}
+\renewcommand{\footnotesize}{\fontsize{7pt}{9pt}\selectfont}
+
+\usepackage{tikzsymbols}
+
+\setbeamertemplate{caption}[numbered]
+
+\usepackage{subfig}
+
+\makeatletter       % for rom in deal.ii symbol
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+
+\title[]{Report on the 2D Paper}
+\institute[]{Delft University of Technology, the Netherlands}
+\author{Jie Liu}
+%\date{}
+
+\begin{document}
+{
+\setbeamertemplate{footline}{\usebeamertemplate*{minimal footline}}
+\frame{\titlepage}
+}
+
+
+\section{Aim of the paper}
+\begin{frame}{Aim of the paper}
+\vspace{-8em}
+\begin{enumerate}
+ \item To determine $\alpha_{\rm R}$ and $\beta_{\rm R}$ for different FEM methods of different FEM packages for various 2D second-order problems.
+ \item To choose FEM methods/elements that give smaller round-off error, i.e. $\alpha_{\rm R}$ and $\beta_{\rm R}$.
+ \item To apply the strategy in the 1D paper to find the optimal number of DoFs of 2D problems$^{*}$.
+\end{enumerate}
+\end{frame}
+
+\section{Problem statement}
+\begin{frame}
+\frametitle{Problem statement}
+\vspace{-7em}
+\begin{block}{Problem to be solved}
+\scriptsize
+\begin{equation}
+ - \nabla \cdot (d(x,y) \nabla u) + \mathbf{a}(x,y) \cdot \nabla u + r(x,y) u = f,\qquad (x,y) \in \Omega = [0,\,1] \times [0,\,1],
+ \label{problem_to_be_investigated}
+\end{equation}
+where $d(x,y)$, $\mathbf{a}(x,y)$ and $r(x,y)$ are scalar/vector coefficient functions. The dependent variable $u$ and coefficients can be either real-valued or complex-valued if not stated otherwise. By choosing different coefficient functions, we can have Poisson, diffusion or Helmholtz problems.
+\end{block}
+\end{frame}
+
+
+\begin{frame}{FEM Status}
+\vspace{-5em}
+The status of the application of FEM methods on various Eq.~(\ref{problem_to_be_investigated}) is shown in Table~\ref{table_status_fem_application}.
+\begin{table}[!ht]
+\scriptsize
+\begin{tabular}{ l | c | c}
+ & deal.\rom{2} & FEniCS \\ \hline
+ Standard FEM ($P_p$) & $\Smiley$\footnote{Working well.} & $\Smiley$ \\ \hline
+ Mixed FEM ($RT_p/P_{p}^{\rm disc}$) & $\Smiley$ & -- \\ \hline
+ Mixed FEM ($BDM_p/Q_{p-1}^{\rm disc}$)\footnote{The notation $Q$ is in opposition to that of deal.\rom{2}.} & $\Smiley$ & $\Smiley$
+\end{tabular}
+\caption{Status of application of FEM methods. The element degree $p$ can be of different order if not stated otherwise.}
+\label{table_status_fem_application}
+\end{table}
+\end{frame}
+
+\section{Progress}
+\begin{frame}{Progress}
+\vspace{-10.5em}
+\begin{itemize}
+ \item Coefficients for the first derivative in Eq.~(\ref{problem_to_be_investigated}), i.e. $a(x,y)$ and $b(x,y)$ considered for problems with real-valued solutions using the standard FEM. The solution using the mixed FEM is not correct by now, since the function space involved with $u$ is not satisfied. 
+\end{itemize}
+\end{frame}
+
+%\section{Discussion}
+%\begin{frame}{Discussion}
+%\vspace{-9em}
+%\begin{enumerate}
+% \item
+%\end{enumerate}
+%\end{frame}
+
+\section{Future work}
+\begin{frame}{Future work}
+\vspace{-10em}
+\begin{itemize}
+ \item To clarify the existence of the derivative of interest.
+ \item To only show the error of $H(div)$ for the second derivative using the mixed FEM.
+\end{itemize}
+\end{frame}
+
+\bibliographystyle{unsrt}
+\bibliography{bibfile_presentation}
+
+\end{document}

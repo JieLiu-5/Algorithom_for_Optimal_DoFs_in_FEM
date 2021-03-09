@@ -1,0 +1,4 @@
+\beamer@sectionintoc {1}{Aim of the paper}{2}{0}{1}
+\beamer@sectionintoc {2}{Problem statement}{3}{0}{2}
+\beamer@sectionintoc {3}{Progress}{4}{0}{3}
+\beamer@sectionintoc {4}{Future work}{5}{0}{4}
